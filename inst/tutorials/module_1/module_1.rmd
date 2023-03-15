@@ -1,0 +1,29 @@
+---
+title: "Module 1: R Foundations"
+output: 
+    learnr::tutorial:
+        progressive: true
+runtime: shiny_prerendered
+description: "add description"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+library(learnr)
+library(dplyr)
+
+```
+
+
+## Introduction to R and RStudio and Quarto
+
+### Sub-topic 1
+this is a sub-topic
+
+### Sub-topic 2
+This is another sub-topic
