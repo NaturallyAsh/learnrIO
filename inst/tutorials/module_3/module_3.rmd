@@ -19,10 +19,71 @@ library(dplyr)
 
 ```
 
-## Introduction to R and RStudio and Quarto (or R Markdown?)
+# Learn R - For IO Psychs
 
-### Sub-topic 1
+## Welcome!
+
+We strongly encourage you to create a quarto document alongside this tutorial to work through the problems. That way you can take notes an retain your knowledge.
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+
+## Introduction to psychometrics {data-progressive=TRUE}
+
+### Sub-topic 1 
 this is a sub-topic
 
-### Sub-topic 2
+### Sub-topic 2 
+This is another sub-topic
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## CTT: Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## CTT: Item analysis (item difficulty, item-total correlation, etc.) {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Factor Analysis {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+##  IRT: Item & person parameter estimation, item & test information {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+##  IRT: Model fitting using the ltm package {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
 This is another sub-topic
