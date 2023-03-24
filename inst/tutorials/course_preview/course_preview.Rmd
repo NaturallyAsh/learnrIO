@@ -1,0 +1,20 @@
+---
+title: "learnrIO: Course Preview"
+output: 
+    learnr::tutorial:
+        progressive: false
+runtime: shiny_prerendered
+description: "add description"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+library(learnr)
+library(dplyr)
+
+```
