@@ -1,0 +1,16 @@
+.figcap {
+  color: gray;
+  font-style: italic;
+}
+
+.float-fig-right {
+  display: table;
+  float: right;
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+
+.paneCloser {
+  display: block;
+  color: blue;
+}

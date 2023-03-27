@@ -1,0 +1,14 @@
+#' Employee dataset
+#'
+#' The employee dataset is a fictional dataset that contains information about employees working in a tech company.
+#'
+#' @format ## A data frame with 30 rows and 6 variables:
+#' \describe{
+#'   \item{employee_id}{numeric A unique identifier for each employee.}
+#'   \item{name}{character The name of the employee.}
+#'   \item{department}{character The department in which the employee works (e.g., Engineering, Sales, Marketing, etc.).}
+#'   \item{salary}{numeric The annual salary of the employee.}
+#'   \item{job_title}{character The title of the employee's job (e.g., Senior Engineer, Sales Manager, Marketing Analyst, etc.).}
+#'   \item{start_date}{Date The date on which the employee started working at the company.}
+#'}
+"employee_data"

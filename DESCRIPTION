@@ -1,5 +1,5 @@
 Package: learnrIO
-Title: Learning R - For IO Psychs
+Title: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students
 Version: 0.0.0.9000
 Authors@R: 
     person("Ashleigh", "Wilson", , "ash.wil.1990@gmail.com", role = c("aut", "cre"),
@@ -11,3 +11,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     learnr (>= 0.11.0)
+Depends: 
+    R (>= 2.10)
+LazyData: true
