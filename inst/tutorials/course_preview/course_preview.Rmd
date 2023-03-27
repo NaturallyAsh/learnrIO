@@ -76,9 +76,9 @@ In conclusion, R is a powerful programming language that is specifically designe
 
 
 ## Our Vision and Mission
-Our vision is to empower both undergraduate and Industrial Organizational Psychology Graduate students with the statistical and analytical skills they need to succeed in the workplace and become valuable scientist-practitioner professionals.  
+Our vision is to empower students pursuing degrees in Industrial and Organizational Psychology with the analytical and statistical skills necessary to excel in the workplace and influence their organizations, their industry, and the field of Industrial and Organizational Psychology.  
 
-Our mission is to develop a supplementary interactive course that utilizes the R programming language to enhance the statistical and analytical skills of both undergraduate and graduate students. By bridging the academic-workplace skills gap, we aim to equip all students with the tools they need to excel in their careers, whether it be pursuing further education or entering directly into industry. We believe that providing a strong foundation in statistical and analytical skills at an earlier stage will better prepare them for future studies or career opportunities in Industrial Organizational Psychology field.  
+Our mission is to develop a supplementary interactive course that teaches the basics of R while enhancing the analytical and statistical skills of both undergraduate and graduate students. By bridging the academic-workplace skills gap, we aim to equip all students with essential tools necessary to excel in their careers, whatever that looks like: pursuing further education, going into industry, or entering the academy as a professor of psychology or business. We believe that providing a strong foundation in analytical and statistical skills at an early stage will better prepare students for their studies and careers in field of Industrial and Organizational Psychology, as well as better equip them to enter and impact rapidly expanding fields such as People Analytics.  
 
 
 
