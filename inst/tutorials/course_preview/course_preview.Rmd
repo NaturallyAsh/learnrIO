@@ -1,5 +1,5 @@
 ---
-title: "learnrIO: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students"
+title: "**learnrIO**: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students"
 output: 
     learnr::tutorial:
         progressive: false
@@ -25,15 +25,22 @@ gradethis_setup()
 ```
 
 
-
 ## Introduction 
-In the ever-evolving landscape of modern business, data analytics and programming skills are becoming increasingly crucial for Industrial Organizational (I-O) Psychology professionals. We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack exposure to data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language.  
+
+In the ever-evolving landscape of modern business, data analytics and programming skills are becoming increasingly crucial for Industrial Organizational (I-O) Psychology professionals.  
+
+We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack exposure to data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language.  
 
 To address this growing demand and the academic-workplace skills gap, we have developed an interactive R programming and statistics tutorial specifically tailored for undergraduate and graduate students in the field of I-O Psychology.   
 
 
 ## What is R and Rstudio?
-R is a programming language that was specifically designed for statistical computing and graphics. It's an open-source language, which means that it's free to use and has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
+R is a programming language that was specifically designed for statistical computing and graphics. 
+<figure class="float-fig-right"> 
+  <img style="width:150px; height:150px" src="images/R Programming logo.png" alt="image of learnrIO logo">
+</figure>
+<p>
+It's an open-source language, which means that it's free to use and has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
 
 One of the biggest strengths of R is its extensive collection of packages. Packages are sets of code that provide additional functionality to the R language. There are thousands of packages available for R that cover a wide range of topics, from data manipulation and visualization to machine learning and deep learning. With so many packages available, R users can quickly and easily extend the capabilities of the language to meet their needs.
 
@@ -57,7 +64,7 @@ RStudio is an integrated development environment (IDE) for R that makes it easie
 - and much _**MUCH**_ more!
 
 ### Things You Can Do with R
-Now, let's talk about some of the cool things you can do with R. Here are a few examples:
+Now, let's talk about some of the cool things you can do with R. Here are a few examples:  
 
 - **Data visualization**: R has a wide range of powerful tools for creating data visualizations. With packages like `ggplot2`, you can create beautiful, customizable plots and charts that allow you to explore your data in new ways. You can also create interactive visualizations using packages like `plotly` or `shiny`.  
 - **Machine learning**: R has a number of packages for performing machine learning techniques, including classification, regression, and clustering. With packages like `caret` or `mlr`, you can easily build and tune machine learning models, and use them to make predictions on new data.  
@@ -76,7 +83,14 @@ Our mission is to develop a supplementary interactive course that utilizes the R
 
 
 ## The Interactive Course
-Through our tutorial, students will have the opportunity to learn basic and more advanced statistical procedures commonly found in applied business settings. Our tutorial provides a strong foundation in statistical and analytical skills that will better prepare students for future studies or career opportunities in the Industrial Organizational Psychology field.  
+Through our tutorial, learnrIO, students will have the opportunity to learn basic and more advanced statistical procedures commonly found in applied business settings.  
+
+<figure class="float-fig-right"> 
+  <img style="width:200x; height:200px" src="images/learnrIO-logo.png" alt="image of learnrIO logo">
+</figure>
+<p>
+
+Our tutorial provides a strong foundation in statistical and analytical skills that will better prepare students for future studies or career opportunities in the Industrial Organizational Psychology field.  
 
 Our tutorial is designed to be accessible and easy-to-use for both professors and students. We understand that redesigning course curriculums to incorporate R programming can be challenging. Therefore, we have created an interactive course using the learnr R package that professors can use as a supplement to their existing curriculum. The interactive course includes various modules covering topics such as data manipulation, data visualization, regression analysis, and more. The modules are self-paced, interactive, and include quizzes to reinforce students' understanding of the material.  
 
@@ -117,8 +131,15 @@ employee_data |>
   summarize(avg_salary = mean(salary))
 ```
 
+<!-- I used grade_this() instead of grade_this_code(). grade_this_code() flagged answer incorrect if I typed `summarise` instead of `summarize`. That's because grade_this_code() passes if the result and solution code string outputs are an exact match. With grade_this(), the .result and .solution objects contain the RESULT. So, the student passes if the user's result from the code output is the same as the solution result (I could also use pass_if_equal() which automatically passes if .result is equal to .solution -->
 ```{r group-check}
-grade_this_code()
+# grade_this_code()
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
 ```
 
 
@@ -132,11 +153,34 @@ grade_this_code()
 dept_start_date_pivot <- employee_data |> 
   select(department, start_date) |> 
   pivot_wider(names_from = start_date, values_from = department)
+
 dept_start_date_pivot
 ```
 
+```{r pivot-hint-1}
+dept_start_date_pivot <- employee_data |> 
+  ___(___, ___) |> 
+  ___(___ = ___, ___ = ___)
+
+dept_start_date_pivot
+```
+
+```{r pivot-hint-2}
+dept_start_date_pivot <- employee_data |> 
+  select(___, ___) |> 
+  pivot_wider(names_from = ___, values_from = ___)
+
+dept_start_date_pivot
+```
+
+
 ```{r pivot-check}
-grade_this_code()
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
 ```
 
 
