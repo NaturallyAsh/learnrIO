@@ -19,7 +19,7 @@ devtools::install_github("naturallyash/learnrIO")
 
 To get started, load the package and launch the interactive course using the following commands:  
 ```r
-some stuff
+library(learnrIO)
 ```
 
 
