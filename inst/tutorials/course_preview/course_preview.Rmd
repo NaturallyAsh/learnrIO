@@ -21,7 +21,7 @@ library(gradethis)
 
 employee_data <- learnrIO::employee_data 
 
-gradethis_setup()
+gradethis::gradethis_setup()
 ```
 
 
@@ -37,7 +37,7 @@ To address this growing demand and the academic-workplace skills gap, we have de
 ## What is R and Rstudio?
 R is a programming language that was specifically designed for statistical computing and graphics. 
 <figure class="float-fig-right"> 
-  <img style="width:150px; height:150px" src="images/R Programming logo.png" alt="image of learnrIO logo">
+  <img style="width:150px; height:150px" src="images/R-Programming-logo.png" alt="image of learnrIO logo">
 </figure>
 <p>
 It's an open-source language, which means that it's free to use and has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.

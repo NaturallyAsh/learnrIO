@@ -6,10 +6,15 @@
 \alias{learnrIO-package}
 \title{learnrIO: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students}
 \description{
-What the package does (one paragraph).
+An interactive R course for IO Psych graduate and undergraduate students.
 }
 \author{
-\strong{Maintainer}: Ashleigh Wilson \email{ash.wil.1990@gmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Ashleigh Wilson \email{ash.wil.1990@gmail.com}
+
+Authors:
+\itemize{
+  \item Matthew Bennett \email{mwbenn@gmail.com}
+}
 
 }
 \keyword{internal}
