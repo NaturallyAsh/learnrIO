@@ -27,6 +27,11 @@ gradethis::gradethis_setup()
 
 ## Introduction 
 
+<div> 
+  <img class="intro-banner" src="images/modern-analytics.png" alt=" ">
+</div>
+<p>
+
 In the ever-evolving landscape of modern business, data analytics and programming skills are becoming increasingly crucial for Industrial Organizational (I-O) Psychology professionals.  
 
 We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack exposure to data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language.  
@@ -36,10 +41,12 @@ To address this growing demand and the academic-workplace skills gap, we have de
 
 ## What is R and Rstudio?
 R is a programming language that was specifically designed for statistical computing and graphics. 
+
 <figure class="float-fig-right"> 
   <img style="width:150px; height:150px" src="images/R-Programming-logo.png" alt="image of learnrIO logo">
 </figure>
 <p>
+
 It's an open-source language, which means that it's free to use and has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
 
 One of the biggest strengths of R is its extensive collection of packages. Packages are sets of code that provide additional functionality to the R language. There are thousands of packages available for R that cover a wide range of topics, from data manipulation and visualization to machine learning and deep learning. With so many packages available, R users can quickly and easily extend the capabilities of the language to meet their needs.
@@ -186,8 +193,16 @@ grade_this({
 
 
 ## Addressing the Challenges Faced by Professors
+<figure class="float-fig-right"> 
+  <img style="width:250px" src="images/professor-confusion.png" alt="a graphic of a confused looking professor with a thought bubble with the R logo, code, and question marks">
+</figure>
+<p>
 We understand that incorporating R programming into the curriculum can be a daunting task for professors who may not have experience with this language or the necessary resources available. Our tutorial provides a solution to this challenge that enables professors to integrate R programming into their courses without any prior knowledge or expertise.  
 
+<figure class="float-fig-left"> 
+  <img style="width:250px" src="images/student-taking-tutorial.png" alt="a graphic of a student on a laptop taking the learnrIO course">
+</figure>
+<p>
 By using our interactive R programming and statistics tutorial as a supplemental course material, professors can confidently provide their I-O Psychology students with the skills and knowledge they need to excel in their careers. This not only benefits the students but also enhances the overall reputation and effectiveness of I-O Psychology programs, ensuring that graduates are well-equipped to meet the demands of the modern business world.
 
 
