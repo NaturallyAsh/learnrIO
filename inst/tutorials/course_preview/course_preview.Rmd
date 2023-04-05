@@ -38,6 +38,7 @@ In the ever-evolving landscape of modern business, data analytics and programmin
 <div class="image-column-container">
   <img src="images/skills-1.png" width=200px>
   <img src="images/skills-2.png" width=200px>
+  <img src="images/ds-industry.png" width=200px>
 </div>
 
 
@@ -56,7 +57,7 @@ R is a programming language that was specifically designed for statistical compu
 </figure>
 <p>
 
-It's an open-source language, which means that it's free to use and has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
+R is an open-source language, which means that it's free to use, making it an attractive choice for businesses and users with limited budgets. It has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
 
 One of the biggest strengths of R is its extensive collection of packages. Packages are sets of code that provide additional functionality to the R language. There are thousands of packages available for R that cover a wide range of topics, from data manipulation and visualization to machine learning and deep learning. With so many packages available, R users can quickly and easily extend the capabilities of the language to meet their needs.
 
@@ -96,7 +97,9 @@ With its large collection of packages and powerful tools for data analysis and v
 Our vision is to empower students pursuing degrees in Industrial and Organizational Psychology with the analytical and statistical skills necessary to excel in the workplace and influence their organizations, their industry, and the field of Industrial and Organizational Psychology.  
 
 ### Mission
-Our mission is to develop a supplementary interactive course that teaches the basics of R while enhancing the analytical and statistical skills of both undergraduate and graduate students. By bridging the academic-workplace skills gap, we aim to equip all students with essential tools necessary to excel in their careers, whatever that looks like: pursuing further education, going into industry, or entering the academy as a professor of psychology or business. We believe that providing a strong foundation in analytical and statistical skills at an early stage will better prepare students for their studies and careers in field of Industrial and Organizational Psychology, as well as better equip them to enter and impact rapidly expanding fields such as People Analytics.  
+Our mission is to provide a supplementary interactive course that teaches the basics of R while enhancing the analytical and statistical skills of both undergraduate and graduate students.  
+
+By bridging the academic-workplace skills gap, we aim to equip all students with essential tools necessary to excel in their careers, whatever that looks like: pursuing further education, going into industry, or entering the academy as a professor of psychology or business. We believe that providing a strong foundation in analytical and statistical skills at an early stage will better prepare students for their studies and careers in field of Industrial and Organizational Psychology, as well as better equip them to enter and impact rapidly expanding fields such as People Analytics.  
 
 
 
@@ -219,7 +222,7 @@ We understand that incorporating R programming into the curriculum can be a daun
 </figure>
 <p>
 
-### learnrIO Can Help You
+### learnrIO Can Help
 By using our interactive R programming and statistics tutorial as a supplemental course material, professors can confidently provide their I-O Psychology students with the skills and knowledge they need to excel in their careers. This not only benefits the students but also enhances the overall reputation and effectiveness of I-O Psychology programs, ensuring that graduates are well-equipped to meet the demands of the modern business world.
 
 
