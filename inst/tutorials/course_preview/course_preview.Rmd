@@ -1,9 +1,10 @@
 ---
-title: "**learnrIO**: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students"
+title: "learnrIO: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students"
 output: 
     learnr::tutorial:
         progressive: false
-        css: /css/preview-styles.css
+        css: css/preview-styles.css
+        theme: "flatly"
 runtime: shiny_prerendered
 description: "A sneak peek into the R-based learning tutorial targeting Industrial Organizational Psychology graduate and undergraduate students, showcasing its purpose, vision, and topics covered in the course."
 ---
