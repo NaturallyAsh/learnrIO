@@ -22,8 +22,21 @@
   color: blue;
 }
 
-.intro-banner {
+.banner {
  width: 100%;
  max-height: 50%;
 }
 
+.image-column-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.image-column-container p {
+  text-align: center;
+}
+
+.image-column-container img {
+  padding: 1rem 0;
+}

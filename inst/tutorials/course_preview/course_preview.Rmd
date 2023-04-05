@@ -28,18 +28,27 @@ gradethis::gradethis_setup()
 ## Introduction 
 
 <div> 
-  <img class="intro-banner" src="images/modern-analytics.png" alt=" ">
+  <img class="banner" src="images/modern-analytics.png" alt=" ">
 </div>
 <p>
 
+### Problem
 In the ever-evolving landscape of modern business, data analytics and programming skills are becoming increasingly crucial for Industrial Organizational (I-O) Psychology professionals.  
 
-We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack exposure to data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language.  
+<div class="image-column-container">
+  <img src="images/skills-1.png" width=200px>
+  <img src="images/skills-2.png" width=200px>
+</div>
 
+
+We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack knowledge of and skills to use data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language. While we argue that colleges are the ideal environment to learn R, factors such as the years it can take a professor to get approval to evolve their curriculum, can hinder the ability for schools to meet the skills demand.    
+
+### Solution
 To address this growing demand and the academic-workplace skills gap, we have developed an interactive R programming and statistics tutorial specifically tailored for undergraduate and graduate students in the field of I-O Psychology.   
 
 
 ## What is R and Rstudio?
+### R Statistical Programming
 R is a programming language that was specifically designed for statistical computing and graphics. 
 
 <figure class="float-fig-right"> 
@@ -79,18 +88,21 @@ Now, let's talk about some of the cool things you can do with R. Here are a few 
 - **Web scraping**: With packages like `rvest` or `httr`, you can easily scrape data from websites and use it for analysis. This is a great way to collect data that isn't available through APIs or other sources.  
 - **Reproducible research**: R is a great language for doing reproducible research. With tools like `quarto` or `rmarkdown`, you can write reproducible reports and documents that include both your code and your results, making it easy to share your work with others. You can also publish production quality articles, presentations, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.   
 
-In conclusion, R is a powerful programming language that is specifically designed for statistical computing and graphics. With its large collection of packages and powerful tools for data analysis and visualization, R is a great choice for anyone working with data. RStudio makes it easier to work with R by providing a user-friendly interface and many useful features.  
+With its large collection of packages and powerful tools for data analysis and visualization, R is a great choice for anyone working with data. RStudio makes it easier to work with R by providing a user-friendly interface and many useful features.  
 
 
 ## Our Vision and Mission
+### Vision
 Our vision is to empower students pursuing degrees in Industrial and Organizational Psychology with the analytical and statistical skills necessary to excel in the workplace and influence their organizations, their industry, and the field of Industrial and Organizational Psychology.  
 
+### Mission
 Our mission is to develop a supplementary interactive course that teaches the basics of R while enhancing the analytical and statistical skills of both undergraduate and graduate students. By bridging the academic-workplace skills gap, we aim to equip all students with essential tools necessary to excel in their careers, whatever that looks like: pursuing further education, going into industry, or entering the academy as a professor of psychology or business. We believe that providing a strong foundation in analytical and statistical skills at an early stage will better prepare students for their studies and careers in field of Industrial and Organizational Psychology, as well as better equip them to enter and impact rapidly expanding fields such as People Analytics.  
 
 
 
 ## The Interactive Course
-Through our tutorial, learnrIO, students will have the opportunity to learn basic and more advanced statistical procedures commonly found in applied business settings.  
+### **learnrIO**
+Through our tutorial, students will have the opportunity to learn basic and more advanced statistical procedures commonly found in applied business settings.  
 
 <figure class="float-fig-right"> 
   <img style="width:200x; height:200px" src="images/learnrIO-logo.png" alt="image of learnrIO logo">
@@ -101,9 +113,12 @@ Our tutorial provides a strong foundation in statistical and analytical skills t
 
 Our tutorial is designed to be accessible and easy-to-use for both professors and students. We understand that redesigning course curriculums to incorporate R programming can be challenging. Therefore, we have created an interactive course using the learnr R package that professors can use as a supplement to their existing curriculum. The interactive course includes various modules covering topics such as data manipulation, data visualization, regression analysis, and more. The modules are self-paced, interactive, and include quizzes to reinforce students' understanding of the material.  
 
+### Topics Not Covered
+
 
 ## Benefits
-Incorporating our tutorial into existing curriculums has several benefits for both undergraduate and I-O graduate students.  
+Incorporating our tutorial into existing curriculums has several benefits for both undergraduate and I-O graduate students:  
+<br>
 - **Easy integration**: Professors can incorporate our tutorial into their existing curriculum without having to overhaul course materials or learn R programming themselves, providing students with an invaluable resource to complement their studies.  
 - **Hands-on approach to learning**: Our tutorial provides a hands-on approach to learning statistical and analytical skills that are often difficult to grasp from traditional textbooks or lectures. Students will have the opportunity to engage with the material in a more interactive and immersive way, which can help them retain and apply the knowledge more effectively.  
 - **Applicability to real-world scenarios**: Our tutorial is designed to cover real-world applications of statistical and analytical techniques, allowing students to develop a better understanding of how these skills can be applied in their future careers in I-O Psychology.  
@@ -203,11 +218,25 @@ We understand that incorporating R programming into the curriculum can be a daun
   <img style="width:250px" src="images/student-taking-tutorial.png" alt="a graphic of a student on a laptop taking the learnrIO course">
 </figure>
 <p>
+
+### learnrIO Can Help You
 By using our interactive R programming and statistics tutorial as a supplemental course material, professors can confidently provide their I-O Psychology students with the skills and knowledge they need to excel in their careers. This not only benefits the students but also enhances the overall reputation and effectiveness of I-O Psychology programs, ensuring that graduates are well-equipped to meet the demands of the modern business world.
 
 
 ## Conclusion
-We believe that our tutorial is a valuable resource for both undergraduate and graduate students in the Industrial Organizational Psychology field. We invite professors to explore our tutorial and consider incorporating it into their curriculum to enhance their students' statistical and analytical skills.  
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around"> 
+  <div>
+  <p style=" text-align: left"> 
+    We believe that our tutorial is a valuable resource for both undergraduate and graduate students in the Industrial Organizational Psychology field. We invite professors to explore our tutorial and consider incorporating it into their curriculum to enhance their students' statistical and analytical skills. 
+  </p>
+  </div>
+  
+  <div> <img style="max-width: 400px; text-align: center" src="images/workplace-prepared.png" alt=" "></div>
+</div>
+<p>
+
+
 
 As data-driven decision-making continues to shape the future of business, our tutorial is a powerful tool that can help prepare the next generation of I-O professionals to make a meaningful impact in their organizations.
 
