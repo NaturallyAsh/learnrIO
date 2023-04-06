@@ -20,6 +20,7 @@ library(learnr)
 library(tidyverse)
 library(gradethis)
 
+devtools::load_all()
 employee_data <- learnrIO::employee_data 
 
 gradethis::gradethis_setup()
