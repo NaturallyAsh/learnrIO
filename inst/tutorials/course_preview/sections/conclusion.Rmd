@@ -1,0 +1,18 @@
+---
+title: "Conclusion"
+---
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around"> 
+  <div>
+  <p style=" text-align: left"> 
+    We believe that our tutorial is a valuable resource for both undergraduate and graduate students in the Industrial Organizational Psychology field. We invite professors to explore our tutorial and consider incorporating it into their curriculum to enhance their students' statistical and analytical skills. 
+  </p>
+  </div>
+  
+  <div> <img style="max-width: 400px; text-align: center" src="images/workplace-prepared.png" alt=" "></div>
+</div>
+<p>
+
+
+
+As data-driven decision-making continues to shape the future of business, our tutorial is a powerful tool that can help prepare the next generation of I-O professionals to make a meaningful impact in their organizations.

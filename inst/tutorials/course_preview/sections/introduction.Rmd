@@ -1,0 +1,24 @@
+---
+title: "Introduction section"
+---
+
+<div> 
+  <img class="banner" src="images/modern-analytics.png" alt=" ">
+</div>
+<p>
+
+### Problem
+In the ever-evolving landscape of modern business, data analytics and programming skills are becoming increasingly crucial for Industrial Organizational (I-O) Psychology professionals.  
+
+<div class="image-column-container">
+  <img src="images/skills-1.png" width=200px>
+  <img src="images/skills-2.png" width=200px>
+  <img src="images/ds-industry.png" width=200px>
+</div>
+
+
+We recognize the importance of equipping I-O professionals with the necessary tools they need to excel in the workplace. However, many students lack knowledge of and skills to use data analytics tools most commonly used in applied settings, namely, R, a powerful statistical programming language. While we argue that colleges are the ideal environment to learn R, factors such as the years it can take a professor to get approval to evolve their curriculum, can hinder the ability for schools to meet the skills demand.  
+
+
+### Solution
+To address this growing demand and the academic-workplace skills gap, we have developed an interactive R programming and statistics tutorial specifically tailored for undergraduate and graduate students in the field of I-O Psychology.   

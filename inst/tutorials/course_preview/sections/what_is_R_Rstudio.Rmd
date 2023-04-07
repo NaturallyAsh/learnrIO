@@ -1,0 +1,44 @@
+---
+title: "What is R and Rstudio?"
+---
+### R Statistical Programming
+R is a programming language that was specifically designed for statistical computing and graphics. 
+
+<figure class="float-fig-right"> 
+  <img style="width:150px; height:150px" src="images/R-Programming-logo.png" alt="image of learnrIO logo">
+</figure>
+<p>
+
+R is an open-source language, which means that it's free to use, making it an attractive choice for businesses and users with limited budgets. It has a large community of users who contribute to its development. R is widely used by statisticians, data analysts, and data scientists for tasks such as data manipulation, visualization, modeling, and machine learning.
+
+One of the biggest strengths of R is its extensive collection of packages. Packages are sets of code that provide additional functionality to the R language. There are thousands of packages available for R that cover a wide range of topics, from data manipulation and visualization to machine learning and deep learning. With so many packages available, R users can quickly and easily extend the capabilities of the language to meet their needs.
+
+### Rstudio
+<figure> 
+  <img style="width:100%; height:400px" src="images/rstudio-gui.png" alt="image of an Rstudio GUI">
+  <figcaption class="figcap">Rstudio GUI</figcaption>
+</figure>
+<br>
+
+RStudio is an integrated development environment (IDE) for R that makes it easier to write and organize R code. It provides a user-friendly interface for working with R and has many features that make it a great tool for data analysis and visualization. Some of the features of RStudio include:
+
+- Syntax highlighting, code completion, and smart indentation    
+- Visual Markdown Editor  
+- Execute R and Python code directly from the source editor  
+- Built-in package management tools  
+- Integrated help and documentation  
+- Interactive debugging  
+- Project organization and management  
+- Version control integration  
+- and much _**MUCH**_ more!
+
+### Things You Can Do with R
+Now, let's talk about some of the cool things you can do with R. Here are a few examples:  
+
+- **Data visualization**: R has a wide range of powerful tools for creating data visualizations. With packages like `ggplot2`, you can create beautiful, customizable plots and charts that allow you to explore your data in new ways. You can also create interactive visualizations using packages like `plotly` or `shiny`.  
+- **Machine learning**: R has a number of packages for performing machine learning techniques, including classification, regression, and clustering. With packages like `caret` or `mlr`, you can easily build and tune machine learning models, and use them to make predictions on new data.  
+- **Text mining**: R has packages like `tm` or `tidytext` that allow you to analyze text data, such as tweets or news articles. You can perform tasks like sentiment analysis, topic modeling, and word frequency analysis.  
+- **Web scraping**: With packages like `rvest` or `httr`, you can easily scrape data from websites and use it for analysis. This is a great way to collect data that isn't available through APIs or other sources.  
+- **Reproducible research**: R is a great language for doing reproducible research. With tools like `quarto` or `rmarkdown`, you can write reproducible reports and documents that include both your code and your results, making it easy to share your work with others. You can also publish production quality articles, presentations, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.   
+
+With its large collection of packages and powerful tools for data analysis and visualization, R is a great choice for anyone working with data. RStudio makes it easier to work with R by providing a user-friendly interface and many useful features.  

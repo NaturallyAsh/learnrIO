@@ -1,0 +1,11 @@
+---
+title: "Benefits"
+---
+Incorporating our tutorial into existing curriculums has several benefits for both undergraduate and I-O graduate students:  
+<br>
+- **Easy integration**: Professors can incorporate our tutorial into their existing curriculum without having to overhaul course materials or learn R programming themselves, providing students with an invaluable resource to complement their studies.  
+- **Hands-on approach to learning**: Our tutorial provides a hands-on approach to learning statistical and analytical skills that are often difficult to grasp from traditional textbooks or lectures. Students will have the opportunity to engage with the material in a more interactive and immersive way, which can help them retain and apply the knowledge more effectively.  
+- **Applicability to real-world scenarios**: Our tutorial is designed to cover real-world applications of statistical and analytical techniques, allowing students to develop a better understanding of how these skills can be applied in their future careers in I-O Psychology.  
+- **Better preparedness for graduate school**: Students who learn R programming in undergrad will be better prepared when they enter graduate school, where they may encounter more advanced statistical techniques and require greater data analysis skills. By introducing R programming language early on, students will have a head start in building a strong foundation in data analysis, making it easier for them to acquire more advanced skills in the future.  
+- **Enhanced employability and opportunities**: Learning R programming language can enhance students' employability and open up opportunities in a range of fields beyond academia. Employers across various industries are increasingly seeking candidates with strong data analytical skills and knowledge of programming languages like R, which are becoming essential tools in the workplace.  
+- **Demonstrates professors' commitment**: By incorporating our tutorial into their curriculums, professors can demonstrate their commitment to equipping students with the skills they need to succeed in their future careers. This can help attract and retain students who are looking for a comprehensive and practical approach to learning statistical and analytical skills.

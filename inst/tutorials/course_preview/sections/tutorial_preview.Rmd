@@ -1,0 +1,78 @@
+---
+title: "Tutorial Preview"
+---
+In this exercise, the learner is asked to use `dplyr` and `tidyr` to perform three transformations on the fictional employee dataset. They are asked to filter for employees in the Marketing department, group by department and calculate the average salary, and pivot the data to have the department as rows and start_date as columns. The exercise code block includes the necessary code to load the dataset and perform the transformations, as well as print the results for the learner to check their work.  
+
+
+### Demonstrates executing a code block exercise. 
+*Click "Run Code" to view the first 5 rows of the dataset:*
+```{r view, exercise=TRUE}
+head(employee_data)
+```
+
+
+### Demonstrates a partially completed exercise for which a student must fill in the correct answer.  
+*Fill in the blank to group by department and calculate the average salary:*
+```{r group, exercise=TRUE, exercise.blanks = "___"}
+employee_data |> 
+  ___(___) |> 
+  ___(avg_salary = mean(salary))
+```
+
+```{r group-solution, exercise.reveal_solution = FALSE}
+employee_data |> 
+  group_by(department) |> 
+  summarize(avg_salary = mean(salary))
+```
+
+<!-- I used grade_this() instead of grade_this_code(). grade_this_code() flagged answer incorrect if I typed `summarise` instead of `summarize`. That's because grade_this_code() passes if the result and solution code string outputs are an exact match. With grade_this(), the .result and .solution objects contain the RESULT. So, the student passes if the user's result from the code output is the same as the solution result (I could also use pass_if_equal() which automatically passes if .result is equal to .solution -->
+```{r group-check}
+# grade_this_code()
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```
+
+
+### Demonstrates completing an exercise from scratch.  
+*Pivot the data to have the department as rows and start_date as columns. Save the result in a variable called `dept_start_date_pivot`. Print the variable:*
+```{r pivot, exercise=TRUE, exercise.blanks = "___"}
+
+```
+
+```{r pivot-solution, exercise.reveal_solution = FALSE}
+dept_start_date_pivot <- employee_data |> 
+  select(department, start_date) |> 
+  pivot_wider(names_from = start_date, values_from = department)
+
+dept_start_date_pivot
+```
+
+```{r pivot-hint-1}
+dept_start_date_pivot <- employee_data |> 
+  ___(___, ___) |> 
+  ___(___ = ___, ___ = ___)
+
+dept_start_date_pivot
+```
+
+```{r pivot-hint-2}
+dept_start_date_pivot <- employee_data |> 
+  select(___, ___) |> 
+  pivot_wider(names_from = ___, values_from = ___)
+
+dept_start_date_pivot
+```
+
+
+```{r pivot-check}
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```

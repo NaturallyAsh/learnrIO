@@ -1,0 +1,16 @@
+---
+title: "Addressing Challenges Faced by Professors"
+---
+<figure class="float-fig-right"> 
+  <img style="width:250px" src="images/professor-confusion.png" alt="a graphic of a confused looking professor with a thought bubble with the R logo, code, and question marks">
+</figure>
+<p>
+We understand that incorporating R programming into the curriculum can be a daunting task for professors who may not have experience with this language or the necessary resources available. Our tutorial provides a solution to this challenge that enables professors to integrate R programming into their courses without any prior knowledge or expertise.  
+
+<figure class="float-fig-left"> 
+  <img style="width:250px" src="images/student-taking-tutorial.png" alt="a graphic of a student on a laptop taking the learnrIO course">
+</figure>
+<p>
+
+### learnrIO Can Help
+By using our interactive R programming and statistics tutorial as a supplemental course material, professors can confidently provide their I-O Psychology students with the skills and knowledge they need to excel in their careers. This not only benefits the students but also enhances the overall reputation and effectiveness of I-O Psychology programs, ensuring that graduates are well-equipped to meet the demands of the modern business world.

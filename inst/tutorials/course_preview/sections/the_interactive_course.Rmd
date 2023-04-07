@@ -1,0 +1,16 @@
+---
+title: "The Interactive Course"
+---
+### **learnrIO**
+Through our tutorial, students will have the opportunity to learn basic and more advanced statistical procedures commonly found in applied business settings.  
+
+<figure class="float-fig-right"> 
+  <img style="width:200x; height:200px" src="images/learnrIO-logo.png" alt="image of learnrIO logo">
+</figure>
+<p>
+
+Our tutorial provides a strong foundation in statistical and analytical skills that will better prepare students for future studies or career opportunities in the Industrial Organizational Psychology field.  
+
+Our tutorial is designed to be accessible and easy-to-use for both professors and students. We understand that redesigning course curriculums to incorporate R programming can be challenging. Therefore, we have created an interactive course using the learnr R package that professors can use as a supplement to their existing curriculum. The interactive course includes various modules covering topics such as data manipulation, data visualization, regression analysis, and more. The modules are self-paced, interactive, and include quizzes to reinforce students' understanding of the material.  
+
+### Topics Not Covered
