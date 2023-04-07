@@ -37,7 +37,7 @@ This topic covers the fundamental principles of statistics, including descriptiv
 
 ### Describing data 
 
-packages to use: `summary()`, `dplyr::glimpse()`, `skimr::skim()`
+packages to use: `psych::describe()`, `summary()`, `dplyr::glimpse()`, `skimr::skim()`
 
 
 ### Variance 
