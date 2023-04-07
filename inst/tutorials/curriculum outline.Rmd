@@ -1,0 +1,120 @@
+---
+title: "curriculum outline"
+author: "Matthew"
+date: "2023-04-07"
+output: html_document
+---
+
+Module 1: Foundations
+  Intro to R & RStudio and Quatro/R Markdown
+  R data types and structures
+  Data management in R
+  Data manipulation with dplyr and tidyr
+  Control structures and functions
+  Basic data visualization with ggplot2
+    Introduction; weave in visualizations throughout the rest of the curriculum (?)
+
+Module 2: Statistics with R 
+  Basic statistical concepts and distributions
+    Estimates of central tendency (mean types, median, mode)
+    Variance & standard deviation
+    Skew, kurtosis, and other properties of distributions
+    Producing random distributions with rnorm(), rpois(), etc.(?)
+    Visualizations
+      Histograms, stem & leaf plots, box-plots, bar charts, scatterplots, quantile-quantile plots
+      Others (?)
+  Statistical inference with hypothesis testing and confidence intervals
+    Z-tests
+    T-tests
+      Independent, paired samples, other types (?)
+      Bootstrapping
+    ANOVA (fixed, random, mixed effects models)
+      One-way ANOVA
+      Post-hoc comparisons
+      Factorial ANOVA
+      Repeated measures
+    ANCOVA
+  Correlation analysis
+    Pearson’s product-moment, Spearman’s rho
+    Polychoric & tetrachoric correlation
+  Linear regression analysis
+    Simple regression
+    Multiple regression
+  Generalized linear models
+    Logistic regression
+    Ordinal regression
+    Nonlinear regression techniques
+  Mediation & Moderation
+    Regression techniques for both
+  Nonparametric techniques
+    Chi-square
+    Others (?)
+
+Module 3: Psychometrics with R
+  Introduction to psychometrics
+  CTT: Item analysis
+    Dichotomous CTT
+      Item difficulty
+      Item discrimination (item-total correlation)
+    Corrected Item-total correlation
+  CTT: Reliability
+    Split-half, test-retest, alternate forms reliability
+      True score reliability (?)
+    Common indices of reliability
+      Crohnbach's alpha
+      McDonald's omega
+      Guttman’s lambda (?)
+      Greatest lower bound (?)
+    Inter-rater reliability (consistency, agreement)
+  Factor Analysis
+    Parallel analysis
+    EFA
+    CFA
+  Unidimensional IRT with mirt
+    Dichotomous
+      Item & person model fit
+  Rasch, 2PL, 3PL
+      Comparing model fits
+      Item Characteristic Curves, Item Information Curves
+      Test Information Curves
+    Polytomous
+      Item & person parameter estimation (single-factor) with mirt
+  Rating Scale, GPCM, Graded Response
+  GGUM
+    Item & test information
+  Generalizability Theory (?)
+    Unnested data
+    Nested data
+
+Module X: HR Analytics with R 
+  Introduction to HR analytics 
+  Talent acquisition analysis 
+  Performance management analysis 
+  Employee engagement analysis 
+  Workforce planning and forecasting
+
+Module X: People Analytics with R 
+  Introduction to people analytics 
+  Diversity and inclusion analysis 
+  Organizational network analysis 
+  Predictive analytics for employee turnover 
+  Natural language processing for employee sentiment analysis 
+
+Module X: Advanced Statistics & Psychometrics with R
+  Simulating data (?)
+  Path analysis
+  Components analysis
+  Cluster analysis
+  Pattern analysis
+  SEM
+  Multilevel modeling
+  Latent growth modeling
+  Dyadic/social-network analysis
+  Meta-analysis
+  Canonical regression
+  Computer Adaptive Testing (? not sure what to put in this section, if included)
+  Measurement invariance
+    Differential Item Functioning
+    Mean and Covariance Structure (MACS) analysis
+  Test equating
+  Multidimensional IRT
