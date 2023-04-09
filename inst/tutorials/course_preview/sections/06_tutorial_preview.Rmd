@@ -1,17 +1,19 @@
 ---
 title: "Tutorial Preview"
 ---
+
+### Demonstrations
 In this exercise, the learner is asked to use `dplyr` and `tidyr` to perform three transformations on the fictional employee dataset. They are asked to filter for employees in the Marketing department, group by department and calculate the average salary, and pivot the data to have the department as rows and start_date as columns. The exercise code block includes the necessary code to load the dataset and perform the transformations, as well as print the results for the learner to check their work.  
 
 
-### Demonstrates executing a code block exercise. 
+#### Demonstrates executing a code block exercise. 
 *Click "Run Code" to view the first 5 rows of the dataset:*
 ```{r view, exercise=TRUE}
 head(employee_data)
 ```
 
 
-### Demonstrates a partially completed exercise for which a student must fill in the correct answer.  
+#### Demonstrates a partially completed exercise for which a student must fill in the correct answer.  
 *Fill in the blank to group by department and calculate the average salary:*
 ```{r group, exercise=TRUE, exercise.blanks = "___"}
 employee_data |> 
@@ -37,7 +39,7 @@ grade_this({
 ```
 
 
-### Demonstrates completing an exercise from scratch.  
+#### Demonstrates completing an exercise from scratch.  
 *Pivot the data to have the department as rows and start_date as columns. Save the result in a variable called `dept_start_date_pivot`. Print the variable:*
 ```{r pivot, exercise=TRUE, exercise.blanks = "___"}
 

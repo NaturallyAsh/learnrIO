@@ -28,40 +28,40 @@ gradethis::gradethis_setup()
 ```
 
 ## Introduction
-```{r, child="sections/introduction.Rmd"}
+```{r, child="sections/01_introduction.Rmd"}
 ```   
 
 
 ## What is R and Rstudio?
-```{r, child="sections/what_is_R_Rstudio.Rmd"}
+```{r, child="sections/02_what_is_R_Rstudio.Rmd"}
 ``` 
 
 
 ## Our Vision and Mission
-```{r, child="sections/vision_mission.Rmd"}
+```{r, child="sections/03_vision_mission.Rmd"}
 ``` 
 
 
 ## The Interactive Course
-```{r, child="sections/the_interactive_course.Rmd"}
+```{r, child="sections/04_the_interactive_course.Rmd"}
 ``` 
 
 ## Benefits
-```{r, child="sections/benefits.Rmd"}
+```{r, child="sections/05_benefits.Rmd"}
 ``` 
 
 ## Tutorial Preview
 
-```{r, child="sections/tutorial_preview.Rmd"}
+```{r, child="sections/06_tutorial_preview.Rmd"}
 ``` 
 
 
 ## Addressing the Challenges Faced by Professors
-```{r, child="sections/addressing_challenges.Rmd"}
+```{r, child="sections/07_addressing_challenges.Rmd"}
 ``` 
 
 ## Conclusion
-```{r, child="sections/conclusion.Rmd"}
+```{r, child="sections/08_conclusion.Rmd"}
 ``` 
 
 
