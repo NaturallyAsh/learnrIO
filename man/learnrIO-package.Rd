@@ -13,7 +13,7 @@ An interactive R course for IO Psych graduate and undergraduate students.
 
 Authors:
 \itemize{
-  \item Matthew Bennett \email{mwbenn@gmail.com}
+  \item Matthew Bennett \email{matthew.bennett@shl.com}
 }
 
 }

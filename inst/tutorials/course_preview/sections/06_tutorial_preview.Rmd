@@ -1,34 +1,50 @@
 ---
 title: "Tutorial Preview"
 ---
+### Course Preview
+Our tutorial is specifically tailored for those interested in Industrial Organizational Psychology, but it's suitable for anyone looking to gain a better understanding of R programming.  
 
-### Demonstrations
-In this exercise, the learner is asked to use `dplyr` and `tidyr` to perform three transformations on the fictional employee dataset. They are asked to filter for employees in the Marketing department, group by department and calculate the average salary, and pivot the data to have the department as rows and start_date as columns. The exercise code block includes the necessary code to load the dataset and perform the transformations, as well as print the results for the learner to check their work.  
+One of the key features of our tutorial is the use of the `learnr` R package. This package allows for the creation of interactive exercises and quizzes that reinforce students' understanding of the material.  
+
+In addition to providing an interactive learning experience, the `learnr` package also has the added benefit of grading. This means that students can receive immediate feedback on their progress, and professors can easily track student performance.
+
+Grading is done using the `grade_this` R package, which allows for the automatic grading of code exercises and quizzes. This package integrates seamlessly with the `learnr` package, making it easy for professors to assign and grade interactive exercises.
+
+Below we provide a few examples of the types of exercises learners will encounter in our tutorial:
+
+### Examples
+In the following exercises, the student is asked to use `dplyr` and `tidyr` to perform three transformations on the fictional employee dataset. The exercise code blocks include the necessary code to load the dataset and perform the transformations and prints the results for the student to check their work.  
 
 
-#### Demonstrates executing a code block exercise. 
+#### Example of executing a code block exercise. 
 *Click "Run Code" to view the first 5 rows of the dataset:*
 ```{r view, exercise=TRUE}
 head(employee_data)
 ```
 
 
-#### Demonstrates a partially completed exercise for which a student must fill in the correct answer.  
-*Fill in the blank to group by department and calculate the average salary:*
-```{r group, exercise=TRUE, exercise.blanks = "___"}
-employee_data |> 
-  ___(___) |> 
-  ___(avg_salary = mean(salary))
+#### Example of a partially completed exercise for which a student must fill in the correct answer.  
+*Fill in the blank to convert `status` values to binary (Active = 1; Inactive = 0). Print the `new_status` variable:*
+```{r ifelse, exercise=TRUE, exercise.blanks = "___"}
+new_status <- employee_data |> 
+  ___(
+    status = ___()
+  )
+
+___
 ```
 
-```{r group-solution, exercise.reveal_solution = FALSE}
-employee_data |> 
-  group_by(department) |> 
-  summarize(avg_salary = mean(salary))
+```{r ifelse-solution, exercise.reveal_solution = FALSE}
+new_status <- employee_data |> 
+  mutate(
+    status = ifelse(status == "Active", 1, 0)
+  )
+
+new_status
 ```
 
 <!-- I used grade_this() instead of grade_this_code(). grade_this_code() flagged answer incorrect if I typed `summarise` instead of `summarize`. That's because grade_this_code() passes if the result and solution code string outputs are an exact match. With grade_this(), the .result and .solution objects contain the RESULT. So, the student passes if the user's result from the code output is the same as the solution result (I could also use pass_if_equal() which automatically passes if .result is equal to .solution -->
-```{r group-check}
+```{r ifelse-check}
 # grade_this_code()
 grade_this({
   if (identical(.result, .solution)) {
@@ -39,42 +55,74 @@ grade_this({
 ```
 
 
-#### Demonstrates completing an exercise from scratch.  
-*Pivot the data to have the department as rows and start_date as columns. Save the result in a variable called `dept_start_date_pivot`. Print the variable:*
-```{r pivot, exercise=TRUE, exercise.blanks = "___"}
+#### Example of a code exercise for a student to complete from scratch.  
+*Group the data by job `level` and calculate the mean compensation for each `level`. Save the result in a variable called `job_level_mean`. Use the `job_level_mean` variable to create a bar plot using `ggplot`. Fill the bars by `level`. Save the plot in a variable called `level_plot` and then print the plot:*
+```{r meanPlot, exercise=TRUE, exercise.blanks = "___"}
 
 ```
 
-```{r pivot-solution, exercise.reveal_solution = FALSE}
-dept_start_date_pivot <- employee_data |> 
-  select(department, start_date) |> 
-  pivot_wider(names_from = start_date, values_from = department)
+```{r meanPlot-solution, exercise.reveal_solution = FALSE}
+job_level_mean <- employee_data |> 
+  select(level, compensation) |> 
+  group_by(level) |> 
+  summarise(mean_compensation = mean(compensation)) 
 
-dept_start_date_pivot
+level_plot <- ggplot(job_level_mean, aes(x = level, y = mean_compensation, fill = level)) +
+  geom_col()
+
+level_plot
 ```
 
-```{r pivot-hint-1}
-dept_start_date_pivot <- employee_data |> 
+```{r meanPlot-hint-1}
+job_level_mean <- employee_data |> 
   ___(___, ___) |> 
   ___(___ = ___, ___ = ___)
 
-dept_start_date_pivot
+level_plot <- ggplot(___) +
+  ___()
+
+level_plot
 ```
 
-```{r pivot-hint-2}
-dept_start_date_pivot <- employee_data |> 
+```{r meanPlot-hint-2}
+job_level_mean <- employee_data |> 
   select(___, ___) |> 
-  pivot_wider(names_from = ___, values_from = ___)
+  group_by(level) |> 
+  summarise(mean_compensation = mean(___)) 
 
-dept_start_date_pivot
+level_plot <- ggplot(job_level_mean, aes(x = level, y = mean_compensation, fill = ___)) +
+  geom_col()
+
+level_plot
 ```
 
-
-```{r pivot-check}
+<!-- KO::compare_ggplots() source: https://github.com/KO112/KO/blob/master/R/Compare_ggplots.R -->
+```{r meanPlot-check}
 grade_this({
-  if (identical(.result, .solution)) {
+  if (KO::compare_ggplots(.result, .solution) == TRUE) {
     pass()
   }
   fail()
+
 })
+
 ```
+
+
+#### Example of a question exercise 
+*Suppose you are investigating employee turnover at a company. You want to see if there is an association between an employee's job level and turnover. Create a contingency table and then use table to run a chi-square test.*. 
+
+```{r chi, echo=FALSE}
+question("What is the result from the test?",
+  answer("There is no statistical association between an employee's job level and turnover."),
+  answer("There is a statistical association between an employee's job level and turnover.", correct = TRUE),
+  answer("I don't know."),
+  allow_retry = TRUE,
+  incorrect = "Incorrect. Try again.",
+  correct = "Correct! Great job!"
+)
+```
+
+
+#### Option for Knowledge Retention
+We **highly** recommend that students create an Quarto file to work in alongside the course. An Quarto file is a great way to keep track of notes and practice what students learn from the course. By working in an Quarto file, students can easily write and execute R code, include text, images, and other media, and export your work to a variety of formats (such as HTML or PDF). This allows students to create a comprehensive record of your progress throughout the course, and provides a valuable resource for future reference.

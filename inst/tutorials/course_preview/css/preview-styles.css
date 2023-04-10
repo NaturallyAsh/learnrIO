@@ -81,3 +81,21 @@ h4 {
 .image-column-container img {
   padding: 1rem 0;
 }
+
+
+.details-callout {
+  padding: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 1px 1px 2px #bbbbbb;
+  cursor: pointer;
+}
+
+.details-callout p {
+  background-color: white;
+  padding: 4px;
+  margin: 0;
+  box-shadow: 1px 1px 2px #bbbbbb;
+}

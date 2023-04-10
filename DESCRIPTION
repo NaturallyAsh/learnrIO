@@ -3,7 +3,7 @@ Title: An Interactive R Programming and Statistics Course for Industrial Organiz
 Version: 0.0.0.9000
 Authors@R: c(
   person("Ashleigh", "Wilson", email = "ash.wil.1990@gmail.com", role = c("aut", "cre")),
-  person("Matthew", "Bennett", email = "mwbenn@gmail.com", role = "aut"))
+  person("Matthew", "Bennett", email = "matthew.bennett@shl.com", role = "aut"))
 Description: An interactive R course for IO Psych graduate and undergraduate students.
 License: MIT + file LICENSE
 Encoding: UTF-8

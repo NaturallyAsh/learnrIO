@@ -1,0 +1,50 @@
+---
+title: "topics covered"
+---
+<details class="details-callout">
+<summary>Module 1: Foundations</summary>
+
+- Intro to R & RStudio and Quatro/R Markdown  
+- R data types and structures  
+- Data management in R  
+- Data manipulation with dplyr and tidyr  
+- Control structures and functions  
+- Basic data visualization with ggplot2  
+
+</details>
+
+<details class="details-callout">
+<summary>Module 2: Statistics with R</summary>
+
+- Basic statistical concepts and distributions  
+  - Estimates of central tendency (mean types, median, mode)  
+  - Variance & standard deviation  
+  - Skew, kurtosis, and other properties of distributions  
+  - Visualizing data  
+  - Statistical inference with hypothesis testing and confidence intervals  
+- ANOVA & ANCOVA  
+- Correlation analysis  
+- Linear Regression & General Linear Models  
+
+</details>
+
+<details class="details-callout">
+<summary>Module 3: Basic Psychometrics with R</summary>
+
+- Introduction to psychometrics  
+- CTT: Item analysis  
+- CTT: Reliability  
+- Factor Analysis  
+
+</details>
+
+<details class="details-callout">
+<summary>Module 4: HR Analytics with R</summary>
+
+- Introduction to HR analytics  
+- Talent acquisition analysis  
+- Performance management analysis  
+- Employee engagement analysis  
+- Workforce planning and forecasting  
+
+</details>

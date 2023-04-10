@@ -13,4 +13,8 @@ Our tutorial provides a strong foundation in statistical and analytical skills t
 
 Our tutorial is designed to be accessible and easy-to-use for both professors and students. We understand that redesigning course curriculums to incorporate R programming can be challenging. Therefore, we have created an interactive course using the learnr R package that professors can use as a supplement to their existing curriculum. The interactive course includes various modules covering topics such as data manipulation, data visualization, regression analysis, and more. The modules are self-paced, interactive, and include quizzes to reinforce students' understanding of the material.  
 
+### Topics Covered
+```{r, child="~/Documents/Coding/RStudio/learnrIO/inst/tutorials/course_preview/sections/04.1_topics-covered.Rmd"}
+``` 
+
 ### Topics Not Covered
