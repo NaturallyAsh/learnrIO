@@ -23,8 +23,8 @@ title: "Topics covered"
 
 #### Module 4: Psychometrics with R
 - Introduction to psychometrics 
-- CTT: Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) 
-- CTT: Item analysis (item difficulty, item-total correlation, etc.) 
+- Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) 
+- Item analysis (item difficulty, item-total correlation, etc.) 
 - Factor Analysis 
 - Item Response Theory (IRT) 
 
