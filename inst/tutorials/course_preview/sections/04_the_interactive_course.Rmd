@@ -18,3 +18,5 @@ Our tutorial is designed to be accessible and easy-to-use for both professors an
 ``` 
 
 ### Topics Not Covered
+```{r, child="~/Documents/Coding/RStudio/learnrIO/inst/tutorials/course_preview/sections/04.2_topics-not-covered.Rmd"}
+``` 

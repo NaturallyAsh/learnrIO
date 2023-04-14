@@ -1,50 +1,34 @@
 ---
-title: "topics covered"
+title: "Topics covered"
 ---
-<details class="details-callout">
-<summary>Module 1: Foundations</summary>
+#### Module 1: Introduction to Data Analytics & R Foundations
+- Overview of data analytics in the IO Psych business context 
+- Introduction to R, RStudio, and Quarto 
+- Version control: Git and Github 
+- Managing and organizing data 
+- Importing and exporting data in R 
+- R data types and structures 
+- Data manipulation with the tidyverse 
 
-- Intro to R & RStudio and Quatro/R Markdown  
-- R data types and structures  
-- Data management in R  
-- Data manipulation with dplyr and tidyr  
-- Control structures and functions  
-- Basic data visualization with ggplot2  
+#### Module 2: Data Preparation & Exploratory Data Analysis in R
+- Data cleaning and preparation with tidyr and dplyr 
+- Descriptive statistics and distributions 
+- Basic data visualization with ggplot2 
+- Intermediate visualization techniques with ggplot2 and plotly 
 
-</details>
+#### Module 3: Statistics & Regression Analysis in R
+- Correlation and regression analysis 
+- Hypothesis testing with statistical inference and confidence intervals 
+- Logistic and Ordinal Regression 
 
-<details class="details-callout">
-<summary>Module 2: Statistics with R</summary>
+#### Module 4: Psychometrics with R
+- Introduction to psychometrics 
+- CTT: Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) 
+- CTT: Item analysis (item difficulty, item-total correlation, etc.) 
+- Factor Analysis 
+- Item Response Theory (IRT) 
 
-- Basic statistical concepts and distributions  
-  - Estimates of central tendency (mean types, median, mode)  
-  - Variance & standard deviation  
-  - Skew, kurtosis, and other properties of distributions  
-  - Visualizing data  
-  - Statistical inference with hypothesis testing and confidence intervals  
-- ANOVA & ANCOVA  
-- Correlation analysis  
-- Linear Regression & General Linear Models  
-
-</details>
-
-<details class="details-callout">
-<summary>Module 3: Basic Psychometrics with R</summary>
-
-- Introduction to psychometrics  
-- CTT: Item analysis  
-- CTT: Reliability  
-- Factor Analysis  
-
-</details>
-
-<details class="details-callout">
-<summary>Module 4: HR Analytics with R</summary>
-
-- Introduction to HR analytics  
-- Talent acquisition analysis  
-- Performance management analysis  
-- Employee engagement analysis  
-- Workforce planning and forecasting  
-
-</details>
+#### Module 5: Advanced Topics in Data Analytics with R
+- Text Mining and Natural language processing with tm and tidytext 
+- Intro to Supervised Learning in R: Logistic Regression 
+- Organizational network analysis with igraph and ggraph 

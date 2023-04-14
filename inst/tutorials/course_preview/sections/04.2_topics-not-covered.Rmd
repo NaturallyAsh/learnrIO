@@ -1,0 +1,11 @@
+---
+title: "Topics not covered"
+---
+
+Although this course covers a wide range of topics in data analytics with a focus on Industrial-Organizational Psychology, there are still several areas that are not covered. These include advanced statistics and advanced psychometrics.  
+
+Advanced statistics such as multilevel modeling, structural equation modeling, and Bayesian analysis require a deeper level of statistical expertise and understanding than what is covered in this course. Similarly, advanced psychometric topics such as differential item functioning, test equating, and latent variable models go beyond the scope of this course.  
+
+However, we will refer students to already available and excellent resources for those topics not covered. For example, the book "Discovering Statistics using R and RStudio" and it's accompanying `discovR` learnr course by Andy Fields, "Modern Psychometrics with R" by Patrick Mair, and Psychometrics: An Introduction by R. Michael Furr provide comprehensive coverage of these topics.  
+
+We also plan to potentially develop courses for machine learning, natural language processing, and people analytics with R in the future. These courses will cover advanced topics in data analytics that build upon the foundations taught in this course.  
