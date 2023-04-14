@@ -23,7 +23,7 @@ title: "Topics covered"
 
 #### Module 4: Psychometrics with R
 - Introduction to psychometrics 
-- Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) & validity (?)
+- Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) & validity
 - Item analysis (item difficulty, item-total correlation, etc.) 
 - Factor Analysis 
 - Item Response Theory (IRT) 
