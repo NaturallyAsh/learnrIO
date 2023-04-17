@@ -17,16 +17,17 @@ title: "Topics covered"
 - Intermediate visualization techniques with ggplot2 and plotly 
 
 #### Module 3: Statistics & Regression Analysis in R
+- Introduction to statistical analysis in R
 - Correlation and regression analysis 
 - Hypothesis testing with statistical inference and confidence intervals 
 - Logistic and Ordinal Regression 
 
 #### Module 4: Psychometrics with R
-- Introduction to psychometrics 
-- Reliability (split-half and other forms of reliability, Crohnbach's alpha, McDonald's omega) & validity
-- Item analysis (item difficulty, item-total correlation, etc.) 
+- Introduction to psychometrics in R
+- Reliability & validity
+- Item analysis
 - Factor Analysis 
-- Item Response Theory (IRT) 
+- Item Response Theory (IRT)
 
 #### Module 5: Advanced Topics in Data Analytics with R
 - Text Mining and Natural language processing with tm and tidytext 
