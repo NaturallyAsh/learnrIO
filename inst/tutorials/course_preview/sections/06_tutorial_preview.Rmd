@@ -125,4 +125,4 @@ question("What is the result from the test?",
 
 
 #### Option for Knowledge Retention
-We **highly** recommend that students create an Quarto file to work in alongside the course. An Quarto file is a great way to keep track of notes and practice what students learn from the course. By working in an Quarto file, students can easily write and execute R code, include text, images, and other media, and export your work to a variety of formats (such as HTML or PDF). This allows students to create a comprehensive record of your progress throughout the course, and provides a valuable resource for future reference.
+We **highly** recommend that students create a Quarto file to work in alongside the course. An Quarto file is a great way to keep track of notes and practice what students learn from the course. By working in a Quarto file, students can easily write and execute R code, include text, images, and other media, and export your work to a variety of formats (such as HTML or PDF). This allows students to create a comprehensive record of your progress throughout the course, and provides a valuable resource for future reference.
