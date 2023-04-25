@@ -5,13 +5,12 @@ title: "Topics covered"
 - Overview of data analytics in the IO Psych business context 
 - Introduction to R, RStudio, and Quarto 
 - Version control: Git and Github 
-- Managing and organizing data 
+- Organizing using RStudio Projects 
 - Importing and exporting data in R 
 - R data types and structures 
-- Data manipulation with the tidyverse 
 
 #### Module 2: Data Preparation & Exploratory Data Analysis in R
-- Data cleaning and preparation with tidyr and dplyr 
+- Data Management: Cleaning and manipulating data with the tidyverse
 - Descriptive statistics and distributions 
 - Basic data visualization with ggplot2 
 - Intermediate visualization techniques with ggplot2 and plotly 
