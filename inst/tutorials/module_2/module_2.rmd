@@ -1,5 +1,5 @@
 ---
-title: "Module 2: Statistics with R"
+title: "Module 2: R Foundations"
 output: 
     learnr::tutorial:
         progressive: true
@@ -19,64 +19,17 @@ library(dplyr)
 
 ```
 
-# Learn R - For IO Psychs
 
-## Welcome!
+# learnrIO
 
-We strongly encourage you to create a quarto document alongside this tutorial to work through the problems. That way you can take notes an retain your knowledge.
+## Lesson Overview
 
-### Overview
-The Statistics with R module is designed to provide students with a comprehensive understanding of commonly used statistical concepts and techniques.
+
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
 
-## Basic statistical concepts and distributions {data-progressive=TRUE}
-
-This topic covers the fundamental principles of statistics, including descriptive statistics and variance.
-
-### Describing data 
-
-packages to use: `psych::describe()`, `summary()`, `dplyr::glimpse()`, `skimr::skim()`
-
-
-### Variance 
-packages to use: r-base, 
-
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Statistical inference with confidence intervals and hypothesis testing {data-progressive=TRUE}
-
-In this topic, students will learn how to use hypothesis testing and confidence intervals to make inferences about population parameters based on sample data.
-
-### Inferential Statistics
-With inferential statistics you take a sample or subset of a population of interest, test for differences in the sample, and use the results from the sample to make predictions about the population.
-
-### Sampling 
-Sample statistic:  
-Parameter:  
-Sampling error:  
-Confidence intervals:  
-
-
-### Hypothesis Testing 
-[reference to help build this section](https://bookdown.org/animestina/R_Manchester/examining-relationships-more-than-one-variable.html)
-
-Hypothesis testing involves generating an experimental hypothesis and a null hypothesis, fitting a statistical model to the data, and assessing that model with a test statistic. 
-
-#### Assumption Checks
-r-base and ggplots to visually check assumptions..
-
-
-#### Tests
-t-test  
-correlation: pearson's and chi-square
-
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## ANOVA and ANCOVA {data-progressive=TRUE}
+## Importing and exporting data in R {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -86,25 +39,12 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Linear regression analysis {data-progressive=TRUE}
+## R data types and structures {data-progressive=TRUE}
 
-This topic focuses on linear regression analysis, which is a powerful tool for examining relationships between variables. Students will learn how to build models that predict outcomes based on one or more predictor variables.
-
-
-### Simple Linear Regression 
+### Sub-topic 1 
 this is a sub-topic
 
-### Multiple Linear Regression
+### Sub-topic 2 
 This is another sub-topic
 
 
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Generalized linear models {data-progressive=TRUE}
-
-### Logistic Regression 
-this is a sub-topic
-
-### Ordinal Regression 
-Proportional odds model

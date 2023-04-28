@@ -1,10 +1,10 @@
 ---
-title: "Module 1: R Foundations"
+title: "Module 1: Introduction to RStudio & Project Workflow for Data Analytics"
 output: 
     learnr::tutorial:
         progressive: false
 runtime: shiny_prerendered
-description: "add description"
+description: "learn the fundamentals of RStudio, including its interface, basic features, and project workflow, to efficiently manage and analyze data."
 ---
 
 ```{r setup, include=FALSE}
@@ -13,24 +13,28 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE
 )
-
 library(learnr)
 library(dplyr)
+library(tidyr)
+library(readr)
+library(readxl)
+library(haven)
+
 
 ```
 
 
-# Learn R - For IO Psychs
+# learnrIO 
 
-## Welcome!
-
-We strongly encourage you to create a quarto document alongside this tutorial to work through the problems. That way you can take notes an retain your knowledge.
+## Lesson Overview
+```{r, child="lessons/1.0_overview.Rmd"}
+``` 
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
 
-## Introduction to R and RStudio and Quarto {data-progressive=TRUE}
+## Overview of data analytics in the IO Psych business context {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -41,7 +45,24 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## R data types and structures {data-progressive=TRUE}
+## Introduction to R, RStudio, and Quarto {data-progressive=TRUE}
+
+### What is R & RStudio
+```{r, child="lessons/1.1_r-and-rstudio.Rmd"}
+``` 
+
+### Navigating RStudio
+```{r, child="lessons/1.2_nav-rstudio.Rmd"}
+``` 
+
+
+### Intro to Quarto and Interactive Reports
+```{r, child="lessons/1.3_quarto.Rmd"}
+``` 
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Version control: Git and Github {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -51,7 +72,7 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data manipulation with dplyr and tidyr {data-progressive=TRUE}
+## Organizing using RStudio Projects {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -61,20 +82,3 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Control structures and functions {data-progressive=TRUE}
-
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Basic data visualization with ggplot2 {data-progressive=TRUE}
-
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic

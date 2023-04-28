@@ -1,0 +1,22 @@
+---
+title: "Lesson Overview"
+---
+### Welcome! 
+This lesson will serve as an introduction to R, RStudio, and Quarto. We will cover the basics of navigating and using R, RStudio, and Quarto for data analytics. 
+
+Before getting started, we **strongly** encourage you to create a Quarto file to work in alongside this course. An Quarto file is a great way to keep track of notes and practice what you learn from the course. By working in a Quarto file, you can write and execute R code, include text, images, and other media, and export your work to a variety of formats (such as HTML or PDF). This allows you to create a comprehensive record of your progress throughout the course.  
+
+This lesson uses the following packages:  
+```
+some package
+```
+So, be sure to load these in your Quarto file.
+
+
+
+By the end of this lesson, you will be able to:  
+
+  1. Gain familiarity with the R programming language and its applications in data analysis.  
+  2. Learn to navigate the RStudio environment, including the script editor, console, and help features.  
+  3. Learn to basics of Quarto and understand the role of Quarto in the data analysis workflow.  
+  

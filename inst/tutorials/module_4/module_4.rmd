@@ -1,5 +1,5 @@
 ---
-title: "Module 4: HR Analytics with R"
+title: "Module 4: "
 output: 
     learnr::tutorial:
         progressive: true
@@ -19,17 +19,16 @@ library(dplyr)
 
 ```
 
-# Learn R - For IO Psychs
+# learnrIO
 
-## Welcome!
+## Lesson Overview
 
-We strongly encourage you to create a quarto document alongside this tutorial to work through the problems. That way you can take notes an retain your knowledge.
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
 
-## Introduction to HR analytics {data-progressive=TRUE}
+## Topic {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -40,7 +39,7 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Talent acquisition analysis {data-progressive=TRUE}
+## Topic {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -50,7 +49,7 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Performance management analysis {data-progressive=TRUE}
+## Topic {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
@@ -60,20 +59,3 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Employee engagement analysis {data-progressive=TRUE}
-
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Workforce planning and forecasting {data-progressive=TRUE}
-
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic
