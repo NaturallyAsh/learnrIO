@@ -1,0 +1,39 @@
+---
+title: "Basic R Concepts and Data Structures"
+---
+
+### R Variables and Data Types
+
+#### Variables
+
+In R, we use variables to store data. We do so by *assigning* a value to a named variable: `variable_name <- value`.
+
+You should aim to make your variable names describe what they store (e.g., a name of `height_values` describing heights). Variable names must start with a letter and can only contain letters, numbers, underscores, and periods. Use an underscore to separate words in a variable name.
+
+```{r, eval=FALSE}
+# Creating variables
+age <- 25
+name <- "Alice"
+height <- 1.70
+is_student <- TRUE
+```
+
+#### Data types and objects
+
+There are 6 data objects: Vector, List, Matrix, Array, Factor, Data Frame.
+
+The common data types are numeric, integer, character, logical, and factor.
+
+| Data type | Description                                          | Example                                |
+|-------------|----------------------------------------------|-------------|
+| Numeric   | Decimal numbers or fractions                         | 0.05                                   |
+| Integer   | Whole numbers                                        | 42                                     |
+| Character | A letter or text enclosed in quotations              | "hello world"                          |
+| Logical   | TRUE or FALSE values                                 | TRUE                                   |
+| Factor    | Categorical data with a fixed set of possible values | factor(c("apple", "orange", "banana")) |
+
+The *type* of a variable is based on the kind of information it stores.
+
+### Sub-topic 2
+
+This is another sub-topic

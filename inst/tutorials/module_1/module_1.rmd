@@ -72,7 +72,7 @@ This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Organizing using RStudio Projects {data-progressive=TRUE}
+## Workflow and Data Management using RStudio Projects {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic

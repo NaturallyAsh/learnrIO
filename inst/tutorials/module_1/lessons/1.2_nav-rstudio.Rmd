@@ -3,3 +3,8 @@ title: "Navigating RStudio"
 ---
 You are probably wondering, "okay, now that I know what R is, how do I use it?" Don't worry, we will get to that part in the next lesson. We first need to get you familiar with using and navigating RStudio.  
 
+```{r}
+ 
+  
+```
+

@@ -24,27 +24,29 @@ library(dplyr)
 
 ## Lesson Overview
 
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Basic R concepts and data structures {data-progressive=TRUE}
+```{r, child="lessons/2.1_basic-R-concepts.Rmd"}
+
+```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
 
 ## Importing and exporting data in R {data-progressive=TRUE}
+```{r, child="lessons/2.2_importing-and-exporting.Rmd"}
 
-### Sub-topic 1 
-this is a sub-topic
+```
 
-### Sub-topic 2 
-This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## R data types and structures {data-progressive=TRUE}
+## Data Wrangling {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
 
 ### Sub-topic 2 
 This is another sub-topic
-
-
