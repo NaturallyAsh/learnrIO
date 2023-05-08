@@ -2,13 +2,42 @@
 title: "Basic R Concepts and Data Structures"
 ---
 
-### R Variables and Data Types
+### R Objects and Data Types
 
-#### Variables
+**Importance of understanding R objects and data types:**
 
-In R, we use variables to store data. We do so by *assigning* a value to a named variable: `variable_name <- value`.
+1.  Efficient data manipulation: Knowing the data types and objects in R will help you manipulate and transform data more efficiently.\
+2.  Error prevention: Understanding the data types will help prevent errors due to incompatible data structures.\
+3.  Better code readability: Proper use of data types and objects will make your code more readable and easier to understand.\
+4.  Enhanced performance: Using the appropriate data types can significantly improve the performance of your code.
 
-You should aim to make your variable names describe what they store (e.g., a name of `height_values` describing heights). Variable names must start with a letter and can only contain letters, numbers, underscores, and periods. Use an underscore to separate words in a variable name.
+### R-objects
+
+In R, everything is an R-object. R-objects store data. R-objects are user-generated (aka created by you), built-in functions, or functions included with a package (more on packages later). We create a new object by giving it a name and *assigning* a value to it: `variable_name <- value`.
+
+```{r, eval=FALSE}
+variable <- "my first variable!"
+variable
+```
+
+Functions in R are objects that perform a specific task or operation on data. They take input arguments/parameters, manipulate data in a defined way, and then return a result.
+
+```{r, eval=FALSE}
+x <- 5
+y <- 4
+sum(x, y) # sum() is an R built-in function.
+```
+
+**Note:** The terms objects and variables are often used interchangeably. For the remainder of this tutorial, we will use the term variables.
+
+
+#### Your Turn
+
+
+
+### Naming Variables
+
+You should aim to make your variable names describe what they store (e.g., a name of `height_values` describing heights). Variable names must start with a letter and can only contain letters, numbers, underscores, and periods. You should also make your variable names lowercase and **snake_case** (using an underscore to separate words in a variable name). Avoid using names of existing functions (i.e., table, seq, data).
 
 ```{r, eval=FALSE}
 # Creating variables
@@ -18,22 +47,145 @@ height <- 1.70
 is_student <- TRUE
 ```
 
-#### Data types and objects
+When it comes to naming variables, the most important thing is to remain consistent.
 
-There are 6 data objects: Vector, List, Matrix, Array, Factor, Data Frame.
 
-The common data types are numeric, integer, character, logical, and factor.
+#### Your Turn
+
+
+### Data types
+
+R data types in define the kind of information a variable stores. The common data types are numeric, integer, character, logical, and factor.
 
 | Data type | Description                                          | Example                                |
-|-------------|----------------------------------------------|-------------|
+|---------------|------------------------------------------|---------------|
 | Numeric   | Decimal numbers or fractions                         | 0.05                                   |
 | Integer   | Whole numbers                                        | 42                                     |
-| Character | A letter or text enclosed in quotations              | "hello world"                          |
+| Character | Any text that is enclosed in quotations              | "hello world"                          |
 | Logical   | TRUE or FALSE values                                 | TRUE                                   |
 | Factor    | Categorical data with a fixed set of possible values | factor(c("apple", "orange", "banana")) |
 
-The *type* of a variable is based on the kind of information it stores.
+You can use the `typeof()` function to determine the data type of a variable:
 
-### Sub-topic 2
+```{r, eval=FALSE}
+salary <- 26890.90
+age <- 55
+first_name <- "Michael"
+current_employee <- TRUE
+employee_level <- factor("entry")
 
-This is another sub-topic
+typeof(salary)
+typeof(age)
+typeof(first_name)
+typeof(current_employee)
+typeof(employee_level)
+```
+
+In some cases, you may need to convert between data types. R provides several functions for type conversion, such as `as.integer()`, `as.numeric()`, `as.character()`, and `as.logical()`.
+
+```{r, eval=FALSE}
+age <- "52"
+typeof(age)
+new_age <- as.integer(age)
+typeof(new_age)
+```
+
+#### Your Turn
+
+
+### Data structures
+
+There are 6 data structures: Vector, List, Matrix, Array, Factor, Data Frame.
+
+1.  **Vectors:** Vectors are one-dimensional arrays of data that can contain elements of the same data type, such as numbers or characters.  
+2.  **Matrices:** Matrices are two-dimensional arrays that can contain elements of the same data type. They are created using the `matrix()` function.  
+3.  **Arrays:** Arrays are similar to matrices but can have any number of dimensions. They are created using the `array()` function.  
+4.  **Data frames:** Data frames are two-dimensional tables that can contain columns of different data types (numeric, character, logical, etc.). They are similar to matrices but are more flexible in terms of the types of data they can hold.  
+5.  **Lists:** Lists are collections of objects that can be of different data types. They can contain any combination of vectors, matrices, arrays, data frames, or even other lists.  
+6.  **Factors:** Factors are used to represent categorical data in R.  
+
+![R data structures](images/data_structures.png)
+
+The main types structures we will work with are vectors, lists, factors, and tibbles (a modern type of data frame; more on that later).  
+
+**Vectors** are the most basic data structure in R and can be created using the `c()` (combine or concat) function:  
+```{r, eval=FALSE}
+numeric_vector <- c(1, 2, 3, 4, 5)
+character_vector <- c("apple", "banana", "cherry")
+
+```
+
+**Lists** are often used to store complex data structures and can be created using the `list()` function:  
+```{r, eval=FALSE}
+my_list <- list(name = "John Doe", age = 25, is_student = TRUE)
+my_list
+```
+
+
+**Factors** Factors can be thought of as a vector of integers where each integer corresponds to a specific category. They are created using the `factor()` function:  
+```{r, eval=FALSE}
+employee_level <- factor(c("entry-level", "mid-level", "senior-level", "mid-level", "entry-level", "entry-level"))
+
+levels(employee_level)
+str(employee_level)
+```
+
+
+
+**Date frames** Data frames are often used for representing data sets and can be created using the `data.frame()` function:  
+```{r}
+employees <- data.frame(
+  name = c("Alice", "Bob", "Charlie", "Dan"),
+  age = c(20, 21, 32, 28),
+  employee_level = factor(c("entry", "entry", "senior", "mid")),
+  is_terminated = c(FALSE, FALSE, TRUE, FALSE)
+)
+employees
+```
+
+
+#### Your Turn
+
+    Create a vector containing the numbers 1 to 10.
+    Create a 3x3 matrix containing the numbers 1 to 9.
+    Create a list containing your name, age, and a logical value indicating whether you are a student or not.
+    Create a data frame containing information about three people, including their names, ages, and student status.
+    Create a factor called marital_status with levels "single", "married", "divorced", and "widowed" and assign it some sample values. Examine the structure of the marital_status factor using the str() function.
+
+
+
+### Packages
+R packages extend the functionality of R by providing additional functions, data, and documentation. Think of packages like apps you can download on a smart phone, where the smart phone is R. Anyone can create packages and make them available to the community! Packages are available through the Comprehensive R Archive Network (CRAN) or Github.  
+
+There are two ways to install packages: Clicking to the "Packages" tab and then Install in the RStudio pane or by running `install.packages("package_name")` in the console. Note that you only need to install packages one time, but you will need to **load** the package for each new R session.  
+
+`ggplot2()` is a popular data visualization package that is part of the tidyverse (more on the tidyverse later). We'll demonstration installing and loading the `ggplot2` package:  
+
+**Install the package**  
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+**Load the package using `library()` function**  
+```{r}
+library(ggplot2)
+```
+
+Once a package is loaded (calling `library()`) you use the package's functions. Many packages come with example datasets to practice with their respective functions. The `ggplot2()` package comes with a few datasets, including the `diamonds` dataset.   
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = carat, y = price, color = cut)) + 
+  geom_jitter()
+```
+
+Don't worry, we have an entire lesson dedicated to teaching you how to create cool visuals using `ggplot2` and other packages!  
+
+When you want detailed information on what a particular function does, simply type `?function_name`, without the parentheses "()", in the console and press Enter to open up the Help section in the pane.  
+
+
+
+
+#### Your Turn
+
+
+### Sub-topic
