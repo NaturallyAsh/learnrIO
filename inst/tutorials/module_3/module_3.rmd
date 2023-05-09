@@ -1,10 +1,10 @@
 ---
-title: "Module 3: "
+title: "Module 3: Statistical Analysis in R"
 output: 
     learnr::tutorial:
         progressive: true
 runtime: shiny_prerendered
-description: "add description"
+description: "learn the basics of statistical analysis in R, from measures of central tendency to factor analysis"
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +22,9 @@ library(dplyr)
 # learnrIO
 
 ## Lesson Overview
-
+## Lesson Overview
+```{r, child="lessons/3.0_overview.Rmd"}
+```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->

@@ -1,0 +1,18 @@
+---
+title: "Module 4 Overview"
+---
+
+### Welcome!
+
+#### [Introductory text]
+In this module, we will be covering how to perform common statistical analyses in R.R was created by statisticians, for statisticians, and it's no surprise that R offers a plethora of tools to analyse data. The CRAN repository features over 19,000 available packages, and almost all of them have different functions and tools to statistically analyze data! Throughout the module we'll introduce some of the most popular methods and tools that IO psychologists use to analyze data in the wild.
+
+As always, we encourage you to create a separate Quarto file to work alongside this course... **[finish this section]**
+
+This lesson will use the following packages:
+```
+some package
+**[finish this section]**
+```
+
+Let's get started!

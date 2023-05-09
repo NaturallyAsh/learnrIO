@@ -1,0 +1,57 @@
+---
+title: "Module 4 outline (internal)"
+author: "Matthew"
+date: "2023-05-07"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+*This is for internal use for tracking and adjusting module curriculum.*
+
+1.  4.0_overview.Rmd
+
+    1.  Introduction to module (including reliability and validity; explain layout of module)
+    2.  Required packages
+
+2. 4.1_CTT
+
+    1.  Introduction (introduction to dataset)
+    2.  Basic item analysis
+        1.  Item difficulty (p)
+        2.  Item discrimination (corrected item-total correlation)
+        3.  Other (?)
+    3.  CTT-based reliability indices
+        1.  Correlative indices: Split-half, test-retest, alternate forms reliability
+        2.  Other commonly used indices (cronbach's alpha, mcdonald's omega, guttman's lamda (?))
+        3.  Inter-rater reliability *(should this go in the CTT section??)*
+
+3. 4.2_factor_analysis
+
+    1.  Introduction (role of factor analysis in scale construction and analysis?)
+    2.  Parallel analysis
+    3.  EFA
+    4.  CFA with lavaan (will do SEM with lavaan later, so using lavaan now)
+    
+4.  4.3_unidimensional_IRT
+
+    1.  Introduction (introduction to dataset)
+    2.  Dichotomous IRT: Rasch, 2PL, 3PL with mirt (using mirt to learn how to use that package)
+        1.  Testing model fit with mirt
+            1. Item and person model fit
+        2.  Comparing model fits with the anova() function
+        3.  Item parameterization *(should this be earlier??)*
+        4.  Item characteristic curves
+        5.  Item and Test Information Curves
+    3.  Polytymous IRT
+        1.  Testing model fit with mirt
+        2.  Item & testing information in polytymous IRT
+
+5.  4.4_generlizability_theory **(???)**
+
+    1.  Introduction (intro to dataset)
+    2.  Unnested data
+    3.  Nested data
+    
+

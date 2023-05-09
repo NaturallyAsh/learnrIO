@@ -1,0 +1,78 @@
+---
+title: "Module 3 outline (internal)"
+author: "Matthew"
+date: "2023-05-07"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+*This is for internal use for tracking and adjusting module curriculum.*
+
+1.  3.0_overview.Rmd
+
+    1.  Introduction to module
+    2.  Required packages
+    
+2.  3.1_data_cleaning_and_preparation
+
+    1.  Introduction (tidy data; tidyverse)
+    2.  Data importation methods (readr, readxl, etc.)
+    3.  EDA *(likely multiple subtopics)*
+    4.  Data cleaning, basic *(likely multiple subtopics)*
+
+3.  3.2_descriptive_statistics
+
+    1.  Introduction (Introduction to dataset; visualization example)
+    2.  Estimates of central tendency: mean (arithmetic, geometric,
+        harmonic), median, and mode
+    3.  Estimates of spread: variance, standard deviation
+    4.  Higher-order properties of distributions: skew & kurtosis
+    5.  Visualizing distributions: histograms, stem & leaf plots,
+        box-plots, bar charts, scatterplots, Q-Q plots
+
+4.  3.3_correlation_regression
+
+    1.  Introduction (Two is better than one!)
+    2.  Correlation
+        1.  Common correlation coefficients (Pearson's *r*, Spearman's
+            *rho*)
+        2.  Polychoric & terachoric correlations
+        3.  Biserial & point-biserial
+    3.  Regression
+        1.  Simple linear
+        2.  Multiple regression
+        3.  Generalized linear models
+            1.  Logistic regression
+            2.  Ordinal regression
+            3.  Mention other nonlinear techniques (e.g., lasso/ridge)
+                and say we'll come back to it (?)
+
+5.  3.4_hypothesis_testing
+
+    1.  Introduction (z-tests, t-tests, and ANOVAs, oh my!)
+    2.  t-tests: independent, paired-sample, other types (?)
+        1.  post-hoc tests between groups (?)
+    3.  ANOVAs
+        1.  Fixed effects, random effects models
+        2.  One-way ANOVA
+        3.  Factorial ANOVA
+        4.  Post-hoc comparisons
+    4.  ANCOVAs
+    5.  Chi-square (and other nonparametric techniques?)
+
+6.  3.5_mediation_moderation
+    
+    1. Introduction (putting it all together in an applied or research context)
+    2. Testing for mediation in R
+        1. Classic test for mediation
+        2. Bootstrapping methods
+            3. PROCESS in R (?)
+    3. Testing moderation in R
+    4. More complex situaitons (moderated mediation; refer to another source?)
+
+7.  3.6_outro
+    
+    1. Congratulations!
+    2. Mention factor analysis; will discuss in more detail in the next module

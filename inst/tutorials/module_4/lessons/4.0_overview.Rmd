@@ -1,0 +1,22 @@
+---
+title: "Module 4 Overview"
+---
+
+### Welcome!
+
+#### [Introductory text]
+In this module, we will be covering how to perform common psychometric operations in R.R may be the most flexible and accessible program for performing psychometric analysis, providing tools for analyses common to different testing paradigms such as classical test theory (CTT), item response theory (IRT), and generlizability theory (G-Theory).
+
+As always, we encourage you to create a separate Quarto file to work alongside this course... **[finish this section]**
+
+This lesson will use the following packages:
+```
+some package
+**[finish this section]**
+```
+
+By the end, you'll be able to produce visualizations and item analyses similar to the below:
+
+**add images of analyses & visualizations**
+
+Let's get started!
