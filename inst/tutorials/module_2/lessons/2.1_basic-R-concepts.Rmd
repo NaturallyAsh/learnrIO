@@ -104,7 +104,13 @@ There are 6 data structures: Vector, List, Matrix, Array, Factor, Data Frame.
 5.  **Lists:** Lists are collections of objects that can be of different data types. They can contain any combination of vectors, matrices, arrays, data frames, or even other lists.  
 6.  **Factors:** Factors are used to represent categorical data in R.  
 
-![R data structures](images/data_structures.png)
+
+<figure>
+  <img src="images/data_structures.png" width="100%">
+  <figcaption class="figcap">R Data Structures</figcaption>
+</figure>
+
+<br>
 
 The main types structures we will work with are vectors, lists, factors, and tibbles (a modern type of data frame; more on that later).  
 
@@ -146,11 +152,11 @@ employees
 
 #### Your Turn
 
-    Create a vector containing the numbers 1 to 10.
-    Create a 3x3 matrix containing the numbers 1 to 9.
-    Create a list containing your name, age, and a logical value indicating whether you are a student or not.
-    Create a data frame containing information about three people, including their names, ages, and student status.
-    Create a factor called marital_status with levels "single", "married", "divorced", and "widowed" and assign it some sample values. Examine the structure of the marital_status factor using the str() function.
+<!--Create a vector containing the numbers 1 to 10.
+Create a 3x3 matrix containing the numbers 1 to 9.
+Create a list containing your name, age, and a logical value indicating whether you are a student or not.
+Create a data frame containing information about three people, including their names, ages, and student status.
+Create a factor called marital_status with levels "single", "married", "divorced", and "widowed" and assign it some sample values. Examine the structure of the marital_status factor using the str() function. -->
 
 
 
@@ -173,7 +179,7 @@ library(ggplot2)
 
 Once a package is loaded (calling `library()`) you use the package's functions. Many packages come with example datasets to practice with their respective functions. The `ggplot2()` package comes with a few datasets, including the `diamonds` dataset.   
 
-```{r}
+```{r, out.width="100%"}
 ggplot(data = diamonds, mapping = aes(x = carat, y = price, color = cut)) + 
   geom_jitter()
 ```
@@ -188,4 +194,4 @@ When you want detailed information on what a particular function does, simply ty
 #### Your Turn
 
 
-### Sub-topic
+

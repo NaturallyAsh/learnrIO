@@ -3,6 +3,8 @@ title: "Module 2: R Foundations with the Tidyverse"
 output: 
     learnr::tutorial:
         progressive: true
+        css: css/learnrIO_styles.css
+        theme: "flatly"
 runtime: shiny_prerendered
 description: "add description"
 ---
@@ -17,6 +19,8 @@ knitr::opts_chunk$set(
 library(learnr)
 library(dplyr)
 
+source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
+# gradethis_setup()
 ```
 
 
@@ -34,16 +38,59 @@ library(dplyr)
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-
-## Importing and exporting data in R {data-progressive=TRUE}
-```{r, child="lessons/2.2_importing-and-exporting.Rmd"}
+## Intro to the Tidyverse {data-progressive=TRUE}
+```{r, child="lessons/2.2_intro-tidyverse.Rmd"}
 
 ```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Wrangling {data-progressive=TRUE}
+## Importing and exporting data {data-progressive=TRUE}
+```{r, child="lessons/2.3_importing-and-exporting.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Data Manipulation {data-progressive=TRUE}
+```{r, child="lessons/2.4_wrangling.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Data Transformation {data-progressive=TRUE}
+```{r, child="lessons/2.5_tidy.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+##  {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+##  {data-progressive=TRUE}
+
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+##  {data-progressive=TRUE}
 
 ### Sub-topic 1 
 this is a sub-topic
