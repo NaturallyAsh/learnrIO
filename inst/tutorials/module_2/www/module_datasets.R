@@ -1,6 +1,8 @@
 # Load the required packages
 # library(tidyverse)
 
+# LESSON 2.4 (WRANGLING) BELOW #
+
 # Create employee_data
 employee_data <- tibble(
   name = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
@@ -36,4 +38,47 @@ department_data <- tibble(
   department = c("Sales", "HR", "Marketing"),
   location = c("Building A", "Building B", "Building C"),
   manager = c("Peter", "Olivia", "Walter")
+)
+
+# LESSON 2.5 (TIDY) BELOW #
+
+# Create survey_data
+survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question1_Answer = c("Yes", "No", "No", "Yes", "Yes", "No"),
+  Question2_Answer = c("No", "Yes", "Yes", "No", "No", "Yes")
+)
+
+# Create untidy_survey_data
+untidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question_Answer = c("Question1_Yes", "Question1_No", "Question2_No", "Question2_Yes", "Question1_Yes", "Question2_No")
+)
+
+# Create too_tidy_survey_data
+too_tidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question = c("Question1", "Question1", "Question2", "Question2", "Question1", "Question2"),
+  Answer = c("Yes", "No", "No", "Yes", "Yes", "No")
+)
+
+
+# LESSON 2.6 (TEXT DATA) BELOW #
+
+# Creating employee_feedback dataset
+employee_feedback <- tibble(
+  Employee_ID = 1:5,
+  Comment = c("I love the work environment here!",
+              "The workload is too much.",
+              "Great team to work with!",
+              "Work-life balance needs improvement.",
+              "The work culture is excellent.")
+)
+
+# Create a tibble for the email example
+employee_emails <- tibble(
+  Employee_ID = 1:3,
+  Email = c("john.doe@example.com",
+            "jane.smith@company.com",
+            "bob.johnson@workplace.net")
 )

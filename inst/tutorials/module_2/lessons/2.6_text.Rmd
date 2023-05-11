@@ -1,0 +1,120 @@
+---
+title: "Working with Strings and Text Data"
+---
+
+### Overview
+
+Text data, which is ubiquitous in business contexts, presents unique opportunities and challenges for analysts. With advances in text analysis techniques and tools, we are now able to derive insights from open-ended survey questions, customer reviews, employee feedback, and more. For instance, in the context of Industrial-Organizational Psychology, text data from employee surveys can provide richer and more nuanced information about employee attitudes and experiences compared to closed-ended questions.  
+
+Further, text data forms the backbone of many advanced analytics techniques, such as machine learning classification algorithms, sentiment analysis, and natural language processing. Hence, understanding how to manipulate and work with text data is a crucial skill for analysts.  
+
+**[Placeholder for an image illustrating text data analytics]**  
+
+In this lesson, we will focus on `stringr`, a package in the `tidyverse`, which provides simple, consistent functions for common string manipulation tasks. Importantly, `stringr` functions can be seamlessly integrated within `dplyr` functions or used with pipe (`|>`) operations for efficient data transformations.  
+
+
+### Basic stringr operations
+
+`stringr` provides a variety of functions for string manipulation. Let's dive into some of the most commonly used ones.  
+
+**str_length()**  
+This function computes the length of a string. It counts the number of characters in the string, including spaces and punctuation:  
+
+```{r, eval=FALSE}
+str_length("Hello, world!")  # Output: 13
+```
+
+
+**str_c()**  
+This function concatenates, or combines, strings together. You can specify a separator with the `sep` argument, which will be inserted between the concatenated strings:  
+
+```{r, eval=FALSE}
+str_c("Hello", "world!", sep = ", ")  # Output: "Hello, world!"
+```
+
+
+**str_sub()**  
+This function extracts or replaces substrings in a string. You specify the start and end positions to extract a substring. If the start is less than 1 or end is greater than the length of the string, the function will return as much as possible:  
+
+```{r, eval=FALSE}
+# Extract the first 5 characters
+str_sub("Hello, world!", start = 1, end = 5)  # Output: "Hello"
+```
+
+
+**str_detect()**  
+This function detects the presence or absence of a pattern in a string. It returns `TRUE` if the pattern is found and `FALSE` otherwise. This function is useful in filtering operations:  
+
+```{r, eval=FALSE}
+# Check if a string contains 'world'
+str_detect("Hello, world!", "world")  # Output: TRUE
+```
+
+
+**str_replace()**  
+This function replaces matched patterns in a string. If no match is found, the original string is returned unchanged:  
+
+```{r, eval=FALSE}
+# Replace 'world' with 'everyone'
+str_replace("Hello, world!", "world", "everyone")  # Output: "Hello, everyone!"
+```
+
+
+### Extended Using stringr with dplyr and Pipe Operations
+
+The real power of `stringr` becomes apparent when used with `dplyr` functions or pipe operations. Let's consider a more complex example using the same `employee_feedback` dataset from earlier.  
+
+We can use `str_detect()` within a dplyr `filter()` to find all comments containing the word 'work':  
+
+```{r, eval=FALSE}
+work_related_comments <- employee_feedback |> 
+  filter(str_detect(Comment, "work"))
+```
+
+
+Now let's say we want to know the average length of these work-related comments:  
+
+```{r, eval=FALSE}
+average_comment_length <- work_related_comments |> 
+  mutate(Comment_Length = str_length(Comment)) |> 
+  summarise(Average_Length = mean(Comment_Length))
+```
+
+
+We could also create a new variable indicating whether the comment was positive, assuming simplicity that comments containing 'love', 'great', or 'excellent' are positive:  
+
+```{r, eval=FALSE}
+positive_comments <- employee_feedback |> 
+  mutate(Is_Positive = ifelse(str_detect(Comment, c("love", "great", "excellent")), "Yes", "No"))
+```
+
+
+In these examples, `str_detect()` and `str_length()` are used within `filter()`, `mutate()`, and `summarise()` functions to create new variables and compute summaries based on text data. This illustrates the flexibility and power of combining `stringr` functions with `dplyr` and pipe operations.
+
+
+### Your Turn
+
+Now, it's your turn to practice what you've learned about manipulating and analyzing text data with `stringr` and `dplyr` functions. Use the `employee_feedback` and `employee_emails` tibbles for these exercises.  
+
+**Exercise 1:** Identify all comments in the employee_feedback dataset that contain the word 'balance'. How many such comments are there?  
+
+```{r}
+
+```
+
+**Exercise 2:** Create a new column in the employee_feedback dataset called 'Comment_Length' that contains the length of each comment. Then, compute the average comment length.  
+
+```{r}
+
+```
+
+**Exercise 3:** In the `employee_emails` dataset, create a new column named 'Domain' that contains the domain of each email (the part after '@').  
+
+- Hint: Use the `str_split()` function.  
+
+```{r}
+
+```
+
+
+Remember to check your answers by running your code. **Happy coding!**

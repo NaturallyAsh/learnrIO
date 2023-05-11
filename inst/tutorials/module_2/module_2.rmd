@@ -54,7 +54,7 @@ source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Manipulation {data-progressive=TRUE}
+## Data Wrangling {data-progressive=TRUE}
 ```{r, child="lessons/2.4_wrangling.Rmd"}
 
 ```
@@ -62,7 +62,7 @@ source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Transformation {data-progressive=TRUE}
+## Tidy Data {data-progressive=TRUE}
 ```{r, child="lessons/2.5_tidy.Rmd"}
 
 ```
@@ -70,13 +70,11 @@ source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-##  {data-progressive=TRUE}
+## Working with Strings and Text Data {data-progressive=TRUE}
+```{r, child="lessons/2.6_text.Rmd"}
 
-### Sub-topic 1 
-this is a sub-topic
+```
 
-### Sub-topic 2 
-This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
