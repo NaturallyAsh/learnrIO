@@ -20,8 +20,9 @@ library(learnr)
 library(tidyverse)
 library(gradethis)
 
-devtools::load_all()
-employee_data <- learnrIO::employee_data
+# devtools::load_all()
+# employee_full_data <- learnrIO::employee_full_data
+employee_full_data <- read_csv("/Users/macuser/Documents/Discord/datasets/employee_data.csv")
 
 gradethis::gradethis_setup()
 

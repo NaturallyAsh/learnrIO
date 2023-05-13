@@ -1,0 +1,185 @@
+---
+title: "Data Visualization"
+---
+
+### Overview
+
+Data visualization is a crucial component of any data analysis, particularly in applied settings. Good visualizations can aid in understanding complex data and can effectively communicate important findings to stakeholders who may not have a deep understanding of statistical methodologies. The goal of data visualization is to display data in a clear and insightful way, revealing the patterns, trends, and insights that numerical summaries might miss.  
+
+For data visualization in R, one of the most powerful tools at our disposal is `ggplot2`, a part of the `tidyverse` suite of packages. Its power comes from its flexibility and from its coherent philosophy of graphics, which allows you to compose plots by combining independent components.  
+
+```{r, eval=FALSE}
+# Install and load ggplot2
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+### ggplot2: Aesthetics and Layers
+
+`ggplot2` operates on the principle of adding different layers to a plot. The first layer (the base layer) defines the plot in terms of its aesthetics. Here's a simple example:  
+
+```{r}
+# A simple scatter plot with 'mpg' dataset
+ggplot(mpg, aes(x=displ, y=hwy)) + 
+  geom_point()
+```
+
+
+In the code above, `ggplot()` initializes the plotting system. Inside `ggplot()`, we pass the dataset `mpg` (included in the ggplot2 package) and define an aesthetic mapping (`aes()`) with `displ` (engine size) on the x-axis and `hwy` (highway miles per gallon) on the y-axis. The `+` sign then adds a layer to this base plot: `geom_point()` adds a layer of points, creating a scatter plot.  
+
+
+You can map other variables to different aesthetics like color, shape, and size. For example:  
+
+```{r}
+# Mapping class to color
+ggplot(mpg, aes(x=displ, y=hwy, color=class)) + 
+  geom_point()
+```
+
+
+Here, the `color=class` inside `aes()` maps the color of the points to the variable `class`, so each class has a different color.  
+
+
+### Visualizing Numerical and Categorical Data
+
+Different types of plots are suited to different types of data. For numerical data, histograms and boxplots are commonly used. For categorical data, bar plots and dot plots can be informative. Here are some examples:  
+
+```{r}
+# Histogram
+ggplot(mpg, aes(x=hwy)) + 
+  geom_histogram(binwidth=5)
+
+# Boxplot
+ggplot(mpg, aes(x=class, y=hwy)) + 
+  geom_boxplot()
+
+# Bar Plot
+ggplot(mpg, aes(x=class)) + 
+  geom_bar()
+
+# Dot Plot
+ggplot(mpg, aes(x=class, y=hwy)) + 
+  geom_dotplot(binaxis='y', stackdir='center')
+
+```
+
+
+### Visualizing Summary Statistics and Relationships
+
+`ggplot2` can also be used to visualize summary statistics and relationships between variables. For instance, you can add a smooth line (a line of best fit) to a scatter plot to visualize a relationship, or add a layer that displays the mean of a variable.  
+
+```{r}
+# Scatter plot with smooth line
+ggplot(mpg, aes(x=displ, y=hwy)) + 
+  geom_point() + 
+  geom_smooth(method=lm)
+
+# Bar plot with means
+ggplot(mpg, aes(x=class, y=hwy)) + 
+  stat_summary(fun=mean, geom="bar")
+
+```
+
+
+### Working with Dates: lubridate
+
+`lubridate` is an incredibly useful package for working with date and time data. It simplifies extracting components of a date (like year or month), doing arithmetic with dates, and more.  
+
+Suppose you have a dataset `employee_turnover` with a column `exit_date` containing the dates when employees left the company:  
+
+```{r}
+# A glimpse of the dataset
+head(employee_turnover)
+```
+
+
+You can use `lubridate` to extract the month from `exit_date` and create a new column:  
+
+```{r}
+employee_turnover <- employee_turnover |> 
+  mutate(exit_month = month(exit_date, label = TRUE))
+
+head(employee_turnover)
+```
+
+
+Then, you can use `ggplot2` to visualize turnover trends over time:  
+
+```{r}
+employee_turnover |> 
+  count(exit_month) |> 
+  ggplot(aes(x = exit_month, y = n)) +
+  geom_line() +
+  labs(x = "Exit Month", y = "Number of Exits", 
+       title = "Employee Turnover Trends Over Time")
+
+```
+
+
+### Tidying Data for Plotting
+
+Sometimes, data may not be in a format suitable for creating the visualizations you want. This is where the data tidying principles we discussed earlier come in handy.  
+
+Consider a dataset `employee_survey` where each row represents an employee's responses to a satisfaction survey with columns for `work_satisfaction`, `life_satisfaction`, and `work_life_balance`:  
+
+```{r}
+# A glimpse of the dataset
+head(employee_survey)
+```
+
+
+To visualize all three satisfaction measures in the same plot, you might want to reshape the data to a "long" format using `pivot_longer()`:  
+
+```{r}
+employee_survey_long <- employee_survey |> 
+  pivot_longer(cols = work_satisfaction:work_life_balance, 
+               names_to = "satisfaction_type", 
+               values_to = "satisfaction_score")
+
+head(employee_survey_long)
+```
+
+
+Now you can use `ggplot2` to create a grouped boxplot of satisfaction scores by type:  
+
+```{r}
+ggplot(employee_survey_long, aes(x=satisfaction_type, y=satisfaction_score, fill=satisfaction_type)) +
+  geom_boxplot() +
+  labs(x = "Satisfaction Type", y = "Satisfaction Score", 
+       title = "Employee Satisfaction Survey Results", fill = "Satisfaction Type")
+
+```
+
+
+This lesson was a brief introduction to the extensive capabilities of ggplot2 for data visualization. Beyond the basics covered here, you can customize nearly every element of a ggplot2 plot, use a variety of additional geometries for specialized plots, and even extend ggplot2's functionality with additional packages.  
+
+Remember that effective data visualization is as much an art as it is a science. While `ggplot2` provides the tools, it's up to you to create visualizations that tell a compelling story about your data. We will cover storytelling with you data in the next Module.    
+
+
+### Your Turn
+
+It's now time to put what you've learned into practice. Below are a few exercises to help you solidify your understanding of data visualization in R using `ggplot2.`
+
+**Exercise 1:** Create a histogram of work_satisfaction from the employee_survey dataset. Experiment with the number of bins to see how the distribution changes. Use the `theme_minimal()` to give your plot a clean look.  
+
+```{r}
+
+```
+
+
+**Exercise 2:** Create a scatter plot with `work_satisfaction` on the x-axis and `life_satisfaction` on the y-axis from the `employee_survey` dataset. Color the points by `work_life_balance`. Add a title and labels to your x and y axes.  
+
+```{r}
+
+```
+
+
+**Exercise 3:** Using the `employee_turnover` dataset, create a line plot of `turnover` over `date`. Modify the line type and color. Then, add a smooth line (loess) to the plot to show the overall trend. Finally, add a title, and x and y labels to your plot.  
+
+```{r}
+
+```
+
+
+Feel free to try additional modifications and experiment with different aesthetics and themes. The more you practice, the more comfortable you'll become with data visualization in R using `ggplot2`. **Happy Coding!**

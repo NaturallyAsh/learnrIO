@@ -1,0 +1,94 @@
+---
+title: "Tidy Data"
+---
+
+### Overview 
+Tidy data is a term introduced by Hadley Wickham that refers to a standard way of mapping the semantics of a dataset to its physical layout. In a tidy dataset:  
+
+- Each variable forms a column.  
+- Each observation forms a row.  
+- Each type of observational unit forms a table.  
+
+
+[Placeholder for an image illustrating tidy data]
+
+
+Tidy data is important because it provides a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning). By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+
+
+In the context of people analytics, a sub-field of IO Psych, imagine having employee survey data where each row corresponds to an employee, and columns represent different aspects of the survey. However, each survey question is spread across multiple columns (e.g., Question1_Answer, Question1_Comment, Question2_Answer, Question2_Comment, etc.). Tidying such data would involve reshaping it so that we have three distinct columns: Employee, Question, and Response. This structure makes it easy to perform analyses at the question level.  
+
+
+
+### Reshaping data with pivot_wider() and pivot_longer() 
+The tidyverse provides two core functions to reshape your data: `pivot_longer()` and `pivot_wider()`.  
+
+`pivot_longer()` is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
+
+```{r, eval=FALSE}
+tidy_survey_data <- survey_data |> pivot_longer(
+  cols = starts_with("Question"),
+  names_to = "Question",
+  values_to = "Answer"
+)
+```
+
+`pivot_wider()` does the opposite. It makes "long" data wider, spreading out a key-value pair across multiple columns.  
+
+```{r, eval=FALSE}
+wide_survey_data <- tidy_survey_data |> pivot_wider(
+  names_from = "Question",
+  values_from = "Answer"
+)
+```
+
+
+### Separate and unite
+At times, we might have a single column containing two variables. In such a case, we can use the `separate()` function to split that column into two. For example, imagine a column 'Question_Answer' in our survey data that combines the question number and the answer.  
+
+```{r, eval=FALSE}
+tidy_survey_data <- untidy_survey_data |> separate(
+  Question_Answer, 
+  into = c("Question", "Answer"), 
+  sep = "_"
+)
+```
+
+Conversely, we might need to combine two columns into one. The unite() function does this.  
+```{r, eval=FALSE}
+untidy_survey_data <- too_tidy_survey_data |> unite(
+  "Question_Answer", 
+  Question, Answer, 
+  sep = "_"
+)
+```
+
+
+### Your Turn
+
+Time to apply what you've learned about tidying data! Here are three exercises for you to try using the survey_data, untidy_survey_data, and too_tidy_survey_data datasets.  
+
+**Exercise 1:** Use `pivot_longer()` on the `survey_data` dataset to transform it into a long format where we have three distinct columns: 'Employee', 'Question', and 'Answer'.  
+
+```{r}
+
+```
+
+
+**Exercise 2:** The `untidy_survey_data` dataset has a 'Question_Answer' column that combines the question number and the answer. Use the `separate()` function to split this column into two separate columns: 'Question' and 'Answer'.  
+
+```{r}
+
+```
+
+
+**Exercise 3:** The `too_tidy_survey_data` dataset has separated 'Question' and 'Answer' columns. Use the `unite()` function to combine these into a single column named 'Question_Answer'.  
+
+```{r}
+
+```
+
+
+
+
+Remember to inspect the results after each step to ensure that your transformations have worked as expected. **Keep up the good work!**

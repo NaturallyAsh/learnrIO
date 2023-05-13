@@ -1,8 +1,10 @@
 ---
-title: "Module 2: R Foundations"
+title: "Module 2: R Foundations with the Tidyverse"
 output: 
     learnr::tutorial:
         progressive: true
+        css: css/learnrIO_styles.css
+        theme: "flatly"
 runtime: shiny_prerendered
 description: "add description"
 ---
@@ -16,13 +18,23 @@ knitr::opts_chunk$set(
 
 library(learnr)
 library(dplyr)
+library(readr)
 
+source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
+employee_survey <- readr::read_csv(here::here("inst/extdata/employee_survey.csv"))
+employee_turnover <- readr::read_csv(here::here("inst/extdata/employee_turnover.csv"))
+employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_data.csv"))
+# gradethis_setup()
 ```
 
 
-# learnrIO
 
-## Lesson Overview
+
+## Introduction
+```{r, child="lessons/2.0_intro.Rmd"}
+
+```
+
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
@@ -34,9 +46,16 @@ library(dplyr)
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
+## Intro to the Tidyverse {data-progressive=TRUE}
+```{r, child="lessons/2.2_intro-tidyverse.Rmd"}
 
-## Importing and exporting data in R {data-progressive=TRUE}
-```{r, child="lessons/2.2_importing-and-exporting.Rmd"}
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Importing and exporting data {data-progressive=TRUE}
+```{r, child="lessons/2.3_importing-and-exporting.Rmd"}
 
 ```
 
@@ -44,9 +63,32 @@ library(dplyr)
 <!-- ==============================NEXT TOPIC=============================== -->
 
 ## Data Wrangling {data-progressive=TRUE}
+```{r, child="lessons/2.4_wrangling.Rmd"}
 
-### Sub-topic 1 
-this is a sub-topic
+```
 
-### Sub-topic 2 
-This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Tidy Data {data-progressive=TRUE}
+```{r, child="lessons/2.5_tidy.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Working with Strings and Text Data {data-progressive=TRUE}
+```{r, child="lessons/2.6_text.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Data Visualization {data-progressive=TRUE}
+```{r, child="lessons/2.7_viz.Rmd"}
+
+```
+
+
