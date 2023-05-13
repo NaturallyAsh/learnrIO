@@ -1,5 +1,5 @@
 ---
-title: "Module 4: "
+title: "Module 4: Statistics in R"
 output: 
     learnr::tutorial:
         progressive: true
@@ -22,7 +22,9 @@ library(dplyr)
 # learnrIO
 
 ## Lesson Overview
-
+## Lesson Overview
+```{r, child="lessons/module_4_overview.qmd"}
+``` 
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
