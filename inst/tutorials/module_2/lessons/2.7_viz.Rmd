@@ -8,7 +8,7 @@ Data visualization is a crucial component of any data analysis, particularly in 
 
 For data visualization in R, one of the most powerful tools at our disposal is `ggplot2`, a part of the `tidyverse` suite of packages. Its power comes from its flexibility and from its coherent philosophy of graphics, which allows you to compose plots by combining independent components.  
 
-```{r}
+```{r, eval=FALSE}
 # Install and load ggplot2
 install.packages("ggplot2")
 library(ggplot2)

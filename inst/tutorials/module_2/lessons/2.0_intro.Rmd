@@ -1,0 +1,38 @@
+---
+title: "Introduction to R Foundations"
+---
+
+### Welcome to **R Foundations and the Tidyverse!**  
+
+In this lesson, we'll dive into the fundamentals of R, an essential language for data analytics.
+ 
+
+In this module, we'll cover the following topics:  
+
+- **Basic R concepts and data structures:** We'll begin by exploring fundamental objects, data types, and data structures in R, as well as the concept of packages which are collections of R functions, data, and compiled code in a well-defined format.  
+
+- **Introduction to the Tidyverse:** We'll discuss why the Tidyverse, a collection of R packages designed for data science, is a powerful tool for data manipulation and visualization. We'll also delve into its core packages.  
+
+- **Importing and Exporting Data:** Here, we'll learn about working with various data formats such as CSV and Excel, and how to import and export them. We'll also get to know about 'Tibbles', a modern take on data frames in R.  
+
+- **Data Wrangling:** This involves transforming and mapping data from one "raw" data form into another format with the intent of making it more appropriate and valuable for a variety of downstream purposes such as analytics.  
+
+- **Tidy Data:** After we've had fun working with already tidied data, we'll dive into the concept of 'tidy data', a standard way of mapping the semantics of a dataset to its physical representation.  
+
+- **Working with Strings and Text Data:** We'll cover techniques and functions for manipulating strings and text data in R.  
+
+- **Data Visualization with ggplot:** Finally, we'll introduce the ggplot package from the Tidyverse for creating beautiful and complex visualizations.  
+
+
+We recommend that you create a Quarto file to accompany your progress in this course. Quarto is a fantastic tool for documenting your learning journey, allowing you to write and execute R code, include text, images, and other media, and then export your work into diverse formats like HTML or PDF. This way, you'll have a comprehensive record of your progress that you can refer back to at any point.  
+
+
+This lesson will employ a selection of R packages, so be sure to load these in your Quarto file. They are:  
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+
+We're excited for you to join us on this journey into R and data analytics. **Let's get started!**  
