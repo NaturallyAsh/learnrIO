@@ -1,0 +1,26 @@
+---
+title: "4.1_correlation_regression"
+---
+
+### Correlation and Regression
+Most of the data that you'll come across "in the wild" won't make much sense in isolation, so analyzing the properties of a single variable won't get you very far. Techniques for quantifying the relationships between variables, such as correlation and regression, are essential to the work of IO psychologists, data analysts, and anyone else who wants to use data to explore and answer real-world questions.
+
+R has many tools for conducting correlation and regression analyses. We'll cover the basics in this part of the module, and then reference other sources where you can dive deeper into these topics. In this part, we'll be using the _______ packages to make our analyses easier.
+
+
+
+
+    1.  Introduction (Two is better than one!)
+    2.  Correlation
+        1.  Common correlation coefficients (Pearson's *r*, Spearman's
+            *rho*)
+        2.  Polychoric & terachoric correlations
+        3.  Biserial & point-biserial
+    3.  Regression
+        1.  Simple linear
+        2.  Multiple regression
+        3.  Generalized linear models
+            1.  Logistic regression
+            2.  Ordinal regression
+            3.  Mention other nonlinear techniques (e.g., lasso/ridge)
+                and say we'll come back to it (?)
