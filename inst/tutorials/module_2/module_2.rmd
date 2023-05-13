@@ -6,7 +6,7 @@ output:
         css: css/learnrIO_styles.css
         theme: "flatly"
 runtime: shiny_prerendered
-description: "add description"
+description: "lesson covering the basic R concepts and data structures, data importing/exporting, wrangling, tidying, and visualization using the Tidyverse."
 ---
 
 ```{r setup, include=FALSE}
