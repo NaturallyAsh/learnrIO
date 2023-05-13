@@ -1,10 +1,10 @@
 ---
-title: "Module 5: "
+title: "Module 5: Psychometrics in R"
 output: 
     learnr::tutorial:
         progressive: true
 runtime: shiny_prerendered
-description: "add description"
+description: "learn the foundations of using psychometrics in R, including methods of quantifying reliability and validity, item analysis, and scale analysis"
 ---
 
 ```{r setup, include=FALSE}
@@ -22,10 +22,13 @@ library(dplyr)
 # learnrIO
 
 ## Lesson Overview
+```{r, child="lessons/module_5_overview.qmd"}
+``` 
 
 
+<!-- ===========================
 
-<!-- ==============================NEXT TOPIC=============================== -->
+===NEXT TOPIC=============================== -->
 
 
 ## Topic {data-progressive=TRUE}
@@ -58,4 +61,3 @@ this is a sub-topic
 This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
-
