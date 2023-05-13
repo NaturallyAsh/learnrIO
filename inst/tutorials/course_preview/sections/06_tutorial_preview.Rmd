@@ -19,14 +19,14 @@ In the following exercises, the student is asked to use `dplyr` and `tidyr` to p
 #### Example of executing a code block exercise. 
 *Click "Run Code" to view the first 5 rows of the dataset:*
 ```{r view, exercise=TRUE}
-head(employee_data)
+head(employee_full_data)
 ```
 
 
 #### Example of a partially completed exercise for which a student must fill in the correct answer.  
 *Fill in the blank to convert `status` values to binary (Active = 1; Inactive = 0). Print the `new_status` variable:*
 ```{r ifelse, exercise=TRUE, exercise.blanks = "___"}
-new_status <- employee_data |> 
+new_status <- employee_full_data |> 
   ___(
     status = ___()
   )
@@ -35,7 +35,7 @@ ___
 ```
 
 ```{r ifelse-solution, exercise.reveal_solution = FALSE}
-new_status <- employee_data |> 
+new_status <- employee_full_data |> 
   mutate(
     status = ifelse(status == "Active", 1, 0)
   )
@@ -62,7 +62,7 @@ grade_this({
 ```
 
 ```{r meanPlot-solution, exercise.reveal_solution = FALSE}
-job_level_mean <- employee_data |> 
+job_level_mean <- employee_full_data |> 
   select(level, compensation) |> 
   group_by(level) |> 
   summarise(mean_compensation = mean(compensation)) 
@@ -74,7 +74,7 @@ level_plot
 ```
 
 ```{r meanPlot-hint-1}
-job_level_mean <- employee_data |> 
+job_level_mean <- employee_full_data |> 
   ___(___, ___) |> 
   ___(___ = ___, ___ = ___)
 
@@ -85,7 +85,7 @@ level_plot
 ```
 
 ```{r meanPlot-hint-2}
-job_level_mean <- employee_data |> 
+job_level_mean <- employee_full_data |> 
   select(___, ___) |> 
   group_by(level) |> 
   summarise(mean_compensation = mean(___)) 

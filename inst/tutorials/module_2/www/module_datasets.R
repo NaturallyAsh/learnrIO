@@ -3,24 +3,24 @@
 
 # LESSON 2.4 (WRANGLING) BELOW #
 
-# Create employee_data
-employee_data <- tibble(
+# Create employees_data
+employees_data <- tibble(
   name = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
   age = c(25, 30, 35, 40, 45, 50),
   department = c("Sales", "HR", "Sales", "HR", "Marketing", "Sales"),
   salary = c(50000, 60000, 70000, 80000, 90000, 100000)
 )
 
-# Create employee_data1
-employee_data1 <- tibble(
+# Create employees_data1
+employees_data1 <- tibble(
   name = c("Gary", "Helen", "Ian"),
   age = c(28, 38, 48),
   department = c("Marketing", "Sales", "HR"),
   salary = c(52000, 62000, 72000)
 )
 
-# Create employee_data2
-employee_data2 <- tibble(
+# Create employees_data2
+employees_data2 <- tibble(
   name = c("Judy", "Kevin", "Laura"),
   age = c(32, 42, 52),
   department = c("Sales", "Marketing", "HR"),
@@ -82,3 +82,7 @@ employee_emails <- tibble(
             "jane.smith@company.com",
             "bob.johnson@workplace.net")
 )
+
+
+
+
