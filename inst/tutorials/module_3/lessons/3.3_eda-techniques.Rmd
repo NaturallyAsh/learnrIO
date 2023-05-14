@@ -1,0 +1,141 @@
+---
+title: "EDA Techniques using R and the Tidyverse"
+---
+
+Exploratory data analysis is an essential step in any data analysis. It allows us to understand the main characteristics of our data, detect anomalies and outliers, visualize distributions and relationships, and formulate hypotheses for further analysis.  
+
+### Descriptive Statistics
+
+Descriptive statistics provide simple summaries about the sample and the measures. They form the basis of virtually every quantitative analysis of data.  
+
+Let's consider an HR dataset, `employee_data`, that includes the following variables: `employee_id`, `hire_date`, `salary`, `job_level`, and `department`.  
+
+We can use the `summary()` function to get a quick overview of the basic statistics for each column:  
+
+```{r, eval=FALSE}
+summary(employee_data)
+```
+
+However, for a more "tidy" approach, we can use `dplyr` functions. For example, we can calculate the mean salary by department as follows:  
+
+```{r, eval=FALSE}
+employee_data |> 
+  group_by(department) |> 
+  summarise(mean_salary = mean(salary, na.rm = TRUE))
+```
+
+In the above code, we first group the data by department using `group_by()`. Then, we calculate the mean salary for each department using `summarise()`. The `na.rm = TRUE` argument tells R to ignore NA values when calculating the mean.  
+
+
+### Distributions
+
+Understanding the distribution of our variables is a crucial step in EDA. It allows us to understand the range of values, central tendency, and dispersion of our data.  
+
+Histograms and density plots are powerful tools for visualizing distributions. Here's how we can create a histogram of `salary` using `ggplot2`:  
+
+```{r}
+employee_data |> 
+  ggplot(aes(salary)) +
+  geom_histogram(binwidth = 1000, fill = "steelblue", color = "white") +
+  theme_minimal() +
+  labs(title = "Distribution of Salaries", x = "Salary", y = "Frequency")
+```
+
+In the above code, `geom_histogram()` creates the histogram, and `binwidth = 1000` sets the width of the bins. `fill` and `color` control the appearance of the histogram, and `labs()` sets the plot title and axis labels.  
+
+
+### Handling Missing Data
+
+Real-world datasets often have missing values. It's essential to handle these appropriately as they can influence our analysis results.  
+
+First, let's identify missing data in our dataset:  
+
+```{r, eval=FALSE}
+employee_data |> 
+  summarise(across(everything(), ~sum(is.na(.))))
+```
+
+The `across()` function applies the `is.na()` function to every column in the dataframe, and `sum()` counts the number of NA values.  
+
+Now, let's say we want to remove all rows with missing values:  
+
+```{r, eval=FALSE}
+employee_data_clean = employee_data |> 
+  drop_na()
+```
+
+The `drop_na()` function removes all rows containing NA values.  
+
+
+### Visualization
+
+Visualizations are an essential part of EDA. They allow us to see patterns, trends, and relationships in our data.  
+
+For example, we can visualize the average salary by department using a bar plot:  
+
+```{r}
+employee_data |> 
+  group_by(department) |> 
+  summarise(mean_salary = mean(salary, na.rm = TRUE)) |> 
+  ggplot(aes(x = department, y = mean_salary)) +
+  geom_col(fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Average Salary by Department", x = "Department", y = "Average Salary")
+
+```
+
+In this code, `geom_col()` creates the bar plot. The `aes()` function tells `ggplot2` to map the `department` to the x-axis and the `mean_salary` to the y-axis. `fill = "steelblue"` sets the color of the bars.  
+
+
+### Identifying Relationships between Variables
+
+Identifying relationships between variables is a vital part of EDA. It allows us to understand how variables interact and influence each other.  
+
+We can visualize relationships between two numerical variables using a scatter plot. For example, let's visualize the relationship between `job_level` (ordinal variable) and `salary`:  
+
+```{r}
+employee_data |> 
+  ggplot(aes(x = job_level, y = salary)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  labs(title = "Salary by Job Level", x = "Job Level", y = "Salary")
+
+```
+
+In this code, `geom_point()` creates the scatter plot, and `alpha = 0.5` makes the points semi-transparent, which helps visualize the density of points.  
+
+For categorical variables, we can use box plots to visualize the relationship. For instance, let's see the distribution of salaries across different departments:  
+
+```{r}
+employee_data |> 
+  ggplot(aes(x = department, y = salary)) +
+  geom_boxplot(fill = "steelblue", outlier.shape = NA) +
+  theme_minimal() +
+  labs(title = "Salary Distribution by Department", x = "Department", y = "Salary")
+
+```
+
+In the above code, `geom_boxplot()` creates the box plots, and `outlier.shape = NA` removes outliers from the plot for a cleaner look.  
+
+
+### Your Turn
+
+Now that we've covered a variety of techniques for exploring and understanding your data, it's your chance to apply what you've learned. Use the employee_data and satisfaction_survey datasets to complete the following exercises. Remember, you can refer back to the lesson if you need a refresher on any of the concepts.  
+
+**Exercise 1 - Descriptive Statistics**  
+Calculate the mean, median, and standard deviation of the `salary` column in the `employee_data` dataset. How would you interpret these values in a real-world context?  
+
+**Exercise 2 - Handling Missing Data**  
+Find the columns in the `satisfaction_survey` dataset that have missing values. For each of these columns, fill the missing values with the median of the non-missing values in the same column.
+
+**Exercise 3 - Visualizations and Relationships**  
+Create a boxplot to visualize the distribution of `salary` for each `department` in the `employee_data` dataset. Additionally, calculate and visualize the correlation between `satisfaction` and `performance_rating.` What insights can you draw from these visualizations?  
+
+
+
+### Conclusion
+
+Exploratory Data Analysis is a crucial step in any data analysis process. By leveraging the power of R and the Tidyverse, we can easily and effectively conduct EDA on a wide range of datasets. The techniques we've covered in this lesson form the foundation of many advanced data analysis techniques, and mastering them is an essential step in becoming a proficient data analyst.
+
+
+

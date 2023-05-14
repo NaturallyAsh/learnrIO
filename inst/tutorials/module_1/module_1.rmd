@@ -24,10 +24,9 @@ library(haven)
 ```
 
 
-# learnrIO 
 
-## Lesson Overview
-```{r, child="lessons/1.0_overview.Rmd"}
+## Introduction
+```{r, child="lessons/1.0_lesson-overview.Rmd"}
 ``` 
 
 

@@ -1,0 +1,31 @@
+---
+title: "Practice EDA Report"
+---
+
+### Introduction
+
+In this lesson, you'll put everything you've learned so far into practice by creating a comprehensive report using Quarto You'll apply your R data wrangling and visualization skills, showcase your ability to ask the right questions, create reproducible reports, tell a story with your data, and most importantly, communicate your findings clearly and effectively.  
+
+
+### Your Task
+
+You will be using the provided `practice_report` dataset to generate a comprehensive report. Your task is to use this data to gain insights and suggest solutions.  
+
+- **Formulate a question:** Based on your initial exploration of the `practice_report` dataset, identify a key challenge that the organization is facing. This could be related to employee turnover, performance, job satisfaction, promotion biases, or any other issue that you find in the data. The question should be specific and should aim to address the challenge.   
+
+- **Define clear objectives:** Once you have your question, define what you aim to learn from your analysis. What insights are you hoping to uncover? What will be your approach to analyzing the data? These objectives will guide your analysis and should be clearly stated in your report.  
+
+- **Data Wrangling:** Use your data wrangling skills to shape the data into a format suitable for analysis. This might involve filtering, mutating, or summarizing the data.  
+
+- **Exploratory Data Analysis (EDA):** Conduct an exploratory data analysis. Use visualizations and summary statistics to understand the data and identify any patterns or trends related to your research question.  
+
+- **Insights and Recommendations:** Based on your EDA, draw insights related to your research question. Translate these insights into actionable business recommendations.  
+
+- **Storytelling:** Remember, your report is not just for you—it's for your team, managers, or even the entire organization. Use storytelling techniques to make your report engaging and understandable. Include clear and compelling visuals to support your analysis.  
+
+- **Quarto:** Make sure to use your Quarto document effectively. Include code chunks where necessary, but also use text to explain your steps and thought processes. Your report should be reproducible, meaning that someone else should be able to run your Quarto document and get the same results.  
+
+
+Remember, this is a chance to demonstrate your ability to ask meaningful questions and extract valuable insights from a dataset. You should formulate your own questions and hypotheses based on the available data and the correlations within it. **Happy Coding!**  
+
+

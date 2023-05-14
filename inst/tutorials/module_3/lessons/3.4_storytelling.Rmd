@@ -1,0 +1,127 @@
+---
+title: "Storytelling Your Data with R"
+---
+
+### Introduction
+
+In this lesson, we're taking a leap from just analyzing and visualizing data, to using data to tell a story. A compelling story can illuminate trends, reveal insights, and communicate complex ideas to a variety of audiences. Ready? Let's get started!  
+
+
+### What's Data Storytelling and Why is it Important?
+
+Data storytelling is the art and science of transforming data analyses into insightful, engaging narratives. It combines data, visuals, and narrative to provide a comprehensive and understandable view of the data's story.  
+
+Why is it important? Well, in the world of business and IO psychology, data is abundant. But raw data in itself often falls flat. It can be hard to interpret, overwhelming, and not very engaging. The real magic happens when we can translate that data into an understandable and engaging story. Data storytelling helps non-data experts understand complex data, make informed decisions, and drive action.  
+
+
+### The Anatomy of a Data Story
+
+A data story typically has three main components:  
+
+**Data:** This is the raw material of your story. It could be a single dataset or several, and it often requires cleaning, wrangling, and analysis.  
+
+**Visuals:** These are your graphs, charts, and other visual aids that help to illustrate the data and make it more understandable and engaging.  
+
+**Narrative:** This is the story you weave around your data. It provides context, highlights key points, and guides the audience through the data.  
+
+Let's see how this works with an example. Let's say we're working with a dataset of employee turnover data. We've analyzed it and found that turnover rates are highest among employees in their first year. We could simply state this as a fact. Or we could tell a story.  
+
+```{r}
+# View the first 6 rows of the turnover dataset
+head(turnover_data)
+```
+
+```{r}
+# Calculate turnover rates by tenure
+turnover_by_tenure <- turnover_data |> 
+  mutate(tenure = as.numeric(difftime(exit_date, hire_date, units = "weeks"))) |> 
+  group_by(tenure) |> 
+  summarise(turnover = n()) |> 
+  mutate(turnover_rate = turnover / nrow(turnover_data))
+```
+
+```{r}
+# Plot turnover rates by tenure
+turnover_by_tenure |> 
+  ggplot(aes(x = tenure, y = turnover_rate)) +
+  geom_line() +
+  labs(title = "Turnover Rates by Tenure",
+       x = "Tenure (weeks)",
+       y = "Turnover Rate") +
+  theme_minimal()
+```
+
+
+In the above example, we first introduce our data, explaining that it's turnover data from the past year. We then present our findings, showing that turnover rates are highest among employees in their first year. We use a line graph to visually illustrate this trend.  
+
+And finally, we discuss what this means: New employees are leaving at a higher rate, suggesting that the company may need to improve its onboarding process or provide more support to new hires.  
+
+By using data, visuals, and narrative, we've turned a simple fact into a compelling story that provides valuable insights for the business.  
+
+
+### Translating Data Insights into Business Stories
+
+The art of data storytelling goes beyond just presenting findings. It's about translating those insights into business stories. This is where we make the connection between what the data is saying and what it means for the organization.  
+
+Let's continue with our turnover example. We've found that turnover rates are highest among employees in their first year. But what does this mean for the business?  
+
+```{r}
+# Calculate the average cost of turnover
+avg_turnover_cost <- 5000  # This is a hypothetical value
+
+# Calculate the cost of turnover in the first year
+first_year_turnover <- turnover_by_tenure |> 
+  filter(tenure < 52) |> 
+  summarise(total_turnover = sum(turnover))
+
+first_year_turnover_cost <- first_year_turnover$total_turnover * avg_turnover_cost
+
+# Print the cost
+first_year_turnover_cost
+
+```
+
+In the above example, we've translated our data insights into a business story by calculating the cost of first-year turnover. This makes the issue more tangible for stakeholders and highlights the urgency of addressing the problem.  
+
+
+### Telling Your Data Story with R and the Tidyverse
+
+So, how can we use R and the Tidyverse to tell our data stories? Here are a few tips:  
+
+1. **Clean and wrangle your data with dplyr:** Before you can tell your data story, you need to get your data in shape. Use dplyr functions like `filter()`, `select()`, `mutate()`, and `group_by()` to clean and wrangle your data.  
+
+2. **Visualize your data with ggplot2:** Visuals are a key part of any data story. Use `ggplot2` to create engaging, informative visuals that illustrate your data and findings.  
+
+3. **Weave your narrative with Quarto:** Quarto is a great tool for combining your R code, visuals, and narrative into a single document. You can use it to guide your audience through your data story, providing context, highlighting key points, and explaining your analysis.  
+
+4. **Use the pipe operator (`|>`) to streamline your code:** The pipe operator allows you to chain together multiple operations in a clear, readable way. This can make your code easier to understand and follow, which is especially important when you're telling a data story.  
+
+
+Remember, the most effective data stories are clear, concise, and focused. They highlight the most important insights, provide context, and guide the audience through the data. So take the time to craft your data story carefully, and happy storytelling!  
+
+
+### Your Turn
+
+Now, it's time for you to practice what you've learned. Here are three exercises to help you apply the concepts from this lesson. Create a new Quarto document to complete the exercises. You will need to load the `learnrIO` and `tidyverse` packages in your document:  
+
+
+**Exercise 1: Translating Data Insights into a Business Story**  
+
+- Using the `turnover_data` dataset, identify another trend or insight from the data. Calculate the potential business impact of this insight (e.g., cost, time, resources). Remember to explain your steps and assumptions.  
+- Write a short paragraph that translates this data insight into a business story.  
+
+**Exercise 2: Visualizing Your Data Story**  
+
+- Create a visualization that supports the business story from Exercise 1. You might create a bar chart, scatter plot, or any other type of visualization that fits your data and story. Be sure to include a title, labels for the x and y axes, and a legend if necessary.  
+- Write a caption for your visualization that explains what it shows and how it supports your business story.  
+
+
+**Exercise 3: Weaving Your Narrative with Quarto**
+
+At the end of your Quarto document, write a short report that presents your business story. Include your R code, your visualization from Exercise 2, and a narrative that guides the reader through your data story.  
+- Remember to provide context, highlight key points, and explain your analysis.  
+
+
+
+Remember, the goal of these exercises is not just to practice your coding skills, but also to practice the art of data storytelling. Don't rush through the exercises—take the time to think about your narrative, your audience, and how you can best communicate your data insights. Good luck!  
+

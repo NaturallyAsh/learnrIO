@@ -1,5 +1,5 @@
 ---
-title: "Lesson Overview"
+title: "Module 1: Lesson Overview"
 ---
 ### Welcome! 
 This lesson will serve as an introduction to R, RStudio, and Quarto. We will cover the basics of navigating and using R, RStudio, and Quarto for data analytics. 
