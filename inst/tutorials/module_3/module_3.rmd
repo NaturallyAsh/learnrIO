@@ -6,7 +6,7 @@ output:
         css: css/learnrIO_styles.css
         theme: "flatly"
 runtime: shiny_prerendered
-description: "you'll learn to formulate effective data-driven questions, perform exploratory data analysis (EDA) with R and the Tidyverse, craft compelling narratives with your data, communicate results to a business audience, and consolidate your skills with a hands-on practice report using Quarto."
+description: "add description"
 ---
 
 ```{r setup, include=FALSE}
