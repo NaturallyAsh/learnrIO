@@ -1,10 +1,8 @@
 ---
-title: "Module 3: Exploratory Data Analysis with R"
+title: "Module 3: "
 output: 
     learnr::tutorial:
         progressive: true
-        css: css/learnrIO_styles.css
-        theme: "flatly"
 runtime: shiny_prerendered
 description: "add description"
 ---
@@ -17,66 +15,47 @@ knitr::opts_chunk$set(
 )
 
 library(learnr)
-library(tidyverse)
-
-source(here::here("inst/tutorials/module_3/www/module_3_datasets.R"))
-
-employee_survey <- read_csv(here::here("inst/extdata/mod_3_employee_survey.csv"))
-employee_data <- read_csv(here::here("inst/extdata/mod_3_employee_missing_data.csv"))
-satisfaction_survey <- read_csv(here::here("inst/extdata/mod_3_satisfaction_survey.csv"))
-turnover_data <- read_csv(here::here("inst/extdata/mod_3_turnover_data.csv"))
-employee_survey2 <- read_csv(here::here("inst/extdata/mod_3_employee_survey2.csv"))
-practice_report <- read_csv(here::here("inst/extdata/practice_report_data.csv"))
-```
-
-
-## Introduction
-```{r, child="lessons/3.0_lesson-overview.Rmd"}
+library(dplyr)
 
 ```
 
-<!-- ==============================NEXT TOPIC=============================== -->
+# learnrIO
 
-## Introduction to Exploratory Data Analysis (EDA) {data-progressive=TRUE}
-```{r, child="lessons/3.1_intro-EDA.Rmd"}
+## Lesson Overview
 
-```
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Asking the Right Questions {data-progressive=TRUE}
-```{r, child="lessons/3.2_asking-questions.Rmd"}
-
-```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## EDA Techniques using R and the Tidyverse {data-progressive=TRUE}
-```{r, child="lessons/3.3_eda-techniques.Rmd"}
 
-```
+## Topic {data-progressive=TRUE}
 
+### Sub-topic 1 
+this is a sub-topic
 
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Storytelling Your Data with R {data-progressive=TRUE}
-```{r, child="lessons/3.4_storytelling.Rmd"}
-
-```
+### Sub-topic 2 
+This is another sub-topic
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Communicating Results in a Business Context {data-progressive=TRUE}
-```{r, child="lessons/3.5_communicating.Rmd"}
+## Topic {data-progressive=TRUE}
 
-```
+### Sub-topic 1 
+this is a sub-topic
 
+### Sub-topic 2 
+This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Practice EDA Report {data-progressive=TRUE}
-```{r, child="lessons/3.6_practice-report.Rmd"}
+## Topic {data-progressive=TRUE}
 
-```
+### Sub-topic 1 
+this is a sub-topic
+
+### Sub-topic 2 
+This is another sub-topic
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
