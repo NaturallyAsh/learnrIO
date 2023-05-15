@@ -2,3 +2,34 @@
 title: "Introduction to Exploratory Data Analysis"
 ---
 
+### Welcome to **Exploratory Data Analysis with R**!
+
+As we venture into the realm of Industrial and Organizational (I/O) Psychology, we'll be leveraging the power of data to ask meaningful questions, uncover hidden patterns, and tell compelling stories. The insights we gain from our data can help us address critical business challenges, improve employee satisfaction, and optimize organizational performance.  
+
+In this module, we'll cover the following topics:  
+
+- **Introduction to Exploratory Data Analysis (EDA):** We'll start with a comprehensive introduction to EDA, which is a key approach in understanding the data. EDA involves summarizing the main characteristics of a data set, often with visual methods. We'll learn how to perform initial investigations on raw data to understand the structure of the data, extract important variables, and detect outliers and anomalies.  
+
+- **Asking the Right Questions:** The value of a data analysis depends on the quality of the questions we ask. We'll explore how to formulate meaningful research questions based on the data available to us.  
+
+- **Exploratory Data Analysis (EDA):** Delving deeper into EDA, we'll learn various techniques to summarize, visualize, and interpret our data. This will help us uncover trends, spot anomalies, and test our hypotheses.  
+
+- **Storytelling with Data:** Data alone isn't powerful. It's the interpretation of the data that makes it so. We'll delve into how to craft a narrative around our data and make our findings relatable and understandable.  
+
+- **Communicating Results:** Finally, we'll learn how to translate our data insights into actionable business recommendations. We'll discuss how to tailor our communication to our audience, visualize data for non-technical stakeholders, and present our findings in a clear and compelling manner.  
+
+- **Practice Report:** To put everything we learn into practice, we'll create a comprehensive report using Quarto. This report will cover all the steps of a data analysis project, from asking the right questions and performing EDA to telling a data-driven story and communicating our findings to a business audience. Feel free to showcase your report to demonstrate the knowledge and skills you gained from this tutorial.  
+
+
+Before we get started, we strongly recommend that you create a Quarto document to accompany your progress in this course. Quarto is a fantastic tool for documenting your learning journey, allowing you to write and execute R code, include text, images, and other media, and then export your work into diverse formats like HTML or PDF. This way, you'll have a comprehensive record of your progress that you can refer back to at any point.  
+
+
+This lesson will employ a selection of R packages, so be sure to load these in your Quarto document. They are:  
+
+```{r, eval=FALSE}
+library(tidyverse) # also loads ggplot2, which we'll be using for visualization
+library(lubridate) # for working with dates and times
+```
+
+
+We're excited to have you here and can't wait to see the insights you'll uncover! Let's get started.

@@ -24,14 +24,14 @@ In this module, we'll cover the following topics:
 - **Data Visualization with ggplot:** Finally, we'll introduce the ggplot package from the Tidyverse for creating beautiful and complex visualizations.  
 
 
-We recommend that you create a Quarto file to accompany your progress in this course. Quarto is a fantastic tool for documenting your learning journey, allowing you to write and execute R code, include text, images, and other media, and then export your work into diverse formats like HTML or PDF. This way, you'll have a comprehensive record of your progress that you can refer back to at any point.  
+Before we get started, we strongly recommend that you create a Quarto document to accompany your progress in this course. Quarto is a fantastic tool for documenting your learning journey, allowing you to write and execute R code, include text, images, and other media, and then export your work into diverse formats like HTML or PDF. This way, you'll have a comprehensive record of your progress that you can refer back to at any point.  
 
 
-This lesson will employ a selection of R packages, so be sure to load these in your Quarto file. They are:  
+This lesson will employ a selection of R packages, so be sure to load these in your Quarto document. They are:  
 
 ```{r, eval=FALSE}
 library(tidyverse)
-library(lubridate)
+library(lubridate) # for working with dates and times
 ```
 
 
