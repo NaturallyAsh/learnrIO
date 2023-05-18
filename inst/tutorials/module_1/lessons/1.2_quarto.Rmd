@@ -6,6 +6,15 @@ title: "Project Workflow and Reports using Quarto"
 
 Working with data often involves multiple files: data files, code files, and output files. Keeping these files organized can be a challenge, especially as a project grows in complexity. RStudio Projects are a powerful tool to keep your work organized.  
 
+Some benefits:  
+
+- **Projects are very “launch-able”:** It’s easy to fire up a fresh instance of RStudio in a Project, with the file browser and working directory set exactly the way you need, ready for work.  
+
+- **Each Project is isolated:** Code run in one Project does not affect any other Project.  
+
+- **You can have several RStudio Projects open at once:** Code executed in Project A does not have any effect on the R session and workspace of Project B.  
+
+
 
 [Image Placeholder or instructions to create new project]  
 
