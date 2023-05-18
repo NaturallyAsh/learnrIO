@@ -1,8 +1,10 @@
 ---
-title: "Module 1: Introduction to RStudio & Project Workflow for Data Analytics"
+title: "Module 1: Introduction to RStudio & Quarto"
 output: 
     learnr::tutorial:
         progressive: false
+        css: css/learnrIO_styles.css
+        theme: "flatly"
 runtime: shiny_prerendered
 description: "learn the fundamentals of RStudio, including its interface, basic features, and project workflow, to efficiently manage and analyze data."
 ---
@@ -13,72 +15,37 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE
 )
-library(learnr)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(readxl)
-library(haven)
 
+library(tidyverse)
+library(learnr)
 
 ```
 
 
-# learnrIO 
-
 ## Lesson Overview
-```{r, child="lessons/1.0_overview.Rmd"}
+```{r, child="lessons/1.0_lesson-overview.Rmd"}
 ``` 
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-
-## Overview of data analytics in the IO Psych business context {data-progressive=TRUE}
-
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic
-
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Introduction to R, RStudio, and Quarto {data-progressive=TRUE}
-
-### What is R & RStudio
+## Introduction to R and RStudio {data-progressive=TRUE}
 ```{r, child="lessons/1.1_r-and-rstudio.Rmd"}
 ``` 
 
-### Navigating RStudio
-```{r, child="lessons/1.2_nav-rstudio.Rmd"}
-``` 
-
-
-### Intro to Quarto and Interactive Reports
-```{r, child="lessons/1.3_quarto.Rmd"}
-``` 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Version control: Git and Github {data-progressive=TRUE}
+## Project Workflow and Reports using Quarto {data-progressive=TRUE}
+```{r, child="lessons/1.2_quarto.Rmd"}
+```
 
-### Sub-topic 1 
-this is a sub-topic
-
-### Sub-topic 2 
-This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
 ## Workflow and Data Management using RStudio Projects {data-progressive=TRUE}
 
-### Sub-topic 1 
-this is a sub-topic
 
-### Sub-topic 2 
-This is another sub-topic
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
