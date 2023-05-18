@@ -1,0 +1,155 @@
+---
+title: "Communicating Results in a Business Context"
+---
+
+### Introduction
+
+Communicating the results of data analysis is as crucial as the analysis itself. Without effective communication, even the most brilliant insights may go unnoticed or misunderstood.  
+
+In this lesson, we will discuss strategies for tailoring your communication to your audience, visualizing data for non-technical audiences, and presenting actionable business recommendations. We will make extensive use of the `tidyverse` for data manipulation and the `ggplot2` package for data visualization.  
+
+
+### Tailoring Communication to Your Audience
+
+First and foremost, effective communication is audience-centric. Knowing your audience's background, interests, and needs can guide the form and content of your message.  
+
+```{r}
+# View the first 6 rows of the employee_survey22 dataset
+head(employee_survey2)
+```
+
+```{r}
+department_summary <- employee_survey2 |> 
+  group_by(department) |> 
+  summarise(avg_satisfaction = mean(job_satisfaction, na.rm = TRUE),
+            turnover_rate = mean(turnover_intent, na.rm = TRUE))
+
+# Here, we've summarised our data by department, which could be useful if our audience is department heads.
+
+```
+
+If your audience is made up of data scientists, you might dive into the technical details of your analysis. If your audience is executives, you might focus on the strategic implications of your findings.  
+
+
+### Visualizing Data for Non-Technical Audiences
+
+Non-technical audiences often benefit from clear, straightforward visualizations. `ggplot2` offers flexible plotting capabilities that can cater to these needs.  
+
+```{r}
+# Create a bar plot to visualize average job satisfaction by department
+department_summary |> 
+  ggplot(aes(x = department, y = avg_satisfaction)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Job Satisfaction by Department", x = "Department", y = "Average Satisfaction Score") +
+  theme_minimal()
+```
+
+This plot shows average job satisfaction by department, which is easy to interpret for non-technical audiences.  
+
+
+### Presenting Actionable Business Recommendations
+
+Lastly, it's important to connect your findings to actionable business recommendations.  
+
+```{r}
+# Identify departments with high turnover intent
+high_turnover_departments <- department_summary |> 
+  filter(turnover_rate > 0.5)
+
+# Suggest actions for departments with high turnover intent
+if (nrow(high_turnover_departments) > 0) {
+  print(paste("Interventions needed in the following departments: ", 
+              paste(high_turnover_departments$department, collapse = ", ")))
+} else {
+  print("No departments with high turnover intent detected.")
+}
+
+```
+
+If your analysis identifies departments with high turnover intent, you might recommend specific interventions such as increased managerial support, enhanced job design, or improved compensation packages.  
+
+Remember, your role as an analyst extends beyond providing information—you're also expected to provide insights that can guide decision-making.  
+
+This lesson introduced key concepts for communicating data analysis results in a business context. We discussed tailoring your communication to your audience, visualizing data for non-technical audiences, and presenting actionable business recommendations. We used the `tidyverse` for data manipulation, and `ggplot2` for data visualization. By practicing these strategies, you can increase the impact of your analysis and drive action within your organization.  
+
+
+### Your Turn
+
+Now, it's time to put your new skills into practice. Complete the following exercises using Quarto to reinforce your understanding of the concepts. Utilize documentation, books, and other resources to help you generate your visualizations.  
+Here are a few resources to help you get start:  
+
+- [ggplot2: Elegant Graphics for Data Analysis](https://www.bigbookofr.com/data-visualization.html)  
+- [Storytelling with Data ggplot: Github repo](https://github.com/adamribaudo/storytelling-with-data-ggplot)  
+
+
+**Exercise 1: Visualizing Job Satisfaction by Department**  
+
+Create a bar chart that compares the average job satisfaction across departments in the `employee_survey2` dataset. Customize the chart by adding a title, labels for the x and y axes, and a theme. Use a color palette that is visually appealing and clear for non-technical audiences.  
+
+<!--
+```{r}
+# Import the necessary packages
+library(ggplot2)
+library(dplyr)
+
+# Calculate average job satisfaction by department
+avg_satisfaction <- employee_survey2 %>%
+  group_by(department) %>%
+  summarize(avg_satisfaction = mean(job_satisfaction))
+
+# Create the bar chart
+ggplot(avg_satisfaction, aes(x = department, y = avg_satisfaction, fill = department)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Job Satisfaction by Department",
+       x = "Department",
+       y = "Average Job Satisfaction") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2")
+
+```
+
+-->
+
+**Exercise 2: Visualizing Turnover Intent by Department**  
+
+Create a stacked bar chart that shows the proportion of employees who intend to leave and those who do not, grouped by department. Customize the chart with a title, labels for the x and y axes, and a theme. Ensure the chart is visually appealing and clear for non-technical audiences.  
+
+<!--
+```{r}
+# Calculate proportions of turnover intent by department
+turnover_proportions <- employee_survey2 %>%
+  group_by(department, turnover_intent) %>%
+  summarize(count = n()) %>%
+  mutate(prop = count / sum(count))
+
+# Create the stacked bar chart
+ggplot(turnover_proportions, aes(x = department, y = prop, fill = as.factor(turnover_intent))) +
+  geom_bar(stat = "identity") +
+  labs(title = "Proportion of Turnover Intent by Department",
+       x = "Department",
+       y = "Proportion of Employees") +
+  theme_minimal() +
+  scale_fill_manual(values = c("#F8766D", "#00BFC4"), labels = c("No Intent", "Intent"))
+
+```
+
+-->
+
+
+**Exercise 3: Presenting Actionable Business Recommendations**  
+
+Based on the visualizations created in exercises 1 and 2, provide a brief recommendation on how the company can improve job satisfaction and reduce turnover intent. Present your findings in your Quarto document in a clear and concise manner.  
+
+<!--
+```{r}
+## Actionable Business Recommendations
+
+# Based on the visualizations, it appears that the **Engineering** and **Sales** departments have the lowest average job satisfaction, which may be contributing to the higher turnover intent in those departments. To improve job satisfaction and reduce turnover intent, the company could consider:
+
+# 1. Conducting employee focus groups to understand the specific factors contributing to dissatisfaction in the Engineering and Sales departments.
+# 2. Developing targeted interventions to address the identified factors, such as additional training, improved communication, or better work-life balance.
+# 3. Regularly monitoring job satisfaction and turnover intent across all departments to measure the effectiveness of implemented interventions and identify any new areas of concern.
+```
+-->
+
+

@@ -1,0 +1,45 @@
+---
+title: "Asking the Right Questions"
+---
+
+### The Importance of Domain Knowledge: Understanding the Business Context
+
+First things first, let's dive into the world where your data is coming from! When we're dealing with data in a business context, a strong understanding of the industry, the organization, and its specific dynamics can make a world of difference. In I/O psychology, this is just as crucial.  
+
+Imagine, for instance, you're dealing with data from a tech company. The specifics of the tech industry - like typical roles, job structures, and unique industry challenges - can help you formulate questions that are spot-on and insightful. It's the difference between asking "What's the average engagement score?" and "Do software engineers have lower engagement scores compared to other roles?" See the difference? That's the power of domain knowledge!  
+
+
+<div class="callout">
+**Exercise**  
+Picture yourself as an I/O psychologist working with a tech company. What are some specific things you'd want to know about the company and its industry? Jot down 5 such points. It's okay if you're not sure - the point is to start thinking about these things!
+</div>
+
+
+### Formulating Good Questions: Hypothesis Generation and Data-Driven Inquiry
+
+A good question is one that is clear, specific, and actionable. In EDA, we often start with broader questions, and as we explore the data, we refine our questions to be more specific.  
+
+For example, we might start with a broad question like, "What factors are associated with higher employee engagement?" As we explore the data, we might refine this to, "Does age or department have a stronger association with employee engagement?"  
+
+Remember, the questions we ask should guide us towards actionable insights. An actionable question is one whose answer can inform a decision or action. For instance, "Does providing flexible work hours improve employee engagement?" is an actionable question because the answer can inform a decision on whether or not to implement flexible work hours.  
+
+<div class="callout">
+**Exercise**  
+Given the `employee_survey` dataset, write down 3 broad questions. Now, try refining each of them into a more specific, actionable question. Remember, it's okay if it's not perfect - the key is to start thinking in this way.
+</div>
+
+
+### Defining Clear Objectives: What Do We Want to Learn from the Data?
+
+Before diving into EDA, it's important to define what we want to learn from the data. This objective guides our analysis and helps us stay focused.  
+
+For example, our objective could be to identify the key drivers of employee engagement. With this objective in mind, we would focus our EDA on exploring variables that might be related to engagement, such as department, age, gender, or job role.  
+
+
+<div class="callout">
+**Exercise**  
+Try setting a learning objective for exploring the employee_survey dataset. What would you like to learn from this data? There's no wrong answer here - it's about what you find interesting and valuable!
+</div>
+
+
+Remember, asking the right questions is both an art and a science. It requires creativity, critical thinking, and a solid understanding of the data and its context. As you practice and gain more experience, you'll get better at asking insightful, actionable questions that drive your EDA.  
