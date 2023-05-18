@@ -1,0 +1,236 @@
+---
+title: "Project Workflow and Reports using Quarto"
+---
+
+### Organize Your Work Using RStudio Projects
+
+Working with data often involves multiple files: data files, code files, and output files. Keeping these files organized can be a challenge, especially as a project grows in complexity. RStudio Projects are a powerful tool to keep your work organized.  
+
+Some benefits:  
+
+- **Projects are very “launch-able”:** It’s easy to fire up a fresh instance of RStudio in a Project, with the file browser and working directory set exactly the way you need, ready for work.  
+
+- **Each Project is isolated:** Code run in one Project does not affect any other Project.  
+
+- **You can have several RStudio Projects open at once:** Code executed in Project A does not have any effect on the R session and workspace of Project B.  
+
+
+
+[Image Placeholder or instructions to create new project]  
+
+
+When you create a new RStudio Project, RStudio creates a new directory/folder on your computer. This new directory will contain an `.Rproj` file which stores settings related to your project. When you open this `.Rproj` file, RStudio will start a new session with the working directory set to the directory containing the `.Rproj` file. This means that you can use relative paths (paths that do not start with `/` or `~`) to your files which makes your project more portable.  
+
+For example, instead of using a full path to read a data file:  
+
+```{r, eval=FALSE}
+data <- read_csv("/Users/yourname/Projects/myproject/data/mydata.csv")
+```
+
+You can use a relative path, i.e., the path starting from your project `myproject` directory:  
+
+```{r, eval=FALSE}
+data <- read_csv("data/mydata.csv")
+```
+
+
+This way, as long as the relative structure of your files remains the same, you can move your project directory or even share it with others, and your code will still work!  
+
+
+### Creating a New Quarto Document
+
+Quarto offers a comprehensive framework for data science authoring, integrating your code, its results, and your written content. Quarto documents are fully reproducible and support various output formats, including HTML web pages, PDFs, Word files, presentations, and more.
+
+Quarto documents serve three primary purposes:  
+
+- **Communication with decision-makers:** These individuals prioritize understanding the key findings rather than delving into the technical aspects of the analysis.  
+
+- **Collaboration with fellow data analysts/scientists:** These individuals are interested in both the conclusions drawn and the underlying code that led to those conclusions.  
+
+- **Data science environment:** Quarto serves as a contemporary lab notebook, allowing you to document not only your actions but also your thoughts during the data science process.  
+
+
+To use Quarto with R, you should install the rmarkdown R package:  
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+
+Installation of the `rmarkdown` package will also install the `knitr` (we'll come back to `knitr` later) package so you will have everything required to render documents containing R code.  
+
+
+[Placeholder for image or instructions on creating new Quarto document]  
+[Include info here about learners using qmd as they work through the tutorials]  
+
+
+### Markdown Basics
+
+Markdown is a simple language for formatting text. You can create headings by starting a line with one or more `#` symbols (e.g., `# Heading 1`, `## Heading 2`). You can create lists by starting lines with `-` or `*`. You can make text bold or italic by surrounding it with `**` or `*` (e.g., `**bold text**`, `*italic text*`).
+
+You can include links using the following syntax:  
+
+```markdown
+[link text](https://www.example.com)
+```
+
+And you can include images using a similar syntax:  
+
+```markdown
+![image alt text](path/to/image.jpg)
+```
+
+<br>
+[Placeholder for markdown image]  
+<br>
+
+
+### Using the Visual Editor with Quarto
+
+Quarto's Visual Editor is an innovative feature that offers a "What You See Is What You Mean" (**WYSIWYM**) interface for editing documents. It provides comprehensive support for all of Pandoc markdown's features including tables, citations, cross-references, footnotes, divs/spans, definition lists, attributes, raw HTML/TeX, and much more.  
+
+
+[Placeholder for image]  
+
+
+You can conveniently switch between the traditional source mode and the visual mode in the document toolbar, located at the top-left of the RStudio interface. There are two buttons labelled **'Source'** and **'Visual'**, respectively. Alternatively, you can use the keyboard shortcut `⌘⇧ F4` to toggle between the two modes. It's important to note that you can switch between these modes at any point in your workflow. Your editing location and the undo/redo state are preserved when you switch, ensuring a smooth transition.  
+
+
+[Placeholder for image]  
+
+
+In the visual mode, a handy shortcut `⌘ /` allows you to insert just about any element into your document. All you need to do is activate the shortcut and then type in what you want to insert.  
+
+
+The editor toolbar in the visual mode houses buttons for the most frequently used formatting commands, making it easier for you to apply the desired formatting to your text.  
+
+
+[Placeholder for image]  
+
+
+Remember, the visual editor is just another way to interact with your Quarto document. Whether you use the visual editor or the source editor is a matter of personal preference and depends on your workflow. You can switch between the two at any time without affecting your document.  
+
+
+The Quarto Visual Editor simplifies the document creation process, allowing you to focus more on the content and less on the syntax. It's a powerful tool that enhances your productivity and makes your writing experience more enjoyable.  
+
+For more detailed information about the visual editor, visit https://quarto.org/docs/visual-editor/  
+
+
+### Code Chunks
+
+In Quarto, code chunks are the parts of the document where you can include code from various programming languages, such as R, Python, and SQL. These chunks can be used to perform computations, create visualizations, and more. The output of the code chunk (if any) is then included directly in the document.  
+
+Here's a basic example of a code chunk in Quarto:  
+
+<!--
+````{verbatim, lang = "r"}
+```{r}
+print("Hello world!")
+```
+````
+-->
+
+```{{r}}
+print("Hello world!")
+```
+
+
+When you knit your document, the code in the code chunk will be executed and the results will be included in the output document. 
+
+You can control the behavior of code chunks with chunk options, which are specified in the `{r}` part of the chunk header.  
+
+Here are some of the most commonly used chunk options:  
+
+- **`echo`**: Determines whether the code in the chunk should be included in the final document. If `echo=FALSE`, the code will be executed, but the code itself won't be shown in the document, only its output.  
+
+- **`eval`**: Determines whether the code in the chunk should be executed. If `eval=FALSE`, the code won't be executed, and no output will be included in the document.  
+
+- **`include`**: Determines whether the chunk (both the code and the output) should be included in the final document. If `include=FALSE`, the chunk will be completely ignored when the document is rendered.  
+
+- **`fig.cap`**: Provides a caption for any figures that are produced by the code chunk.  
+
+
+
+Quarto introduces a new way to specify chunk options (well, new if you have not used R Markdown before). Instead of including them on the same line as the backticks and language identifier, you can include them in special comments at the top of the code chunk. For example:  
+
+```{r, eval=FALSE}
+#| echo: false
+#| fig-cap: "Air Quality"
+
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess", se = FALSE)
+  
+```
+
+
+In this example, `echo: false` is a chunk option that tells Quarto not to include the code in the final output, and `fig-cap: "Air Quality"` is a chunk option that provides a caption for a figure produced by the code chunk.  
+
+This way of specifying chunk options makes it easier to include longer options like `fig-cap`, `fig-subcap`, and `fig-alt`. It also improves compatibility with more structured editors that don’t have an easy way to edit chunk metadata (e.g., most traditional notebook UIs).  
+
+That being said, if you prefer, you can still include chunk options on the first line (e.g., ```{r, echo = FALSE}```). However, we recommend using the comment-based syntax to make your documents more portable and consistent across execution environments.  
+
+
+
+For more detailed information about Quarto chunk options, you can refer to the [chunk options documentation](https://yihui.org/knitr/options/).  
+
+
+
+### YAML and Output Formats
+
+At the top of a Quarto document, you'll find a block of text surrounded by `---`. This is the YAML metadata for the document. It specifies options for the document, such as the output format. For example, here's a YAML block for a document specifying the title and that the output should be in HTML format:  
+
+```yaml
+---
+title: "My Document"
+format: html_document
+---
+```
+
+The `format` field specifies the output format. You can specify multiple formats by listing them:  
+
+```yaml
+---
+title: "My Document"
+format: 
+  - html_document
+  - pdf_document
+---
+```
+
+
+### Your Turn
+
+Now it's time to put what you've learned into practice. Below are a few exercises to help reinforce the concepts discussed in this lesson. To complete these exercises, you will need to open a new Session (opens in a separate window while keeping this current window open). Go to the top navigation bar, click "Session" and select "New Session." Complete the following steps after your new Session opens.  
+
+- **Create a new RStudio Project:** Set up a new RStudio Project and name it "My_First_Project".  
+
+- **Create a new Quarto document:** Within your newly created project, generate a new Quarto document. Name the document "My_First_Quarto".  
+
+- **Explore Markdown Basics:** Inside your Quarto document, write a paragraph or two introducing yourself, and explain why you are interested in R and data analytics. Experiment with different markdown syntax like headers, bold, italic, bullet points, and numbered lists. Also include a hyperlink to your LinkedIn or other social media profile.  
+
+- **Add Images:** Find an image or images related to what you wrote for the above step, data analytics, or anything else you find interesting on the internet. Add the image or images to your Quarto document. Remember to provide an alternate text for the image.  
+
+- **Execute a Code Chunk:** Create and execute two code chunks by pasting the following code:  
+  - First chunk:  
+```{r, eval=FALSE}
+library(tidyverse)
+
+# something using mpg dataset
+```
+
+  - Second chunk:
+```{r, eval=FALSE}
+library(tidyverse)
+
+# plot using mpg dataset
+```
+  
+
+- **Experiment with YAML:** In the YAML header of your Quarto document, set the output format to both HTML and PDF.  
+
+- **Knit the Document:** Finally, knit your Quarto document to both HTML and PDF formats. Check the output files to see how they look!  
+
+
+Remember, if you get stuck at any point, don't hesitate to use the resources discussed in the lesson and visit the [Quarto documentation](https://www.quarto.org)to find help. **Happy coding!**  
