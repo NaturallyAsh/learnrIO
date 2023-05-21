@@ -1,8 +1,5 @@
 # learnrIO: An Interactive R Programming and Statistics Course for Industrial Organizational Psychology Graduate and Undergraduate Students  
 
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/NaturallyAsh/learnrIO/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NaturallyAsh/learnrIO/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 
 # Overview
 
