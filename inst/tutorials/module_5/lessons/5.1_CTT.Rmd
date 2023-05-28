@@ -1,0 +1,38 @@
+---
+title: "Module 5.1_CTT"
+author: "Matthew"
+date: "2023-05-27"
+output: html_document
+---
+
+In these exercises, we'll be discussing item and scale analysis from the perspective of classical test theory (CTT). Although details of the mathematics and theory behind CTT are beyond the scope of this project, some brief refreshers will be given before focusing on the analyses used to examine a scale.
+
+The heart of CTT is that, for every psychological test, every person has a *true score* that they would always get if there were no measurement error. However, due to a variety of factors, measurement error is always a factor in psychological measurement and affects the observed score that a participant will receive on a test. This relationship can be modeled as such:
+
+# **TODO: LaTeX::** X = T + E
+
+Where X represents a person's observed score on a test, T represents a person's true score, and E represents measurement error. Within the framework of CTT, further assumptions are made about the nature of error, including that error is unsystematic and random. If two persons, A and B, were taking the same test, the measurement error affecting Person A's observed score would be uncorrelated with Person A's true score, and the measurement error affecting Person A's score would be uncorrelated with the measurement error affecting Person B's score. Error is assumed to be normally distributed with a mean of 0. Therefore, the expected value of error (i.e., the value of error if averaged over many instances of measurement) is expected to be 0, and the expected value of a person's observed score is their true score. This means that, as more individual measurements are taken of a respondent, the more likely it is that the mean of their observed scores reflects their true score.
+
+### Descriptive Statistics
+When analyzing data, the first step is to ensure you have a good understanding of the data itself. What kind of data is it? Survey data will look different from reaction time data, which will look different from physiological data, which will look different from constructed format responses (e.g., write-in questions). If the data you're working with has not been converted entirely to a numerical format that you can work with, you transform it using the skills obtained in Modules 1 - 3 of this course to transform.
+
+For any quantitative data you'll be working with, the first step is to get an understanding of the descriptive quality of the data. For each variable, what is the value of the measure of central tendency that makes most sense for this data (e.g., the arithmetic mean)? What is the range and the spread of the data? Learning the answers to these questions and checking to ensure that all the data is as expected is one of the best ways to make sure that there wasn't a recording or transcription error during the data collection or preparation.
+
+The `psych` package has a useful tool to help us answer these questions. Let's use it to help us understand the nature of the Big 5 dataset:
+```{r}
+psych::describe(big5_data)
+```
+
+'psych::describe()` will return multiple statistics useful for psychometric analysis, including (arithmetic) mean, standard deviation (sd), median, minimum and maximum values, range, and skew and kurtosis. It is a valuable tool for getting a big picture view of your dataset.
+
+
+From curriculum outline:
+    1.  Introduction (introduction to dataset)
+    2.  Basic item analysis
+        1.  Item difficulty (p)
+        2.  Item discrimination (corrected item-total correlation)
+        3.  Other (?)
+    3.  CTT-based reliability indices
+        1.  Correlative indices: Split-half, test-retest, alternate forms reliability
+        2.  Other commonly used indices (cronbach's alpha, mcdonald's omega, guttman's lamda (?))
+        3.  Inter-rater reliability *(should this go in the CTT section??)*

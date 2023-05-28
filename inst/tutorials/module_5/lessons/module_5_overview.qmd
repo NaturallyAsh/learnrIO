@@ -5,7 +5,7 @@ title: "Module 5 Overview"
 ### Welcome!
 
 #### [Introductory text]
-In this module, we will be covering how to perform common psychometric operations in R.R may be the most flexible and accessible program for performing psychometric analysis, providing tools for analyses common to different testing paradigms such as classical test theory (CTT), item response theory (IRT), and generlizability theory (G-Theory).
+In this module, we will be covering how to perform common psychometric operations in R. R may be the most flexible and accessible program for performing psychometric analysis, providing tools for analyses common to different testing paradigms such as classical test theory (CTT), item response theory (IRT), and generlizability theory (G-Theory), **as well as tools for psychometric network analysis.**
 
 As always, we encourage you to create a separate Quarto file to work alongside this course... **[finish this section]**
 
@@ -15,7 +15,15 @@ some package
 **[finish this section]**
 ```
 
-By the end, you'll be able to produce visualizations and item analyses similar to the below:
+#### Meet the Data
+In this section, we'll be conducting analyses that require different sorts of responses. To showcase how these analyses work, we'll be using the following datasets, which we obtained from openpsychometrics.org:
+
+-   Big 5 Personality Test: This dataset contains 3000 responses to a test of the Big 5 test of personality, taken with items from the International Personality Item Pool (IPIP). The test consisted of 50 Likert-type items and includes some demographic information such as gender, age, and race.
+-   Taylor Manifest Anxiety Scale: This dataset contains 3000 responses to a test of anxiety. The TMA consists of 50 true-false items, and responses are dichotomous. The data also includes information on participant gender and age.
+
+Details for both datasets can be found by reading the codebookx... **TODO:: Add codebooks to the module, somehow.**
+
+By the end, you'll be able to produce visualizations and item analyses similar to what you see below:
 
 **add images of analyses & visualizations**
 
