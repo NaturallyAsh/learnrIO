@@ -1,0 +1,23 @@
+
+Projects:
+  Version 2.1: 
+    Todos:
+      Note - Figure out a home to add detailed info on creating user-defined functions.
+      2.0 - overview:
+      2.1 - basic concepts:
+        ☐ Add somewhere info about executing a function without assigning it to a variable as a way to quickly print to console. Play with and view code results without the inconvenience of needing to `rm()` a variable. Maybe add to the "Functions" section. @created(23-05-27)
+        ✔ Move Packages section (at the bottom) to module 2.1 @created(23-05-27) @done(23-05-29 18:31)
+          I will move to module 1
+        ☐ Add resources/recommendations for more detailed learning of concept @created(23-05-27)
+      2.2 - tidyverse:
+        ☐ Include info about tidyverse package loading options (individually `library(dplyr`) or all `library(tidyverse)`). Explain it's just a matter of preference or convenience. @created(23-05-27 16:09)
+      2.3 - importing:
+      2.4 - wrangling:
+      2.5 - tidy:
+      2.6 - text:
+      2.7 - viz:
+        
+    
+  
+  Archive:
+    You can archive finished todos here

@@ -2,7 +2,8 @@
 title: "Module 2: R Foundations with the Tidyverse"
 output: 
     learnr::tutorial:
-        progressive: true
+        progressive: false
+        allow_skip: true # TODO: consider keeping or removing
         css: css/learnrIO_styles.css
         theme: "flatly"
 runtime: shiny_prerendered
@@ -20,11 +21,24 @@ library(learnr)
 library(dplyr)
 library(readr)
 
+tutorial_options(
+  exercise.blanks = "___",
+  exercise.checker = gradethis::grade_learnr()
+)
+
 source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
+source(here::here("inst/tutorials/module_2/www/helpers.R"))
+
 employee_survey <- readr::read_csv(here::here("inst/extdata/employee_survey.csv"))
 employee_turnover <- readr::read_csv(here::here("inst/extdata/employee_turnover.csv"))
 employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_data.csv"))
 # gradethis_setup()
+
+table_types <- tibble(
+  Type = c("Numeric", "Integer", "Character", "Logical", "Factor"),
+  Description = c("Decimal numbers or fractions", "Whole numbers", "Any text that is enclosed in quotations", "TRUE or FALSE values", "Categorical data with a fixed set of possible values"),
+  Example = c(0.05, 42, "Hello World!", "TRUE", "factor(c('apple', 'orange', 'banana'))")
+)
 ```
 
 
@@ -38,11 +52,18 @@ employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_dat
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Basic R concepts and data structures {data-progressive=TRUE}
+## Basic R Concepts{data-progressive=TRUE}
 ```{r, child="lessons/2.1_basic-R-concepts.Rmd"}
 
 ```
 
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Basic R Concepts: Exercises {data-progressive=TRUE}
+```{r, child="lessons/2.1e_exercises.Rmd"}
+
+```
 
 <!-- ==============================NEXT TOPIC=============================== -->
 

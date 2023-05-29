@@ -1,0 +1,158 @@
+---
+title: "Basic R Concepts: Exercises"
+---
+
+### Your Turn!
+
+Now that you have gained an understanging of the basic R concepts, it's time to put what you have learned into practice!  
+
+
+###
+**Creating Vectors**: InnovateCorp HR team would like to analyze the age distribution of its employees. For a small sample, create a numeric vector called `employee_age` with the ages of five employees: 32, 45, 28, 50, and 35. Print the variable.  
+
+```{r creating-vectors, exercise=TRUE}
+
+```
+
+```{r creating-vectors-hint}
+employee_age <- c(___, ___, 28, ___, ___)
+employee_age
+```
+
+```{r creating-vectors-solution}
+employee_age <- c(32, 45, 28, 50, 35)
+employee_age
+```
+
+```{r creating-vectors-check}
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```
+
+
+###
+**Creating Lists**: To get a better understanding of this sample, InnovateCorp would like to look at additional employee data. Create a list called `employee_info` that contains the following elements: a numeric vector with employee ages called `ages` (use the `employee_age` vector you created in the previous exercise), a character vector with employee roles called `roles`: "HR", "Sales", "Marketing", "Sales", "HR", and a logical vector called `full_time` indicating whether the employee is full-time: TRUE, TRUE, FALSE, TRUE, TRUE. Print the variable.  
+
+```{r creating-lists-setup}
+employee_age <- c(32, 45, 28, 50, 35)
+```
+
+```{r creating-lists, exercise=TRUE}
+
+```
+
+```{r creating-lists-hint-1}
+employee_info <- ___(___ = ___, 
+                      ___ = c(), 
+                      ___ = c())
+___
+```
+
+```{r creating-lists-hint-2}
+employee_info <- list(ages = ___, 
+                      roles = c(___, "Sales", ___, "Sales", ___), 
+                      full_time = c(___, ___, FALSE, TRUE, TRUE))
+employee_info
+```
+
+```{r creating-lists-solution}
+employee_info <- list(ages = employee_age, 
+                      roles = c("HR", "Sales", "Marketing", "Sales", "HR"), 
+                      full_time = c(TRUE, TRUE, FALSE, TRUE, TRUE))
+employee_info
+```
+
+```{r creating-lists-check}
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```
+
+
+###
+**Understanding and Creating Factors**: To make future analyses more manageable, create a factor from the `roles` vector in the `employee_info` list and store it in a variable named `employee_roles_factor`. Then reorder its levels to: "Sales", "Marketing", "HR". Print the variable.  
+
+```{r creating-factors-setup}
+employee_info <- list(ages = employee_age, 
+                      roles = c("HR", "Sales", "Marketing", "Sales", "HR"), 
+                      full_time = c(TRUE, TRUE, FALSE, TRUE, TRUE))
+```
+
+```{r creating-factors, exercise=TRUE}
+
+```
+
+```{r creating-factors-hint-1}
+employee_roles_factor <- ___(___, ___ = c())
+___
+```
+
+```{r creating-factors-hint-2}
+employee_roles_factor <- factor(employee_info$roles, levels = c(___, "Marketing", ___))
+employee_roles_factor
+```
+
+```{r creating-factors-solution}
+# $ shorthand ----
+employee_roles_factor <- factor(employee_info$roles, levels = c("Sales", "Marketing", "HR"))
+employee_roles_factor
+
+# double brackets ----
+employee_roles_factor <- factor(employee_info[["roles"]], levels = c("Sales", "Marketing", "HR"))
+employee_roles_factor
+```
+
+```{r creating-factors-check}
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```
+
+
+###
+**Recoding Factors**: InnovateCorp has decided to rename the "HR" role to "Human Resources" for clarity. Recode the `employee_roles_factor` factor to reflect this change. Print the updated `employee_roles_factor` variable.  
+
+```{r recoding-setup}
+employee_roles_factor <- factor(employee_info[["roles"]], levels = c("Sales", "Marketing", "HR"))
+```
+
+```{r recoding, exercise=TRUE}
+
+```
+
+```{r recoding-hint-1}
+levels(___)[levels(___) == ___] <- ___
+employee_roles_factor
+```
+
+```{r recoding-hint-2}
+levels(employee_roles_factor)[levels(employee_roles_factor) == ___] <- ___
+employee_roles_factor
+```
+
+```{r recoding-solution}
+levels(employee_roles_factor)[levels(employee_roles_factor) == "HR"] <- "Human Resources"
+employee_roles_factor
+```
+
+```{r recoding-check}
+grade_this({
+  if (identical(.result, .solution)) {
+    pass()
+  }
+  fail()
+})
+```
+
+
+
