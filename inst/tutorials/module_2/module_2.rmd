@@ -67,7 +67,7 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Intro to the Tidyverse {data-progressive=TRUE}
+## Introduction to the Tidyverse {data-progressive=TRUE}
 ```{r, child="lessons/2.2_intro-tidyverse.Rmd"}
 
 ```

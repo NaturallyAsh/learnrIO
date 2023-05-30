@@ -9,3 +9,17 @@
   color: gray;
   font-style: italic;
 }
+
+.float-fig-right {
+  display: table;
+  float: right;
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+
+.float-fig-left {
+  display: table;
+  float: left;
+  padding-right: 30px;
+  padding-bottom: 10px;
+}
