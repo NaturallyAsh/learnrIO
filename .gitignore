@@ -8,5 +8,5 @@
 inst/tutorials/course_preview/
 inst/tutorials/*/*_files/
 inst/tutorials/*/*.html
-inst/tutorials/*/*.todo
+*.todo
 inst/tutorials/module_2/UNUSED.Rmd
