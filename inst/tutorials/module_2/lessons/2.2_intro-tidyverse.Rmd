@@ -114,6 +114,19 @@ We have only scratched the surface of what the tidyverse has to offer, and its t
 
 Remember, the tidyverse is a unified approach to dealing with data - it provides a consistent and coherent toolkit for data manipulation, exploration, and visualization. This consistency is what makes it a powerful tool and will allow us to streamline our analyses as we become more proficient.  
 
+
+### What's to Come
+
+Now that you have an understanding of the Tidyverse, we're ready to venture deeper into the exciting world of data science with follow-up lessons dedicated to the concept of **data wrangling**. Data wrangling is critical component of a data project.  
+
+
+<figure>
+  <img src="images/data-science-wrangle.png" width="100%">
+  <figcaption class="figcap">Image of data wrangling component</figcaption>
+</figure>
+
+<br>
+
 By the end of the remaining lessons, you will be adept at harnessing the power of the tidyverse to transform raw data into actionable insights. So, buckle up and get ready to dive into the vast and exciting world of the tidyverse!  
 
 
