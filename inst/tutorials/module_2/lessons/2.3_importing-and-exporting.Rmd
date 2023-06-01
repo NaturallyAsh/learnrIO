@@ -1,21 +1,36 @@
 ---
 title: "Importing and exporting data"
 ---
-### Importing csv files
-Data can come in various forms and from different sources. Two of the most common are csv (comma-separated values) and excel file types.  
 
-The `readr` package is a part of the tidyverse. `readr` provides functions for importing flat files, a two-dimensional tabular structured file where a column represents one dimension and rows represent the other dimension.  
+Welcome to our lesson on Importing and Exporting Data! In this lesson, we'll be taking a look at how to bring data into R from a variety of formats (like CSV, Excel, and SPSS), and how to write your data back out to these formats. We'll also learn how to work with tibbles, a modern reimagining of the data frame.  
 
-We can use `readr::read_csv()` to import csv flat files:  
-```{r, eval=TRUE}
-library(readr)
+
+### Importing CSV files
+Data can come in various forms and from different sources. Two of the most common are CSV (Comma-Separated Values) and excel file types.  
+
+
+We can import CSV files using `readr`, a core tidyverse package. `readr` provides functions for importing flat files, a two-dimensional tabular structured file where a column represents one dimension and rows represent the other dimension.  
+
+We can use the `readr` `read_csv()` function to import CSV flat files. Let's say we have a CSV file located at a URL. We can import it by doing the following:  
+```{r, eval=FALSE}
 person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/R-Tutorial-Data-Files/master/PersData.csv") 
-
-person_data |>
-  head()
 ```
 
-Using `head()` to view the first 6 rows of the imported data, you can see the column names along with the data types (i.e., `id` values are type **double**, `lastname` values are type **character**, etc.).  
+Use `head()` to view the first 6 rows of the imported data:  
+
+```{r import-csv-setup}
+person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/R-Tutorial-Data-Files/master/PersData.csv") 
+```
+
+```{r import-csv, exercise=TRUE, exercise.lines=2}
+
+```
+
+```{r import-csv-solution}
+head(person_data)
+```
+
+You can see the column names along with the data types (i.e., `id` values are type **double**, `lastname` values are type **character**, etc.).  
 
 
 
@@ -25,15 +40,19 @@ You will often find encounter Excel data. We can use the `readxl` package to imp
 path_excel_data <- system.file("extdata", "PersData_Excel.xlsx", package = "learnrIO", mustWork = TRUE)
 ```
 
-We can use the `readxl::read_excel()` function which reads xls or xlsx files.  
-```{r}
-readxl::read_excel(path = path_excel_data)
+We can use the `readxl::read_excel()` function which reads xls or xlsx files. Here we use a path to an Excel file:  
+
+<!-- using readxl::read_excel() so I don't need to load the entire package (less dependency related stuff). Same for `haven`. -->
+```{r import-excel, exercise=TRUE}
+excel_data <- readxl::read_excel(path = path_excel_data)
+
+excel_data
 ```
 
-Running the above function with only the 'path' argument returns the first Excel sheet, in this case sheet "Year1". The dataset, however, contains two sheets. The `read_excel()` function provides options for fine-tuning Excel imports, such as importing a sheet other than the first or importing a column/row cell range.  
+Running the above function with only the `path` argument returns the first Excel sheet, in this case sheet "Year1". The dataset, however, contains two sheets. The `read_excel()` function provides options for fine-tuning Excel imports, such as importing a sheet other than the first or importing a column/row cell range.  
 
-*Import the second sheet "Year2"*  
-```{r}
+*Import the second sheet titled "Year2"*  
+```{r excel-sheet2, exercise=TRUE}
 sheet2 <- readxl::read_excel(
   path = path_excel_data,
   sheet = "Year2"
@@ -41,8 +60,8 @@ sheet2 <- readxl::read_excel(
 sheet2
 ```
 
-*Import the first 3 rows from the `id`, `lastname`, and `firstname` columns from the first sheet "Year1"*  
-```{r}
+*Importing the first 3 rows from the `id`, `lastname`, and `firstname` columns from the first sheet "Year1"*  
+```{r excel-sheet1-range, exercise=TRUE}
 sheet1 <- readxl::read_excel(
   path = path_excel_data,
   range = "A1:C4"
@@ -50,26 +69,74 @@ sheet1 <- readxl::read_excel(
 sheet1
 ```
 
-Type `?read_xlsx` to see additional examples.  
+Although we can retrieve the first sheet ("Year1") by explicitly setting the `sheet = "Year1"` attribute, we don't need to since `readxl::read_excel()` calls the first sheet by default.  
+
+Type `?read_excel` in your RStudio Console to see additional examples.  
 
 
 
 ### Importing other file formats with `haven`  
-For other common file formats like SPSS, Stata, and SAS, we can use the haven package.  
+For other common file formats like SPSS, Stata, and SAS, we can use the haven package. The `haven` package provides a consistent way to read data into R, regardless of the original software used to create the data.  
 
 **Import SPSS file**  
 ```{r, include=FALSE}
 path_sav_data <- system.file("extdata", "exam.sav", package = "learnrIO", mustWork = TRUE)
 ```
 
+The `haven::read_sav()` function takes a file path as its argument and returns a data frame:  
 ```{r}
-haven::read_sav(path_sav_data) |> head()
+haven::read_sav(path_sav_data) 
 ```
+
+
+### Quickly Exploring Your Imported Data
+Once you have successfully imported your data, the next step is to explore it to get an understanding of its structure and content. Exploring data is an essential step before moving on to data manipulation or data analysis. This process includes:  
+
+- Viewing the dataset  
+- Inspecting the structure  
+- Looking at the first few rows  
+
+### Viewing the Dataset 
+The simplest way to view your dataset is to print the dataset's name in the console. However, for large datasets, this is not practical because it can flood your console. A more appropriate method, especially for large datasets, is using the `View()` function:  
+
+```{r, eval=FALSE}
+View(person_data)
+```
+
+
+When you run this code in RStudio, it will open the data in the RStudio's interactive data viewer, which is a spreadsheet-like viewer that provides a quick look at the data. You can also open the viewer by clikcing the dataset's name in the "Environment Pane":  
+
+
+<figure>
+  <img src="images/view-data.png" width="100%">
+  <figcaption class="figcap">Interactive data viewer in RStudio</figcaption>
+</figure>
+
+<br>
+
+This viewer is especially useful for quickly scanning through your data, checking variable names, and seeing the values that your variables take. However, remember, this is only for viewing; you cannot edit your data in this viewer.  
+
+### Inspecting the Structure 
+Another important step in exploring your data is inspecting its structure. As you saw earlier in this lesson, the `head()` function is great for viewing the first few rows and columns of a dataset. Another handy function is `glimpse()` from the dplyr package, which provides a quick way to view the structure of your dataset. Run `glimpse()` on the `person_data` dataset:  
+
+```{r inspect-str-setup}
+person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/R-Tutorial-Data-Files/master/PersData.csv") 
+```
+
+```{r inspect-str, exercise=TRUE, exercise.lines=2}
+
+```
+
+```{r inspect-str-solution}
+glimpse(person_data)
+```
+
+The `glimpse()` function will display the total number of observations (rows), the total number of variables (columns), and a line for each variable. For each variable, `glimpse()` shows the variable's name, its type, and the first few entries.  
 
 
 
 ### Exporting Data
-You can easily export a tibble to csv, Excel, or other file formats such as SPSS.  
+You can easily export your data to csv, Excel, or other file formats such as SPSS.  
 
 **Export to csv using `readr`**  
 ```{r, eval=FALSE}
@@ -87,88 +154,28 @@ haven::write_sav(person_data, "person_data.sav")
 ```
 
 
-### Working with Tibbles
-A tibble, or tbl_df, is an enhanced version of a data frame. While it keeps what works well in data frames, it tweaks some parts to make data handling smoother. For example, it doesn’t convert strings to factors, it doesn’t adjust row names, and it allows for non-syntactic column names. Tibbles also have improved print methods that show only the first 10 rows and all columns that fit on the screen.  
+But where do the files go when you "write" them? By default, R writes files to your working directory, which is the folder where your R session is running. In RStudio, the working directory is typically the root directory of your RStudio Project.  
 
-#### Creating a Tibble
-Creating a tibble is straightforward with the `tibble()` function. Let's create a tibble with employee data:  
+You can check your current working directory using the getwd() function:  
+```{r, eval=FALSE}
+# Get the current working directory
+getwd()
+```
+
+
+You likely would want to save your data in a designated location. In that case, you would specify a different folder to write to by providing a file path instead of just a file name to the `path` argument:  
 
 ```{r, eval=FALSE}
-# Load the Tidyverse
-library(tidyverse)
-
-# Create a tibble
-employee_tibble <- tibble(
-  name = c("Alice", "Bob", "Charlie", "David", "Eve"),
-  age = c(24, 30, 35, 42, 29),
-  department = c("Sales", "HR", "IT", "Marketing", "Sales"),
-  salary = c(50000, 55000, 60000, 65000, 70000)
-)
+haven::write_sav(person_data, "path-to-desired-directory/person_data.sav")
 ```
 
-#### Working with Tibbles
-Working with tibbles is similar to working with data frames. You can use the `$` operator to extract a column:  
-
-```{r, eval=FALSE}
-# Extract the 'age' column
-employee_ages <- employee_tibble$age
-```
-
-And the `filter()`, `select()`, `mutate()`, and `summarise()` functions from dplyr work the same way (we'll dive deeper into `dplyr` in the next lesson):  
-
-```{r, eval=FALSE}
-# Filter to get employees older than 30
-older_employees <- filter(employee_tibble, age > 30)
-
-# Select the 'name' and 'salary' columns
-names_and_salaries <- select(employee_tibble, name, salary)
-
-# Add a new 'salary_group' column
-employee_tibble <- mutate(employee_tibble, salary_group = ifelse(salary > 60000, "High", "Low"))
-
-# Get the average age of employees
-average_age <- summarise(employee_tibble, avg_age = mean(age))
-
-```
+This is particularly useful when you're working with multiple datasets and want to keep your files organized.  
 
 
+### Conclusion
+We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.  
 
-#### Subsetting Tibbles
-Subsetting tibbles also works similarly to subsetting data frames. However, tibbles do not simplify to a vector when a single column is selected with `[[]]` or `[]`. Instead, a tibble is always returned:  
+In the next section, titled **"Data Wrangling"**, we will dive deeper into this topic, focusing on techniques for transforming and cleaning data. These skills are crucial in preparing data for analysis, making them a vital part of any data professional's toolkit.  
 
-```{r, eval=FALSE}
-# Subsetting with '[[]]'
-one_column_tibble <- employee_tibble[["age"]]
-
-# Subsetting with '[]'
-another_column_tibble <- employee_tibble["age"]
-```
-
-You now have a basic understanding of tibbles, and why they're a crucial part of the Tidyverse. They're designed to handle common data frame pain points, resulting in a cleaner, more intuitive way of working with data in R.  
-
-### Your Turn
-Now that we've delved into the world of tibbles, it's time for you to put what you've learned into practice. Here are a couple of exercises for you to try. Remember, the key to mastering these concepts is regular practice!  
-
-**Exercise 1: Creating a Tibble**  
-Create a tibble named `project_teams` with the following data:  
-
-- team_id: c(1, 2, 3, 4, 5)  
-- project_name: c("Phoenix", "Hydra", "Kraken", "Pegasus", "Dragon")  
-- team_lead: c("Sarah", "Joshua", "Nina", "Carlos", "Preeti")  
-- project_budget: c(5000, 7500, 6000, 6500, 8000)  
-
-```{r}
-
-```
-
-
-**Exercise 2: Manipulating and Subsetting a Tibble**  
-Using the `project_teams` tibble you created in Exercise 1:  
-
-- Add a new column named `budget_group` that categorizes the projects as 'Low Budget' if the project_budget is less than 7000 and 'High Budget' otherwise.  
-- Subset the `project_teams` tibble to select only the 'team_lead' and 'budget_group' columns for 'High Budget' projects.  
-
-```{r}
-
-```
+**Stay tuned!**  
 

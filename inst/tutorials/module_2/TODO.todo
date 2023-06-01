@@ -10,8 +10,9 @@ Projects:
           I will move to module 1
         ☐ Add resources/recommendations for more detailed learning of concept @created(23-05-27)
       2.2 - tidyverse:
-        ☐ Include info about tidyverse package loading options (individually `library(dplyr`) or all `library(tidyverse)`). Explain it's just a matter of preference or convenience. @created(23-05-27 16:09)
+        ✔ Include info about tidyverse package loading options (individually `library(dplyr`) or all `library(tidyverse)`). Explain it's just a matter of preference or convenience. @created(23-05-27 16:09) @done(23-05-31 19:53)
       2.3 - importing:
+        ☐ Probably should move the Tibbles section at the end of 2.3 to 2.4-Wrangling @created(23-05-31)
       2.4 - wrangling:
       2.5 - tidy:
       2.6 - text:

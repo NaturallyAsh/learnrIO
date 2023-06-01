@@ -18,8 +18,7 @@ knitr::opts_chunk$set(
 )
 
 library(learnr)
-library(dplyr)
-library(readr)
+library(tidyverse)
 
 tutorial_options(
   exercise.blanks = "___",
