@@ -82,16 +82,16 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Wrangling {data-progressive=TRUE}
-```{r, child="lessons/2.4_wrangling.Rmd"}
+## Tidy Data {data-progressive=TRUE}
+```{r, child="lessons/2.4_tidy.Rmd"}
 
 ```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Tidy Data {data-progressive=TRUE}
-```{r, child="lessons/2.5_tidy.Rmd"}
+## Transforming Data {data-progressive=TRUE}
+```{r, child="lessons/2.5_transform.Rmd"}
 
 ```
 

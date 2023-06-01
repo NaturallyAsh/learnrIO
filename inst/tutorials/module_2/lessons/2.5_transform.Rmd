@@ -1,0 +1,278 @@
+---
+title: "Transforming Data"
+---
+
+One of the most crucial aspects of data analysis: data wrangling. Data wrangling is all about cleaning, structuring, and enriching raw data into a desired format for better decision making. We'll be using dplyr, a core package of the Tidyverse, to demonstrate the powerful capabilities of data wrangling.  
+
+### Working with Tibbles
+Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the core tidyverse `tibble` package, operates as a modern reimagining of the traditional data frame. At its core, a tibble inherits all the features that have made data frames a versatile and powerful tool in R. However, a tibble goes one step further, fine-tuning some of the characteristics of data frames to provide an improved experience of data handling. Here are some enhancements that tibbles bring to the table:  
+
+- **No automatic conversion of strings to factors**: When dealing with textual data, tibbles preserve the original character strings without automatically converting them into factors. This is a significant improvement, especially when working with large text datasets where unnecessary factor levels can complicate data processing.  
+
+- **Retention of original row names**: Tibbles do not adjust row names. This means that your original row identifiers will remain as they are, thereby reducing potential confusion when examining your data.  
+
+- **Support for non-syntactic column names**: Tibbles open the doors to more flexible naming conventions. They allow for non-syntactic column names, a feature that significantly eases the process of dealing with real-world data that often includes messy or unconventional column names.  
+
+- **Improved print methods**: When you print a tibble, you will notice an elegant display of data that focuses on usability. By default, tibbles only show the first 10 rows and all columns that can fit on the screen. This makes it easier to get a quick snapshot of your data without being overwhelmed by lengthy outputs.  
+
+
+### Creating a Tibble
+Creating a tibble is straightforward with the `tibble()` function. Let's create a tibble with employee data:  
+
+```{r}
+
+# Create a tibble
+employee_tibble <- tibble(
+  name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  age = c(24, 30, 35, 42, 29),
+  department = c("Sales", "HR", "IT", "Marketing", "Sales"),
+  salary = c(50000, 55000, 60000, 65000, 70000)
+)
+```
+
+
+###
+
+Now let's create a tibble with non-syntactic names:  
+```{r}
+# Creating a tibble with non-syntactic names
+non_syntactic_tibble <- tibble(
+  `First Name` = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  `Age in years` = c(24, 30, 35, 42, 29),
+  `Department` = c("Sales", "HR", "IT", "Marketing", "Sales"),
+  `Annual Salary ($)` = c(50000, 55000, 60000, 65000, 70000)
+)
+
+non_syntactic_tibble
+```
+
+Notice how we use backticks to denote non-syntactic names. Viewing `non_syntactic_tibble`, you can see the tibble clearly indicating the data types of each column and showing the first few entries.  
+
+
+### Converting Data Frames to Tibbles
+Sometimes, you may start with data that's already in a data frame, perhaps because it was returned from a function that doesn't create tibbles by default. In these cases, you can convert your data frame to a tibble using `as_tibble()`.  
+
+Suppose we have a data frame, `employee_df`:  
+
+```{r, eval=FALSE}
+employee_df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Age = c(24, 30, 35, 42, 29),
+  Department = c("Sales", "HR", "IT", "Marketing", "Sales"),
+  Salary = c(50000, 55000, 60000, 65000, 70000)
+)
+```
+
+We can convert it to a `tibble`:  
+
+```{r, include=FALSE}
+employee_df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Age = c(24, 30, 35, 42, 29),
+  Department = c("Sales", "HR", "IT", "Marketing", "Sales"),
+  Salary = c(50000, 55000, 60000, 65000, 70000)
+)
+```
+
+```{r}
+emp_tibble <- as_tibble(employee_df)
+
+emp_tibble
+```
+
+
+
+### Subsetting Tibbles
+Subsetting tibbles also works similarly to subsetting data frames. Tibbles simplify to a vector when a single column is selected with `[[]]` or `$`. However, a tibble is always returned when subsetting with `[]`:  
+
+```{r}
+# Subsetting with '[[]]' and `$` - returns a double vector
+employee_tibble[["age"]]
+employee_tibble$age
+
+```
+
+
+```{r}
+# Subsetting with '[]' - returns a new tibble with the "age" variable as a column
+employee_tibble["age"]
+```
+
+
+###
+Now, what if we want to subset a tibble by rows?  
+
+We can subset by rows by providing a vector of row indices in single brackets. For instance, to get the first three rows of our tibble, we would do:  
+
+```{r}
+# Subset first three rows
+employee_tibble[1:3, ]
+```
+
+**Remember**, the comma is necessary when subsetting rows using single brackets. The part *before* the comma refers to rows, and the part *after* refers to columns. Leaving the column part blank means **"give me all columns"**.  
+
+###
+**Subsetting by Rows and Columns**  
+We can subset specific rows and columns simultaneously using single brackets. To do this, we specify the row indices before the comma, and the column names after the comma.  
+
+For instance, to get the `age` and `department` columns for the first three employees, we would do:  
+
+```{r}
+# Subset first three rows, "age" and **department** columns
+employee_tibble[1:3, c("age", "department")]
+
+```
+
+
+
+
+
+
+### Conditional Subsetting with Tibbles
+Subsetting is not limited to specifying column names or indices. A key strength of R (and tibbles) is the ability to subset based on logical (TRUE or FALSE) conditions.  
+
+For instance, suppose we're interested in viewing only the employees in the 'Sales' department or only the employees who are over 30 years old. We can achieve this with conditional subsetting. Let's take a look at how we can do this:  
+
+```{r}
+sales_department <- employee_tibble[employee_tibble$department == "Sales",]
+
+sales_department
+```
+
+In this example, `employee_tibble$department == "Sales"` creates a logical vector that is `TRUE` when the department is "Sales" and `FALSE` otherwise. When this logical vector is used to subset the tibble, only the rows where the condition is `TRUE` are returned.  
+
+Similarly, we can subset based on numerical conditions:  
+
+```{r}
+older_employees <- employee_tibble[employee_tibble$age > 30,]
+
+older_employees
+```
+
+Here, `employee_tibble$age > 30` creates a logical vector that is `TRUE` when the age is greater than 30 and `FALSE` otherwise. The tibble is subsetted in the same way as before, returning only the rows where the condition is `TRUE`.  
+
+Remember that you can use all sorts of logical conditions to subset your tibble in exactly the way you need. By mastering these techniques, you will find it much easier to work with and extract specific information from large datasets.  
+
+
+
+
+
+
+### What is dplyr? 
+**dplyr** is a powerful R package that provides a set of tools for efficiently manipulating datasets in R. It offers a flexible set of verbs that allow you to perform common data manipulation tasks such as filtering, mutating (adding new variables), summarizing, and so on.  
+
+**The Pipe Operator (`|>`)**  
+Before we dive into dplyr, it's important to understand the pipe operator (`|>`). This operator allows you to pipe your data from one function to the next. It's used to make your code cleaner and easier to read.
+
+Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary:  
+
+
+```{r, eval=FALSE}
+employees_data |> 
+  filter(department == "HR") |> 
+  select(age, salary) |> 
+  summarise(avg_salary = mean(salary, na.rm = TRUE))
+```
+
+(ADD VS WITHOUT PIPE HERE; LESS NEAT)  
+
+
+**Now, let's explore the key functions for data wrangling provided by dplyr.**  
+
+### dplyr Functions 
+Let's take a closer look at some of the core dplyr functions:  
+
+**filter()**  
+The `filter()` function lets you select rows in your data that meet certain criteria. It's like asking questions of your data. For instance, you might want to see only the data for employees in the "Sales" department. You'd do this by using:  
+```{r, eval=FALSE}
+sales_data <- employees_data |> filter(department == "Sales")
+```
+
+**select()**  
+`select()` allows you to focus on specific columns (variables) in your dataset. For example, if you only want to work with the 'name', 'age', and 'salary' columns, you could use:  
+
+```{r, eval=FALSE}
+selected_data <- employees_data |> select(name, age, salary)
+```
+
+**mutate()**  
+`mutate()` lets you add new variables to your dataset. These can be transformations of existing variables, or they could be entirely new variables you calculate based on existing variables. For instance, you might want to calculate a new salary after a 5% increase:  
+
+```{r, eval=FALSE}
+mutated_data <- employees_data |> mutate(salary_increase = salary * 1.05)
+```
+
+You can also use `mutate()` with the `across()` function to apply a transformation to multiple columns at once. Say we want to round all salary related columns:  
+
+```{r, eval=FALSE}
+rounded_data <- employees_data |> mutate(across(ends_with("salary"), round))
+```
+
+
+**arrange()**  
+`arrange()` lets you reorder rows according to the values of particular columns. By default, it sorts in ascending order, but you can sort in descending order by using `desc()`. For example, to arrange employees by age:  
+
+```{r, eval=FALSE}
+arranged_data <- employees_data |> arrange(desc(age))
+```
+
+
+**group_by() and summarise()**  
+`group_by()` and `summarise()` are a powerful combination. `group_by()` allows you to group your data based on the values in one or more columns, and `summarise()` allows you to calculate summary statistics for each group. For instance, you can calculate the average salary by department like this:  
+
+```{r, eval=FALSE}
+summary_data <- employees_data |> 
+                group_by(department) |> 
+                summarise(avg_salary = mean(salary, na.rm = TRUE))
+```
+
+**count()**  
+`count()` is a convenient function that combines `group_by()` and `summarise()` to quickly count the total number of records within each group. For instance, to count the number of employees in each department:  
+
+```{r, eval=FALSE}
+count_data <- employees_data |> count(department)
+```
+
+
+**bind_rows() and bind_cols()**  
+`bind_rows()` and `bind_cols()` are useful functions for combining two datasets. `bind_rows()` stacks two datasets on top of each other, while `bind_cols()` places them side by side:  
+
+```{r, eval=FALSE}
+# Assuming we have two similar datasets, employees_data1 and employees_data2
+combined_data <- bind_rows(employees_data1, employees_data2)
+
+# Assuming we have two datasets, employees_data and benefits_data, with the same number of rows
+combined_data_cols <- bind_cols(employees_data, benefits_data)
+```
+
+
+**Changing column data types**  
+Sometimes, we may need to change the data type of a column to perform certain operations. For instance, changing a character column to a numeric or vice versa. We can use `mutate()` with functions like `as.character()`, `as.numeric()`, `as.Date()`, etc. to change data types.  
+
+```{r, eval=FALSE}
+# Changing 'age' column from numeric to character
+changed_data <- employees_data |> mutate(age = as.character(age))
+```
+
+
+**Joining Datasets**  
+dplyr also provides several functions to join datasets based on common variables, including `inner_join()`, `left_join()`, `right_join()`, and `full_join()`. For example, if we have another dataset `department_data` with more information about each department, we could join it to our employee data:  
+
+```{r, eval=FALSE}
+joined_data <- employees_data |> inner_join(department_data, by = "department")
+```
+
+
+
+### Your Turn
+Now it's your turn to put your newfound knowledge of dplyr into practice. Here are a couple of exercises to get you started.  
+
+**Exercise 1:** Use the `mutate()` function to create a new column in `employees_data` called 'seniority' This column should categorize employees as "Junior" if their age is less than 35, "Mid-level" if their age is between 35 and 45 (inclusive), and "Senior" if their age is more than 45.  
+  - Hint: You can use the `case_when()` function within `mutate()` to accomplish this. Type `?case_when` in your console to see the help documentation.  
+  
+**Exercise 2:** Combine `employees_data1` and `employees_data2` into a single dataset using `bind_rows()`. Then, use `group_by()` and `summarise()` to calculate the average salary for each department in the combined dataset.  
+
+**Exercise 3:** Join `employees_data` and `department_data` on the 'department' column using `inner_join()`. Then, use `select()` to choose only the 'name', 'department', 'location', and 'salary' columns. Arrange the resulting dataset by 'department' and 'salary' in descending order.
+
+
+**Keep practicing!** Remember, the more you code, the more comfortable you'll get with these concepts.
