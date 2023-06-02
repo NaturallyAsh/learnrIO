@@ -175,7 +175,7 @@ This is particularly useful when you're working with multiple datasets and want 
 ### Conclusion
 We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.  
 
-In the next section, titled **"Data Wrangling"**, we will dive deeper into this topic, focusing on techniques for transforming and cleaning data. These skills are crucial in preparing data for analysis, making them a vital part of any data professional's toolkit.  
+In the next section, titled **"Tidy Data"**, we will dive deeper into this topic, focusing on techniques for tidying up your messy datasets into a format that will be much easier to work with. With your data in "tidy" format, you'll find that you spend less time wrestling with data structures and more time addressing the analytic questions at hand.  
 
 **Stay tuned!**  
 
