@@ -2,28 +2,46 @@
 title: "Tidy Data"
 ---
 
-### Overview 
-Tidy data is a term introduced by Hadley Wickham that refers to a standard way of mapping the semantics of a dataset to its physical layout. In a tidy dataset:  
+### Introduction
+As IO Psychologists, we often deal with a lot of data, be it employee performance metrics, survey responses, or recruitment data. One of the key challenges we face is ensuring that this data is well-organized and easy to analyze. Enter the concept of "Tidy Data" - a term coined by Hadley Wickham, the creator of many of the tools in the tidyverse package in R.
 
-- Each variable forms a column.  
-- Each observation forms a row.  
-- Each type of observational unit forms a table.  
+According to Wickham, "Tidy datasets are all alike, but every messy dataset is messy in its own way." The idea is to organize your data in a consistent way that makes it easier to work with and analyze. In essence, tidy data is about structuring datasets to facilitate analysis.  
+
+### Tidy Data Principles
+
+Tidy data follows three fundamental rules:  
+
+- Each variable must have its own column.  
+- Each observation must have its own row.  
+- Each value must have its own cell.  
 
 
 [Placeholder for an image illustrating tidy data]
 
 
-Tidy data is important because it provides a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning). By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+The advantages of tidy data are twofold. Firstly, having a consistent data structure makes it easier to learn the tools that work with it. Secondly, placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural. By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+
+Let's consider an example where we have data on employee satisfaction, performance, and tenure. The tidy version of this data would look something like this:  
+
+| Employee ID | Satisfaction | Performance | Tenure |
+|---|---|---|---|
+| 1 | 7 | 8 | 2 |
+| 2 | 8 | 7 | 3 |
+| 3 | 9 | 9 | 5 |
+| 4 | 6 | 5 | 1 | 
+
+In this example, each variable (Satisfaction, Performance, Tenure) has its own column, each observation (each employee) has its own row, and each value has its own cell.  
 
 
-In the context of people analytics, a sub-field of IO Psych, imagine having employee survey data where each row corresponds to an employee, and columns represent different aspects of the survey. However, each survey question is spread across multiple columns (e.g., Question1_Answer, Question1_Comment, Question2_Answer, Question2_Comment, etc.). Tidying such data would involve reshaping it so that we have three distinct columns: Employee, Question, and Response. This structure makes it easy to perform analyses at the question level.  
+### Pivoting Data
 
+In practice, you'll often encounter data that is not tidy. For instance, a variable might be spread across multiple columns, or one observation might be scattered across multiple rows. To handle such scenarios, `tidyr`, a core tidyverse package for working with messy data, provides two pivotal functions: `pivot_longer()` and `pivot_wider()`.  
 
+Let's discuss each one in detail.  
 
-### Reshaping data with pivot_wider() and pivot_longer() 
-The tidyverse provides two core functions to reshape your data: `pivot_longer()` and `pivot_wider()`.  
+### `pivot_longer()` 
 
-`pivot_longer()` is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
+is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
 
 ```{r, eval=FALSE}
 tidy_survey_data <- survey_data |> pivot_longer(
