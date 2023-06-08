@@ -82,6 +82,45 @@ untidy_survey_data <- too_tidy_survey_data |> unite(
 ```
 
 
+### The Pipe Operator **(`|>`)**  
+I bet you are wondering what that strange `|>` symbol is that we used in the above section. This symbol is a very useful method for creating tidy data, and it called the pipe operator (`|>`). This operator allows you to pipe your data from one function to the next. It's used to make your code cleaner and easier to read. The pipe operator fundamentally transforms the way you use R for data manipulation, leading to a tidier, more readable, and maintainable code.  
+
+You may be unfamiliar with some of the functions used in the following code examples (such as `filter()`). Don't worry! We will cover them in detail in the next lesson: Transforming Data!  
+
+Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary:  
+
+
+```{r, eval=FALSE}
+employees_data |> 
+  filter(department == "HR") |> 
+  select(age, salary) |> 
+  summarise(avg_salary = mean(salary, na.rm = TRUE))
+```
+
+This code reads from left to right in a logical order, making it easier to follow.  
+
+### The Benefit of Using Piping in Tidyverse
+
+The introduction of the pipe operator has transformed the way we can write and read R code. Let's consider the same task as above, but without using the pipe operator:  
+
+```{r, eval=FALSE}
+avg_salary <- summarise(select(filter(employees_data, department == "HR"), age, salary), avg_salary = mean(salary, na.rm = TRUE))
+```
+
+Without piping, this code becomes much harder to read. Functions are nested within one another, and the code reads from inside-out, rather than from left to right. It's also much more challenging to add or remove steps from the analysis.  
+
+On the other hand, the pipe operator allows us to follow the logic of our data transformation step by step. It facilitates a style of programming that emphasizes clear, readable code, and promotes the chaining of functions, where the output of one function is the input to the next. Take another look at the piping of the `employees_data` to calculate the same `avg_salary`:  
+
+```{r, eval=FALSE}
+employees_data |> 
+  filter(department == "HR") |> 
+  select(age, salary) |> 
+  summarise(avg_salary = mean(salary, na.rm = TRUE))
+```
+
+So much neater, right!? This is a powerful style, especially for data manipulation tasks.
+
+
 ### Your Turn
 
 Time to apply what you've learned about tidying data! Here are three exercises for you to try using the survey_data, untidy_survey_data, and too_tidy_survey_data datasets.  
