@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 library(learnr)
 library(tidyverse)
+library(janitor)
 
 tutorial_options(
   exercise.blanks = "___",
