@@ -4,26 +4,202 @@ author: "Matthew"
 date: "2023-05-27"
 output: html_document
 ---
+## PACKAGES REQUIRED: DPLYR, NANIAR, PSYCH, GGPLOT, TIDYR, HMISC, MBESS, IRR
 
+# Introduction
 In these exercises, we'll be discussing item and scale analysis from the perspective of classical test theory (CTT). Although details of the mathematics and theory behind CTT are beyond the scope of this project, some brief refreshers will be given before focusing on the analyses used to examine a scale.
 
 The heart of CTT is that, for every psychological test, every person has a *true score* that they would always get if there were no measurement error. However, due to a variety of factors, measurement error is always a factor in psychological measurement and affects the observed score that a participant will receive on a test. This relationship can be modeled as such:
 
 # **TODO: LaTeX::** X = T + E
 
-Where X represents a person's observed score on a test, T represents a person's true score, and E represents measurement error. Within the framework of CTT, further assumptions are made about the nature of error, including that error is unsystematic and random. If two persons, A and B, were taking the same test, the measurement error affecting Person A's observed score would be uncorrelated with Person A's true score, and the measurement error affecting Person A's score would be uncorrelated with the measurement error affecting Person B's score. Error is assumed to be normally distributed with a mean of 0. Therefore, the expected value of error (i.e., the value of error if averaged over many instances of measurement) is expected to be 0, and the expected value of a person's observed score is their true score. This means that, as more individual measurements are taken of a respondent, the more likely it is that the mean of their observed scores reflects their true score.
+Where X represents a person's observed score on a test, T represents a person's true score, and E represents measurement error. Within the framework of CTT, further assumptions are made about the nature of measurement error, including that error is unsystematic and random. If two persons, A and B, were taking the same test, the measurement error affecting Person A's observed score would be uncorrelated with Person A's true score, and the measurement error affecting Person A's score would be uncorrelated with the measurement error affecting Person B's score. Error is assumed to be normally distributed with a mean of 0. Therefore, the expected value of error (i.e., the value of error if averaged over many instances of measurement) is expected to be 0, and the expected value of a person's observed score is their true score. This means that, as more individual measurements are taken of a respondent, the more likely it is that the mean of their observed scores reflects their true score.
 
 ### Descriptive Statistics
-When analyzing data, the first step is to ensure you have a good understanding of the data itself. What kind of data is it? Survey data will look different from reaction time data, which will look different from physiological data, which will look different from constructed format responses (e.g., write-in questions). If the data you're working with has not been converted entirely to a numerical format that you can work with, you transform it using the skills obtained in Modules 1 - 3 of this course to transform.
+When analyzing data, the first step is to ensure you have a good understanding of the data itself. What kind of data is it? Survey data will look different from reaction time data, which will look different from physiological data, which will look different from constructed format responses (e.g., write-in questions). If the data you're working with has not been converted entirely to a numerical format that you can work with, you can transform it using the strategies and skills taught in Modules 1 - 3 of this course.
 
 For any quantitative data you'll be working with, the first step is to get an understanding of the descriptive quality of the data. For each variable, what is the value of the measure of central tendency that makes most sense for this data (e.g., the arithmetic mean)? What is the range and the spread of the data? Learning the answers to these questions and checking to ensure that all the data is as expected is one of the best ways to make sure that there wasn't a recording or transcription error during the data collection or preparation.
 
-The `psych` package has a useful tool to help us answer these questions. Let's use it to help us understand the nature of the Big 5 dataset:
+In this section, we'll be using the Big 5 dataset, collected from **TODO: get dataset info**. The full dataset is very large, so we'll only use a part of it. We can consult the dataset's codebook to learn a bit about it. **TODO: show how to view text files in RStudio?** Doing so, we learn about the survey used for data collection and the variables. Respondents answered 50 questions measuring the Big 5 traits (10 items per trait) and then answered some demographic questions.
+
+If your dataset is of manageable size, it is very useful to look at the dataset in spreadsheet form before running analyses. This is the easiest way to identify any major issues (e.g., incorrect formats in datetime columns, string values where numeric values should be). Spreadsheet programs like Excel are better for this than R, but RStudio (and many other IDEs) have the capacity to produce a spreadsheet representation of the data. In RStudio, use `View()` to examine any matrix, data.frame, or tibble as a spreadsheet.
+
+# **TODO**: exercise to view data in spreadsheet; make comments if necessary
+
+Now that we've looked at our data as a spreadhseet, let's use 'glimpse' from the dplyr package to get a snapshot of what the Big 5 data look like as it's stored in R.
 ```{r}
-psych::describe(big5_data)
+dplyr::glimpse(big5_data)
+```
+We have a 3000 (rows) x 57 (columns) dataset. Variables are on columns, which are all of type "double" aside from `country`, which is a character vector.
+
+We're interested in how frequently variables are missing data, too. Getting around missing data can be tricky, but the `naniar` package offers some tools that make it much easier.
+```{r}
+naniar::miss_var_summary(big5_data)
+```
+In this dataset, we see that two values are missing from 'country', and no values are missing from other variables. This is an unusually clean dataset! To learn how to work with missing data, see **TODO: WHERE IS MISSING DATA DISCUSSED IN OUR TUTORIAL?**
+
+The next step is to get a general idea of the distribution of data within variables. The `psych` package is a useful tool for this task. Let's use it to help us understand the nature of the Big 5 dataset. (Note that some of these items should be reverse coded. We will do that for some variables later; for now, this is an exploration of the data before we make any changes to it.)
+```{r}
+big5_summary <- psych::describe(big5_data)
+big5_summary
 ```
 
-'psych::describe()` will return multiple statistics useful for psychometric analysis, including (arithmetic) mean, standard deviation (sd), median, minimum and maximum values, range, and skew and kurtosis. It is a valuable tool for getting a big picture view of your dataset.
+'psych::describe()` will return multiple statistics useful for psychometric analysis, including (arithmetic) mean, standard deviation (sd), median, minimum and maximum values, range, and skew and kurtosis. It is a valuable tool for getting a big picture view of your dataset. Notice that the row for `country` has an asterisk; this is signaling that the variable is not type numeric. Importantly, you should always check that the min, max, mean, and skew values for each numeric variable is within the bounds that you would expect.
+
+To get frequency data for `country`, we can use either `base::table()` or `dplyr::count`. It usually helps to sort the data from greatest to least or least to greatest; below, I want to see which countries are most represented, so I'll sort in decreasing order. Note the differences in syntax between the two methods:
+```{r}
+base::table(big5_data$country) |> sort(decreasing = T)
+dplyr::count(big5_data, country) |> arrange(desc(n))
+```
+
+`base::table()` returns a named integer vector, whereas `dplyr::count()` returns a tibble. I usually find it easier to work with tibbles in interactive data analysis; in this instance, it's easier to sort based on the values counted (for example, if I wanted to sort by name of country in ascending order), which is often useful.
+
+# **TODO**: learnr exercise, using count() on multiple columns and ordering by descending country value? Can do age, race, and `engnat` (is English natural language)
+
+It can be useful to visualize certain elements of the data. In the Big 5 dataset, what is the distribution of mean values among the variables, and does that mean change for each personality trait? We can use the `ggplot2` package to answer that question, after manipulating the data a bit. Below, I'll use pipes to update the data.frame and make two visualizations: one histogram of all means, and one set of histograms grouping the means by the traits..
+```{r}
+big5_summary |> dplyr::filter(trait %in% c("E", "N", "A", "C", "O")) |>
+  ggplot2::ggplot(ggplot2::aes(x = mean)) + ggplot2::geom_histogram()
+big5_summary |> dplyr::filter(trait %in% c("E", "N", "A", "C", "O")) |>
+  ggplot2::ggplot(ggplot2::aes(x = mean, fill = trait)) + ggplot2::geom_histogram() + ggplot2::facet_wrap(~trait)
+```
+(I converted the summary object to a tibble because normally it has a special class and so you can't filter using `dplyr::filter()`. There are other ways around this, such as indexing by row number, but I find this way to be a bit easier.)
+
+We can see that most items have a mean value between 2.5 and 3.5, and that different traits have notably different distributions of item means. A (Agreeableness) items have either high or low means, whereas Conscientiousness items tend to group near the center. This gives us insight into item properties.
+
+# Item Analysis
+Now that we've got a snapshot of the data, it's time to crunch the numbers! In this section, we'll discuss item difficulty (or *p*-value), item description, and indices of reliability.
+
+## Item difficulty
+In dichotomous and polytymous numerical data, overall item difficulty can be found by taking the mean of the items, which we achieved with `psych::describe()` and could alternatively get for individual variables with `mean()`. However, it is often useful to get item difficulties for different groups of respondents (e.g., those who scored in the top/bottom 20% of a trait). Here, we'll look at methods for doing so by examining the Extraversion scale and its items.
+
+After consulting the codebook, we can see that some items should be inversely correlated with overall Extraversion (e.g., E2, "I don't talk a lot"). We need to reverse code these items before proceeding, or our analysis will be thrown off!
+```{r}
+big5_data <-
+  big5_data |>
+  mutate(E2 = 6-E2, E4 = 6-E4, E6 = 6-E6, E8 = 6-E8, E10 = 6-E10)
+```
+
+
+We'll use a few new functions from the `dplyr` package to group, summarise, and calculate our data. First, we want to get scale scores for all respondents, on all five traits, and save the results. Below, I use `dplyr::across()` combined with `rowSums()` to get the scale score for each respondent, here defined as the mean of the respondent's score on all 10 items.
+```{r}
+big5_data <- 
+  big5_data |>
+  mutate(Extraversion = rowSums(across(starts_with("E", ignore.case = FALSE), ~ .x))/10)
+```
+(You should take the time to examine the syntax for `dplyr::across()` and read the function's Help page. It is a powerful tool in working with data and can significantly reduce the time necessary to perform significant tasks!)
+
+We should use `utils::View()` to make sure that we got everything right! We'll view the data in a way that we can manually spot check to make sure the averages are what we'd expect. We don't have to do it for all the scales; three should suffice.
+```{r}
+big5_data |> select(starts_with("E", ignore.case = FALSE)) |> View()
+```
+
+Now that we have scale scores, we can look at the distribution. For the sake of demonstration, we'll identify the scores that trichotomize the data, separating the tails from the center of the distribution.
+```{r}
+thirds <- quantile(big5_data$Extraversion, c(.27, .73))
+thirds
+```
+
+We can use this information to divide respondents into High, Medium, and Low categories, and then look at item difficuties.
+```{r}
+Edifficulties <- big5_data |>
+  mutate(Extraversion_group = case_when(Extraversion < thirds[[1]] ~ "1 (Low)", Extraversion > thirds[[2]] ~ "3 (High)", TRUE ~ "2 (Medium)")) |>
+  summarise(across(E1:E10, list(mean = mean), .names = "{.col}_{.fn}"), .by = Extraversion_group) |> arrange(Extraversion_group)
+Edifficulties
+```
+
+Using `ggplot2`, we can get a visual representation by pivoting the data with `tidyr::pivot_longer()` and making a line graph.
+```{r}
+Edifficulties_toPlot <- Edifficulties |> 
+  pivot_longer(E1_mean:E10_mean, names_to = "Item", values_to = "Mean") |> 
+  mutate(Item = as.integer(stringr::str_remove_all(Item, "(E)|(_mean)")))
+ggplot(Edifficulties_toPlot, aes(x = Item, y = Mean, color = Extraversion_group)) + 
+  geom_line() + geom_point() + scale_x_continuous(breaks = 1:10)
+```
+(You should examine the code above and explore on your own to see what happened in each step to turn `Edifficulties` into `Edifficulties_toPlot`.)
+
+As we can see, although there are some differences in the spread of the group means within items, the rank order of item difficulty across items matches the rank order of the score groups. Looking at this chart and the data in `Edifficulties`, what conclusions can you make about the psychometric qualities of the different items?
+
+## Item discrimination (Item-total correlation)
+In CTT, item discrimination is usually quantified by the correlation between item scores and scale scores. The statistics module of this course covers correlation in more detail, but here we'll go over an example of the use of correlation in item discrimination estimation. We'll be finding the item-total polychoric correlation between each Extraversion item and the scale score.
+
+To ensure our correlations aren't inflated, we'll actually be running the correlations between the item scores and *corrected* scale scores. We find corrected scale scores by removing the effects of the item to be correlated. We'll recalculate 10 new mean scores and add them to the dataset.
+```{r}
+big5_data <- big5_data |>  mutate(across(E1:E10, function(x) ((Extraversion * 10) - x)/9, .names = "{.col}_correctedTotal"))
+```
+(Notice how this time, I use an *anonymous function* in `dplyr::across()`. Anonymous functions are incredibly powerful!)
+
+We'll use the `Hmisc::rcorr()` function to compute the correlations between the items and the corrected scale scores. Because we're using ordinal data, we'll calculate the Spearman *rho* coefficient.
+```{r}
+itemData <- select(big5_data, E1:E10) |> as.matrix()
+correctedScores <- select(big5_data, E1_correctedTotal:E10_correctedTotal) |> as.matrix()
+
+spear <- Hmisc::rcorr(itemData, correctedScores, type = "spearman")
+spear
+```
+
+`Hmisc::rcorr()` returns a list object that contains matrices with correlation coefficients, significance values, and N sizes. When printed to the console, a lot of information we dont' need is shown! To view the correlations of interest, we'll need to first index into the matrix with the correlations.
+```{r}
+spear[["r"]][1:10,11:20]
+```
+
+That's better, but to get just the item-corrected total coefficients, we'll take the diagonal from that quadrant. This returns a vector, which we'll name to make it easier to identify which value is which.
+```{r}
+itemTotalCorrs <- diag(spear[["r"]][1:10,11:20]) |> set_names(paste0("E", 1:10))
+itemTotalCorrs
+```
+
+We can get the range of correlations with the `range()` function, which returns a double vector with the minimum and maximum value, and sort it from highest to lowest discrimination. Because we named the vector, we'll still be able to tell which coefficient belongs to which item.
+```{r}
+range(itemTotalCorrs)
+sort(itemTotalCorrs, decreasing = TRUE)
+```
+Based on this, we can see that E5 has the highest discrimination and E8 has the lowest.
+
+## Reliability
+In CTT, reliability can be understood as the degree to which an assessment is free of measurement error, and is often quantified as a correlation coefficient of some kind--either between two test forms (e.g., alternate forms reliability), the same test administered twice (test-retest reliability)--or as a measure of internal consistency. We've already done a correlation analysis, so we won't cover test-retest reliability.
+
+### Internal Consistency
+Common measures of internal consistency reliability include Cronbach's alpha and McDonald's omega. Alpha relies on correlation analysis, while omega uses a factor analytic approach. To compute alpha, we'll use the `psych` package; to calculate omega, we'll use the `MBESS` package.
+```{r}
+alphaVal <- psych::alpha(itemData, title = "Extraversion", check.keys = TRUE)
+omegaVal <- MBESS::ci.reliability(itemData, type = "omega")
+```
+Checking the object produced by `psych::alpha()`, we see a lot of information, including response values, raw and standardized alpha values, and other information.
+**TODO: find a better way to present this information**
+```{r}
+alphaVal
+```
+
+The object returned by `MBESS::ci.reliability()` contains less informaiton.
+```{r}
+omegaVal
+```
+
+However, we can see that the estimates (for this data, at least) are very similar.
+
+### Interrater Reliability
+Interrater reliability can be estimated 
+**TODO: Finish this. Can reference the psychometric sheet. Compute ICC for interrater consistency, `irr::agree()` for interrater agreement.**
+
+
+
+# EXERCISES
+1) By default, `psych::describe()` coerces categorical and logical variables to numerical before summarising them. How can you change this behavior? (Hint: The functions's 'Help' page has a lot of useful information!)
+
+2) Look at the help page for `dplyr::tally()`. How does it compare to `dplyr::count()`, and when might you want to use it?
+
+3) Because there was no missing data, we could safely calculate the mean of respondent data by dividing by 10. How might you alter the syntax to get the correct mean (that is, by dividing the sum of a respondent's scores by the number of items they saw on that score)? 
+(Hint 1: It's easiest if you create another variable first, that contains the number of items a respondent answered.)
+(Hint 2: `is.na()` can be used inside of `sum()` and `rowSums()` to count the number of `NA` values in a vector of values.)
+
+4) When making `Edifficulties_toPlot` in section **TODO: add section #**, I used the function `stringr::str_remove_all()`. What happens if you use `stringr::str_remove()` instead? Why was it necessary to pivot the data before making the line plot?
+
+5) When working with dichotomous or continuous data, you'll want to use different correlation coefficients to find item discrimination values. `Hmisc()` can also calculate Pearson's *r*, but not a biserial correlation coefficient, which you would use with dichotomous data. Check the documentation for the `psych` package (you can find a link to download the reference manual https://cran.r-project.org/web/packages/psych/index.html). What function could you use to compute a biserial correlation?
+
+6) Using the analysis of the Extraversion scale as a guide, conduct an analysis of one of the other scales in the Big 5 dataset. How is the process the same, and how is it different?
+
+
 
 
 From curriculum outline:
