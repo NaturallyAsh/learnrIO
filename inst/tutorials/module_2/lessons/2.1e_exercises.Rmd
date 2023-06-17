@@ -26,10 +26,7 @@ employee_age
 
 ```{r creating-vectors-check}
 grade_this({
-  if (identical(.result, .solution)) {
-    pass()
-  }
-  fail()
+    pass_if_equal()
 })
 ```
 
@@ -67,11 +64,14 @@ employee_info
 ```
 
 ```{r creating-lists-check}
+# grade_this({
+#   if (identical(.result, .solution)) {
+#     pass()
+#   }
+#   fail()
+# })
 grade_this({
-  if (identical(.result, .solution)) {
-    pass()
-  }
-  fail()
+    pass_if_equal()
 })
 ```
 
@@ -110,11 +110,14 @@ employee_roles_factor
 ```
 
 ```{r creating-factors-check}
+# grade_this({
+#   if (identical(.result, .solution)) {
+#     pass()
+#   }
+#   fail()
+# })
 grade_this({
-  if (identical(.result, .solution)) {
-    pass()
-  }
-  fail()
+    pass_if_equal()
 })
 ```
 
@@ -147,10 +150,7 @@ employee_roles_factor
 
 ```{r recoding-check}
 grade_this({
-  if (identical(.result, .solution)) {
-    pass()
-  }
-  fail()
+    pass_if_equal()
 })
 ```
 

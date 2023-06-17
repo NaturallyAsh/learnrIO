@@ -320,6 +320,7 @@ You can access a single value (or element) from a vector by using square bracket
 To retrieve the "HR" element, specify the number that indicates it's position in the vector. So, there are four elements in `departments`. "HR" is in the 1 position, "Sales" is in the 2 position, and so forth.  
 
 ```{r}
+departments <- c("HR", "Sales", "Marketing", "Finance")
 departments[1]
 ```
 

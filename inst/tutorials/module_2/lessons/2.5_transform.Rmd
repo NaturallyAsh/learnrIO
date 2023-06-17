@@ -95,27 +95,27 @@ non_syntactic_tibble <- tibble(
 )
 ```
 
-```{r non-syntactic, exercise=TRUE, exercise.lines=2, exercise.setup="prepare-janitor"}
+```{r non-syntactic, exercise=TRUE, exercise.lines=2, exercise.setup="prepare-non-syntactic"}
 
 ```
 
 ```{r non-syntactic-solution}
-janitor
+non_syntactic_tibble
 ```
 
 You will notice that the column names contain spaces, punctuation, and a non-standard `$` character. Call the `non_syntactic_tibble` and pipe it to the `clean_names()` function. Save the this to a variable called `clean_tibble_names`. Remember to print the variable:  
 
-```{r clean-names, exercise=TRUE, exercise.setup="prepare-janitor"}
+```{r clean-names, exercise=TRUE, exercise.setup="prepare-non-syntactic"}
 
 ```
 
-```{r clean-names-hint1}
+```{r clean-names-hint-1}
 clean_tibble_names <- ___ |> 
   ___()
 ___
 ```
 
-```{r clean-names-hint2}
+```{r clean-names-hint-2}
 clean_tibble_names <- ___ |> 
   clean_names()
 clean_tibble_names
@@ -449,7 +449,7 @@ salary_stats_by_department
 To group by multiple variables, add them to the `group_by()` function. If we want average salary by department and job title:  
 
 ```{r}
-average_salary_by_department_job <- df |> 
+average_salary_by_department_job <- employees_data |> 
                                      group_by(department, job_title) |> 
                                      summarise(avg_salary = mean(salary, na.rm = TRUE))
 
@@ -603,14 +603,14 @@ In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and con
 
 ```
 
-```{r changed-rating-hint1}
+```{r changed-rating-hint-1}
 changed_rating <- ___ |> 
   ___(___ = ___(rating))
 
 ___
 ```
 
-```{r changed-rating-hint2}
+```{r changed-rating-hint-2}
 changed_rating <- employees_data_types |> 
   ___(rating = ___(rating))
 
@@ -636,14 +636,14 @@ In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and con
 
 ```
 
-```{r changed-date-hint1}
+```{r changed-date-hint-1}
 changed_start_date <- ___ |> 
   ___(___ = ___(start_date))
 
 ___
 ```
 
-```{r changed-date-hint2}
+```{r changed-date-hint-2}
 changed_start_date <- employees_data_types |> 
   ___(start_date = ___(start_date))
 
@@ -668,14 +668,14 @@ Converting character columns to numeric can be done using `as.numeric()`. In the
 
 ```
 
-```{r changed-age-hint1}
+```{r changed-age-hint-1}
 ___ <- ___ |> 
   ___(___ = ___(age))
 
 ___
 ```
 
-```{r changed-age-hint2}
+```{r changed-age-hint-2}
 changed_age <- employees_data_types |> 
   ___(age = ___(age))
 
@@ -698,14 +698,14 @@ In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and par
 
 ```
 
-```{r changed-salary-hint1}
+```{r changed-salary-hint-1}
 ___ <- ___ |> 
   ___(___ = ___(___))
 
 changed_salary
 ```
 
-```{r changed-salary-hint2}
+```{r changed-salary-hint-2}
 changed_salary <- employees_data_types |> 
   ___(___ = ___(salary))
 
@@ -737,14 +737,14 @@ In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and con
 
 ```
 
-```{r changed-factor-hint1}
+```{r changed-factor-hint-1}
 changed_factor <- ___ |> 
   ___(___ = ___(rating, ___ = c(___)))
 
 ___
 ```
 
-```{r changed-factor-hint2}
+```{r changed-factor-hint-2}
 changed_factor <- ___ |> 
   mutate(rating = ___(rating, levels = c("1",___,___,___,"5")))
 
@@ -944,6 +944,13 @@ is.na(vec)
 ```
 
 You can see that `is.na()` returns `TRUE` for the third and fifth elements, which are `NA` and `NaN`.  
+
+You can calculate the total number of missing values:  
+```{r}
+sum(is.na(vec))
+```
+
+The result shows there are 2 missing values in `vec`. Since R treats TRUE as "1" and FALSE as "0", `sum(is.na(vec))` works by adding all the TRUEs to the question, "is this value NA or NaN?"  
 
 
 ###
