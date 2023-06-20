@@ -10,6 +10,10 @@ Let's imagine you are a data scientist working for a large company called "Futur
 - `transform_practice_emp`: Contains general information about each employee, including their ID, age, department, hire date, and performance score.  
 - `transform_practice_emp_salary`: Contains salary information for some of the employees.  
 
+//FIXME getting "does not exist in dir" error with data folder
+```{r test, exercise = TRUE}
+test <- read_csv("data/transform_practice_emp.csv")
+```
 
 ### Exercise 1
 
