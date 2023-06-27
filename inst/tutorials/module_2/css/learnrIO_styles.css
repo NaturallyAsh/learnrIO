@@ -23,3 +23,9 @@
   padding-right: 30px;
   padding-bottom: 10px;
 }
+
+.tutorial-exercise-output > pre > code {
+  white-space: pre-line !important; 
+  /* fixed issue where code output had a lot of whitespace. Solved from here: https://github.com/rstudio/pagedown/issues/233#issuecomment-879045818 */
+}
+

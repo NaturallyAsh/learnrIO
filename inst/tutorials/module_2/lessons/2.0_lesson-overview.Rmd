@@ -15,9 +15,9 @@ In this module, we'll cover the following topics:
 
 - **Importing and Exporting Data:** Here, we'll learn about working with various data formats such as CSV and Excel, and how to import and export them. We'll also get to know about 'Tibbles', a modern take on data frames in R.  
 
-- **Data Wrangling:** This involves transforming and mapping data from one "raw" data form into another format with the intent of making it more appropriate and valuable for a variety of downstream purposes such as analytics.  
-
 - **Tidy Data:** After we've had fun working with already tidied data, we'll dive into the concept of 'tidy data', a standard way of mapping the semantics of a dataset to its physical representation.  
+
+- **Transforming Data:** This involves transforming and mapping data from one "raw" data form into another format with the intent of making it more appropriate and valuable for a variety of downstream purposes such as analytics.  
 
 - **Working with Strings and Text Data:** We'll cover techniques and functions for manipulating strings and text data in R.  
 
