@@ -116,6 +116,14 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
+## Working with Strings and Text Data: Exercises {data-progressive=TRUE}
+```{r, child="lessons/2.6e_exercises.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
 ## Data Visualization {data-progressive=TRUE}
 ```{r, child="lessons/2.7_viz.Rmd"}
 
