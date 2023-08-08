@@ -29,3 +29,7 @@
   /* fixed issue where code output had a lot of whitespace. Solved from here: https://github.com/rstudio/pagedown/issues/233#issuecomment-879045818 */
 }
 
+.tutorial-exercise-output > p > img {
+  /* fixes issue where ggplot was scrolling off the page. Now fits to screen */
+  width: 100% !important;
+}

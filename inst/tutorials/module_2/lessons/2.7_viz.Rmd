@@ -2,184 +2,1023 @@
 title: "Data Visualization"
 ---
 
-### Overview
+```{r prepare-employee-data}
+employee_data <- readr::read_csv(here::here("inst/extdata/ggplot_lesson_data.csv"))
+```
 
-Data visualization is a crucial component of any data analysis, particularly in applied settings. Good visualizations can aid in understanding complex data and can effectively communicate important findings to stakeholders who may not have a deep understanding of statistical methodologies. The goal of data visualization is to display data in a clear and insightful way, revealing the patterns, trends, and insights that numerical summaries might miss.  
+Welcome to the Data Visualization lesson! We will be exploring the art of visualizing data using R and various packages. These skills will be critical for the next lesson on exploratory data analysis.\
 
-For data visualization in R, one of the most powerful tools at our disposal is `ggplot2`, a part of the `tidyverse` suite of packages. Its power comes from its flexibility and from its coherent philosophy of graphics, which allows you to compose plots by combining independent components.  
+For this lesson, we will need the following packages: `tidyverse`, `lubridate`, `ggplot2`, `stringr`, `scales`, `RColorBrewer`, `ggtext`, and `janitor`. If you haven't installed these packages yet, please do so using the command `install.packages()`.\
+
+### Introduction
+
+Data visualization is a crucial component of any data analysis, particularly in applied settings. Good visualizations can aid in understanding complex data and can effectively communicate important findings to stakeholders who may not have a deep understanding of statistical methodologies. The goal of data visualization is to display data in a clear and insightful way, revealing the patterns, trends, and insights that numerical summaries might miss.\
+
+For data visualization in R, one of the most powerful tools at our disposal is `ggplot2`, a part of the `tidyverse` suite of packages. Its power comes from its flexibility and from its coherent philosophy of graphics, which allows you to compose plots by combining independent components.\
+
+
+### Inspiring ggplot2 Examples
+
+Before we begin, let's take a look at what you can achieve with effective data visualizations. These examples will show you the power of `ggplot2` and hopefully get you excited about the possibilities.  
+
+First, let's consider a complex survey dataset. Imagine you have conducted an employee survey that includes several categories such as work environment, culture, career development, and more. With the right visualization, you can not only represent this multi-dimensional data in an easily digestible format but also highlight key aspects that require immediate attention.  
+
+<figure>
+  <img src="images/ggplot_example_feedback.png" width="100%">
+  <figcaption class="figcap">Employee Survey Feedback</figcaption>
+</figure>
+
+<br>
+
+The second example showcases an annotated line graph. Line graphs are often used to represent changes over time, but by adding annotations, you can highlight specific points in time or changes that are of interest. This can be extremely useful when presenting your findings to stakeholders who might not have the time or expertise to interpret raw data.  
+
+<figure>
+  <img src="images/ggplot_example_linegraph.png" width="100%">
+  <figcaption class="figcap">Advanced Linegraph</figcaption>
+</figure>
+
+<br>
+
+These examples are just a glimpse of what you can achieve with data visualization in R. As we move through this lesson, you will acquire the skills to create such advanced visualizations and more.
+
+Now that we've seen what's possible, let's start building our foundation!  
+
+
+### Working with ggplot2
+The mechanics of `ggplot2` is based on a philosophy called "the Grammar of Graphics". This philosophy breaks graphics into different components. Here are the key components that make up a ggplot:  
+
+- **Data**: The default raw dataset and aesthetic mappings (such as position, size, shape, color, fill, linetype, etc.) for variables that you want to plot.  
+- **One or more Layers**: Each layer is composed of a geometric object (geom), a statistical transformation, a position adjustment, and optionally, a dataset and aesthetic mappings.  
+- **Scales**: These map values in the data space to values in the aesthetic space.  
+- **Coordinate system**: Describes how data coordinates are mapped to the plane of the graphic.  
+- **Facets**: To create multiple similar plots by splitting data by a factor variable.  
+
+
+### The ggplot() Function 
+The `ggplot()` function is the used to create the initial plot. When dealing with more complex datasets and more sophisticated visualizations, understanding the generalized structure of a ggplot2 function call is essential. The `ggplot()` function can seem a bit daunting at first. But with a little bit of practice, creating plots will become a piece of cake!  
+
+So, let's look at a generic structure of `ggplot()` calls:  
 
 ```{r, eval=FALSE}
-# Install and load ggplot2
-install.packages("ggplot2")
-library(ggplot2)
+# Basic ggplot() structure:
+ggplot(data = <DATA>) +      
+  <GEOM_FUNCTION>(mapping = aes(<MAPPING>),   
+                 <arg_1 = value_1, ..., arg_n = value_n>) + 
+  ...
+  <FACET_FUNCTION> + 
+  <THEMING_FUNCTIONS> 
 ```
 
+###
+Let's unpack what each part of this structure means:  
 
-### ggplot2: Aesthetics and Layers
+- `<DATA>`: This is the dataset you are going to use for the plot. It should be in a dataframe or a tibble format.  
+- `<GEOM_FUNCTION>`: This is the function that tells `ggplot()` what geometric object to use to represent the data. It could be points (as in a scatter plot), lines, bars, etc. The mapping argument to this function, specified within `aes(<MAPPING>)`, determines how data values get translated to visual properties of the geom.  
+- `<arg_1 = value_1, ..., arg_n = value_n>`: These are optional arguments that you can set to customize the appearance of the geom. For example, you might set color to a fixed value here, to color all points the same color.  
+- `<FACET_FUNCTION>`: This is optional, and you can use it to split your plot into multiple subplots based on one or more variables.  
+- `<THEMING_FUNCTIONS>`: This encompasses all the functions that help make your plot look good! This could be adjusting colors, adding labels or titles, setting themes, or changing coordinate systems.  
 
-`ggplot2` operates on the principle of adding different layers to a plot. The first layer (the base layer) defines the plot in terms of its aesthetics. Here's a simple example:  
 
-```{r}
-# A simple scatter plot with 'mpg' dataset
-ggplot(mpg, aes(x=displ, y=hwy)) + 
+###
+We will cover each plot component (and more!) as you progress through this lesson.  
+
+Remember, while this is the generalized structure, each plot you create will have its unique requirements and adjustments, so don't worry if your code doesn't perfectly fit this structure every time. The real power of `ggplot2` is its flexibility, so don't hesitate to experiment and see what works best for your specific visualization needs!  
+
+
+### Geoms
+Geoms are the geometric objects that represent data points in our plots. There are many geometric objects in `ggplot2` and you can access them by calling the names of these functions which have the prefix `geom_`. The name of a geom typically describes its function. For example, `geom_point()` creates a scatterplot, `geom_bar()` creates a bar chart, `geom_histogram()` creates a histogram, `geom_line()` creates a line plot, `geom_text()` lets you overlay a plot with text, and so on.
+
+We'll start with a simple example using the `employee_data` dataset. Type `employee_data` in the codeblock below to view the dataset:  
+
+```{r view-ggplot-data, exercise = TRUE, exercise.setup = "prepare-employee-data", fig.asp = 1}
+
+```
+
+```{r view-ggplot-data-solution}
+employee_data
+```
+
+###
+Say we want to plot a scatter plot of `salary` against `age`. Run the codeblock to see what the resulting plot would look like:  
+
+```{r geom-scatter, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = salary)) +
   geom_point()
 ```
 
+###
+In the plot above, we created a scatter plot of `salary` against `age`. The `aes()` function is used to map variables in your data to visual properties of the `ggplot` (aesthetics). In this case, `age` is mapped to the x-axis, and `salary` is mapped to the y-axis. The `geom_point()` function then adds a layer of points to the plot.  
 
-In the code above, `ggplot()` initializes the plotting system. Inside `ggplot()`, we pass the dataset `mpg` (included in the ggplot2 package) and define an aesthetic mapping (`aes()`) with `displ` (engine size) on the x-axis and `hwy` (highway miles per gallon) on the y-axis. The `+` sign then adds a layer to this base plot: `geom_point()` adds a layer of points, creating a scatter plot.  
+###
+Notice with the above plot that data points look a bit clumped together. This is known as **overplotting** and don't always look good.  
+
+An easy way to deal with this is using `geom_jitter()` instead of `geom_point()`. Replace `geom_point()` with `geom_jitter()` in the codeblock:  
+
+```{r geom-jitter, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = salary)) +
+  ___
+```
+
+###
+**Much better looking!**\
+`geom_jitter()` spreads the data points so that they are not overlapping each other, making for a more aesthetically pleasing plot.  
 
 
-You can map other variables to different aesthetics like color, shape, and size. For example:  
+### Aesthetics
+**Aesthetics** refers to the visual properties of the objects in your plot. These properties (or attributes) can include things like size, shape, color, and position along the x and y axes, among others. When you map an aesthetic to a variable in your dataset, you're instructing `ggplot` to represent that variable with that aesthetic property.  
 
-```{r}
-# Mapping class to color
-ggplot(mpg, aes(x=displ, y=hwy, color=class)) + 
-  geom_point()
+You can set these aesthetic properties to fixed values. Going back to our previous example, we can add a fixed value of "red" to the `color` attribute to the `geom_jitter()`. Add `color = "red"` to the plot and then view the changes:  
+
+```{r aes-fixed, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = salary)) +
+  geom_jitter(___)
+```
+
+```{r aes-fixed-solution}
+ggplot(employee_data, aes(x = age, y = salary)) +
+  geom_jitter(color = "red")
+```
+
+###
+**Nice!**\
+Setting the fixed value "red" changed the color of the data points. One important thing to note. Setting visual properties manually (outside of the `aes()` function) does not tell us anything about our data. It only changes the appearance of the plot.  
+
+###
+This is what leads us to the real power of `ggplot2`: mapping aesthetics to variables in your data. When you do this, the aesthetic property varies based on the data values, giving a visual representation of these variations.  
+
+Lets see this in action! Add a `color` attribute to `aes()` and set the value to "department". Run the code to view the change:  
+
+```{r aes-map, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = salary, ___)) +
+  geom_jitter()
+```
+
+```{r aes-map-solution}
+ggplot(employee_data, aes(x = age, y = salary, color = department)) +
+  geom_jitter()
 ```
 
 
-Here, the `color=class` inside `aes()` maps the color of the points to the variable `class`, so each class has a different color.  
+###
+**Beautiful!**\  
+The data point colors are based on the employee's department. Mapping "department" to the color aesthetic automatically grouped the data and draws a legend (on the right side by default) displaying the groups and their color codes.   
+
+###
+So, to clarify the main difference between aesthetic mapping and a fixed aesthetic property:  
+
+- An **aesthetic mapping** is created with the `aes()` function and links an aesthetic to a variable. This results in the aesthetic varying in accordance to the variable's values.  
+- A `fixed aesthetic property` sets the aesthetic to a specific value, regardless of the data.  
+
+It's important to remember that when you're mapping an aesthetic, the aesthetic argument needs to be *inside* the `aes()` function. When you're setting a fixed aesthetic property, the argument should be *outside* the `aes()` function.  
 
 
-### Visualizing Numerical and Categorical Data
+###
+**Global vs Geom Specific Aesthetics**
+Notice that in our earlier plot example, we specified `aes()` on the *first line* as an argument in the `ggplot` function. Specifying `aes()` on the first line sets a *global aesthetic*. Setting a global aesthetic means that mappings will apply to all geoms in your plot. That is, the aesthetic properties (i.e., color, size, etc.) will be inherited by all the geoms. On the other hand, mappings to individual geoms apply aesthetics to that geom alone. Note that the specific aesthetics you can use for a plot depend on the geom you use to represent the data.   
 
-Different types of plots are suited to different types of data. For numerical data, histograms and boxplots are commonly used. For categorical data, bar plots and dot plots can be informative. Here are some examples:  
 
-```{r}
-# Histogram
-ggplot(mpg, aes(x=hwy)) + 
-  geom_histogram(binwidth=5)
+### Layers
 
-# Boxplot
-ggplot(mpg, aes(x=class, y=hwy)) + 
-  geom_boxplot()
+`ggplot2` operates on the principle of adding different **layers** on top of each other to a plot. Each layer can be added to the previous layer using the plus `+` sign. The first layer (the base layer) defines the plot in terms of its aesthetics. You are already familiar with the most basic layer: the geom layer. While we won't go to deep into the theory behind layers, we do want to give you a brief overview into this critical concept.  
 
-# Bar Plot
-ggplot(mpg, aes(x=class)) + 
-  geom_bar()
 
-# Dot Plot
-ggplot(mpg, aes(x=class, y=hwy)) + 
-  geom_dotplot(binaxis='y', stackdir='center')
+### The Inner Workings of Layers
+You have seen how `ggplot2` functions, like `geom_jitter()`, help create layers in our visualizations. But did you know that these geom functions are essentially just simplified interfaces for a more comprehensive function? Yep, they are shortcuts for the function `layer()`, which provides us with a more granular control over the specifics of our layers.  
+
+Let's take a deeper look at this by examining a `layer()` call equivalent to our previous `geom_jitter()`:  
+
+```{r, eval=FALSE}
+ggplot(employee_data, aes(x = age, y = salary, color = department)) +
+  layer( 
+  mapping = NULL, 
+  data = NULL,
+  geom = "jitter", 
+  stat = "identity",
+  position = "identity"
+)
+```
+
+###
+Quite wordy, isn't it? However, the advantage is that it explicitly spells out each component of our layer:  
+
+- **mapping**: Here we declare our aesthetic mappings. Think of this as the rules that guide how our data gets translated into visual elements. When set to NULL, the mapping from the initial `ggplot()` call is used.  
+- **data**: This specifies the dataset for this layer. If set to NULL, the data provided in the `ggplot()` call will be used.  
+- **geom**: This determines the geometric object that visually represents our data. The choice of geom influences how we interpret the data on the plot.  
+  - **additional arguments**: Some geoms also allow us to specify additional parameters. If we supply aesthetics like color as a parameter, they won't be scaled, giving us more control over the appearance of the plot.  
+- **stat**: This refers to the statistical transformation used. These transformations help summarize the data in useful ways. For example, in histograms, `stat` counts the number of observations in each group. To keep the data as is, we use the “identity” stat.  
+- **position**: This dictates how overlapping elements are handled. If several points occupy the same position, should they be stacked, dodged or jittered?  
+
+
+###
+You're probably thinking - "Wow, that's a lot to keep in mind!" Indeed, although understanding the `layer()` function can provide a more concrete mental model of the layering concept in `ggplot2`, in practice, we rarely use the `layer()` call directly. It's much easier and quicker to use the `geom_` shortcuts, like `geom_jitter(mapping, data, ...)`, which are equivalent to `layer(mapping, data, geom = "point", ...)`.  
+
+###
+Here is a quick example of stacking geom layers.  
+
+Suppose we are interested in looking at the relationship between the age and salaries for our employees, but we want to visualize this relationship differently for different departments. We might decide to use `geom_jitter()` to plot the individual observations and `geom_smooth()` to add a smoothed line representing the trend.  
+
+Run the code to view the plot:  
+
+```{r stack-layers, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = salary)) +
+  geom_jitter(aes(color = department), alpha = 0.4) +
+  geom_smooth(method = "lm", aes(color = department), se = FALSE, linetype = "dashed") +
+  theme_minimal()
+```
+
+###
+In this plot, each `department` has its own color. The points represent individual employees, and the dashed lines show the trend of `salary` against `age` for each department.  
+
+The stacking of layers allows us to visualize more complex patterns within our data. Notice that we can use different aesthetic mappings for each layer. This enables us to further differentiate the data points based on their attributes, thereby enriching the information conveyed by our visualization.  
+
+Keep in mind that the order in which we stack layers matters. The layers added later will be on top of those added earlier. Therefore, plan your layers accordingly.  
+
+###
+Remember, this is a high-level overview on `ggplot2` layers. If you're interested in delving more into the mechanics of layers in ggplot2, you can check out this comprehensive resource on [ggplot2 layers](https://ggplot2-book.org/layers.html). For now, let's continue with our exploration of the fascinating world of data visualization!  
+
+
+### Facets
+Facets are a way to create multiple small plots, each displaying a different subset of the data. By splitting the data into subsets and presenting each subset in a separate panel, faceting allows us to compare these subsets more directly.  
+
+**The Two Types of Faceting**  
+There are two primary forms of faceting: grid and wrapped. The grid type is useful when we have two categorical variables, and we want to create a matrix of plots. However, in most cases, we are working with a single variable that has many levels. In these situations, we will use a wrapped facet, which is arguably the most practical form of faceting.  
+
+###
+`Working with **facet_wrap()**`  
+To implement faceting in our plots, we add a faceting specification with the `facet_wrap()` function. This function takes as an argument the name of a variable, preceded by a `~`.  
+
+Consider the following `ggplot` with our `employee_data`. Try adding a `facet_wrap()` function and use `department` as the variable argument. If you need help, type `?facet_wrap` in your console to read the documentation and view examples.  
+
+```{r facet-wrap, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = job_satisfaction, color = department)) +
+  geom_jitter() +
+  ___
+```
+
+```{r facet-wrap-solution, exercise.reveal_solution = FALSE}
+ggplot(employee_data, aes(x = age, y = job_satisfaction, color = department)) +
+  geom_jitter() +
+  facet_wrap(~department)
+```
+
+###
+**Great work!**\  
+In the above example, the `facet_wrap()` function created separate scatterplot for each department in our employee dataset.  
+
+
+### Labeling
+Labels are a key element of readable plots. The `labs()` function allows us to add or modify labels on our plot. We can specify the plot's title, the subtitle, captions, as well as the x and y labels.\
+
+Add a `labs()` layer after `geom_smooth()`. Type the following argument/value pairs for `labs()`: `x = "Age"`, `y = "Job Satisfaction"`, `title = "The Relationship Between Age and Job Satisfaction"`, `subtitle = "Grouped by Department"`, `color = "Department"`. *Remember*, each argument needs to be separated by a comma.\
+
+```{r labeling, exercise = TRUE, exercise.setup = "prepare-employee-data"}
+ggplot(employee_data, aes(x = age, y = job_satisfaction, color = department)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", aes(color = department), se = FALSE, linetype = "dashed") +
+  labs(
+    ___,
+    ___,
+    ___,
+    ___,
+    ___
+  )
+```
+
+
+```{r labeling-hint}
+ggplot(employee_data, aes(x = age, y = job_satisfaction, color = department)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", aes(color = department), se = FALSE, linetype = "dashed") +
+  labs(
+    x = "Age",
+    ___,
+    ___,
+    ___,
+    ___
+  )
+```
+
+```{r labeling-solution}
+ggplot(employee_data, aes(x = age, y = job_satisfaction, color = department)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", aes(color = department), se = FALSE, linetype = "dashed") +
+  labs(
+    x = "Age",
+    y = "Job Satisfaction",
+    title = "The Relationship Between Age and Job Satisfaction",
+    subtitle = "Grouped by Department",
+    color = "Department" 
+  )
+```
+
+###
+**That's gorgeous!**\
+Now, our plot has a title, a subtitle, and proper x, y, and legend labels. It's important to label your graphs well so that the readers can easily understand them.  
+
+###
+The beauty of ggplot2 lies in its versatility. Whether you're dealing with numerical or categorical data, you can create meaningful, insightful visualizations.  
+
+Now that you've learned the fundamentals of `ggplot2` such as geoms, layers, aesthetics, facets and more, the following sections will tie in your knowledge of transforming data with `dplyr` to give you more control over your visualizations.
+
+
+### Data Cleaning and Preparation
+Our first step in deepening our exploration of visualizations for continuous and categorical variables is to prepare our data. For this, we'll use a dataset containing Human Resources (HR) data from a company. This dataset includes different attributes related to employees' professional and personal life such as monthly income, years at the company, department, job satisfaction, and more.  
+
+To start, we'll read in our CSV file using the `readr` package's `read_csv()` function, and then we'll tidy up the column names using the `janitor` package's `clean_names()` function. Also, we'll convert any character variables to factors to ensure they are properly treated as categorical variables. Remember that you can use the `?help` documentation to read up on functions and how to use them.  
+
+Lets begin by taking a quick look at the `hr_data` dataset. View it using the codeblock:  
+
+```{r prepare-hr-data-1}
+hr_data <- readr::read_csv(here::here("inst/extdata/HR-Employee-Attrition-kaggle.csv"))
+hr_data <- hr_data |> dplyr::select(EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome, TotalWorkingYears, YearsAtCompany, JobSatisfaction)
+```
+
+```{r view-hr-data, exercise=TRUE, exercise.setup="prepare-hr-data-1"}
+
+```
+
+```{r view-hr-data-solution}
+hr_data
+```
+
+###
+As you can see, the `hr_data` dataset includes different attributes related to employees' professional and personal life such as monthly income, years at the company, department, and job satisfaction.  
+
+###
+
+Before plotting or conducting any form of analysis, it is best practice to transform variable names into lowercase with an underscore (`_`) separating words. The `janitor` package's `clean_names()` function makes this process a piece of cake.  
+
+In the codeblock, create a pipeline (`|>`) on the `hr_data` that calls `janitor::clean_names()`. Save the pipeline to `hr_data` to overwrite the current variable names with the cleaned variable names. Print `hr_data` when you are done to see the result:  
+
+```{r clean-hr-data-names, exercise = TRUE, exercise.setup = "prepare-hr-data-1"}
+
+```
+
+```{r clean-hr-data-names-hint}
+hr_data <- hr_data |> 
+  ___
+
+hr_data
+```
+
+```{r clean-hr-data-names-solution, exercise.reveal_solution = FALSE}
+hr_data <- hr_data |> 
+  janitor::clean_names()
+
+hr_data
+```
+
+###
+**Wonderful!**\ 
+Now you have cleaner variables names to work with.  
+
+###
+Next, we will transform our character variables to factors. Now, you might wonder why we don't just keep categorical variables as character strings. The main reason is that `ggplot2` treats character vectors and factors differently. By converting to factors, `ggplot2` can better understand that a variable is categorical. This means `ggplot2` will then automatically adjust the plot settings to best suit a categorical variable (e.g., using a discrete scale for a bar plot rather than a continuous one). Plus, with factors, you have more control over your plots. For example, you can easily change the order of levels, group data by levels, or change level labels.  
+
+You will see examples of how to use factors with ggplot, but for now, let's convert our character variables to factors!  
+
+###
+There are a few different ways to transform one data type to another. The best method depends on what you are trying to achieve. In our case, since we want to transform **ALL** character variables, the most efficient method is by using `dplyr`'s `across()` function. The syntax would look something like the following:  
+
+```{r eval=FALSE}
+data |> 
+  mutate(across(column_s, function_to_apply))
+```
+
+###
+The `across()` function is used within `mutate()` to apply a function to multiple columns at once.  
+
+The `column_s` argument specifies the columns to which the function will be applied. This can be a character vector of column names, a numeric vector of column positions, or a logical vector that indicates which columns to select. What's neat is that you can also use `dplyr` helper functions like `where()`, `starts_with()`, `ends_with()`, `contains()`, etc., to select columns based on certain conditions.  
+
+The `function_to_apply` argument specifies the function that you want to apply to each of the selected columns. The function can be any function that takes a vector input and returns a vector output. You could use base R functions (i.e., `mean()`, `sum()`, `factor()`, etc.), functions from other packages, or even your own custom function. **Note** that when you specify a function, you do so *without* the parentheses (i.e., so just type `factor` instead of `factor()`).  
+
+###
+Let's give it a shot!  
+
+For this case, create a pipeline (`|>`) on the `hr_data` that calls mutates across all columns **WHERE** column names `is.character()`. You then want to apply the `factor` function. Save the pipeline to `hr_data` to overwrite the current variable names with the cleaned variable names. Print `hr_data` when you are done to see the result:  
+
+```{r prepare-hr-data-2}
+hr_data <- readr::read_csv(here::here("inst/extdata/HR-Employee-Attrition-kaggle.csv"))
+hr_data <- hr_data |> 
+  dplyr::select(EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome, TotalWorkingYears, YearsAtCompany, JobSatisfaction) |> 
+  janitor::clean_names()
+```
+
+```{r convert-hr-data-to-factors, exercise = TRUE, exercise.setup = "prepare-hr-data-2"}
+
+```
+
+```{r convert-hr-data-to-factors-hint-1}
+hr_data <- ___ |> 
+  ___(___(where(___), ___))
+
+hr_data
+```
+
+```{r convert-hr-data-to-factors-hint-2}
+hr_data <- hr_data |> 
+  mutate(___(where(is.character), ___))
+
+hr_data
+```
+
+```{r convert-hr-data-to-factors-solution, exercise.reveal_solution = FALSE}
+hr_data <- hr_data |> 
+  mutate(across(where(is.character), factor))
+
+hr_data
+```
+
+
+###
+**Awesome job!**\
+You can see that the type of variable shown underneath the variable name has changed from character (`<chr>`) to factor (`<fct>`).  
+
+
+### Plotting Continuous and Categorical Variables
+With our data now prepped, we can start by exploring the distribution of continuous variables. As an example, we'll examine `monthly_income` using histograms and density plots. We'll also show how adding a bit of customization into our plots can go a long way to make them more readable and visually appealing.  
+
+### Histogram and Density Plot
+Just how you used the pipe (`|>`) when prepping our `hr_data`, you can also add the `ggplot()` function to the pipeline. Since `ggplot()` to the pipeline makes the function silently inherit `hr_data` as it's first argument, you don't need to worry about typing `hr_data` in `ggplot()`.   
+
+In the codeblock, create a pipeline (`|>`) on the `hr_data` that calls `ggplot()`. In `ggplot()`, use `aes()` to map `monthly_income` to the `x` argument. Then use `+` to add the `geom_histogram()` to the `ggplot()`. Run the code when you are done to see the result:  
+
+```{r prepare-hr-data-3}
+hr_data <- readr::read_csv(here::here("inst/extdata/HR-Employee-Attrition-kaggle.csv"))
+hr_data <- hr_data |> 
+  dplyr::select(EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome, TotalWorkingYears, YearsAtCompany, JobSatisfaction) |> 
+  janitor::clean_names() |> 
+  mutate(across(where(is.character), factor))
+```
+
+```{r hist-no-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+
+```
+
+```{r hist-no-theme-hint-1}
+hr_data |> 
+  ___(aes(x = ___)) +
+    ___()
+```
+
+```{r hist-no-theme-hint-2}
+hr_data |> 
+  ggplot(aes(x = ___)) +
+    geom_histogram()
+```
+
+```{r hist-no-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  ggplot(aes(x = monthly_income)) +
+    geom_histogram()
+```
+
+###
+This plot looks a bit bland. Let's add some customizations to spice it up!  
+
+In `aes()`, map the `department` variable to the `fill` argument. Swap out `geom_histogram()` with `geom_density()`. In `geom_density()`, add the `alpha` argument and set its value to `0.3`. Finally, add another layer to the plot: `theme_minimal()`. Run the code to view the result:  
+
+```{r hist-with-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+hr_data |> 
+  ggplot(aes(x = monthly_income)) +
+    geom_histogram()
+```
+
+```{r hist-with-theme-hint-1}
+hr_data |> 
+  ggplot(aes(x = monthly_income, ___ = ___)) +
+    geom_density(___ = ___) +
+    ___()
+```
+
+```{r hist-with-theme-hint-2}
+hr_data |> 
+  ggplot(aes(x = monthly_income, fill = ___)) +
+    geom_density(___ = 0.3) +
+    theme_minimal()
+```
+
+```{r hist-with-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  ggplot(aes(x = monthly_income, fill = department)) +
+    geom_density(alpha = 0.3) +
+    theme_minimal()
+```
+
+###
+**Well done!**  
+
+In the plot above, the `fill = department` inside `aes()` specifies different colors for each department, helping to distinguish between the income distribution of different departments. `geom_density()` is a smoothed out version of a histogram, and setting `alpha = 0.3` creates a density plot with semi-transparent colors, allowing overlaps to be visible.  
+
+
+### Bar Plot with Text
+Bar plots are one of the most common ways to visualize data. In this section, you will create a fairly basic bar plot showing the distribution of employees by department.\
+
+In the codeblock, create a pipeline (`|>`) on the `hr_data` and call the `count()` function on the `department` variable. Run the code to quickly view what the data you will be plotting now looks like. Next, pipe a `ggplot()` and use `aes()` to map `department` to the `x` argument and `n` to the `y` argument. Then use `+` to add the `geom_bar(stat = "identity")` to the `ggplot()`. Run the code when you are done to see the result:\
+
+```{r bar-no-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+
+```
+
+```{r bar-no-theme-hint-1}
+hr_data |> 
+  ___(___) |> 
+  ___(aes(x = ___, y = ___)) +
+    ___
+```
+
+```{r bar-no-theme-hint-2}
+hr_data |> 
+  count(___) |> 
+  ggplot(aes(x = ___, y = n)) +
+    geom_bar(stat = "identity")
+```
+
+```{r bar-no-theme, exercise.reveal_solution = FALSE}
+hr_data |> 
+  count(department) |> 
+  ggplot(aes(x = department, y = n)) +
+    geom_bar(stat = "identity")
+```
+
+###
+This plot could use some "tender love and care", so let's add some customizations.\
+
+Update the plot `aes()` by mapping the `department` variable to the `fill` argument. Next, add a `geom_text()` layer and add an `aes()` as an argument and within it sets the value of `label` to `paste("n = ", n)`. The next argument in `geom_text()` should be `vjust` and set its value to `-0.5`. Next, add a `labs()` layer and set `y` to "Employees Count", `fill` to "Department" (this argument changes the text of the legend), and `title` to "Distribution of employees by department". Add the `theme_minimal()` layer as this plot's base theme. Finally, expand on this theme by adding the `theme()` layer and add the following arguments and values:\
+- `plot.margin = margin(t = .5, r = .5, b = .5, l = .5, unit = "cm")`\
+- `panel.grid.major = element_blank()`\
+- `axis.title.x = element_blank()`\
+- `axis.text.x = element_blank()`\
+
+Run the code to view the result:\
+
+```{r bar-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+hr_data |> 
+  count(department) |> 
+  ggplot(aes(x = department, y = n, ___)) +
+    geom_bar(stat = "identity") +
+
+```
+
+```{r bar-theme-hint-1}
+hr_data |> 
+  count(department) |> 
+  ggplot(aes(x = department, y = n, fill = ___)) + 
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = ___), vjust = ___) +
+    labs(
+      ___,
+      ___,
+      ___
+    ) +
+    ___() +
+    theme(
+      ___,
+      ___,
+      ___,
+      ___
+    )
+```
+
+```{r bar-theme-hint-2}
+hr_data |> 
+  count(department) |> 
+  ggplot(aes(x = department, y = n, fill = department)) + 
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = paste("n = ", n)), vjust = -0.5) +
+    labs(
+      y = "Employees Count",
+      fill = "Department",
+      ___ = ___
+    ) +
+    theme_minimal() +
+    theme(
+      plot.margin = margin(t = .5, r = .5, b = .5, l = .5, unit = "cm"),
+      panel.grid.major = element_blank(),
+      axis.title.x = element_blank(),
+      axis.text.x = element_blank()
+    )
+```
+
+```{r bar-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  count(department) |> 
+  ggplot(aes(x = department, y = n, fill = department)) + 
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = paste("n = ", n)), vjust = -0.5) +
+    labs(
+      y = "Employees Count",
+      fill = "Department",
+      title = "Distribution of employees by department"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.margin = margin(t = .5, r = .5, b = .5, l = .5, unit = "cm"),
+      panel.grid.major = element_blank(),
+      axis.title.x = element_blank(),
+      axis.text.x = element_blank()
+    )
+```
+
+###
+**Great job!**\
+For the plot above, we first pipe `hr_data` into the `count()` function, which groups the data by the `department` column and counts the number of occurrences of each department. We updated the `ggplot()` function to `fill` the bars with colors based on each department. We then add a `geom_text()` layer to display the count value above each bar. We used `labs` to adjust the y-axis and legend labels and add a title to the plot. Finally, we set our plot to use `theme_minimal()` as its base theme, and then we further customized it by adding some margins around the plot and removing the major gridlines and also removing the department names from the x-axis since those are already included in the legend.\
+
+The final result of our customizations is a better looking and more informative bar plot.\
+
+
+### Trend Line Plot 
+Line plots are particularly useful when we want to see the trend of a variable over time. In this section, you will create a line plot showing the trend of average annual income over the years of hiring.  
+
+Before we can plot a trend line plot, we need to create two new variables: `annual_income` and `hire_year`. In the codeblock, create a pipeline on the `hr_data` dataset. Use `mutate()` to create a variable called `annual_income` that multiplies the `monthly_income` column by 12, and then create a variable called `hire_year` that subtracts `years_at_company` from 2023. Save the pipeline to `hr_data` to overwrite the current data and then print `hr_data` to see the result:  
+
+```{r add-trend-vars, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+
+```
+
+```{r add-trend-vars-hint-1}
+hr_data <- ___ |> 
+  ___(
+    ___ = ___ * 12, 
+    ___ = 2023 - ___ 
+  )
+
+___
+```
+
+```{r add-trend-vars-hint-2}
+hr_data <- hr_data |> 
+  mutate(
+    ___ = monthly_income * 12, 
+    ___ = 2023 - years_at_company 
+  ) 
+
+hr_data
+```
+
+```{r add-trend-vars-solution, exercise.reveal_solution = FALSE}
+hr_data <- hr_data |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) 
+
+hr_data
+```
+
+
+###
+Good job! Just two more steps and your data will be ready for plotting.  
+
+Build on the previous code by adding to the pipeline. Use `group_by()` to group the data by `hire_year`. Add a `summarise()` to create a variable called `avg_annual_income` that calculates the mean `annual_income` of each group. Save the pipeline to `hr_data` to overwrite the current data and then print `hr_data` to see the result:\
+
+```{r add-another-trend-var, exercise = TRUE, exercise.setup = "prepare-hr-data-3"}
+hr_data <- hr_data |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) 
+
+hr_data
+```
+
+```{r add-another-trend-var-hint-1}
+hr_data <- hr_data |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) ___ 
+  ___(___) |> 
+  ___(___ = mean(___))
+
+hr_data
+```
+
+```{r add-another-trend-var-hint-2}
+hr_data <- hr_data |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) |> 
+  group_by(___) |> 
+  summarise(avg_annual_income = mean(___))
+
+hr_data
+```
+
+```{r add-another-trend-var-solution, exercise.reveal_solution = FALSE}
+hr_data <- hr_data |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) |> 
+  group_by(hire_year) |> 
+  summarise(avg_annual_income = mean(annual_income))
+
+hr_data
+```
+
+###
+Masterclass! You are getting the hang of it! Now we can finally create our plot.  
+
+
+###
+In the codeblock, create a pipeline (`|>`) on the `hr_data` that calls `ggplot()`. In `ggplot()`, use `aes()` to map `hire_year` to the `x` argument and `avg_annual_income` to the `y` argument. Then add the `geom_line()` followed by the `geom_point()` geoms to the `ggplot()`. Run the code when you are done to see the result:\
+
+```{r prepare-hr-data-4}
+hr_data <- readr::read_csv(here::here("inst/extdata/HR-Employee-Attrition-kaggle.csv"))
+hr_data <- hr_data |> 
+  dplyr::select(EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome, TotalWorkingYears, YearsAtCompany, JobSatisfaction) |> 
+  janitor::clean_names() |> 
+  mutate(across(where(is.character), factor)) |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  ) |> 
+  group_by(hire_year) |> 
+  summarise(avg_annual_income = mean(annual_income))
+```
+
+```{r trend-no-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-4"}
+
+```
+
+```{r trend-no-theme-hint-1}
+hr_data |> 
+  ggplot(___(x = ___, y = ___)) +
+    ___() +
+    ___()
+```
+
+```{r trend-no-theme-hint-2}
+hr_data |> 
+  ggplot(aes(x = ___, y = ___)) +
+    geom_line() +
+    geom_point()
+```
+
+```{r trend-no-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  ggplot(aes(x = hire_year, y = avg_annual_income)) +
+    geom_line() +
+    geom_point()
+```
+
+
+###
+Great job! Now lets spruce up that trend plot with some customizations and theming.\
+
+For both `geom_line()` and `geom_point()`, add the `color` argument and set its value to `"blue"`. Then add a `scale_y_continuous()` layer and set its `labels` argument value to `scales::dollar_format()`. Then add a `scale_x_continuous()` layer and set its `breaks` argument value to `seq(1980, 2020, 5)`. The add a `labs()` and set `x = "Hire Year"`, `y = "Average Salary"`, and `title = "Average Annual Salary over Hire Years"`. Next add the `theme_minimal()` layer. We want to make a few adjustments to `theme_minimal()`, so add another layer called `theme()` and set the `panel.grid.major` argument to `element_blank()` and the `axis.line` argument to `element_line(size = .2)`. Run the code to view the result:\
+
+```{r trend-with-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-4"}
+hr_data |> 
+  ggplot(aes(x = hire_year, y = avg_annual_income)) +
+    geom_line() +
+    geom_point()
+```
+
+```{r trend-with-theme-hint-1}
+hr_data |> 
+  ggplot(aes(x = hire_year, y = avg_annual_income)) +
+    geom_line(___) +
+    geom_point(___) +
+    ___ +
+    ___(breaks = seq(1980, 2020, 5)) +
+    labs(
+      ___,
+      ___,
+      ___
+    ) +
+    theme_minimal() +
+    ___(
+      ___,
+      ___
+    )
+```
+
+```{r trend-with-theme-hint-2}
+hr_data |> 
+  ggplot(aes(x = hire_year, y = avg_annual_income)) +
+    geom_line(color = "blue") +
+    geom_point(___) +
+    scale_y_continuous(___ = scales::dollar_format()) +
+    scale_x_continuous(___ = seq(1980, 2020, 5)) +
+    labs(
+      x = "Hire Year",
+      y = ___,
+      title = ___
+    ) +
+    theme_minimal() +
+    theme(
+      panel.grid.major = element_blank(),
+      axis.line = element_line(___)
+    )
+```
+
+```{r trend-with-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  ggplot(aes(x = hire_year, y = avg_annual_income)) +
+    geom_line(color = "blue") +
+    geom_point(color = "blue") +
+    scale_y_continuous(labels = scales::dollar_format()) +
+    scale_x_continuous(breaks = seq(1980, 2020, 5)) +
+    labs(
+      x = "Hire Year",
+      y = "Average Salary",
+      title = "Average Annual Salary over Hire Years"
+    ) +
+    theme_minimal() +
+    theme(
+      panel.grid.major = element_blank(),
+      axis.line = element_line(size = .2)
+    )
+```
+
+
+###
+**Super!**\
+
+We made our plot pop by coloring the lines and points <span style="color: blue">blue</span>. Using `scale_y_continuous`, we converted the average salary values to dollar sign format. The `breaks` argument in `scale_x_continuous` specified the years we wanted on our x-axis and to space them out by `5` years. We then used `labs()` to capitalize the x and y-axis labels and add a title to the plot. Final, we used `theme_minimal()` as our base theme and made additional adjustments using `theme()` to remove the major gridline and add a thin line on the x and y-axis.\
+
+
+###
+For the last continuous plot example, you will plot the average salary of employees in the Research & Development Department.\
+
+
+In the codeblock, create a pipeline (`|>`) on the `hr_data`. Use `filter()` to return rows where the `department` is "Research & Development". Next, call `ggplot()` and use `aes()` to map `total_working_years` to the `x` argument and `annual_income` to the `y` argument. Then add the `geom_jitter()` to the plot. Run the code when you are done to see the result:\
+
+```{r salary-facet-no-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-1"}
 
 ```
 
 
-### Visualizing Summary Statistics and Relationships
+```{r salary-facet-no-theme-hint-1}
+hr_data |> 
+  ___(department == ___) |> 
+  ___(___(x = ___, y = ___)) +
+    ___()
+```
 
-`ggplot2` can also be used to visualize summary statistics and relationships between variables. For instance, you can add a smooth line (a line of best fit) to a scatter plot to visualize a relationship, or add a layer that displays the mean of a variable.  
+```{r salary-facet-no-theme-hint-2}
+hr_data |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = ___)) +
+    ___()
+```
 
-```{r}
-# Scatter plot with smooth line
-ggplot(mpg, aes(x=displ, y=hwy)) + 
-  geom_point() + 
-  geom_smooth(method=lm)
+```{r salary-facet-no-theme-solution, exercise.reveal_solution = FALSE}
+hr_data |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = annual_income)) +
+    geom_jitter()
+```
 
-# Bar plot with means
-ggplot(mpg, aes(x=class, y=hwy)) + 
-  stat_summary(fun=mean, geom="bar")
+###
+Let's add some customizations and also adjust our plot to show a comparison of average annual salary across job positions in Research & Development.\
 
+Before we draw our plot, let's first create a column called `avg_color` that sets a color based on the `avg_salary`. In the codeblock below, you will see that I already created the `avg_salary` variable for you. Create a pipeline on `hr_data` and use `mutate()` to create `avg_color`. Use an `ifelse()` condition and if `annual_income` is less than `avg_salary`, assign `avg_color` `"#C0C0C0"`, otherwise assign `avg_color` `"#FF8C00"`. Continue down the pipe and in `ggplot()`, map our new `avg_color` to the color argument in `aes()`. Add a `scale_color_identity()` layer. Then add a `scale_y_continuous()` layer and set the `labels` argument value to `scales::dollar_format()`. Add a `geom_hline()` layer and set the `yintercept` argument to `avg_salary` and `linetype` to `"longdash"`. I added the `annotate()` layer for you. Add a `facet_wrap()` and type inside `~job_role`. Next, add a `labs()` layer and set `x` to "Total Working Years", `y` to "Annual Income", and `title` to "Average Annual Salary by Research & Development Department". Add a `theme_minimal()`. Finally, add a `theme()` and set `panel.background` to `element_rect(fill = "#F0F0F0")`. Phew! Once you're done, run the code to view the result.\
+
+
+```{r prepare-hr-data-5}
+hr_data <- readr::read_csv(here::here("inst/extdata/HR-Employee-Attrition-kaggle.csv"))
+hr_data <- hr_data |> 
+  dplyr::select(EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome, TotalWorkingYears, YearsAtCompany, JobSatisfaction) |> 
+  janitor::clean_names() |> 
+  mutate(across(where(is.character), factor)) |> 
+  mutate(
+    annual_income = monthly_income * 12, 
+    hire_year = 2023 - years_at_company 
+  )
+```
+
+```{r salary-facet-theme, exercise = TRUE, exercise.setup = "prepare-hr-data-5"}
+# Our variable of average salary. We will use this single variable in our mutate and in our ggplot
+avg_salary <- mean(hr_data$annual_income)
+
+hr_data |> 
+  ___() |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = annual_income, color = ___)) +
+    geom_jitter() +
+    ___ +
+    ___(___) +
+    ___(___, ___) +
+    annotate("text", x = 35, y = 87000, label = "Average Salary", size = 2.5) +
+    
+```
+
+```{r salary-facet-theme-hint-1}
+# Our variable of average salary. We will use this single variable in our mutate and in our ggplot
+avg_salary <- mean(hr_data$annual_income)
+
+hr_data |> 
+  mutate(
+    avg_color = ifelse(___ < ___, "#C0C0C0", "#FF8C00")
+  ) |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = annual_income, color = ___)) +
+    geom_jitter() +
+    ___() +
+    scale_y_continuous(___ = scales::dollar_format()) +
+    geom_hline(yintercept = avg_salary, linetype = "longdash") +
+    annotate("text", x = 35, y = 87000, label = "Average Salary", size = 2.5) +
+    facet_wrap(~job_role) +
+    labs(
+      x = ___,
+      y = ___,
+      title = ___
+    ) +
+    theme_minimal() +
+    theme(
+      panel.background = ___
+    )
+```
+
+```{r salary-facet-theme-hint-2}
+# Our variable of average salary. We will use this single variable in our mutate and in our ggplot
+avg_salary <- mean(hr_data$annual_income)
+
+hr_data |> 
+  mutate(
+    avg_color = ifelse(annual_income < avg_salary, "#C0C0C0", "#FF8C00")
+  ) |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = annual_income, color = avg_color)) +
+    geom_jitter() +
+    scale_color_identity() +
+    scale_y_continuous(labels = scales::dollar_format()) +
+    geom_hline(yintercept = avg_salary, linetype = "longdash") +
+    annotate("text", x = 35, y = 87000, label = "Average Salary", size = 2.5) +
+    facet_wrap(~job_role) +
+    labs(
+      x = "Total Working Years",
+      y = "Annual Income",
+      title = "Average Annual Salary by Research & Development Department"
+    ) +
+    theme_minimal() +
+    theme(
+      panel.background = element_rect(fill = "#F0F0F0")
+    )
 ```
 
 
-### Working with Dates: lubridate
+```{r salary-facet-theme-solution, exercise.reveal_solution = FALSE}
+# Our variable of average salary. We will use this single variable in our mutate and in our ggplot
+avg_salary <- mean(hr_data$annual_income)
 
-`lubridate` is an incredibly useful package for working with date and time data. It simplifies extracting components of a date (like year or month), doing arithmetic with dates, and more.  
-
-Suppose you have a dataset `employee_turnover` with a column `exit_date` containing the dates when employees left the company:  
-
-```{r}
-# A glimpse of the dataset
-head(employee_turnover)
+hr_data |> 
+  mutate(
+    avg_color = ifelse(annual_income < avg_salary, "#C0C0C0", "#FF8C00")
+  ) |> 
+  filter(department == "Research & Development") |> 
+  ggplot(aes(x = total_working_years, y = annual_income, color = avg_color)) +
+    geom_jitter() +
+    scale_color_identity() +
+    scale_y_continuous(labels = scales::dollar_format()) +
+    geom_hline(yintercept = avg_salary, linetype = "longdash") +
+    annotate("text", x = 35, y = 87000, label = "Average Salary", size = 2.5) +
+    facet_wrap(~job_role) +
+    labs(
+      x = "Total Working Years",
+      y = "Annual Income",
+      title = "Average Annual Salary by Research & Development Department"
+    ) +
+    theme_minimal() +
+    theme(
+      panel.background = element_rect(fill = "#F0F0F0")
+    )
 ```
 
 
-You can use `lubridate` to extract the month from `exit_date` and create a new column:  
+###
+**Look at you and your bad self!**\
+What a beautiful plot that highlights the difference in average salary between job roles. Let's go over each code step in the above plot.\
 
-```{r}
-employee_turnover <- employee_turnover |> 
-  mutate(exit_month = month(exit_date, label = TRUE))
+First, the we calculate the average salary from the `annual_income` column in the `hr_data` tibble. We then use this average salary to create a new column called `avg_color` in the dataframe. The `ifelse()` statement is saying that if the `annual_income` is less than the `avg_salary`, the `avg_color` is set to the color hexcode "#C0C0C0". Otherwise, it is set to "#FF8C00".\
 
-head(employee_turnover)
-```
+Adding the `color` argument to `aes()` sets the color of the plot points based on the `avg_color` column. Additional modifications to the plot include scaling the color values from `avg_color` using `scale_color_identity()`, formatting the y-axis labels as dollar values using `scale_y_continuous()`, adding a dashed line representing the average salary using `geom_hline()`, adding a text annotation for the average salary, faceting the plot by `job_role`, and adding titles to the axes and the plot using `labs()`.\
 
+Finally, we set the theme of the plot to "minimal" and use `theme()` to further modify the panel background color.\
 
-Then, you can use `ggplot2` to visualize turnover trends over time:  
+### Conclusion
+You might feel slighly overwhelmed (or maybe not!) with all of the additional code needed to produce these nicer looking plots. But the more you practice, the easier this process becomes. Once you become more comfortable, you will find there are ways to make this process faster and more efficient.\
 
-```{r}
-employee_turnover |> 
-  count(exit_month) |> 
-  ggplot(aes(x = exit_month, y = n)) +
-  geom_line() +
-  labs(x = "Exit Month", y = "Number of Exits", 
-       title = "Employee Turnover Trends Over Time")
+To further enhance your skills in data visualizations, I encourage you to continue exploring more advanced features of `ggplot2`, such as integrating facets, applying built-in themes and creating your own custom reusable themes, and using additional geoms and aesthetics to create more sophisticated plots.\
 
-```
+Additionally, consider exploring other packages in R, such as `ggplotly`, `patchwork`, `flexdashboard`, and `shiny`, which offer interactive and dynamic visualizations that can further engage your audience.\
+
+Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. Happy visualizing! 
 
 
-### Tidying Data for Plotting
 
-Sometimes, data may not be in a format suitable for creating the visualizations you want. This is where the data tidying principles we discussed earlier come in handy.  
+### Conclusion
 
-Consider a dataset `employee_survey` where each row represents an employee's responses to a satisfaction survey with columns for `work_satisfaction`, `life_satisfaction`, and `work_life_balance`:  
+In this lesson, we covered the basics of data visualizations with ggplot2 in R for business contexts, specifically focusing on IO psychology and people analytics. We discussed the Grammar of Graphics, built basic and advanced plots, and explored customization options to enhance the appearance of the visualizations. We also worked through two exercises: one involving creating a scatter plot of employee performance ratings based on years of experience, and the other involving a grouped bar chart to display average engagement scores by department.  
 
-```{r}
-# A glimpse of the dataset
-head(employee_survey)
-```
+Data visualizations play a crucial role in understanding and communicating insights from data. By leveraging ggplot2 and its functionalities, you can create compelling and informative visualizations that aid in decision-making and storytelling.  
 
+To further enhance your skills in data visualizations, I encourage you to explore more advanced features of ggplot2, such as integrating facets, applying themes and customizations, and using additional geoms and aesthetics to create more sophisticated plots.  
 
-To visualize all three satisfaction measures in the same plot, you might want to reshape the data to a "long" format using `pivot_longer()`:  
+Additionally, consider exploring other packages in R, such as plotly, ggplotly, and shiny, which offer interactive and dynamic visualizations that can further engage your audience.  
 
-```{r}
-employee_survey_long <- employee_survey |> 
-  pivot_longer(cols = work_satisfaction:work_life_balance, 
-               names_to = "satisfaction_type", 
-               values_to = "satisfaction_score")
-
-head(employee_survey_long)
-```
-
-
-Now you can use `ggplot2` to create a grouped boxplot of satisfaction scores by type:  
-
-```{r}
-ggplot(employee_survey_long, aes(x=satisfaction_type, y=satisfaction_score, fill=satisfaction_type)) +
-  geom_boxplot() +
-  labs(x = "Satisfaction Type", y = "Satisfaction Score", 
-       title = "Employee Satisfaction Survey Results", fill = "Satisfaction Type")
-
-```
-
-
-This lesson was a brief introduction to the extensive capabilities of ggplot2 for data visualization. Beyond the basics covered here, you can customize nearly every element of a ggplot2 plot, use a variety of additional geometries for specialized plots, and even extend ggplot2's functionality with additional packages.  
-
-Remember that effective data visualization is as much an art as it is a science. While `ggplot2` provides the tools, it's up to you to create visualizations that tell a compelling story about your data. We will cover storytelling with you data in the next Module.    
-
-
-### Your Turn
-
-It's now time to put what you've learned into practice. Below are a few exercises to help you solidify your understanding of data visualization in R using `ggplot2.`
-
-**Exercise 1:** Create a histogram of work_satisfaction from the employee_survey dataset. Experiment with the number of bins to see how the distribution changes. Use the `theme_minimal()` to give your plot a clean look.  
-
-```{r}
-
-```
-
-
-**Exercise 2:** Create a scatter plot with `work_satisfaction` on the x-axis and `life_satisfaction` on the y-axis from the `employee_survey` dataset. Color the points by `work_life_balance`. Add a title and labels to your x and y axes.  
-
-```{r}
-
-```
-
-
-**Exercise 3:** Using the `employee_turnover` dataset, create a line plot of `turnover` over `date`. Modify the line type and color. Then, add a smooth line (loess) to the plot to show the overall trend. Finally, add a title, and x and y labels to your plot.  
-
-```{r}
-
-```
-
-
-Feel free to try additional modifications and experiment with different aesthetics and themes. The more you practice, the more comfortable you'll become with data visualization in R using `ggplot2`. **Happy Coding!**
+Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. **Happy visualizing!**

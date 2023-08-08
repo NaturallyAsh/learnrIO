@@ -21,9 +21,11 @@ library(learnr)
 library(gradethis)
 library(tidyverse)
 library(janitor)
+library(scales)
 
 tutorial_options(
-  exercise.blanks = "___"
+  exercise.blanks = "___",
+  exercise.completion = FALSE
 )
 gradethis::gradethis_setup()
 

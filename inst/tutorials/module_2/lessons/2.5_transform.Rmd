@@ -1025,6 +1025,33 @@ A quote from Hadley Wickham provides a good way to think about the difference be
 
 
 ###
+**`na.rm` attribute**  
+
+In the instance of executing mathematical computations such as sum(), mean(), or sd(), if any NA elements are detected in the data, the output you'll get is an NA value. This particular characteristic is purposeful to promptly notify you of the existence of missing entries in your data.  
+
+```{r}
+nums <- c(2, 4, NA, 8, 10)
+
+mean(nums)
+```
+
+To bypass this, you have the option to exclude missing values from being incorporated in the calculation. This can be achieved by introducing the attribute `na.rm = TRUE`. Here, "na.rm" is a shorthand for "remove NA".  
+
+```{r}
+nums <- c(2, 4, NA, 8, 10)
+
+mean(nums, na.rm = TRUE)
+```
+
+The same would apply when using a math function in a `dplyr` function, such as `summarise()`:  
+
+```{r}
+na_remove_tibble <- scores_tibble |> 
+  summarise(avg_performance = mean(performance_score, na.rm = TRUE))
+```
+
+
+###
 **Finding Missing Values Between Datasets**  
 
 When working with multiple datasets, it's possible that there are missing values when one dataset is compared with another. For instance, an employee might be present in one dataset but missing in another. We can identify these missing values using joins, specifically `anti-joins`.
