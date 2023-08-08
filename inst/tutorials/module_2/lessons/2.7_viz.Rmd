@@ -1000,6 +1000,8 @@ Adding the `color` argument to `aes()` sets the color of the plot points based o
 
 Finally, we set the theme of the plot to "minimal" and use `theme()` to further modify the panel background color.\
 
+
+
 ### Conclusion
 You might feel slighly overwhelmed (or maybe not!) with all of the additional code needed to produce these nicer looking plots. But the more you practice, the easier this process becomes. Once you become more comfortable, you will find there are ways to make this process faster and more efficient.\
 
@@ -1007,18 +1009,10 @@ To further enhance your skills in data visualizations, I encourage you to contin
 
 Additionally, consider exploring other packages in R, such as `ggplotly`, `patchwork`, `flexdashboard`, and `shiny`, which offer interactive and dynamic visualizations that can further engage your audience.\
 
-Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. Happy visualizing! 
+Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. **Happy visualizing!**\
 
 
+### Up Next
+For the next lesson, Introduction to Exploratory Data Analysis, we'll be leveraging the power of data to ask meaningful questions, uncover hidden patterns, and tell compelling stories.\
 
-### Conclusion
-
-In this lesson, we covered the basics of data visualizations with ggplot2 in R for business contexts, specifically focusing on IO psychology and people analytics. We discussed the Grammar of Graphics, built basic and advanced plots, and explored customization options to enhance the appearance of the visualizations. We also worked through two exercises: one involving creating a scatter plot of employee performance ratings based on years of experience, and the other involving a grouped bar chart to display average engagement scores by department.  
-
-Data visualizations play a crucial role in understanding and communicating insights from data. By leveraging ggplot2 and its functionalities, you can create compelling and informative visualizations that aid in decision-making and storytelling.  
-
-To further enhance your skills in data visualizations, I encourage you to explore more advanced features of ggplot2, such as integrating facets, applying themes and customizations, and using additional geoms and aesthetics to create more sophisticated plots.  
-
-Additionally, consider exploring other packages in R, such as plotly, ggplotly, and shiny, which offer interactive and dynamic visualizations that can further engage your audience.  
-
-Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. **Happy visualizing!**
+**See you there!** 
