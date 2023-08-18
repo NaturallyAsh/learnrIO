@@ -3,7 +3,7 @@ title: "Transforming Data: Exercises"
 ---
 
 ### Your Turn
-Now it's your turn to put your newfound knowledge of dplyr into practice. Here are a couple of exercises to get you started.  
+Now it's your turn to put your newfound knowledge of transforming data into practice. Here are a couple of exercises to get you started.  
 
 Let's imagine you are a data scientist working for a large company called "FutureTech". This company has multiple departments, such as HR, Finance, Marketing, and IT. You have been given access to two datasets:  
 
@@ -54,6 +54,7 @@ head(emp_data)
 # })
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 
@@ -89,6 +90,7 @@ head(emp_salary_data)
 ```{r emp-salary-check}
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 
@@ -182,6 +184,7 @@ updated_emp_data
 ```{r ex-2-check}
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 
@@ -234,6 +237,7 @@ joined_emp_data
 ```{r ex-3a-check}
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 
@@ -271,6 +275,7 @@ missing_employees
 ```{r ex-3b-check}
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 
@@ -320,6 +325,7 @@ final_emp_data
 ```{r ex-4-check}
 grade_this({
     pass_if_equal()
+    fail()
 })
 ```
 

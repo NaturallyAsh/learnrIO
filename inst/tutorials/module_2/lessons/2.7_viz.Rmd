@@ -534,7 +534,7 @@ hr_data |>
     geom_bar(stat = "identity")
 ```
 
-```{r bar-no-theme, exercise.reveal_solution = FALSE}
+```{r bar-no-theme-solution, exercise.reveal_solution = FALSE}
 hr_data |> 
   count(department) |> 
   ggplot(aes(x = department, y = n)) +

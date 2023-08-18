@@ -2,7 +2,7 @@
 title: "Transforming Data"
 ---
 
-One of the most crucial aspects of data analysis: data wrangling. Data wrangling is all about cleaning, structuring, and enriching raw data into a desired format for better decision making. We'll be using dplyr, a core package of the Tidyverse, to demonstrate the powerful capabilities of data wrangling.  
+One of the most crucial aspects of data analysis: data transformation. Data wrangling is all about cleaning, structuring, and enriching raw data into a desired format for better decision making. We'll be using dplyr, a core package of the Tidyverse, to demonstrate the powerful capabilities of data wrangling.  
 
 ### Working with Tibbles
 Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the core tidyverse `tibble` package, operates as a modern reimagining of the traditional data frame. At its core, a tibble inherits all the features that have made data frames a versatile and powerful tool in R. However, a tibble goes one step further, fine-tuning some of the characteristics of data frames to provide an improved experience of data handling. Here are some enhancements that tibbles bring to the table:  
