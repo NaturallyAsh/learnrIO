@@ -1,0 +1,158 @@
+---
+title: "Tidy Data: Exercises"
+---
+
+### Your Turn
+
+Time to apply what you've learned about tidying data! Here are three exercises for you to try using the `survey_data`, `untidy_survey_data`, and `too_tidy_survey_data` datasets.  
+
+**Exercise 1:** Create a pipeline (`|>`) on the `survey_data` dataset. Use `pivot_longer()` to transform it into a long format where we have three distinct columns: 'Employee', 'Question', and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E1-setup}
+survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question1 = c("Yes", "No", "No", "Yes", "Yes", "No"),
+  Question2 = c("No", "Yes", "Yes", "No", "No", "Yes")
+)
+```
+
+```{r tidy_E1, exercise = TRUE}
+
+```
+
+```{r tidy_E1-hint-1}
+___ |> 
+    ___(
+        ___,
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E1-hint-2}
+survey_data |> 
+    ___(
+        ___ = starts_with(___),
+        names_to = ___,
+        values_to = ___
+    )
+```
+
+```{r tidy_E1-solution, exercise.reveal_solution = FALSE}
+survey_data |> 
+    pivot_longer(
+        cols = starts_with("Question"),
+        names_to = "Question",
+        values_to = "Answer"
+    )
+```
+
+```{r tidy_E1-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+**Exercise 2:** The `untidy_survey_data` dataset has a 'Question_Answer' column that combines the question number and the answer. Create a pipeline on the `untidy_survey_data` dataset and use the `separate()` function to split this column into two separate columns: 'Question' and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E2-setup}
+untidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question_Answer = c("Question1_Yes", "Question1_No", "Question2_No", "Question2_Yes", "Question1_Yes", "Question2_No")
+)
+```
+
+```{r tidy_E2, exercise = TRUE}
+
+```
+
+```{r tidy_E2-hint-1}
+___ |> 
+    separate(
+        ___,
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E2-hint-2}
+untidy_survey_data |> 
+    separate(
+        col = ___,
+        into = c("___", "___"),
+        sep = "_"
+    )
+```
+
+```{r tidy_E2-solution, exercise.reveal_solution = FALSE}
+untidy_survey_data |> 
+    separate(
+        col = Question_Answer,
+        into = c("Question", "Answer"),
+        sep = "_"
+    )
+```
+
+```{r tidy_E2-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+**Exercise 3:** The `too_tidy_survey_data` dataset has separated 'Question' and 'Answer' columns. Create a pipeline on the `too_tidy_survey_data` and use the `unite()` function to combine these into a single column named 'Question_Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E3-setup}
+too_tidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question = c("Question1", "Question1", "Question2", "Question2", "Question1", "Question2"),
+  Answer = c("Yes", "No", "No", "Yes", "Yes", "No")
+)
+```
+
+```{r tidy_E3, exercise = TRUE}
+
+```
+
+```{r tidy_E3-hint-1}
+___ |> 
+    unite(
+        ___, 
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E3-hint-2}
+too_tidy_survey_data |> 
+    unite(
+        col = "___", 
+        c(___, ___),
+        sep = "_"
+    )
+```
+
+```{r tidy_E3-solution, exercise.reveal_solution = FALSE}
+too_tidy_survey_data |> 
+    unite(
+        col = "Question_Answer", 
+        c(Question, Answer),
+        sep = "_"
+    )
+```
+
+```{r tidy_E3-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+###
+**Congratulations on completing the exercises!**\
+
+Remember to keep practicing. The more you code, the more comfortable you'll get with these concepts. **Keep up the good work!**

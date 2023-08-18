@@ -95,6 +95,14 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
+## Tidy Data: Exercises {data-progressive=TRUE}
+```{r, child="lessons/2.4e_tidy.Rmd"}
+
+```
+
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
 ## Transforming Data {data-progressive=TRUE}
 ```{r, child="lessons/2.5_transform.Rmd"}
 

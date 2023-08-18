@@ -16,7 +16,7 @@ Tidy data follows three fundamental rules:
 - Each value must have its own cell.  
 
 
-[Placeholder for an image illustrating tidy data]
+[Placeholder for an image illustrating tidy data] <!-- TODO: add image from github -->
 
 
 The advantages of tidy data are twofold. Firstly, having a consistent data structure makes it easier to learn the tools that work with it. Secondly, placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural. By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
@@ -62,24 +62,117 @@ wide_survey_data <- tidy_survey_data |> pivot_wider(
 
 
 ### Separate and unite
-At times, we might have a single column containing two variables. In such a case, we can use the `separate()` function to split that column into two. For example, imagine a column 'Question_Answer' in our survey data that combines the question number and the answer.  
+The `separate()` function from the `tidyr` package is used to split a column into two columns at the point of a specified separator also called delimiter (e.g., comma, space, semi-colon). This is useful when for breaking down combined information into distinct parts, which can be valuable when analyzing employee data.\
 
-```{r, eval=FALSE}
-tidy_survey_data <- untidy_survey_data |> separate(
-  Question_Answer, 
-  into = c("Question", "Answer"), 
-  sep = "_"
+In the following example, we have an `employee_data_sep` dataset that includes a column for full names. First, view the dataset in the codeblock:\
+
+```{r prepare-separate-data}
+employee_data_sep <- tibble(
+  employee_id = c(1, 2, 3),
+  full_name = c("John Doe", "Jane Smith", "Michael Johnson")
 )
 ```
 
-Conversely, we might need to combine two columns into one. The unite() function does this.  
-```{r, eval=FALSE}
-untidy_survey_data <- too_tidy_survey_data |> unite(
-  "Question_Answer", 
-  Question, Answer, 
-  sep = "_"
-)
+```{r view-separate-data, exercise = TRUE, exercise.setup = "prepare-separate-data"}
+
 ```
+
+```{r view-separate-data-solution}
+employee_data_sep
+```
+
+Now, complete the code in the codeblock below so that it calls `separate()` and splits the `full_name` column into separate columns for `first_name` and `last_name`. Run the code to inspect your result and then click **Submit Answer**.\
+
+*Remember to run `?help` in your console if you need to read the `separate()` documentation*.\
+
+```{r separate, exercise = TRUE, exercise.setup = "prepare-separate-data"}
+employee_data_sep |> 
+  ___(
+    ___, 
+    into = c("___", "___"), 
+    sep = ___
+  )
+```
+
+```{r separate-hint-1}
+employee_data_sep |> 
+  separate(
+    full_name, 
+    into = c("first_name", "___"), 
+    sep = " "
+  )
+```
+
+```{r separate-solution, exercise.reveal_solution = FALSE}
+employee_data_sep |> 
+  separate(
+    full_name, 
+    into = c("first_name", "last_name"), 
+    sep = " "
+  )
+```
+
+```{r separate-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+###
+Conversely, we might need to combine two columns into one. The `unite()` function does this. We can save the `employee_data_sep` data from the previous example in a new variable called `employee_data_unite` and then call `unite()` to combine the `first_name` and `last_name` columns back into a single `full_name` column. Execute this task by completing the code in the codeblock below. Run the code to inspect your result and then click **Submit Answer**.\
+
+*Remember to run `?help` in your console if you need to read the `unite()` documentation*.\
+
+```{r prepare-unite-data}
+employee_data_sep <- tibble(
+    employee_id = c(1, 2, 3),
+    full_name = c("John Doe", "Jane Smith", "Michael Johnson")
+  ) |> 
+    separate(
+      full_name, 
+      into = c("first_name", "last_name"), 
+      sep = " "
+    )
+```
+
+```{r unite, exercise = TRUE, exercise.setup = "prepare-unite-data"}
+employee_data_unite <- employee_data_sep |> 
+  ___(
+    col = "___",
+    c(___, ___),
+    sep = ___
+  )
+
+employee_data_unite
+```
+
+```{r unite-hint-1}
+employee_data_unite <- employee_data_sep |> 
+  ___(
+    col = "full_name",
+    c(first_name, last_name),
+    sep = " "
+  )
+
+employee_data_unite
+```
+
+```{r unite-solution, exercise.reveal_solution = FALSE}
+employee_data_unite <- employee_data_sep |> 
+  unite(
+    col = "full_name",
+    c(first_name, last_name),
+    sep = " "
+  )
+
+employee_data_unite
+```
+
+###
+Great work!\
+For the next and final section of this lesson, we will dive a bit deeper into one of the most useful and invaluable methods for working with the `tidyverse`: The pipe operator (`|>`).\
 
 
 ### The Pipe Operator **(`|>`)**  
@@ -87,17 +180,18 @@ I bet you are wondering what that strange `|>` symbol is that we used in the abo
 
 You may be unfamiliar with some of the functions used in the following code examples (such as `filter()`). Don't worry! We will cover them in detail in the next lesson: Transforming Data!  
 
-Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary:  
+Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary. We can use a pipeline using `|>` that clearly and understandibly describes each step:  
 
 
 ```{r, eval=FALSE}
-employees_data |> 
-  filter(department == "HR") |> 
-  select(age, salary) |> 
-  summarise(avg_salary = mean(salary, na.rm = TRUE))
+employees_data |> # step 1: dataset of employees
+  filter(department == "HR") |> # step 2: filter out the HR department
+  select(age, salary) |> # step 3: select the age and salary columns
+  summarise(avg_salary = mean(salary, na.rm = TRUE)) # step 4: calculate the average salary
 ```
 
-This code reads from left to right in a logical order, making it easier to follow.  
+###
+Notice how easy it is to understand what the code is executing. Each step is written on its own line. If you need to edit or change the code, this format simplifies the process.\
 
 ### The Benefit of Using Piping in Tidyverse
 
@@ -121,31 +215,9 @@ employees_data |>
 So much neater, right!? This is a powerful style, especially for data manipulation tasks.
 
 
-### Your Turn
+### Conclusion
+**Congratulations on completing this lesson!**\
 
-Time to apply what you've learned about tidying data! Here are three exercises for you to try using the survey_data, untidy_survey_data, and too_tidy_survey_data datasets.  
+You've taken a significant step in understanding the principles of tidy data. Test out your newfound knowledge by completing the "Tidy Data: Exercises" sub-lesson!\
 
-**Exercise 1:** Use `pivot_longer()` on the `survey_data` dataset to transform it into a long format where we have three distinct columns: 'Employee', 'Question', and 'Answer'.  
-
-```{r}
-
-```
-
-
-**Exercise 2:** The `untidy_survey_data` dataset has a 'Question_Answer' column that combines the question number and the answer. Use the `separate()` function to split this column into two separate columns: 'Question' and 'Answer'.  
-
-```{r}
-
-```
-
-
-**Exercise 3:** The `too_tidy_survey_data` dataset has separated 'Question' and 'Answer' columns. Use the `unite()` function to combine these into a single column named 'Question_Answer'.  
-
-```{r}
-
-```
-
-
-
-
-Remember to inspect the results after each step to ensure that your transformations have worked as expected. **Keep up the good work!**
+The next lesson, titled "Transforming Data," will unlock new avenues by covering data transformation techniques. Prepare to embark on this exciting journey!
