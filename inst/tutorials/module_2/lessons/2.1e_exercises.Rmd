@@ -155,4 +155,8 @@ grade_this({
 ```
 
 
+###
+Awesome job working through these exercises!  
+
+Remember, the key to mastery comes from practice. The more you practice, the better you will become.  
 
