@@ -34,13 +34,16 @@ Assigning objects to variables is accomplished using the assignment operator, wh
 variable <- object
 ```
 
-For example, let's say we have an object `x` containing the value 10, and we want to assign it to a variable `my_variable`:  
+###
+
+As an example, let's say we have an object `x` containing the value 10, and we want to assign it to a variable `my_variable`:  
 
 ```{r, eval=FALSE}
 x <- 10
 my_variable <- x
 ```
 
+###
 In this case, we assign the value of `x` (which is 10) to the variable `my_variable`. Now, `my_variable` holds the same value as `x`. Click the "run code" button in the following code block to view the result:  
 
 ```{r object-setup}
@@ -48,14 +51,16 @@ x <- 10
 my_variable <- x
 ```
 
-```{r object, exercise=TRUE, exercise.lines=2}
+```{r object, exercise=TRUE}
 x <- 10
 my_variable <- x
 ```
 
-You will notice that it seems like nothing happened after clicking "run code". Something DID happen! We assigned object `x` to `my_variable`, but in order to print (view) the result, you must type `my_variable` on a line by itself. Go ahead and type `my_variable` in the code box below, then click "run code":  
 
-```{r view-object, exercise=TRUE, exercise.setup="object-setup", exercise.lines=2}
+###
+You will notice that it seems like nothing happened after clicking "Run Code". Something **DID** happen! We assigned object `x` to `my_variable`, but in order to print (view) the result, you must type `my_variable` on a line by itself. Go ahead and type `my_variable` in the code box below, then click "run code":  
+
+```{r view-object, exercise=TRUE, exercise.setup="object-setup"}
 
 ```
 
@@ -63,16 +68,16 @@ You will notice that it seems like nothing happened after clicking "run code". S
 my_variable
 ```
 
-
+###
 <div class="callout">
-**Note**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
+**Tip**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
 </div>
  
 
 ###
-Variables can be assigned objects of any type. Here's another example, assigning a character string to a variable. Click the "run code" button to view the result. **Don't forget to print the variable!**:  
+Variables can be assigned objects of any type. Here's another example, assigning a character string to a variable. Add a second line that **prints** the variable output to the console. Do this by typing the variable name. Click the "run code" button to view the result:\
 
-```{r hello, exercise=TRUE, exercise.lines=2}
+```{r hello, exercise=TRUE}
 hello_message <- "Hello World!"
 ```
 
@@ -81,6 +86,9 @@ hello_message <- "Hello World!"
 hello_message
 ```
 
+###
+Well done!\
+You always want to making sure you are printing the output of the variable or code periodically. This way, you can ensure that your code is doing what you expect, and if not, you can catch errors and make corrections early on.\
 
 ### Naming Variables
 
@@ -101,7 +109,7 @@ is_student <- TRUE # Good!
 is_this_a_student <- TRUE # Bad; too long
 ```
 
-
+###
 Where possible, avoid using names of existing functions and variables (i.e., table, seq, data). Doing so will cause confusion for the readers of your code.  
 
 ```{r, eval=FALSE}
@@ -114,8 +122,6 @@ T <- FALSE
 
 When it comes to naming variables, the most important thing is to remain consistent.
 
-
-
 ###
 
 Functions in R are objects that perform a specific task or operation on data. They take one or more objects as input (often referred to as arguments or parameters), manipulate data in a defined way, and then return a result.   
@@ -127,6 +133,7 @@ x <- 5
 y <- 4
 ```
 
+###
 `sum()` is an R built-in function. We can input `x` and `y` as the `sum()` function's arguments to get a result that sums the two variable's values. In the following code block, type `sum(x,y)` and click the "run code" button to view the result:  
 
 ```{r sum-setup}
@@ -134,7 +141,7 @@ x <- 5
 y <- 4
 ```
 
-```{r sum, exercise=TRUE, exercise.lines=1}
+```{r sum, exercise=TRUE}
 
 ```
 
@@ -142,18 +149,25 @@ y <- 4
 sum(x, y)
 ```
 
+###
 In the above codeblock, the `sum()` function takes the value of object `x` and the value of object `y` and returns the sum of the two values.  
 
-When working in RStudio, you can access any built-in function and package function's documenation from the help pane.  
+###
+When working in RStudio, you can access any built-in function and package function's documentation from the help pane. Type `?help` in the codeblock below and run the block:\ 
 
-```{r, eval=FALSE}
+```{r help, exercise = TRUE}
 
 ```
 
-We will dive deeper into functions in the lesson.  
-
+```{r help-solution}
+?help
+```
 
 ###
+Running `?help` should pop open the help documentation window (in RStudio or VScode with the R Extension). You can type any function in the search bar to view its documentation and example usages.\
+
+
+### Operators
 
 R supports a wide array of operations and functions that we can perform on our variables. These include but are not limited to:  
 
@@ -162,6 +176,7 @@ R supports a wide array of operations and functions that we can perform on our v
 - Logical operations (`&`, `|`, `!`)  
 - Basic mathematical functions (`abs()`, `sqrt()`, `exp()`, `log()`, `sin()`, `cos()`, `tan()`)  
 
+###
 Consider the following variables containing an employee's salary, age, and department:  
 
 ```{r, eval=FALSE}
@@ -185,6 +200,7 @@ employee_dept == "IT"
 sqrt(employee_age)
 ```
 
+###
 These operations and functions allow you to manipulate and transform your data, extract meaningful information from it, and perform complex mathematical and statistical calculations.  
 
 
@@ -196,7 +212,7 @@ R data types in define the kind of information a variable stores. The common dat
 reactable::reactable(table_types, bordered = TRUE)
 ```
 
-
+###
 You can use the `typeof()` function to determine the data type of a variable. Take the following code block for example:
 
 ```{r, eval=FALSE}
@@ -207,7 +223,8 @@ current_employee <- TRUE
 employee_level <- factor("entry")
 ```
 
-Using the `typeof()` function, print the data type of each variable. Click the "run code" button to view the results:  
+###
+Try this out in the codeblock below. Using the `typeof()` function, print the data type of each of the variables above (e.g., `salary`, `age`, etc.) . Click the "run code" button to view the results:  
 
 ```{r typeof-setup}
 salary <- 26890.90
@@ -217,7 +234,7 @@ current_employee <- TRUE
 employee_level <- factor("entry")
 ```
 
-```{r typeof, exercise=TRUE, exercise.lines=6}
+```{r typeof, exercise=TRUE}
 
 ```
 
@@ -237,6 +254,8 @@ typeof(current_employee)
 typeof(employee_level)
 ```
 
+###
+Awesome job!\
 In some cases, you may need to convert between data types. R provides several functions for type conversion, such as `as.integer()`, `as.numeric()`, `as.character()`, and `as.logical()`.
 
 ```{r, eval=FALSE}
@@ -246,6 +265,7 @@ typeof(age)
 new_age <- as.integer(age)
 typeof(new_age)
 ```
+
 
 We will dive deeper into data type conversions in a later lesson.  
 
@@ -269,21 +289,25 @@ R has several data structures to store and organize data. These include Vectors,
 
 <br>
 
+###
 While R has several data structures available, for the purpose of this lesson, we will focus primarily on vectors, lists, factors, and data frames, all fundamental building blocks in R.  
 
 
 ###
 #### Atomic Vectors
 Atomic vectors are the most basic data structure in R. An atomic vector's values can be one of 6 data types: logical, integer, double, character, complex, and raw. We can be create atomic vectors using the `c()` (combine or concat) function:  
+
 ```{r, eval=FALSE}
 numeric_vector <- c(1, 2, 3, 4, 5)
 character_vector <- c("apple", "banana", "cherry")
 ```
 
+###
 Notice that the `numeric_vector` and `character_vector` each contain elements of the *same* data type; number elements and character elements, respectively.  
 
+###
 In the codeblock below, create a numeric vector with the values `25`, `30`, `35`, and `40`. Assign the vector to a variable named `ages`. Click the "run code" button to view the result.  
-```{r numeric-vec, exercise=TRUE, exercise.lines=2}
+```{r numeric-vec, exercise=TRUE}
 
 ```
 
@@ -297,9 +321,10 @@ ages <- c(25, 30, 35, 40)
 ages
 ```
 
+###
 Now create a character vector with the values `HR`, `Sales`, `Marketing`, and `Finance`. Assign the vector to a variable named `departments`. Print the variable. Click the "run code" button to view the result:  
 
-```{r char-vec, exercise=TRUE, exercise.lines=2}
+```{r char-vec, exercise=TRUE}
 
 ```
 
@@ -317,14 +342,16 @@ departments
 **Accessing Vector Elements**  
 You can access a single value (or element) from a vector by using square brackets `[]`. This method of accessing elements of a vector (and other data structures) is called *indexing* or *subsetting*. We will go into more detail about indexing and subsetting in a later lesson. But as a quick demonstration, we can look at `departments`.  
 
+###
 To retrieve the "HR" element, specify the number that indicates it's position in the vector. So, there are four elements in `departments`. "HR" is in the 1 position, "Sales" is in the 2 position, and so forth.  
 
-```{r}
+```{r, eval=FALSE}
 departments <- c("HR", "Sales", "Marketing", "Finance")
 departments[1]
 ```
 
-In the codeblock below, retrieve the "Marketing" element from `departments`. Click "run code" to view the result.  
+###
+Try this out yourself in the codeblock below. Write a code line that retrieves the "Marketing" element from `departments`. Click "run code" to view the result.  
 
 ```{r index-vector-setup}
 departments <- c("HR", "Sales", "Marketing", "Finance")
@@ -342,11 +369,14 @@ departments[___]
 departments[3]
 ```
 
+###
+Great job!\
 
 ###
 #### Lists 
 Lists are often used to store complex data structures and can contain a mixture of data types (whereas atomic vectors can only contain one data type). Lists can also be referred to as **recursive vectors** because lists can contain other lists. When I say recursive, think of it as something that "reoccurs" over and over again, like those fun house mirrors that are angled to present an infinite number of images. So, a list can contain a list, which can contain another list, which can contain another list, and so on to infinity.  
 
+###
 We create lists using the `list()` function:  
 ```{r, eval=FALSE}
 regular_list <- list("John Doe", 25, TRUE) # Mixture of data types
@@ -355,14 +385,15 @@ named_list <- list(name = "John Doe", age = 25, is_student = TRUE) # Give object
 
 ```
 
-Notice that the object values in `regular_list` and `named_list` are the same. However, `named_list` assigns **names** to those objects. You can better understand the difference between the two lists using `str()`.  
+###
+Notice that the object values in `regular_list` and `named_list` are the same. However, `named_list` assigns **names** to those objects. You can better understand the difference between the two lists using `str()`.\
 
 Something to note is that you will often work with lists containing hundreds or thousands of data objects and values. Printing a list object (typing `regular_list`, for example) is not very informative. There are two better ways to for inspecting lists:  
 
-- Using the `str()` function.  
-- Viewing the list object in the "Environment Pane".  
+- Using the `str()` function.\
+- Viewing the list object in the "Environment Pane".\
   
-
+###
 In the codeblock below, call `str()` twice; the first with `regular_list` as an argument and the second with `named_list` as an argument. Run the code to view the results and see if you can spot the difference:  
 
 ```{r basic-list-setup}
@@ -385,7 +416,7 @@ str(regular_list)
 str(named_list)
 ```
 
-
+###
 When working out of RStudio, you can easily view a list object's structure by going to the Environment Pane and "uncollapsing" the list object:  
 
 <figure>
@@ -396,14 +427,11 @@ When working out of RStudio, you can easily view a list object's structure by go
 <br>
 
 
-<div class="callout">
-**Note**:  
-</div>
-
-
+###
 **Indexing Elements in a List**  
 Indexing elements in lists is similar to indexing them in vectors - using single brackets `[]`. However, because of complexity of lists compared to vectors, double brackets `[[]]` needed in order to drill down and access individual list elements.  
 
+###
 Let's use an employee list object as an example. Use the codeblock to take a look at the structure of `employee_list_data`. *Hint: use the function that makes viewing lists easier*. Click "run code" to view the result.  
 
 ```{r index-lists-setup}
@@ -427,24 +455,32 @@ str(___)
 str(employee_list_data)
 ```
 
-Viewing `employee_list_data` shows a named list of 4: `id`, `name`, `age`, and `department`. We can use `[]` to extract the `age` named element:  
+###
+Viewing `employee_list_data` shows a named list of 4: `id`, `name`, `age`, and `department`. We can use `[]` to extract the `age` named element. Run the code below to see what this would look like:  
 
 ```{r single-bracket, exercise=TRUE, exercise.setup="index-lists-setup"}
 employee_list_data["age"]
 ```
 
-Notice that when we inspect the structure of the extracted `age` element:  
+
+###
+Now run the codeblock below to see what the structure of the extracted `age` element looks like when we use use `str()`:  
 ```{r str-single-bracket, exercise=TRUE, exercise.setup="index-lists-setup"}
 str(employee_list_data["age"])
 ```
 
-`age` is still a list! When using the `[]`, the result is a new list containing the element at the specified index.  
+###
+`age` is still a list!\
+When using the `[]`, the result is a new list containing the element at the specified index.  
 
-We can also use `[]` to extract multiple elements:  
+###
+
+We can also use `[]` to extract multiple elements. Run the codeblock to view the output of the `id` and `age` elements:  
 ```{r multi-single-bracket, exercise=TRUE, exercise.setup="index-lists-setup"}
 str(employee_list_data[c("id", "age")])
 ```
 
+###
 Say we want to extract the third employee's name. Using the `[[]]`, we can drill down and retrieve the individual element:  
 ```{r}
 str(employee_list_data[["name"]][3])
@@ -580,7 +616,7 @@ employees <- data.frame(
 )
 ```
 
-```{r frame-tibble, exercise=TRUE, exercise.lines=2}
+```{r frame-tibble, exercise=TRUE}
 
 ```
 
