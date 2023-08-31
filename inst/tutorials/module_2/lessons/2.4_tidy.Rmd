@@ -16,11 +16,19 @@ Tidy data follows three fundamental rules:
 - Each value must have its own cell.  
 
 
-[Placeholder for an image illustrating tidy data] <!-- TODO: add image from github -->
+<figure>
+  <img src="images/tidy-principles.png" width="100%">
+  <figcaption class="figcap">Tidy Data Principles</figcaption>
+</figure>
 
 
-The advantages of tidy data are twofold. Firstly, having a consistent data structure makes it easier to learn the tools that work with it. Secondly, placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural. By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+###
+The advantages of tidy data are twofold. Firstly, having a consistent data structure makes it easier to learn the tools that work with it. Secondly, placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural.\
 
+By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+
+
+###
 Let's consider an example where we have data on employee satisfaction, performance, and tenure. The tidy version of this data would look something like this:  
 
 | Employee ID | Satisfaction | Performance | Tenure |
@@ -30,6 +38,8 @@ Let's consider an example where we have data on employee satisfaction, performan
 | 3 | 9 | 9 | 5 |
 | 4 | 6 | 5 | 1 | 
 
+
+###
 In this example, each variable (Satisfaction, Performance, Tenure) has its own column, each observation (each employee) has its own row, and each value has its own cell.  
 
 
@@ -39,9 +49,10 @@ In practice, you'll often encounter data that is not tidy. For instance, a varia
 
 Let's discuss each one in detail.  
 
-### `pivot_longer()` 
+### 
+**`pivot_longer()`**\ 
 
-is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
+`pivot_longer()` is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
 
 ```{r, eval=FALSE}
 tidy_survey_data <- survey_data |> pivot_longer(
@@ -50,6 +61,9 @@ tidy_survey_data <- survey_data |> pivot_longer(
   values_to = "Answer"
 )
 ```
+
+###
+**`pivot_wider()`**\
 
 `pivot_wider()` does the opposite. It makes "long" data wider, spreading out a key-value pair across multiple columns.  
 
@@ -62,9 +76,11 @@ wide_survey_data <- tidy_survey_data |> pivot_wider(
 
 
 ### Separate and unite
-The `separate()` function from the `tidyr` package is used to split a column into two columns at the point of a specified separator also called delimiter (e.g., comma, space, semi-colon). This is useful when for breaking down combined information into distinct parts, which can be valuable when analyzing employee data.\
+The `separate()` function from the `tidyr` package is used to split a column into two columns at the point of a specified separator also called delimiter (e.g., comma, space, semi-colon). This is useful when for breaking down combined information into distinct parts, which can be valuable when analyzing employee data.
 
-In the following example, we have an `employee_data_sep` dataset that includes a column for full names. First, view the dataset in the codeblock:\
+
+###
+In the following example, we have an `employee_data_sep` dataset that includes a column for full names. First, type the variable name in the codeblock and view the dataset:\
 
 ```{r prepare-separate-data}
 employee_data_sep <- tibble(
@@ -81,6 +97,7 @@ employee_data_sep <- tibble(
 employee_data_sep
 ```
 
+###
 Now, complete the code in the codeblock below so that it calls `separate()` and splits the `full_name` column into separate columns for `first_name` and `last_name`. Run the code to inspect your result and then click **Submit Answer**.\
 
 *Remember to run `?help` in your console if you need to read the `separate()` documentation*.\
@@ -121,7 +138,7 @@ grade_this({
 
 
 ###
-Conversely, we might need to combine two columns into one. The `unite()` function does this. We can save the `employee_data_sep` data from the previous example in a new variable called `employee_data_unite` and then call `unite()` to combine the `first_name` and `last_name` columns back into a single `full_name` column. Execute this task by completing the code in the codeblock below. Run the code to inspect your result and then click **Submit Answer**.\
+Conversely, we might need to combine two columns into one. The `unite()` function does this. We can save the `employee_data_sep` data from the previous example in a new variable called `employee_data_unite` and then call `unite()` to combine the `first_name` and `last_name` columns back into a single `full_name` column. Execute this task by completing the code in the codeblock below. Run the code to inspect your result, and then click **Submit Answer** to see if your answer is correct.\
 
 *Remember to run `?help` in your console if you need to read the `unite()` documentation*.\
 
@@ -178,8 +195,12 @@ For the next and final section of this lesson, we will dive a bit deeper into on
 ### The Pipe Operator **(`|>`)**  
 I bet you are wondering what that strange `|>` symbol is that we used in the above section. This symbol is a very useful method for creating tidy data, and it called the pipe operator (`|>`). This operator allows you to pipe your data from one function to the next. It's used to make your code cleaner and easier to read. The pipe operator fundamentally transforms the way you use R for data manipulation, leading to a tidier, more readable, and maintainable code.  
 
+###
+**Don't Panic!**\
+
 You may be unfamiliar with some of the functions used in the following code examples (such as `filter()`). Don't worry! We will cover them in detail in the next lesson: Transforming Data!  
 
+###
 Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary. We can use a pipeline using `|>` that clearly and understandibly describes each step:  
 
 
@@ -201,8 +222,10 @@ The introduction of the pipe operator has transformed the way we can write and r
 avg_salary <- summarise(select(filter(employees_data, department == "HR"), age, salary), avg_salary = mean(salary, na.rm = TRUE))
 ```
 
-Without piping, this code becomes much harder to read. Functions are nested within one another, and the code reads from inside-out, rather than from left to right. It's also much more challenging to add or remove steps from the analysis.  
+###
+Without piping, the above code becomes much harder to read. Functions are nested within one another, and the code reads from inside-out, rather than from left to right. It's also much more challenging to add or remove steps from the analysis.  
 
+###
 On the other hand, the pipe operator allows us to follow the logic of our data transformation step by step. It facilitates a style of programming that emphasizes clear, readable code, and promotes the chaining of functions, where the output of one function is the input to the next. Take another look at the piping of the `employees_data` to calculate the same `avg_salary`:  
 
 ```{r, eval=FALSE}
@@ -212,6 +235,8 @@ employees_data |>
   summarise(avg_salary = mean(salary, na.rm = TRUE))
 ```
 
+
+###
 So much neater, right!? This is a powerful style, especially for data manipulation tasks.
 
 

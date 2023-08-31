@@ -6,6 +6,9 @@ title: "Tidy Data: Exercises"
 
 Time to apply what you've learned about tidying data! Here are three exercises for you to try using the `survey_data`, `untidy_survey_data`, and `too_tidy_survey_data` datasets.  
 
+
+###
+
 **Exercise 1:** Create a pipeline (`|>`) on the `survey_data` dataset. Use `pivot_longer()` to transform it into a long format where we have three distinct columns: 'Employee', 'Question', and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
 
 ```{r tidy_E1-setup}
@@ -55,6 +58,7 @@ grade_this({
 ```
 
 
+###
 **Exercise 2:** The `untidy_survey_data` dataset has a 'Question_Answer' column that combines the question number and the answer. Create a pipeline on the `untidy_survey_data` dataset and use the `separate()` function to split this column into two separate columns: 'Question' and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
 
 ```{r tidy_E2-setup}
@@ -103,6 +107,7 @@ grade_this({
 ```
 
 
+###
 **Exercise 3:** The `too_tidy_survey_data` dataset has separated 'Question' and 'Answer' columns. Create a pipeline on the `too_tidy_survey_data` and use the `unite()` function to combine these into a single column named 'Question_Answer'. Run the code to inspect your result and then click **Submit Answer**.\
 
 ```{r tidy_E3-setup}
