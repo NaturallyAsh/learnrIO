@@ -11,12 +11,14 @@ Data can come in various forms and from different sources. Two of the most commo
 
 We can import CSV files using `readr`, a core tidyverse package. `readr` provides functions for importing flat files, a two-dimensional tabular structured file where a column represents one dimension and rows represent the other dimension.  
 
+###
 We can use the `readr` `read_csv()` function to import CSV flat files. Let's say we have a CSV file located at a URL. We can import it by doing the following:  
 ```{r, eval=FALSE}
 person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/R-Tutorial-Data-Files/master/PersData.csv") 
 ```
 
-Use `head()` to view the first 6 rows of the imported data:  
+###
+Give it a shot in the codeblock below. Use `head()` to view the first 6 rows of the imported `person_data`:  
 
 ```{r import-csv-setup}
 person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/R-Tutorial-Data-Files/master/PersData.csv") 
@@ -26,12 +28,16 @@ person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/
 
 ```
 
+```{r import-csv-hint-1}
+head(___)
+```
+
 ```{r import-csv-solution}
 head(person_data)
 ```
 
+###
 You can see the column names along with the data types (i.e., `id` values are type **double**, `lastname` values are type **character**, etc.).  
-
 
 
 ### Importing Excel files  
@@ -40,7 +46,8 @@ You will often find encounter Excel data. We can use the `readxl` package to imp
 path_excel_data <- system.file("extdata", "PersData_Excel.xlsx", package = "learnrIO", mustWork = TRUE)
 ```
 
-We can use the `readxl::read_excel()` function which reads xls or xlsx files. Here we use a path to an Excel file:  
+###
+We can use the `readxl::read_excel()` function which reads xls or xlsx files. Here we use a path to an Excel file. Run the codeblock to view the output:  
 
 <!-- using readxl::read_excel() so I don't need to load the entire package (less dependency related stuff). Same for `haven`. -->
 ```{r import-excel, exercise=TRUE}
@@ -49,8 +56,11 @@ excel_data <- readxl::read_excel(path = path_excel_data)
 excel_data
 ```
 
+###
 Running the above function with only the `path` argument returns the first Excel sheet, in this case sheet "Year1". The dataset, however, contains two sheets. The `read_excel()` function provides options for fine-tuning Excel imports, such as importing a sheet other than the first or importing a column/row cell range.  
 
+
+###
 *Import the second sheet titled "Year2"*  
 ```{r excel-sheet2, exercise=TRUE}
 sheet2 <- readxl::read_excel(
@@ -60,6 +70,8 @@ sheet2 <- readxl::read_excel(
 sheet2
 ```
 
+
+###
 *Importing the first 3 rows from the `id`, `lastname`, and `firstname` columns from the first sheet "Year1"*  
 ```{r excel-sheet1-range, exercise=TRUE}
 sheet1 <- readxl::read_excel(
@@ -69,15 +81,18 @@ sheet1 <- readxl::read_excel(
 sheet1
 ```
 
+###
 Although we can retrieve the first sheet ("Year1") by explicitly setting the `sheet = "Year1"` attribute, we don't need to since `readxl::read_excel()` calls the first sheet by default.  
 
-Type `?read_excel` in your RStudio Console to see additional examples.  
+###
+*Remember* that you can view the documentation of functions. Type `?read_excel` in your RStudio Console to view the function's definition, arguments, and additional examples.\
 
 
 
 ### Importing other file formats with `haven`  
 For other common file formats like SPSS, Stata, and SAS, we can use the haven package. The `haven` package provides a consistent way to read data into R, regardless of the original software used to create the data.  
 
+###
 **Import SPSS file**  
 ```{r, include=FALSE}
 path_sav_data <- system.file("extdata", "exam.sav", package = "learnrIO", mustWork = TRUE)
@@ -85,7 +100,7 @@ path_sav_data <- system.file("extdata", "exam.sav", package = "learnrIO", mustWo
 
 The `haven::read_sav()` function takes a file path as its argument and returns a data frame:  
 ```{r}
-haven::read_sav(path_sav_data) 
+haven::read_sav(path_sav_data)
 ```
 
 
@@ -96,6 +111,7 @@ Once you have successfully imported your data, the next step is to explore it to
 - Inspecting the structure  
 - Looking at the first few rows  
 
+
 ### Viewing the Dataset 
 The simplest way to view your dataset is to print the dataset's name in the console. However, for large datasets, this is not practical because it can flood your console. A more appropriate method, especially for large datasets, is using the `View()` function:  
 
@@ -103,8 +119,8 @@ The simplest way to view your dataset is to print the dataset's name in the cons
 View(person_data)
 ```
 
-
-When you run this code in RStudio, it will open the data in the RStudio's interactive data viewer, which is a spreadsheet-like viewer that provides a quick look at the data. You can also open the viewer by clikcing the dataset's name in the "Environment Pane":  
+###
+When you run a `View(data)` function in RStudio, it will open the data in the RStudio's interactive data viewer, which is a spreadsheet-like viewer that provides a quick look at the data. You can also open the viewer by clicking the dataset's name in the "Environment Pane":  
 
 
 <figure>
@@ -114,7 +130,9 @@ When you run this code in RStudio, it will open the data in the RStudio's intera
 
 <br>
 
-This viewer is especially useful for quickly scanning through your data, checking variable names, and seeing the values that your variables take. However, remember, this is only for viewing; you cannot edit your data in this viewer.  
+###
+This interactive viewer is especially useful for quickly scanning through your data, checking variable names, and seeing the values that your variables take. Be aware though that this interactive viewer is only for *viewing*; you cannot edit your data in this viewer.  
+
 
 ### Inspecting the Structure 
 Another important step in exploring your data is inspecting its structure. As you saw earlier in this lesson, the `head()` function is great for viewing the first few rows and columns of a dataset. Another handy function is `glimpse()` from the dplyr package, which provides a quick way to view the structure of your dataset. Run `glimpse()` on the `person_data` dataset:  
@@ -131,6 +149,8 @@ person_data <- read_csv(file = "https://raw.githubusercontent.com/davidcaughlin/
 glimpse(person_data)
 ```
 
+
+###
 The `glimpse()` function will display the total number of observations (rows), the total number of variables (columns), and a line for each variable. For each variable, `glimpse()` shows the variable's name, its type, and the first few entries.  
 
 
@@ -153,22 +173,25 @@ writexl::write_xlsx(person_data, "person_data.xlsx")
 haven::write_sav(person_data, "person_data.sav")
 ```
 
-
+###
 But where do the files go when you "write" them? By default, R writes files to your working directory, which is the folder where your R session is running. In RStudio, the working directory is typically the root directory of your RStudio Project.  
 
-You can check your current working directory using the getwd() function:  
+###
+
+You can check your current working directory using the `getwd()` function:  
 ```{r, eval=FALSE}
 # Get the current working directory
 getwd()
 ```
 
-
+###
 You likely would want to save your data in a designated location. In that case, you would specify a different folder to write to by providing a file path instead of just a file name to the `path` argument:  
 
 ```{r, eval=FALSE}
 haven::write_sav(person_data, "path-to-desired-directory/person_data.sav")
 ```
 
+###
 This is particularly useful when you're working with multiple datasets and want to keep your files organized.  
 
 
@@ -176,6 +199,3 @@ This is particularly useful when you're working with multiple datasets and want 
 We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.  
 
 In the next section, titled **"Tidy Data"**, we will dive deeper into this topic, focusing on techniques for tidying up your messy datasets into a format that will be much easier to work with. With your data in "tidy" format, you'll find that you spend less time wrestling with data structures and more time addressing the analytic questions at hand.  
-
-**Stay tuned!**  
-
