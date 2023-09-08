@@ -55,6 +55,7 @@ grade_this({
 ```
 
 
+###
 Now use the global variable `emp_salary_path` as the `path` attribute to import the dataset. Save the dataset in a variable called `emp_salary_data` and inspect the first few rows.  
 
 ```{r, emp-salary-setup}
@@ -121,12 +122,14 @@ question("Which variable is missing values?",
 ### Exercise 2
 For the performance appraisal process, every employee should have a performance score. However, you've noticed that some employees don't have this score in the `emp_data` dataset.  
 
-Perform the following steps:  
+###
+Perform the following steps:\
 
-- Group by department and create a summarized column called `avg_performance` that calculates the average performance score and removes NAs. Use the `round()` function to round the scores Save the result in a variable called `avg_scores`.  *Hint: use group_by() and summarise()*  
-- Left join `avg_scores` with the `emp_data` dataset. Save the result as `updated_emp_data`.  
-- Overwrite the `performance_score` to replace missing performance scores with average performance score of their department. Overwrite `updated_emp_data` by saving the result as `updated_emp_data`. *Hint: use mutate(), and call is.na() in an ifelse()*  
-- View the `updated_emp_data` tibble.  
+- Group by department and create a summarized column called `avg_performance` that calculates the average performance score and removes NAs. Use the `round()` function to round the scores Save the result in a variable called `avg_scores`.  *Hint: use group_by() and summarise()*\
+- Left join `avg_scores` with the `emp_data` dataset. Save the result as `updated_emp_data`.
+- Overwrite the `performance_score` to replace missing performance scores with average performance score of their department.\
+- Overwrite `updated_emp_data` by saving the result as `updated_emp_data`. *Hint: use mutate(), and call is.na() in an ifelse()*\
+- View the `updated_emp_data` tibble.\
 
 ```{r ex-2, exercise = TRUE, exercise.completion = FALSE}
 
@@ -238,6 +241,7 @@ grade_this({
 ```
 
 
+###
 **Part 2**  
 While comparing the `updated_emp_data` and `emp_salary_data` datasets, you realize some employees present in the `updated_emp_data` dataset are missing in the `emp_salary_data` dataset. Identify these employees. Save the result in a variable named `missing_employees` and then print the variable.  
 
@@ -326,7 +330,7 @@ grade_this({
 ```
 
 
-
+###
 **Congratulations on completing the exercises!**  
 
 Remember to keep practicing. The more you code, the more comfortable you'll get with these concepts.  
