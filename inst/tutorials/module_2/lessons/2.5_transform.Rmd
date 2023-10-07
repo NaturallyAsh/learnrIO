@@ -2,10 +2,13 @@
 title: "Transforming Data"
 ---
 
-One of the most crucial aspects of data analysis: data transformation. Data wrangling is all about cleaning, structuring, and enriching raw data into a desired format for better decision making. We'll be using dplyr, a core package of the Tidyverse, to demonstrate the powerful capabilities of data wrangling.  
+One of the most crucial aspects of data analysis: data transformation. Data transformation is all about cleaning, structuring, and enriching raw data into a desired format for better decision making. We'll be using dplyr, a core package of the Tidyverse, to demonstrate the powerful capabilities of data transformation.  
 
 ### Working with Tibbles
-Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the core tidyverse `tibble` package, operates as a modern reimagining of the traditional data frame. At its core, a tibble inherits all the features that have made data frames a versatile and powerful tool in R. However, a tibble goes one step further, fine-tuning some of the characteristics of data frames to provide an improved experience of data handling. Here are some enhancements that tibbles bring to the table:  
+Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the core tidyverse `tibble` package, operates as a modern reimagining of the traditional data frame. At its core, a tibble inherits all the features that have made data frames a versatile and powerful tool in R. However, a tibble goes one step further, fine-tuning some of the characteristics of data frames to provide an improved experience of data handling.\
+
+###
+Here are some enhancements that tibbles bring to the table:\
 
 - **No automatic conversion of strings to factors**: When dealing with textual data, tibbles preserve the original character strings without automatically converting them into factors. This is a significant improvement, especially when working with large text datasets where unnecessary factor levels can complicate data processing.  
 
@@ -17,36 +20,42 @@ Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the 
 
 
 ### Creating a Tibble
-Creating a tibble is straightforward with the `tibble()` function. Let's create a tibble with employee data:  
+Although rare, there might be times where you want to create a tibble with a few data points by hand. Creating a tibble is straightforward with the `tibble()` function. In `tibble()` each argument defines a column/variable and it's values. The syntax would look like:\
 
-```{r}
+```{r, eval=FALSE}
+tibble(
+  col_1 = c(value1, value2, value3),
+  col_2 = c(value1, value2, value3)
+)
+```
 
-# Create a tibble
-employee_tibble <- tibble(
-  name = c("Alice", "Bob", "Charlie", "David", "Eve"),
-  age = c(24, 30, 35, 42, 29),
-  department = c("Sales", "HR", "IT", "Marketing", "Sales"),
-  salary = c(50000, 55000, 60000, 65000, 70000)
+###
+Let's create a tibble with data on three employees. In the `tibble()` function, create one column named `name` with values of "Alice", "Bob", and "Charlie", and create another column named `age` with values of 24, 30, and 35. Run the code to view the output:\  
+
+```{r create-tibble, exercise = TRUE}
+tibble(
+  ___ = ___,
+  ___ = ___
+)
+```
+
+```{r create-tibble-hint-1}
+tibble(
+  name = c(___, ___, ___),
+  age = c(___, ___, ___)
+)
+```
+
+```{r create-tibble-solution}
+tibble(
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(24, 30, 35)
 )
 ```
 
 
 ###
-
-Now let's create a tibble with non-syntactic names:  
-```{r}
-# Creating a tibble with non-syntactic names
-non_syntactic_tibble <- tibble(
-  `First Name` = c("Alice", "Bob", "Charlie", "David", "Eve"),
-  `Age in years` = c(24, 30, 35, 42, 29),
-  `Department` = c("Sales", "HR", "IT", "Marketing", "Sales"),
-  `Annual Salary ($)` = c(50000, 55000, 60000, 65000, 70000)
-)
-
-non_syntactic_tibble
-```
-
-Notice how we use backticks to denote non-syntactic names. Viewing `non_syntactic_tibble`, you can see the tibble clearly indicating the data types of each column and showing the first few entries.  
+In the output, you see the tibble clearly indicating the data types of each column and showing the first few entries.    
 
 
 ### Converting Data Frames to Tibbles
@@ -63,9 +72,9 @@ employee_df <- data.frame(
 )
 ```
 
-We can convert it to a `tibble`:  
+Use `as_tibble()` to convert `employee_df` to a `tibble`. Run the code to view the output:\
 
-```{r as-tibble-setup}
+```{r prepare-as-tibble}
 employee_df <- data.frame(
   Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
   Age = c(24, 30, 35, 42, 29),
@@ -74,7 +83,11 @@ employee_df <- data.frame(
 )
 ```
 
-```{r as-tibble, exercise=TRUE}
+```{r as-tibble, exercise=TRUE, exercise.setup = "prepare-as-tibble"}
+
+```
+
+```{r as-tibble-solution}
 as_tibble(employee_df)
 ```
 
@@ -82,8 +95,11 @@ as_tibble(employee_df)
 ### Do We Really Want Non-syntactic Names?
 Even though `tibbles` allow for non-syntactic names, it is generally considered bad practice to have non-syntactic column names. Working with non-syntactic names could lead to errors and confusion, and it's essential to clean these names to ensure smooth data analysis.  
 
+###
+
 Enter the `janitor` package. This package offers user-friendly functions to examine and clean data, including formatting column names and creating frequency tables. The `clean_names()` function in the `janitor` package is used to clean the names of an object. The resulting names are unique and consist only of the underscore `_` character, numbers, and lowercase letters. This is achieved by removing spaces, punctuation, and other non-standard characters, and converting accented characters to ASCII.
 
+###
 Let's take a look at an example of how to use the `clean_names()` function. First, use the codeblock and print the `non_syntactic_tibble`:  
 
 ```{r prepare-non-syntactic}
@@ -103,7 +119,10 @@ non_syntactic_tibble <- tibble(
 non_syntactic_tibble
 ```
 
-You will notice that the column names contain spaces, punctuation, and a non-standard `$` character. Call the `non_syntactic_tibble` and pipe it to the `clean_names()` function. Save the this to a variable called `clean_tibble_names`. Remember to print the variable:  
+###
+You will notice that the column names contain spaces, punctuation, and a non-standard `$` character.\
+
+Call the `non_syntactic_tibble` and pipe it to the `clean_names()` function. Save the this to a variable called `clean_tibble_names`. Remember to print the variable to view the result:  
 
 ```{r clean-names, exercise=TRUE, exercise.setup="prepare-non-syntactic"}
 
@@ -127,26 +146,30 @@ clean_tibble_names <- non_syntactic_tibble |>
 clean_tibble_names
 ```
 
-As you can see, the `clean_names()` function takes `clean_tibble_names` as input and returns a tibble with cleaned column names. In this case, the resulting column names will be `first_name`, `age_in_years`, `department`, and `annual_salary`. These column names consist only of lower-case letters, numbers, and the underscore character, and they're much easier to work with.  
+###
+As you can see, the `clean_names()` function takes `clean_tibble_names` as input and returns a tibble with cleaned column names. In this case, the resulting column names will be `first_name`, `age_in_years`, `department`, and `annual_salary`.\
+
+These column names consist only of lower-case letters, numbers, and the underscore character, and they're much easier to work with.  
 
 
+//TODO: all exercises below are incomplete
 
 ### Subsetting Tibbles
 Subsetting tibbles also works similarly to subsetting data frames. Tibbles simplify to a vector when a single column is selected with `[[]]` or `$`:  
 
-```{r}
+```{r subset-double, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
 # Subsetting with '[[]]' and `$` - returns a double vector
-employee_tibble[["age"]]
-employee_tibble$age
+employee_df[["Age"]]
+employee_df$Age
 
 ```
 
-
+###
 However, a tibble is always returned when subsetting with `[]`:  
 
-```{r}
+```{r subset-single, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
 # Subsetting with '[]' - returns a new tibble with the "age" variable as a column
-employee_tibble["age"]
+employee_df["Age"]
 ```
 
 
@@ -155,21 +178,20 @@ Now, what if we want to subset a tibble by rows?
 
 We can subset by rows by providing a vector of row indices in single brackets. For instance, to get the first three rows of our tibble, we would do:  
 
-```{r}
-employee_tibble[1:3, ]
+```{r subset-rows, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
+employee_df[1:3, ]
 ```
 
-
+###
 **Remember**, the comma is necessary when subsetting rows using single brackets. The part *before* the comma refers to rows, and the part *after* refers to columns. Leaving the column part blank means **"give me all columns"**.  
 
-###
-**Subsetting by Rows and Columns**  
-We can subset specific rows and columns simultaneously using single brackets. To do this, we specify the row indices before the comma, and the column names after the comma.  
+### Subsetting by Rows and Columns
+We can subset specific rows and columns simultaneously using single brackets. To do this, we specify the row indices before the comma, and the column names after the comma.\
 
 For instance, to get the `age` and `department` columns for the first three employees, we would do:  
 
-```{r}
-employee_tibble[1:3, c("age", "department")]
+```{r subset-rows-and-cols, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
+employee_df[1:3, c("Age", "Department")]
 ```
 
 
@@ -177,29 +199,35 @@ employee_tibble[1:3, c("age", "department")]
 ### Conditional Subsetting with Tibbles
 Subsetting is not limited to specifying column names or indices. A key strength of R (and tibbles) is the ability to subset based on logical (TRUE or FALSE) conditions.  
 
+###
 For instance, suppose we're interested in viewing only the employees in the 'Sales' department or only the employees who are over 30 years old. We can achieve this with conditional subsetting. Let's take a look at how we can do this:  
 
-```{r}
-sales_department <- employee_tibble[employee_tibble$department == "Sales",]
+```{r subset-tibbles, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
+sales_department <- employee_df[employee_df$Department == "Sales",]
 
 sales_department
 ```
 
-In this example, `employee_tibble$department == "Sales"` creates a logical vector that is `TRUE` when the department is "Sales" and `FALSE` otherwise. When this logical vector is used to subset the tibble, only the rows where the condition is `TRUE` are returned.  
+###
+In the example, `employee_df$Department == "Sales"` creates a logical vector that is `TRUE` when the department is "Sales" and `FALSE` otherwise. When this logical vector is used to subset the tibble, only the rows where the condition is `TRUE` are returned.  
 
+###
 Similarly, we can subset based on numerical conditions:  
 
-```{r}
-older_employees <- employee_tibble[employee_tibble$age > 30,]
+```{r subset-numerical, exercise = TRUE, exercise.setup = "prepare-as-tibble"}
+older_employees <- employee_df[employee_df$Age > 30,]
 
 older_employees
 ```
 
-Here, `employee_tibble$age > 30` creates a logical vector that is `TRUE` when the age is greater than 30 and `FALSE` otherwise. The tibble is subsetted in the same way as before, returning only the rows where the condition is `TRUE`.  
+###
+Here, `employee_df$Age > 30` creates a logical vector that is `TRUE` when the age is greater than 30 and `FALSE` otherwise. The tibble is subsetted in the same way as before, returning only the rows where the condition is `TRUE`.  
 
+
+###
 Remember that you can use all sorts of logical conditions to subset your tibble in exactly the way you need. By mastering these techniques, you will find it much easier to work with and extract specific information from large datasets.  
 
-
+###
 <div class="callout">
 Note that throughout the lessons, we will use the name tibble and data frame interchangeably.  
 </div>
@@ -207,8 +235,10 @@ Note that throughout the lessons, we will use the name tibble and data frame int
 
 
 ### What is dplyr? 
-**dplyr** is a powerful R package that provides a flexible and consistent set of tools for manipulating datasets in R. This package is part of the wider tidyverse, which provides a suite of tools for data cleaning, transformation, and visualization. dplyr offers a cohesive set of **verbs** that allow you to perform common data manipulation tasks such as filtering, mutating (adding new variables), summarizing, and arranging data in a clear, straightforward way.  
+**dplyr** is a powerful R package that provides a flexible and consistent set of tools for manipulating datasets in R. This package is part of the wider tidyverse, which provides a suite of tools for data cleaning, transformation, and visualization. dplyr offers a cohesive set of **verbs** that allow you to perform common data manipulation tasks such as filtering, mutating (adding new variables), summarizing, and arranging data in a clear, straightforward way.\
 
+
+###
 `dplyr` verbs all share three commonalities:  <!-- TODO: cite Hadley r4ds -->
 
 1. The first argument is always a data frame.  
@@ -216,9 +246,13 @@ Note that throughout the lessons, we will use the name tibble and data frame int
 3. The output is always a new data frame.  
 
 
-**The Return of the Pipe!**  
+### The Return of the Pipe!
 
 In the previous lesson - Tidy Data - we introduced the pipe operator (`|>`) for writing neat and efficient code. You will often use more than one `dplyr` verb to solve complex problems. The `|>` allows you to combine, or **chain**, multiple `dplyr` verbs together in one seamless codeblock.  
+
+###
+In essence, `|>` takes the object on its left and sends it directly to the function on its right, as if placing it on the conveyor belt. The function then processes the object and sends it to the next function if there is one.  
+
 
 ```{r, eval=FALSE}
 employees_data |> 
@@ -227,53 +261,72 @@ employees_data |>
   summarise(avg_salary = mean(salary, na.rm = TRUE))
 ```
 
-In essence, `|>` takes the object on its left and sends it directly to the function on its right, as if placing it on the conveyor belt. The function then processes the object and sends it to the next function if there is one.  
-
+###
 In the example code above, `employees_data`is the object, and `filter(department == "HR")` is the function. `|>` passes `employees_data` along the conveyor belt and puts it directly into `filter(department == "HR")` as its first argument. This is a convenient way to chain functions together without explicitly mentioning the object each time.  
 
+###
 Now that you have an understanding of the pipe operator (`|>`), **let's explore the key functions for data wrangling provided by dplyr!**  
+
 
 ### dplyr Functions 
 Let's take a closer look at some of the core dplyr functions:  
 
+```{r prepare-dplyr-data}
+employees_data <- tibble(
+  name = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  age = c(25, 30, 35, 40, 45, 50),
+  job_title = c("Analyst", "Manager", "Software Developer", "Software Developer", "Analyst", "Analyst"),
+  department = c("Sales", "HR", "Sales", "HR", "Marketing", "Sales"),
+  salary = c(52900, 61234, 77899, 81011, 99127, 114025),
+  hire_date = c("2013-02-22", "2009-09-05", "2022-11-13", "2021-08-27", "2021-01-20", "2018-10-02"),
+  promotion_date = c("2015-12-03", "2011-04-12", NA, "2022-02-06", NA, NA)
+)
+```
 
 ###
 **filter()**  
-The `filter()` function lets you select rows in your data when certain criteria that you specify are TRUE. Rows where the condition evaluates to `NA` are dropped. For instance, you might want to see only the data for employees in the "Sales" department. You'd do this by using:  
-```{r}
+The `filter()` function lets you select rows in your data when certain criteria that you specify are TRUE. Rows where the condition evaluates to `NA` are dropped.\
+
+For instance, you might want to see only the data for employees in the "Sales" department. You'd do this by using:  
+```{r dplyr-filter-single, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 sales_data <- employees_data |> 
   filter(department == "Sales")
 
 sales_data
 ```
 
+###
 You can also use multiple conditions. For instance, if you want to find employees in the HR department with a salary greater than 50000, you can do:  
 
-```{r}
+```{r dplyr-filter-multi, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 hr_high_salary <- employees_data |> 
   filter(department == "HR", salary > 50000)
 
 hr_high_salary
 ```
 
+
+###
 If you want to find employees in either the HR department or the IT department, use the `|` (OR) operator:  
 
-```{r}
+```{r dplyr-filter-OR, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 hr_or_it <- employees_data |> 
   filter(department == "HR" | department == "Marketing")
 
 hr_or_it
 ```
 
+###
 There is a very useful shortcut that we can use in `filter()` calls. The shortcut is `%in% `. We can rewrite the above example using `%in%`:  
 
-```{r}
+```{r dplyr-filter-IN, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 hr_or_it <- employees_data |> 
   filter(department %in% c("HR", "Marketing"))
 
 hr_or_it
 ```
 
+###
 What `%in%` does is keep the rows with values equal to those specified in the `c()` function.  
 
 
@@ -281,25 +334,27 @@ What `%in%` does is keep the rows with values equal to those specified in the `c
 **select()**  
 `select()` allows you to choose specific columns (variables) in your dataset. It's not uncommon to have datasets with many variables, but you might be interested in only a few of them. For example, if you only want to work with the 'name', 'age', and 'salary' columns, you could use:  
 
-```{r}
+```{r dplyr-select, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 selected_data <- employees_data |> 
   select(name, age, salary)
 
 selected_data
 ```
 
+###
 `select()` also supports a number of helper functions like `starts_with()`, `ends_with()`, `contains()`, etc. If you wanted to select all columns that contain the word "date", you could do:  
 
-```{r}
+```{r dplyr-select-helper, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 date_columns <- employees_data |> 
   select(contains("date"))
 
 date_columns
 ```
 
+###
 To deselect certain columns, use the `-` symbol. If we want all columns except for `name`:  
 
-```{r}
+```{r dplyr-deselect, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 all_except_name <- employees_data |> 
   select(-name)
 
@@ -312,16 +367,17 @@ all_except_name
 **mutate()**  
 `mutate()` lets you add new variables to your dataset. These can be transformations of existing variables, or they could be entirely new variables you calculate based on existing variables. For instance, you might want to calculate a new salary after a 5% increase:  
 
-```{r, eval=FALSE}
+```{r dplyr-mutate, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 mutate_one_column <- employees_data |> 
   mutate(salary_increase = salary * 1.05)
 
 mutate_one_column
 ```
 
+###
 You can also mutate multiple columns at once. If we also wanted to create an `is_above_70000` variable:  
 
-```{r}
+```{r dplyr-mutate-multi, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 mutate_two_columns <- employees_data |> 
   mutate(
     salary_increase = salary * 1.05,
@@ -331,19 +387,28 @@ mutate_two_columns <- employees_data |>
 mutate_two_columns
 ```
 
-
+###
 You can also use `mutate()` with the `across()` function to apply a transformation to multiple columns at once. Say we want to round all salary related columns:  
 
-```{r}
+```{r prepare-dplyr-mutate}
+mutate_two_columns <- employees_data |> 
+  mutate(
+    salary_increase = salary * 1.05,
+    is_above_70000 = ifelse(salary > 70000, TRUE, FALSE)
+    )
+```
+
+```{r dplyr-mutate-across, exercise = TRUE, exercise.setup = "prepare-dplyr-mutate"}
 rounded_data <- mutate_two_columns |> 
   mutate(across(ends_with("salary"), round))
 
 rounded_data
 ```
 
+###
 `mutate()` can also be used to modify existing columns. To modify a column, simply supply the **exact** name of the variable you want to modify in the `mutate()` function. If we wanted to update the `salary` column to represent rounded values:  
 
-```{r}
+```{r dplyr-mutate-modify, exercise = TRUE, exercise.setup = "prepare-dplyr-mutate"}
 modified_column <- mutate_two_columns |> 
   mutate(
     salary = round(salary)
@@ -351,35 +416,39 @@ modified_column <- mutate_two_columns |>
 ```
 
 
-###
+### Conditional Transformation
 You often need more than simple arithmetic or transformation operations. For instance, you may want to change the value of a variable based on certain conditions. This is where **conditional transformation** functions like `if_else()` and `case_when()` come into play.  
 
 ###
 **Using mutate() with if_else()**  
 `if_else()` is a vectorised function that takes three arguments: a logical condition, a value to return if the condition is `TRUE`, and a value to return if the condition is `FALSE`. It's particularly useful in `mutate()` when you want to create a new variable based on a simple binary (TRUE/FALSE) condition.  
 
+###
 Let's say you want to create a new variable, `high_salary`, that flags whether an employee has a salary above the median or not.  
 
-```{r}
+```{r dplyr-mutate-if-else, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 employees_data |> 
   mutate(high_salary = if_else(salary > median(salary, na.rm = TRUE), "Yes", "No"))
 ```
 
+###
 The `if_else()` function checks if the salary of an employee is greater than the median salary. If it is, "Yes" is returned, otherwise "No" is returned. The result is stored in the new variable `high_salary`.  
 
 ###
 **Using mutate() with case_when()**  
 While `if_else()` is useful for binary conditions, `case_when()` is better suited for more complex conditions involving multiple possibilities. `case_when()` takes a series of "condition ~ value" pairs and returns the first value where its corresponding condition is `TRUE`.  
 
-Let's assume we want to classify the employees in `employees_data` into different categories based on their salaries:  
+###
+Let's assume we want to classify the employees in `employees_data` into different categories based on their salaries:\
 
-- "Low" if salary is less than the 25th percentile.  
-- "Medium" if salary is between the 25th and 75th percentile.  
-- "High" if salary is greater than the 75th percentile.  
+- "Low" if salary is less than the 25th percentile.\
+- "Medium" if salary is between the 25th and 75th percentile.\
+- "High" if salary is greater than the 75th percentile.\
 
+###
 We can achieve this using `case_when()` in `mutate()` as follows:  
 
-```{r}
+```{r dplyr-mutate-case-when, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 employees_data |> 
   mutate(
     salary_class = case_when(
@@ -390,31 +459,33 @@ employees_data |>
   )
 ```
 
+###
 `case_when()` checks the conditions from top to bottom and assigns the corresponding value to the `salary_class` variable. Note the use of `TRUE ~ "High"` at the end, which acts as an "else" clause, assigning "High" when none of the previous conditions is met.
-
 
 
 ###
 **arrange()**  
 `arrange()` lets you reorder rows according to the values of particular columns. By default, it sorts in ascending order. For example, to arrange employees by age:  
 
-```{r, eval=FALSE}
+```{r dplyr-arrange, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 arranged_data <- employees_data |> 
   arrange(age)
 
 arranged_data
 ```
 
+###
 To arrange rows in descending order, use the `desc()` function. If we want to have the dataset ordered by highest `age` first:  
 
-```{r}
+```{r dplyr-arrange-rows, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 desc_age_column <- employees_data |> 
   arrange(desc(age))
 ```
 
+###
 For arranging by multiple columns, just add more column names. To arrange by `department` (ascending) and then `salary` (descending) within each department:  
 
-```{r}
+```{r dplyr-arrange-mulit, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 arrange_multiple <- employees_data |> 
   arrange(department, desc(salary))
 
@@ -427,7 +498,7 @@ arrange_multiple
 **group_by() and summarise()**  
 `group_by()` and `summarise()` are a powerful combination. These two functions are commonly used together. `group_by()` allows you to group your data based on the values in one or more columns. Use `group_by()` to divide your dataset into groups meaningful for your analysis. `summarise()` allows you to calculate summary statistics for each group. For instance, you can calculate the average salary by department like this:  
 
-```{r}
+```{r dplyr-summarise-single, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 summary_data <- employees_data |> 
                 group_by(department) |> 
                 summarise(avg_salary = mean(salary, na.rm = TRUE))
@@ -435,9 +506,10 @@ summary_data <- employees_data |>
 summary_data
 ```
 
+###
 We can also summarise multiple variables at once. If we also want the maximum salary in each department:  
 
-```{r}
+```{r dplyr-summarise-multi, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 salary_stats_by_department <- employees_data |> 
                               group_by(department) |> 
                               summarise(avg_salary = mean(salary, na.rm = TRUE),
@@ -446,9 +518,10 @@ salary_stats_by_department <- employees_data |>
 salary_stats_by_department
 ```
 
+###
 To group by multiple variables, add them to the `group_by()` function. If we want average salary by department and job title:  
 
-```{r}
+```{r dplyr-groupby-multi, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 average_salary_by_department_job <- employees_data |> 
                                      group_by(department, job_title) |> 
                                      summarise(avg_salary = mean(salary, na.rm = TRUE))
@@ -462,7 +535,7 @@ average_salary_by_department_job
 **count()**  
 `count()` is a convenient function that combines `group_by()` and `summarise()` to quickly count the total number of records within each group. For instance, to count the number of employees in each department:  
 
-```{r, eval=FALSE}
+```{r dplyr-count, exercise = TRUE, exercise.setup = "prepare-dplyr-data"}
 count_data <- employees_data |> 
   count(department)
 ```
@@ -473,29 +546,84 @@ count_data <- employees_data |>
 **bind_rows() and bind_cols()**  
 `bind_rows()` and `bind_cols()` are useful functions for combining two datasets. `bind_rows()` stacks two datasets on top of each other, while `bind_cols()` places them side by side:  
 
-```{r, eval=FALSE}
+```{r prepare-bind-data}
+# Create employees_data
+employees_data <- tibble(
+  name = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  age = c(25, 30, 35, 40, 45, 50),
+  job_title = c("Analyst", "Manager", "Software Developer", "Software Developer", "Analyst", "Analyst"),
+  department = c("Sales", "HR", "Sales", "HR", "Marketing", "Sales"),
+  salary = c(52900, 61234, 77899, 81011, 99127, 114025),
+  hire_date = c("2013-02-22", "2009-09-05", "2022-11-13", "2021-08-27", "2021-01-20", "2018-10-02"),
+  promotion_date = c("2015-12-03", "2011-04-12", NA, "2022-02-06", NA, NA)
+)
+
+# Create employees_data1
+employees_data1 <- tibble(
+  name = c("Gary", "Helen", "Ian"),
+  age = c(28, 38, 48),
+  department = c("Marketing", "Sales", "HR"),
+  salary = c(52000, 62000, 72000)
+)
+
+# Create employees_data2
+employees_data2 <- tibble(
+  name = c("Judy", "Kevin", "Laura"),
+  age = c(32, 42, 52),
+  department = c("Sales", "Marketing", "HR"),
+  salary = c(53000, 63000, 73000)
+)
+
+# Create benefits_data
+benefits_data <- tibble(
+  health_insurance = c("Plan A", "Plan B", "Plan A", "Plan C", "Plan B", "Plan A"),
+  retirement_plan = c("401K", "403B", "401K", "403B", "401K", "403B")
+)
+```
+
+```{r dplyr-bind-rows, exercise = TRUE, exercise.setup = "prepare-bind-data"}
 # Assuming we have two similar datasets, employees_data1 and employees_data2
 combined_data <- bind_rows(employees_data1, employees_data2)
+```
 
+```{r dplyr-bind-cols, exercise = TRUE, exercise.setup = "prepare-bind-data"}
 # Assuming we have two datasets, employees_data and benefits_data, with the same number of rows
 combined_data_cols <- bind_cols(employees_data, benefits_data)
 ```
 
 
-###
-**Joining Datasets**  
+### Joining Datasets 
 Joining data is a crucial process in data analysis that involves combining data from different sources. The operation of joining data refers to the process of combining rows from two or more tables based on a related column between them, also known as a **key**. The kind of operation to be performed depends on which keys you want to return.  
 
+###
 `dplyr` provides several functions to join datasets, including `inner_join()`, `left_join()`, `right_join()`, `full_join()`, `semi_join()`, and `anti_join()`. 
 
 ###
 **inner_join()**  
 This function returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combinations of the matches are returned.  
 
+```{r prepare-join-data}
+# Create emp_join_data tibble
+emp_join_data <- tibble(
+  emp_id = c(1, 2, 3, 4, 5),
+  age = c(25, 30, 35, 40, 45),
+  dept_id = c(1, 2, 2, 3, 1),
+  job_satisfaction = c(7, 6, 8, 9, 6),
+  performance_rating = c(3, 4, 3, 5, 4),
+  salary = c(50000, 55000, 60000, 65000, 70000)
+)
 
+# Create dept_join_data tibble
+dept_join_data <- tibble(
+  dept_id = c(1, 3, 2, 1, 2),
+  dept_name = c("HR", "Engineering", "Marketing", "HR", "Engineering")
+)
+```
+
+###
 Let's assume we have two datasets, `emp_join_data` (employee data), and `dept_join_data` (department data). View both datasets in the codeblock below:  
 
-```{r inner-join-view, exercise=TRUE}
+```{r inner-join-view, exercise=TRUE, exercise.setup = "prepare-join-data"}
 
 ```
 
@@ -504,14 +632,17 @@ emp_join_data
 dept_join_data
 ```
 
+###
 With `inner_join()` we want to join the `emp_join_data` and `dept_join_data` datasets based on the `dept_id` column and keep only those rows in `emp_join_data` and `dept_join_data` where `dept_id` is common.  
 
-```{r}
+```{r dplyr-inner-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   inner_join(dept_join_data, by = "dept_id")
 ```
 
+###
 As you can see, the new dataset contains all the columns from both `emp_join_data` and `dept_join_data` where `dept_id` matches in both datasets.  
+
 
 ###
 **left_join() and right_join()**  
@@ -519,17 +650,19 @@ As you can see, the new dataset contains all the columns from both `emp_join_dat
 
 If we want to keep all the rows in `emp_join_data` irrespective of whether there is a matching `dept_id` in `dept_join_data` or not, we use `left_join()`.  
 
-```{r}
+```{r dplyr-left-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   left_join(dept_join_data, by = "dept_id")
 ```
 
+###
 The result contains all the columns from `emp_join_data` and `dept_join_data`. For rows in `emp_join_data` with no match in `dept_join_data`, we will have `NA` values in the new columns.  
 
 
+###
 A `right_join()`, as the name suggests, is the opposite of a `left_join()`. It keeps all the rows in the second (right) dataset and any matching rows in the first (left) dataset.  
 
-```{r}
+```{r dplyr-right-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   right_join(dept_join_data, by = "dept_id")
 ```
@@ -539,7 +672,7 @@ emp_join_data |>
 **full_join()**  
 A `full_join()`, or full outer join, returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.  
 
-```{r}
+```{r dplyr-full-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   full_join(dept_join_data, by = "dept_id")
 ```
@@ -549,13 +682,15 @@ emp_join_data |>
 **semi_join()**  
 A semi-join can be useful if you want to filter your dataset to only include rows that have a match in another dataset. This function returns all rows from x where there are matching values in y, keeping just columns from x.  
 
+###
 Although similar to an `inner_join()`, `semi_join()` differs because an `inner_join()` will return one row of x for each matching row of y, where a `semi_join()` will never duplicate rows of x.  
 
-```{r}
+```{r dplyr-semi-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   semi_join(dept_join_data, by = "dept_id")
 ```
 
+###
 You can see that the result contains all the rows from `emp_join_data` for which there is a matching `dept_id` in `dept_join_data`.  
 
 
@@ -563,11 +698,12 @@ You can see that the result contains all the rows from `emp_join_data` for which
 **anti_join()**  
 An `anti_join()` returns all rows from x where there are not matching values in y, keeping just columns from x. `anti_join()` can be used to remove all rows from your dataset that have a match in another dataset.  
 
-```{r}
+```{r dplyr-anti-join, exercise = TRUE, exercise.setup = "prepare-join-data"}
 emp_join_data |> 
   anti_join(dept_join_data, by = "dept_id")
 ```
 
+###
 The result contains all the rows from `emp_join_data` for which there is not a matching `dept_id` in `dept_join_data`.  
 
 
@@ -575,13 +711,24 @@ The result contains all the rows from `emp_join_data` for which there is not a m
 Joining data is an essential operation when working with multiple data sources, enabling you to efficiently combine and analyze data. The different types of joins allow you to manipulate your datasets according to your specific needs, giving you a high degree of control over your data analysis process.  
 
 
-###
-**Changing column data types**  
+### Changing column data types
 Sometimes, we may need to change the data type of a column to perform certain operations. R provides several in-built functions that can be used to convert one data type to another, such as `as.numeric()`, `as.character()`, `as.factor()`, `as.Date()`, and many more. You can use these functions in conjunction with the `mutate()` to change the data type of a column in a data frame.  
 
+```{r prepare-data-types-data}
+employees_data_types <- tibble(
+  name = c("John", "Sara", "Amy", "Peter", "Emma"),
+  age = c("25", "32", "29", "45", "38"),
+  salary = c("$50000", "$60000", "$55000", "$65000", "$62000"),
+  department = c("Sales", "HR", "Sales", "HR", "Sales"),
+  start_date = c("2020-06-01", "2019-03-15", "2021-01-10", "2018-07-30", "2019-11-20"),
+  rating = c(3, 2, 3, 5, 4)
+)
+```
+
+###
 First, view the first 6 rows of `employees_data` using the codeblock below:  
 
-```{r view-types, exercise=TRUE, exercise.lines=2}
+```{r view-types, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -589,17 +736,16 @@ First, view the first 6 rows of `employees_data` using the codeblock below:
 head(employees_data_types)
 ```
 
+###
 You can see that the `rating` column is numeric (integer), and `age`, `salary`, `start_date`, and `department` are characters. Let's change these column data types.  
 
 
-###
-**Changing Numeric Columns to Character**  
-
+### Changing Numeric Columns to Character
 You can use the `as.character()` function to convert the `rating` column from integer to character.  
 
 In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and convert `rating` to a character. Store the result in a variable called `changed_rating` and print the variable when you are done.  
 
-```{r changed-rating, exercise=TRUE}
+```{r changed-rating, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -625,14 +771,13 @@ changed_rating
 ```
 
 
-###
-**Converting Character Columns to Date**  
-
+### Converting Character Columns to Date
 When you have date data that is stored as a character string, you might want to convert it to a **Date** data type. This can allow you to perform date-specific operations, such as extracting the year or calculating the difference between dates. You can use the R built-in function `as.Date()` to convert a character column to a Date.  
 
+###
 In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and convert `start_date` from a character to a Date. Store the result in a variable called `changed_start_date` and print the variable when you are done.  
 
-```{r changed-date, exercise=TRUE}
+```{r changed-date, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -657,6 +802,7 @@ changed_start_date <- employees_data_types |>
 changed_start_date
 ```
 
+###
 We will dive deeper into working with dates later in this lesson.  
 
 ###
@@ -664,7 +810,7 @@ We will dive deeper into working with dates later in this lesson.
 
 Converting character columns to numeric can be done using `as.numeric()`. In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and convert `age` from a character to a numeric. Store the result in a variable called `changed_age` and print the variable when you are done.  
 
-```{r changed-age, exercise=TRUE}
+```{r changed-age, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -689,12 +835,13 @@ changed_age <- employees_data_types |>
 changed_age
 ```
 
-
+###
 Another useful function to convert character columns to numeric is `parse_number()` from the `readr` package. This function is particularly useful when your data includes number-like characters with additional non-numeric characters.  
 
+###
 In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and parse `salary` into a numeric. Store the result in a variable called `changed_salary` and print the variable when you are done.  
 
-```{r changed-salary, exercise=TRUE}
+```{r changed-salary, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -719,21 +866,21 @@ changed_salary <- employees_data_types |>
 changed_salary
 ```
 
-
+###
 As you can see, the `parse_number()` function removes the dollar sign ($) and converts the remaining character string to a numeric value.  
 
 
-###
-**Converting Character Columns to Factor**  
+### Converting Character Columns to Factor
 If you are dealing with categorical data, you might want to convert a character column to a factor. This can provide useful functionalities such as preserving the order of categories, even if some categories are not present in the data, and ordering the levels of the factor according to their logical order instead of alphabetical order.  
 
 R provides the built-in `factor()` function which can create a factor from a character column, and it also allows you to specify the levels attribute to set the order of the factor levels.  
 
+###
 Consider the `rating` column in `employees_data_types`. Employees can receive a rating score from 1 to 5. You can transform `rating` into a factor using the `factor()` function and set the `levels` attribute in the logical order.  
 
 In the codeblock, pipe a `mutate()` to the `employees_data_types` tibble and convert `rating` from a character to a factor with `levels` from 1 to 5. Store the result in a variable called `changed_factor` and print the variable when you are done. Run *?factor* in your console if you get stuck!  
 
-```{r changed-factor, exercise=TRUE}
+```{r changed-factor, exercise=TRUE, exercise.setup = "prepare-data-types-data"}
 
 ```
 
@@ -758,18 +905,19 @@ changed_factor <- employees_data_types |>
 changed_factor
 ```
 
+###
 Including `levels` attribute will preserve the order of factors, even if some factors are not present in the data. For example, if you filter your tibble and end up with a subset where `rating` "3" is not present, the factor levels will still include "3", maintaining the complete set of levels.  
 
 
 ### Dealing with Dates 
 
- Dates are a crucial part of many employee datasets. They can be found in employee time records, survey timestamps, records of organizational changes, and more. We touched on dates in the previous section using `as.Date()`. However, a great and more efficient way to work with dates comes from `lubridate`, a core tidyverse package, which streamlines the process of working with these types of data.  
+Dates are a crucial part of many employee datasets. They can be found in employee time records, survey timestamps, records of organizational changes, and more. We touched on dates in the previous section using `as.Date()`. However, a great and more efficient way to work with dates comes from `lubridate`, a core tidyverse package, which streamlines the process of working with these types of data.  
 
 ###
 **Parsing Dates**  
 `lubridate` provides several functions to parse dates. The functions `ymd()`, `dmy()`, and `mdy()` convert character strings into Date objects, with the function name indicating the order of the year, month, and day components in the input string. For example:  
 
-```{r}
+```{r lubridate-parse, exercise = TRUE}
 # Parsing dates
 date1 <- ymd("20230609")
 date2 <- dmy("09-06-2023")
@@ -780,6 +928,7 @@ date2
 date3
 ```
 
+###
 If your dates are written in a different order, lubridate provides similar functions, like `ymd_hms()` and `dmy_hm()` where hms means hours, minutes, and seconds. View the help documentation - `?lubridate` - for a comprehensive list of possibilities.  
 
 ###
@@ -787,7 +936,7 @@ If your dates are written in a different order, lubridate provides similar funct
 
 Once you have your dates in the correct format, `lubridate` allows you to extract specific components from these dates using easy-to-understand functions: `year()`, `month()`, `day()`, `wday()`, and so on.  
 
-```{r}
+```{r lubridate-extract, exercise = TRUE}
 # Parsing a date
 date <- ymd("20230609")
 
@@ -798,6 +947,7 @@ day(date)  # 9
 wday(date, label = TRUE)  # "Friday"
 ```
 
+###
 In the above example, we parse a date and extract the year, month, day, and the day of the week (with `label = TRUE` to get the weekday name instead of its numeric representation).  
 
 ###
@@ -807,7 +957,7 @@ Often, we need to perform arithmetic operations with dates, like calculating the
 
 The `lubridate` package simplifies date arithmetic by allowing you to add and subtract dates using common arithmetic operators. It also provides the `duration()`, `period()`, and `interval()` functions to represent the time span in different ways.  
 
-<!-- TODO: turn into exercises -->
+<!-- TODO: turn into exercises 873-888 -->
 ```{r}
 # Parsing two dates
 start_date <- ymd("20220609")
@@ -825,6 +975,7 @@ new_date
 
 ```
 
+###
 In the above code, we first parse two dates: `start_date` and `end_date`. Then, we calculate the difference between these two dates. Note that when we subtract one date from another, we get a `difftime` object representing the time span between the two dates.  
 
 Next, we add a period of 30 days to the `start_date`. The `days()` function is a convenient way to represent a time span in days.  
@@ -833,9 +984,10 @@ Next, we add a period of 30 days to the `start_date`. The `days()` function is a
 **Working with Dates within dplyr Operations**  
 You can integrate lubridate functions within dplyr operations to perform complex manipulations on date columns in a dataset.  
 
+###
 Say we have a `review_dataset` with a `perf_review_date` column which represents the date of each employee's performance review. View the `review_dataset` in the codeblock:  
 
-```{r, include=FALSE}
+```{r prepare-review-data}
 review_dataset <- tibble(
   employee_id = c(1, 2, 3, 4, 5),
   employee_name = c("John Doe", "Jane Smith", "Bill Johnson", "Mary Williams", "Jim Brown"),
@@ -843,15 +995,7 @@ review_dataset <- tibble(
 )
 ```
 
-```{r date-setup}
-review_dataset <- tibble(
-  employee_id = c(1, 2, 3, 4, 5),
-  employee_name = c("John Doe", "Jane Smith", "Bill Johnson", "Mary Williams", "Jim Brown"),
-  perf_review_date = c(mdy("06/06/23"), mdy("12/31/22"), mdy("04/12/23"), mdy("05/17/23"), mdy("12/20/22")),
-)
-```
-
-```{r date, exercise=TRUE, exercise.lines=2}
+```{r date, exercise=TRUE, exercise.setup = "prepare-review-data"}
 
 ```
 
@@ -859,9 +1003,11 @@ review_dataset <- tibble(
 head(review_dataset)
 ```
 
+###
+<!-- TODO: turn into exercises 930-998 -->
 We can extract the month:  
 
-```{r}
+```{r extract-month, exercise = TRUE, exercise.setup = "prepare-review-data"}
 # Extracting the review month
 review_dataset |> 
   mutate(
@@ -869,13 +1015,14 @@ review_dataset |>
     ) 
 ```
 
+###
 In the above code, we add a new column, `perf_review_month`, to the `review_dataset` tibble that contains the month of the review date.  
 
 
 ###
 We can also perform arithmetic calculations on dates. To calculate the number of days until the next performance review (assuming the next review is one year from the last review):  
 
-```{r}
+```{r next-review, exercise = TRUE, exercise.setup = "prepare-review-data"}
 # Adding a column for days until the next review
 review_dataset |> 
   mutate(
@@ -883,18 +1030,20 @@ review_dataset |>
     )
 ```
 
+###
 In this code, we subtract the `perf_review_date` from a future date to calculate the number of days until the next review.  
 
 ###
 We can use other `dplyr` functions when working with dates. The `filter()` function can filter rows based on the `perf_review_date` and return only those where the review is in December:  
 
-```{r}
+```{r select-reviews, exercise = TRUE, exercise.setup = "prepare-review-data"}
 # Selecting employees with reviews in December
 review_dataset |> 
   filter(month(perf_review_date) == 12)
 
 ```
 
+###
 As you have seen, the `lubridate` package is an essential tool for working with dates in R. It provides simple and intuitive functions for parsing, extracting, and manipulating dates.  
 
 
@@ -902,30 +1051,37 @@ As you have seen, the `lubridate` package is an essential tool for working with 
 ### Handling Missing Values
 Missing values are a common occurrence in datasets and pose a significant challenge in data analysis. They can impact the results of your analysis and lead to inaccurate conclusions. In R, the representation of missing values is `NA`, which stands for "Not Available". `NaN` which stands for "Not a Number" is another form of `NA`, although both are essentially the same. Missing values can be implicit (not present in the data) or explicit (represented as `NA` or `NaN`).  
 
-###
-Let's start with creating a simple vector with some missing values:  
+```{r prepare-missing-data}
+vec <- c(1, 2, NA, 4, NaN, 6)
+```
 
-```{r}
+###
+Let's start with a simple vector with some missing values:  
+
+```{r, eval = FALSE}
 # Creating a vector with missing values
 vec <- c(1, 2, NA, 4, NaN, 6)
 
 vec
 ```
 
-Here, `NA` and `NaN` are the missing values in the vector. When performing operations with this vector, these missing values can cause issues. For example:  
+###
+Here, `NA` and `NaN` are the missing values in the vector. When performing operations with this vector, these missing values can cause issues. For example, run the following code:  
 
-```{r}
+```{r view-missing, exercise = TRUE, exercise.setup = "prepare-missing-data"}
 # Sum of vector values
 sum(vec)
 ```
 
+###
 This operation returns `NA` because the sum includes missing values. To handle such scenarios, you can use the `na.rm` argument in the function, which stands for "NA remove". If set to `TRUE`, it will exclude the `NA` values:  
 
-```{r}
+```{r rm-missing, exercise = TRUE, exercise.setup = "prepare-missing-data"}
 # Sum of vector values excluding NAs
 sum(vec, na.rm = TRUE)
 ```
 
+###
 This will now return the sum of all non-missing values in the vector.  
 
 
@@ -935,7 +1091,7 @@ Explicit missing values are represented as `NA` in your data. One of the common 
 
 In the codeblock, call `is.na()` on the `vec` vector:  
 
-```{r is-na, exercise=TRUE, exercise.lines=2}
+```{r is-na, exercise = TRUE, exercise.setup = "prepare-missing-data"}
 
 ```
 
@@ -943,13 +1099,16 @@ In the codeblock, call `is.na()` on the `vec` vector:
 is.na(vec)
 ```
 
+###
 You can see that `is.na()` returns `TRUE` for the third and fifth elements, which are `NA` and `NaN`.  
 
+###
 You can calculate the total number of missing values:  
-```{r}
+```{r sum-missing, exercise = TRUE, exercise.setup = "prepare-missing-data"}
 sum(is.na(vec))
 ```
 
+###
 The result shows there are 2 missing values in `vec`. Since R treats TRUE as "1" and FALSE as "0", `sum(is.na(vec))` works by adding all the TRUEs to the question, "is this value NA or NaN?"  
 
 
@@ -957,16 +1116,18 @@ The result shows there are 2 missing values in `vec`. Since R treats TRUE as "1"
 **Filling Missing Values**  
 Sometimes, you might want to fill in the missing values rather than excluding them. One method is to fill them with a fixed value using the `replace_na()` function from the core `tidyr` package of the `tidyverse`:  
 
-```{r}
+<!-- TODO: clean up exercises - here until end -->
+```{r replace-na, exercise = TRUE, exercise.setup = "prepare-missing-data"}
 # Replace NA values with 0
 vec_filled <- replace_na(vec, replace = 0)
 
 vec_filled
 ```
 
-Another method is to carry the last observation forward. This can be achieved using the `tidyr` `fill()` function. Let's use this method on a sample tibble:  
+###
+Another method is to carry the last observation forward. This can be achieved using the `tidyr` `fill()` function. Let's use this method on a sample tibble. First, view the `scores_tibble` dataset:  
 
-```{r}
+```{r prepare-scores-data}
 # Create a tibble
 scores_tibble <- tibble(
   employee_id = c(1, 2, 3, 4, 5),
@@ -974,7 +1135,19 @@ scores_tibble <- tibble(
 )
 ```
 
-```{r}
+```{r view-scores, exercise = TRUE, exercise.setup = "prepare-scores-data"}
+
+```
+
+```{r view-scores-solution}
+scores_tibble
+```
+
+###
+
+Instructions:/
+
+```{r fill-with-last, exercise = TRUE, exercise.setup = "prepare-scores-data"}
 # Fill NA values with the last observation carried forward
 scores_filled <- scores_tibble |> 
   fill(performance_score)
@@ -982,6 +1155,7 @@ scores_filled <- scores_tibble |>
 scores_filled
 ```
 
+###
 In this tibble, the `NA` values in the `performance_score` column are replaced with the last non-`NA` value.  
 
 
@@ -990,24 +1164,33 @@ In this tibble, the `NA` values in the `performance_score` column are replaced w
 
 Implicit missing values are values that do not exist in the data. They can be revealed by making comparisons or performing operations that should have returned a value but did not because it was missing.  
 
-Let's consider an example where we have data for employees' performances for different years, but not all employees have entries for all years:  
+Let's consider an example where we have data for employees' performances for different years, but not all employees have entries for all years. First, View the `implicit_tibble` dataset:  
 
-```{r}
+```{r prepare-implicit-data}
 # Create a tibble
 implicit_tibble <- tibble(
   employee_id = c(1, 2, 2, 3, 3, 3, 4, 4, 5, 5),
   year = c(2020, 2019, 2021, 2020, 2021, 2022, 2021, 2022, 2020, 2022),
   performance_score = c(85, 90, 92, 88, 90, 93, 91, 95, 89, 96)
 )
+```
 
+```{r view-implicit, exercise = TRUE, exercise.setup = "prepare-implicit-data"}
+
+```
+
+```{r view-implicit-solution}
 implicit_tibble
 ```
 
+###
+
 Here, you can notice that not all employees have entries for all years from 2019 to 2022. To better explain, we expect each employee to have four entries, one for each year. So, employee 1 should have an entry for 2019, 2020, 2021, and 2022, employee 2 should have an entry for 2019, 2020, 2021, and 2022, and so on. These missing entries are implicit missing values.  
 
+###
 We can make these implicit missing values explicit using the `tidyr` `complete()` function:  
 
-```{r}
+```{r explicitly-missing, exercise = TRUE, exercise.setup = "prepare-implicit-data"}
 # Making implicit missing values explicit
 complete_tibble <- implicit_tibble |> 
   complete(employee_id, year = 2019:2022)
@@ -1015,6 +1198,8 @@ complete_tibble <- implicit_tibble |>
 complete_tibble
 ```
 
+
+###
 Notice that every employee now has an entry for each year from 2019 to 2022. The missing performance scores are represented as `NA`.  
 
 A quote from Hadley Wickham provides a good way to think about the difference between explicit and implicit missing values:  
@@ -1027,25 +1212,29 @@ A quote from Hadley Wickham provides a good way to think about the difference be
 ###
 **`na.rm` attribute**  
 
-In the instance of executing mathematical computations such as sum(), mean(), or sd(), if any NA elements are detected in the data, the output you'll get is an NA value. This particular characteristic is purposeful to promptly notify you of the existence of missing entries in your data.  
+In the instance of executing mathematical computations such as `sum()`, `mean()`, or `sd()`, if any NA elements are detected in the data, the output you'll get is an NA value. This particular characteristic is purposeful to promptly notify you of the existence of missing entries in your data.  
 
-```{r}
+```{r pre-NArm, exercise = TRUE}
 nums <- c(2, 4, NA, 8, 10)
 
 mean(nums)
 ```
 
+
+###
 To bypass this, you have the option to exclude missing values from being incorporated in the calculation. This can be achieved by introducing the attribute `na.rm = TRUE`. Here, "na.rm" is a shorthand for "remove NA".  
 
-```{r}
+```{r post-NArm, exercise = TRUE}
 nums <- c(2, 4, NA, 8, 10)
 
 mean(nums, na.rm = TRUE)
 ```
 
+
+###
 The same would apply when using a math function in a `dplyr` function, such as `summarise()`:  
 
-```{r}
+```{r rm-summarise, exercise = TRUE}
 na_remove_tibble <- scores_tibble |> 
   summarise(avg_performance = mean(performance_score, na.rm = TRUE))
 ```
@@ -1056,9 +1245,10 @@ na_remove_tibble <- scores_tibble |>
 
 When working with multiple datasets, it's possible that there are missing values when one dataset is compared with another. For instance, an employee might be present in one dataset but missing in another. We can identify these missing values using joins, specifically `anti-joins`.
 
+
 Let's consider two datasets - one with employee details and another with their performance scores:  
 
-```{r}
+```{r prepare-missing-between-data}
 # Create two tibbles
 tibble_employees <- tibble(
   employee_id = c(1, 2, 3, 4, 5, 6),
@@ -1072,15 +1262,30 @@ tibble_scores <- tibble(
 
 ```
 
+```{r view-missing-between, exercise = TRUE, exercise.setup = "prepare-missing-between-data"}
+
+```
+
+```{r view-missing-between-solution}
+tibble_employees
+tibble_scores
+```
+
+
+###
+
 Notice that the sixth employee from `tibble_employees` is missing from the `tibble_scores` dataset. We can find this missing value using the `anti_join()` function:  
 
-```{r}
+```{r missing-antijoin, exercise = TRUE, exercise.setup = "prepare-missing-between-data"}
 # Finding missing employees in the scores dataset
 missing_employees <- tibble_employees |> 
   anti_join(tibble_scores, by = "employee_id")
 
 missing_employees
 ```
+
+
+###
 
 The `anti_join()` function returns all rows from `tibble_employees` where there are not matching values in `tibble_scores`, keeping just columns from `tibble_employees`.  
 
@@ -1090,22 +1295,32 @@ The `anti_join()` function returns all rows from `tibble_employees` where there 
 
 In some scenarios, there might be groups in your data that have no observations. These are known as empty groups. While these groups do not contain any explicit or implicit missing values, they can cause issues when performing group-wise operations.  
 
+
 Let's consider an example where we have data for the performance scores of employees in different departments:  
 
-```{r}
+```{r prepare-empty-group-data}
 # Create a tibble
 groups_tibble <- tibble(
   department = c("HR", "Finance", "Marketing", "IT"),
   number_of_employees = c(10, 15, 20, 0),
   average_performance_score = c(85, 90, 87, NA)
 )
+```
 
+```{r view-empty-group, exercise = TRUE, exercise.setup = "prepare-empty-group-data"}
+
+```
+
+```{r view-empty-group-solution}
 groups_tibble
 ```
 
+
+###
+
 Notice that the `IT` department is an empty group because it has no employees. If we try to calculate the total performance score for each department, the `IT` department will return `NA`. You can see an example of this below:  
 
-```{r}
+```{r na-group, exercise = TRUE, exercise.setup = "prepare-empty-group-data"}
 # Try to calculate total performance score for each department
 calc_groups <- groups_tibble |> 
   mutate(total_performance_score = number_of_employees * average_performance_score)
@@ -1113,6 +1328,7 @@ calc_groups <- groups_tibble |>
 calc_groups
 ```
 
+###
 In such cases, it might be beneficial to fill in the missing values with a fixed value (like `0`), or exclude these groups from your analysis.  
 
 
