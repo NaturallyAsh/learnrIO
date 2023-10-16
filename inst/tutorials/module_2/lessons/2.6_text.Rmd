@@ -791,7 +791,7 @@ Grouping in regex allows you to treat multiple characters as a single unit. This
 ###
 Let's say we want to identify any mentions of a repeated weekly meeting in an email thread. A repeated meeting might be indicated by the word "week" followed by "ly" or "s".  
 
-```{r}
+```{r eval=FALSE}
 meeting_emails <- c("The weekly meeting will proceed as scheduled.", 
             "Let's meet to discuss this in one week.",
             "Our bi-weekly sync will address these issues.")
@@ -799,15 +799,40 @@ meeting_emails <- c("The weekly meeting will proceed as scheduled.",
 str_subset(meeting_emails, pattern = "(week)(ly|s)")
 ```
 
+###
+Run the codeblock to view the result:\
+
+```{r grouping-setup}
+meeting_emails <- c("The weekly meeting will proceed as scheduled.", 
+            "Let's meet to discuss this in one week.",
+            "Our bi-weekly sync will address these issues.")
+```
+
+```{r grouping, exercise = TRUE}
+str_subset(meeting_emails, pattern = "(week)(ly|s)")
+```
+
 
 ###
 In addition to grouping, parentheses also create what we call **"capturing groups"**. Capturing groups store the part of the string matched by the part of the regular expression inside the parentheses. These captured groups can then be referred back to with `\\1`, `\\2`, etc., where the number corresponds to the order of the capturing group.  
 
+
 ###
 Consider a dataset where we have stored first and last names together, and we want to reverse the order (i.e., from "First Last" to "Last, First"). We can use capturing groups to accomplish this:  
 
-```{r}
+```{r eval=FALSE}
 names <- c("James Doe", "Jenna Smith", "Mike Johnson", "Sarah Connor", "Jack Davis")
+
+str_replace_all(names, pattern = "(\\w+) (\\w+)", replacement = "\\2, \\1")
+```
+
+###
+Run the codeblock to view the result:\
+```{r capturing-setup}
+names <- c("James Doe", "Jenna Smith", "Mike Johnson", "Sarah Connor", "Jack Davis")
+```
+
+```{r capturing, exercise = TRUE}
 str_replace_all(names, pattern = "(\\w+) (\\w+)", replacement = "\\2, \\1")
 ```
 
@@ -831,8 +856,20 @@ A look-ahead matches a pattern only if it's followed by another pattern. In rege
 
 Let's say we have a database of email addresses of employees and we want to select only the Gmail addresses. However, we don't want to include the "@gmail.com" part in our result. We can use a positive look-ahead to accomplish this:  
 
-```{r}
+```{r eval=FALSE}
 email_addresses <- c("james@gmail.com", "jenna@yahoo.com", "mike@outlook.com", "sarah@gmail.com", "jack@gmail.com")
+
+str_subset(email_addresses, pattern = "\\w+(?=@gmail.com)")
+```
+
+###
+Run the codeblock to view the result:\
+
+```{r prepare-looks}
+email_addresses <- c("james@gmail.com", "jenna@yahoo.com", "mike@outlook.com", "sarah@gmail.com", "jack@gmail.com")
+```
+
+```{r lookahead, exercise = TRUE, exercise.setup = "prepare-looks"}
 str_subset(email_addresses, pattern = "\\w+(?=@gmail.com)")
 ```
 
@@ -847,7 +884,13 @@ Similarly, a look-behind matches a pattern only if it's preceded by another patt
 
 Suppose we want to extract the domain names from the email addresses, but we don't want to include the "@" part in our result. We can use a positive look-behind to do this:  
 
-```{r}
+```{r eval=FALSE}
+str_extract(email_addresses, pattern = "(?<=@)\\w+.com")
+```
+
+###
+Run the codeblock to view the result:\
+```{r lookbehind, exercise = TRUE, exercise.setup = "prepare-looks"}
 str_extract(email_addresses, pattern = "(?<=@)\\w+.com")
 ```
 
@@ -858,7 +901,7 @@ Here, "\w+.com" matches any word character followed by ".com", and "(?<=@)" is a
 ###
 Look-ahead and look-behind can be used for more advanced pattern matching. For example, say we have a job posting:  
 
-```{r}
+```{r eval=FALSE}
 job_postings <- c(
   "Job opening: Senior HR Analyst, Salary: $75000 per year",
   "Hiring: Junior People Analyst, Salary: $55000 annually",
@@ -867,9 +910,18 @@ job_postings <- c(
 ```
 
 
-Using look arounds, we can extract job titles from a job posting:   
+###
+Using look arounds, we can extract job titles from a job posting. Run the codeblock to view the result:\
 
-```{r}
+```{r postings-setup}
+job_postings <- c(
+  "Job opening: Senior HR Analyst, Salary: $75000 per year",
+  "Hiring: Junior People Analyst, Salary: $55000 annually",
+  "Job vacancy: HR Manager, Salary: $95000 per year"
+)
+```
+
+```{r postings, exercise = TRUE}
 job_postings |> 
   str_extract("(?<=Job opening: |Hiring: |Job vacancy: ).*?(?=, Salary)")
 ```
