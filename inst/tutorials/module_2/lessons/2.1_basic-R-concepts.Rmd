@@ -22,13 +22,34 @@ As we go through this lesson, you'll get a chance to work with these concepts di
 
 ### R Objects and Variables
 
-In R, objects and variables are fundamental components used to store and manipulate data. They provide a way to refer to values or entities within the program. Let's delve into each concept separately:  
+In R, objects and variables are fundamental components used to store and manipulate data. They provide a way to refer to values.\
 
-1. **Objects**: In R, an object is a data structure that holds a value or a set of values. Objects can represent various types of data, such as numbers, strings, vectors, matrices, data frames, and more complex structures. Each object has a unique name (variable name) that can be used to refer to it and perform operations on its associated data.  
+**Objects**: An object is like a container that holds data. Think of it as a box where you can put different types of information. There are various types of objects in R, but here are a few common ones:\
 
-2. **Variables**: Variables serve as placeholders or containers for storing objects in memory. They are essentially names that are assigned to objects. By using variables, you can easily reference and manipulate the associated objects without explicitly using their names every time.  
+1. **Numeric:** This object holds numbers. For example, if you want to store someone's age, you can use a numeric object.\
+2. **Character:** This is for text, like names, words, or sentences. If you want to store someone's name, you'd use a character object.\
+3. **Logical:** This type of object holds either "TRUE" or "FALSE." It's handy for making decisions in your code.\
+4. **Vector:** A vector is like a list of objects of the same type. You can have a numeric vector, character vector, and so on.\
+5. **Data Frame:** Think of it as a table. It's like a spreadsheet where you can organize data into rows and columns.\
 
-Assigning objects to variables is accomplished using the assignment operator, which is denoted by the <- symbol. Here's the general syntax:    
+Each object has a unique name (variable name) that can be used to refer to it and perform operations on its associated data.\
+
+
+**Variables**: Variables are like labels you put on your objects. They are essentially names that are assigned to objects. By using variables, you can easily reference and manipulate the associated objects without explicitly using their names every time.\
+
+For example, if you have a numeric object that stores someone's age, you can create a variable called "age" to refer to it:\
+
+```{r eval=FALSE}
+# Creating a variable called "age" with a numeric object
+age <- 30
+
+# Creating a variable called "name" with a character object
+name <- "John"
+
+```
+
+###
+Wondering what that arrow (`<-`) means? This is called the "assignment operator". When we create an object, we need to "assign" it to a variable in order to use it later. Assigning an object to a variable follows the general syntax:\
 
 ```{r, eval=FALSE}
 variable <- object
@@ -36,7 +57,7 @@ variable <- object
 
 ###
 
-As an example, let's say we have an object `x` containing the value 10, and we want to assign it to a variable `my_variable`:  
+As an example, let's say we have an object `x` containing the value 10, and we want to assign it to a variable `my_variable`:\
 
 ```{r, eval=FALSE}
 x <- 10
@@ -58,7 +79,7 @@ my_variable <- x
 
 
 ###
-You will notice that it seems like nothing happened after clicking "Run Code". Something **DID** happen! We assigned object `x` to `my_variable`, but in order to print (view) the result, you must type `my_variable` on a line by itself. Go ahead and type `my_variable` in the code box below, then click "run code":  
+You will notice that it seems like nothing happened after clicking "Run Code". Something **DID** happen! We assigned object `x` to `my_variable`, but in order to print (view) the result, you must type the variable name (`my_variable` in this case) on a line by itself. Go ahead and type `my_variable` in the code box below, then click "run code":\
 
 ```{r view-object, exercise=TRUE, exercise.setup="object-setup"}
 
@@ -68,11 +89,25 @@ You will notice that it seems like nothing happened after clicking "Run Code". S
 my_variable
 ```
 
+
 ###
 <div class="callout">
 **Tip**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
 </div>
  
+
+###
+When you create an object in RStudio, you can easily see and view the object in the Environment Pane.
+
+<figure>
+  <img src="https://github.com/NaturallyAsh/learnrIO-assets/blob/main/gifs/R_object.gif?raw=true" width="100%">
+  <figcaption class="figcap">R Object in RStudio</figcaption>
+</figure>
+
+###
+It is best practice to get into the habit of printing your variables and checking the content. As an example, imagine you're working on a big project or a complex piece of code. You've created several variables and written lots of code. You notice far into the project that the results are wildly inaccurate. Because you hadn't been checking your variables, you end up spending hours trying to figure out which part of your code is causing the problem. If you don't check the output of your variables along the way, it can be like looking for a needle in a haystack.\
+
+So, make it a habit to print variables and check the output regularly!
 
 ###
 Variables can be assigned objects of any type. Here's another example, assigning a character string to a variable. Add a second line that **prints** the variable output to the console. Do this by typing the variable name. Click the "run code" button to view the result:\
@@ -165,6 +200,11 @@ When working in RStudio, you can access any built-in function and package functi
 
 ###
 Running `?help` should pop open the help documentation window (in RStudio or VScode with the R Extension). You can type any function in the search bar to view its documentation and example usages.\
+
+<figure>
+  <img src="https://github.com/NaturallyAsh/learnrIO-assets/blob/main/gifs/R_help.gif?raw=true" width="100%">
+  <figcaption class="figcap">RStudio Help Documentation</figcaption>
+</figure>
 
 
 ### Operators
@@ -636,4 +676,9 @@ Do you notice the differences between the data frame and tibble output? Tibbles 
 We will revisit tibbles in greater detail in future lessons, as they are an integral part of data manipulation and analysis using the `tidyverse`.  
 
 
+### Conclusion
+Well done on completing this lesson! Test out your newfound knowledge by completing the "Basic R Concepts: Exercises" sub-lesson!\
 
+For the next lesson, we will introduce you to the Tidyverse. Imagine the Tidyverse like a powerful toolbox filled with handy tools for working with data. It might sound a bit complex, but don't worry, we'll break it down for you. The Tidyverse makes data tasks easier and more organized.\
+
+So, get ready to learn how to use these tools, and soon you'll be a pro at working with data in R!
