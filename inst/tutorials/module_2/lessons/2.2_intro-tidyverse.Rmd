@@ -3,7 +3,7 @@ title: "Introduction to the Tidyverse"
 ---
 
 
-The Tidyverse is an essential part of data science in R. It is a collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. These packages streamline the process of transforming and modeling data, making it a powerful tool for applied data analytics.  
+The Tidyverse is an essential part of data science in R. It is a collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. The Tidyverse and the concept of "tidy data" was initially developed by Hadley Wickham, Chief Data Scientist at Posit (formerly called RStudio). These packages streamline the process of transforming and modeling data, making it a powerful tool for applied data analytics.\
 
 <figure class="float-fig-right"> 
   <img style="width:150px; height:150px" src="images/tidyverse-packages.png" alt="image of tidyverse core packages' hexagons">
@@ -11,8 +11,15 @@ The Tidyverse is an essential part of data science in R. It is a collection of R
 
 #### Why use the Tidyverse for Data Analysis?
 
-Tidyverse packages are user-friendly and designed to work together seamlessly, which makes data manipulation, visualization, and analysis more intuitive and less error-prone all while simplifying complex data analysis tasks to makes it easier to create clean, consistent, and interpretable code. Together, these packages allow you to write less code while still accomplishing your tasks efficiently and effectively.  
- 
+Tidyverse packages are user-friendly and designed to work together seamlessly, which makes data manipulation, visualization, and analysis more intuitive and less error-prone all while simplifying complex data analysis tasks to makes it easier to create clean, consistent, and interpretable code.\
+
+Together, these packages allow you to write less code while still accomplishing your tasks efficiently and effectively.\
+
+###
+
+<div class="callout">
+The best resource for all things Tidyverse is Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund's free online book, [R for Data Science](https://r4ds.hadley.nz/). I encourage you to always keep it handy. I certainly do!
+</div>
 
 ### Installing the Tidyverse
 
@@ -129,8 +136,7 @@ Now that you have an understanding of the Tidyverse, we're ready to venture deep
 
 
 <figure>
-  <img src="images/data-science-wrangle.png" width="100%">
-  <figcaption class="figcap">Image of data wrangling component</figcaption>
+  <img src="images/data-science-wrangle.png" alt="Image of data wrangling component" width="100%">
 </figure>
 
 <br>
@@ -139,7 +145,7 @@ Now that you have an understanding of the Tidyverse, we're ready to venture deep
 By the end of the remaining lessons, you will be adept at harnessing the power of the tidyverse to transform raw data into actionable insights. So, buckle up and get ready to dive into the vast and exciting world of the tidyverse!  
 
 
-<div class="callout">
+<!-- <div class="callout">
 Consider checking out the free online [R for Data Science](https://r4ds.had.co.nz/) resource for useful tips and examples on how to leverage the power of Tidyverse!
-</div>
+</div> -->
 
