@@ -2,7 +2,8 @@
 title: "Importing and exporting data"
 ---
 
-Welcome to our lesson on Importing and Exporting Data! In this lesson, we'll be taking a look at how to bring data into R from a variety of formats (like CSV, Excel, and SPSS), and how to write your data back out to these formats. We'll also learn how to work with tibbles, a modern reimagining of the data frame.  
+### Introduction
+In this lesson, we'll be taking a look at how to bring data into R from a variety of formats (like CSV, Excel, and SPSS), and how to write your data back out to these formats. We'll also learn how to work with tibbles, a modern re-imagining of the data frame.  
 
 
 ### Importing CSV files
@@ -42,7 +43,7 @@ You can see the column names along with the data types (i.e., `id` values are ty
 
 ### Importing Excel files  
 You will often find encounter Excel data. We can use the `readxl` package to import xls and xlsx Excel file types.  
-```{r, include=FALSE}
+```{r prepare-path-excel-data}
 path_excel_data <- system.file("extdata", "PersData_Excel.xlsx", package = "learnrIO", mustWork = TRUE)
 ```
 
@@ -50,7 +51,7 @@ path_excel_data <- system.file("extdata", "PersData_Excel.xlsx", package = "lear
 We can use the `readxl::read_excel()` function which reads xls or xlsx files. Here we use a path to an Excel file. Run the codeblock to view the output:  
 
 <!-- using readxl::read_excel() so I don't need to load the entire package (less dependency related stuff). Same for `haven`. -->
-```{r import-excel, exercise=TRUE}
+```{r import-excel, exercise=TRUE, exercise.setup = "prepare-path-excel-data"}
 excel_data <- readxl::read_excel(path = path_excel_data)
 
 excel_data
@@ -62,7 +63,7 @@ Running the above function with only the `path` argument returns the first Excel
 
 ###
 *Import the second sheet titled "Year2"*  
-```{r excel-sheet2, exercise=TRUE}
+```{r excel-sheet2, exercise=TRUE, exercise.setup = "prepare-path-excel-data"}
 sheet2 <- readxl::read_excel(
   path = path_excel_data,
   sheet = "Year2"
@@ -73,7 +74,7 @@ sheet2
 
 ###
 *Importing the first 3 rows from the `id`, `lastname`, and `firstname` columns from the first sheet "Year1"*  
-```{r excel-sheet1-range, exercise=TRUE}
+```{r excel-sheet1-range, exercise=TRUE, exercise.setup = "prepare-path-excel-data"}
 sheet1 <- readxl::read_excel(
   path = path_excel_data,
   range = "A1:C4"
@@ -94,14 +95,17 @@ For other common file formats like SPSS, Stata, and SAS, we can use the haven pa
 
 ###
 **Import SPSS file**  
-```{r, include=FALSE}
+```{r, prepare-path-sav-data}
 path_sav_data <- system.file("extdata", "exam.sav", package = "learnrIO", mustWork = TRUE)
 ```
 
-The `haven::read_sav()` function takes a file path as its argument and returns a data frame:  
-```{r}
+The `haven::read_sav()` function takes a file path as its argument and returns a data frame. Run the code to view the output:\
+```{r run-path-sav, exercise = TRUE, exercise.setup = "prepare-path-sav-data"}
 haven::read_sav(path_sav_data)
 ```
+
+###
+You can learn more about importing SPSS and SAV files with `haven` by reading the [package documentation](https://haven.tidyverse.org/).
 
 
 ### Quickly Exploring Your Imported Data
@@ -196,6 +200,12 @@ This is particularly useful when you're working with multiple datasets and want 
 
 
 ### Conclusion
-We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.  
+We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.\
 
+
+<div class="callout">
+I strongly encourage you to read the [Import](https://r4ds.hadley.nz/import) chapter of <strong>Hadley Wickham's R for Data Science</strong> online book for a deeper dive into importing using the Tidyverse. These chapters cover other importing methods outside the scope of this lesson (i.e., Google Sheets, databases).
+</div>
+
+###
 In the next section, titled **"Tidy Data"**, we will dive deeper into this topic, focusing on techniques for tidying up your messy datasets into a format that will be much easier to work with. With your data in "tidy" format, you'll find that you spend less time wrestling with data structures and more time addressing the analytic questions at hand.  
