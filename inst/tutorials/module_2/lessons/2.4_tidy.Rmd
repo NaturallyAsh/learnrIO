@@ -3,7 +3,7 @@ title: "Tidy Data"
 ---
 
 ### Introduction
-As IO Psychologists, we often deal with a lot of data, be it employee performance metrics, survey responses, or recruitment data. One of the key challenges we face is ensuring that this data is well-organized and easy to analyze. Enter the concept of "Tidy Data" - a term coined by Hadley Wickham, the creator of many of the tools in the tidyverse package in R.
+In applied settings, we often deal with a lot of data, be it employee performance metrics, survey responses, or recruitment data. One of the key challenges we face is ensuring that this data is well-organized and easy to analyze. Enter the concept of "Tidy Data" - a term coined by Hadley Wickham, the creator of many of the tools in the tidyverse package in R.
 
 According to Wickham, "Tidy datasets are all alike, but every messy dataset is messy in its own way." The idea is to organize your data in a consistent way that makes it easier to work with and analyze. In essence, tidy data is about structuring datasets to facilitate analysis.  
 
@@ -23,9 +23,12 @@ Tidy data follows three fundamental rules:
 
 
 ###
-The advantages of tidy data are twofold. Firstly, having a consistent data structure makes it easier to learn the tools that work with it. Secondly, placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural.\
+The advantages of tidy data are twofold:\
 
-By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.  
+1. Having a consistent data structure makes it easier to learn the tools that work with it.\
+2. Placing variables in columns allows R's vectorized nature to shine, making data transformation feel natural.\
+   
+By maintaining tidy datasets, you can streamline your data analysis process, make it easier to handle missing values, and enhance the readability and organization of your data.\
 
 
 ###
@@ -49,8 +52,7 @@ In practice, you'll often encounter data that is not tidy. For instance, a varia
 
 Let's discuss each one in detail.  
 
-### 
-**`pivot_longer()`**\ 
+### `pivot_longer()`
 
 `pivot_longer()` is used to make "wide" data longer. In other words, it takes multiple columns and combines them into key-value pairs, duplicating all other columns as needed.  
 
@@ -63,7 +65,12 @@ tidy_survey_data <- survey_data |> pivot_longer(
 ```
 
 ###
-**`pivot_wider()`**\
+- The `cols` argument specifies the columns to pivot. In this case, it selects all columns that start with "Question".\
+- The `names_to` argument specifies the name of the new column that will contain the column names of the selected columns. In this case, it is "Question".\
+- The `values_to` argument specifies the name of the new column that will contain the values of the selected columns. In this case, it is "Answer".\
+
+
+### `pivot_wider()`
 
 `pivot_wider()` does the opposite. It makes "long" data wider, spreading out a key-value pair across multiple columns.  
 
@@ -74,8 +81,18 @@ wide_survey_data <- tidy_survey_data |> pivot_wider(
 )
 ```
 
+###
+- The `names_from` argument specifies the column that contains the names of the new columns in the wide format. In this case, it is "Question".\
+- The `values_from` argument specifies the column that contains the values of the new columns in the wide format. In this case, it is "Answer".\
 
-### Separate and unite
+
+###
+<div class="callout">
+Read the R for Data Science chapter section ["How does pivoting work?"](https://r4ds.hadley.nz/data-tidy#how-does-pivoting-work) for more on `pivot_longer()` and `pivot_wider()`.
+</div>
+
+
+### Separate and Unite
 The `separate()` function from the `tidyr` package is used to split a column into two columns at the point of a specified separator also called delimiter (e.g., comma, space, semi-colon). This is useful when for breaking down combined information into distinct parts, which can be valuable when analyzing employee data.
 
 
@@ -138,7 +155,9 @@ grade_this({
 
 
 ###
-Conversely, we might need to combine two columns into one. The `unite()` function does this. We can save the `employee_data_sep` data from the previous example in a new variable called `employee_data_unite` and then call `unite()` to combine the `first_name` and `last_name` columns back into a single `full_name` column. Execute this task by completing the code in the codeblock below. Run the code to inspect your result, and then click **Submit Answer** to see if your answer is correct.\
+Conversely, we might need to combine two columns into one. The `unite()` function does this.\
+
+We can save the `employee_data_sep` data from the previous example in a new variable called `employee_data_unite` and then call `unite()` to combine the `first_name` and `last_name` columns back into a single `full_name` column. Execute this task by completing the code in the codeblock below. Run the code to inspect your result, and then click **Submit Answer** to see if your answer is correct.\
 
 *Remember to run `?help` in your console if you need to read the `unite()` documentation*.\
 
@@ -188,31 +207,39 @@ employee_data_unite
 ```
 
 ###
-Great work!\
-For the next and final section of this lesson, we will dive a bit deeper into one of the most useful and invaluable methods for working with the `tidyverse`: The pipe operator (`|>`).\
+**Great work!**\
+For the next and final section of this lesson, we will dive a bit deeper into one of the most useful and invaluable methods for working with the Tidyverse: The pipe operator (`|>`).\
 
 
 ### The Pipe Operator **(`|>`)**  
-I bet you are wondering what that strange `|>` symbol is that we used in the above section. This symbol is a very useful method for creating tidy data, and it called the pipe operator (`|>`). This operator allows you to pipe your data from one function to the next. It's used to make your code cleaner and easier to read. The pipe operator fundamentally transforms the way you use R for data manipulation, leading to a tidier, more readable, and maintainable code.  
+I bet you are wondering what that strange `|>` symbol is that we used in the above section. This symbol is a very useful method for creating tidy data, and it called the pipe operator (`|>`). This operator allows you to pipe your data from one function to the next. It's used to make your code cleaner and easier to read.\
 
-###
-**Don't Panic!**\
+The pipe operator fundamentally transforms the way you use R for data manipulation, leading to a tidier, more readable, and maintainable code.  
 
-You may be unfamiliar with some of the functions used in the following code examples (such as `filter()`). Don't worry! We will cover them in detail in the next lesson: Transforming Data!  
+### Don't Panic!
+You may be unfamiliar with some of the functions used in the following code examples (such as `filter()`). Don't worry! We will cover them in detail in the next lesson: **Transforming Data**!\
 
-###
-Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary. We can use a pipeline using `|>` that clearly and understandibly describes each step:  
+
+### The Pipe Operator in Action
+Consider an example where you have a dataset of employees, and you want to filter out the HR department, select the age and salary columns, and calculate the average salary. We can use a pipeline using `|>` that clearly and understandably describes each step:\
 
 
 ```{r, eval=FALSE}
-employees_data |> # step 1: dataset of employees
-  filter(department == "HR") |> # step 2: filter out the HR department
-  select(age, salary) |> # step 3: select the age and salary columns
-  summarise(avg_salary = mean(salary, na.rm = TRUE)) # step 4: calculate the average salary
+employees_data |> 
+  filter(department == "HR") |> 
+  select(age, salary) |> 
+  summarise(avg_salary = mean(salary, na.rm = TRUE))
 ```
 
 ###
-Notice how easy it is to understand what the code is executing. Each step is written on its own line. If you need to edit or change the code, this format simplifies the process.\
+Notice how easy it is to understand what the code is executing. Each step is written on its own line:\
+- Step 1: We start with the `employees_data` dataset.\
+- Step 2: We **filter** out the HR department.\
+- Step 3: We **select** the age and salary columns.\
+- Step 4: We **calculate** the average salary.\
+
+If you need to edit or change the code, this format simplifies the process.\
+
 
 ### The Benefit of Using Piping in Tidyverse
 
@@ -226,7 +253,9 @@ avg_salary <- summarise(select(filter(employees_data, department == "HR"), age, 
 Without piping, the above code becomes much harder to read. Functions are nested within one another, and the code reads from inside-out, rather than from left to right. It's also much more challenging to add or remove steps from the analysis.  
 
 ###
-On the other hand, the pipe operator allows us to follow the logic of our data transformation step by step. It facilitates a style of programming that emphasizes clear, readable code, and promotes the chaining of functions, where the output of one function is the input to the next. Take another look at the piping of the `employees_data` to calculate the same `avg_salary`:  
+On the other hand, the pipe operator allows us to follow the logic of our data transformation step by step. It facilitates a style of programming that emphasizes clear, readable code, and promotes the chaining of functions, where the output of one function is the input to the next.\
+
+Take another look at the piping of the `employees_data` to calculate the same `avg_salary`:  
 
 ```{r, eval=FALSE}
 employees_data |> 
@@ -245,4 +274,6 @@ So much neater, right!? This is a powerful style, especially for data manipulati
 
 You've taken a significant step in understanding the principles of tidy data. Test out your newfound knowledge by completing the "Tidy Data: Exercises" sub-lesson!\
 
-The next lesson, titled "Transforming Data," will unlock new avenues by covering data transformation techniques. Prepare to embark on this exciting journey!
+In our next lesson, "Transforming Data," we're going to dive into the fascinating world of working with data in a more structured and organized way. We'll be using a special kind of data table called tibbles and some handy tools from a package called `dplyr`, which makes data manipulation a breeze. We'll also cover various `dplyr` functions that help you sort, filter, and summarize your data efficiently. Additionally, we'll explore how to handle missing data gracefully.\
+
+**See you in the next lesson!**
