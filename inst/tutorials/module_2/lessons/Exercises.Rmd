@@ -1,0 +1,785 @@
+---
+title: Module 2 Exercises
+---
+
+### Basic R Concepts
+
+Now that you have gained an understanding of the basic R concepts, it's time to put what you have learned into practice!\
+
+### Exercise 1 - Creating Vectors
+InnovateCorp HR team would like to analyze the age distribution of its employees. For a small sample, create a numeric vector called `employee_age` with the ages of five employees: 32, 45, 28, 50, and 35. Print the variable.  
+
+```{r creating-vectors, exercise=TRUE}
+
+```
+
+```{r creating-vectors-hint}
+employee_age <- c(___, ___, 28, ___, ___)
+employee_age
+```
+
+```{r creating-vectors-solution}
+employee_age <- c(32, 45, 28, 50, 35)
+employee_age
+```
+
+```{r creating-vectors-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### Exercise 2 - Creating Lists
+To get a better understanding of this sample, InnovateCorp would like to look at additional employee data. Create a list called `employee_info` that contains the following elements: a numeric vector with employee ages called `ages` (use the `employee_age` vector you created in the previous exercise), a character vector with employee roles called `roles`: "HR", "Sales", "Marketing", "Sales", "HR", and a logical vector called `full_time` indicating whether the employee is full-time: TRUE, TRUE, FALSE, TRUE, TRUE. Print the variable.  
+
+```{r creating-lists-setup}
+employee_age <- c(32, 45, 28, 50, 35)
+```
+
+```{r creating-lists, exercise=TRUE}
+
+```
+
+```{r creating-lists-hint-1}
+employee_info <- ___(___ = ___, 
+                      ___ = c(), 
+                      ___ = c())
+___
+```
+
+```{r creating-lists-hint-2}
+employee_info <- list(ages = ___, 
+                      roles = c(___, "Sales", ___, "Sales", ___), 
+                      full_time = c(___, ___, FALSE, TRUE, TRUE))
+employee_info
+```
+
+```{r creating-lists-solution}
+employee_info <- list(ages = employee_age, 
+                      roles = c("HR", "Sales", "Marketing", "Sales", "HR"), 
+                      full_time = c(TRUE, TRUE, FALSE, TRUE, TRUE))
+employee_info
+```
+
+```{r creating-lists-check}
+# grade_this({
+#   if (identical(.result, .solution)) {
+#     pass()
+#   }
+#   fail()
+# })
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### Exercise 3 - Factors
+To make future analyses more manageable, create a factor from the `roles` vector in the `employee_info` list and store it in a variable named `employee_roles_factor`. Then reorder its levels to: "Sales", "Marketing", "HR". Print the variable.  
+
+```{r creating-factors-setup}
+employee_info <- list(ages = employee_age, 
+                      roles = c("HR", "Sales", "Marketing", "Sales", "HR"), 
+                      full_time = c(TRUE, TRUE, FALSE, TRUE, TRUE))
+```
+
+```{r creating-factors, exercise=TRUE}
+
+```
+
+```{r creating-factors-hint-1}
+employee_roles_factor <- ___(___, ___ = c())
+___
+```
+
+```{r creating-factors-hint-2}
+employee_roles_factor <- factor(employee_info$roles, levels = c(___, "Marketing", ___))
+employee_roles_factor
+```
+
+```{r creating-factors-solution}
+# $ shorthand ----
+employee_roles_factor <- factor(employee_info$roles, levels = c("Sales", "Marketing", "HR"))
+employee_roles_factor
+
+# double brackets ----
+employee_roles_factor <- factor(employee_info[["roles"]], levels = c("Sales", "Marketing", "HR"))
+employee_roles_factor
+```
+
+```{r creating-factors-check}
+# grade_this({
+#   if (identical(.result, .solution)) {
+#     pass()
+#   }
+#   fail()
+# })
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### Exercise 4 - Recoding Factors
+InnovateCorp has decided to rename the "HR" role to "Human Resources" for clarity. Recode the `employee_roles_factor` factor to reflect this change. Print the updated `employee_roles_factor` variable.  
+
+```{r recoding-setup}
+employee_roles_factor <- factor(employee_info[["roles"]], levels = c("Sales", "Marketing", "HR"))
+```
+
+```{r recoding, exercise=TRUE}
+
+```
+
+```{r recoding-hint-1}
+levels(___)[levels(___) == ___] <- ___
+employee_roles_factor
+```
+
+```{r recoding-hint-2}
+levels(employee_roles_factor)[levels(employee_roles_factor) == ___] <- ___
+employee_roles_factor
+```
+
+```{r recoding-solution}
+levels(employee_roles_factor)[levels(employee_roles_factor) == "HR"] <- "Human Resources"
+employee_roles_factor
+```
+
+```{r recoding-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### Tidy Data
+Time to apply what you've learned about tidying data! Here are three exercises for you to try using the `survey_data`, `untidy_survey_data`, and `too_tidy_survey_data` datasets.  
+
+
+### Exercise 5 - Pivoting
+Create a pipeline (`|>`) on the `survey_data` dataset. Use `pivot_longer()` to transform it into a long format where we have three distinct columns: 'Employee', 'Question', and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E1-setup}
+survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question1 = c("Yes", "No", "No", "Yes", "Yes", "No"),
+  Question2 = c("No", "Yes", "Yes", "No", "No", "Yes")
+)
+```
+
+```{r tidy_E1, exercise = TRUE}
+
+```
+
+```{r tidy_E1-hint-1}
+___ |> 
+    ___(
+        ___,
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E1-hint-2}
+survey_data |> 
+    ___(
+        ___ = starts_with(___),
+        names_to = ___,
+        values_to = ___
+    )
+```
+
+```{r tidy_E1-solution, exercise.reveal_solution = FALSE}
+survey_data |> 
+    pivot_longer(
+        cols = starts_with("Question"),
+        names_to = "Question",
+        values_to = "Answer"
+    )
+```
+
+```{r tidy_E1-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 6 - Separating
+The `untidy_survey_data` dataset has a 'Question_Answer' column that combines the question number and the answer. Create a pipeline on the `untidy_survey_data` dataset and use the `separate()` function to split this column into two separate columns: 'Question' and 'Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E2-setup}
+untidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question_Answer = c("Question1_Yes", "Question1_No", "Question2_No", "Question2_Yes", "Question1_Yes", "Question2_No")
+)
+```
+
+```{r tidy_E2, exercise = TRUE}
+
+```
+
+```{r tidy_E2-hint-1}
+___ |> 
+    separate(
+        ___,
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E2-hint-2}
+untidy_survey_data |> 
+    separate(
+        col = ___,
+        into = c("___", "___"),
+        sep = "_"
+    )
+```
+
+```{r tidy_E2-solution, exercise.reveal_solution = FALSE}
+untidy_survey_data |> 
+    separate(
+        col = Question_Answer,
+        into = c("Question", "Answer"),
+        sep = "_"
+    )
+```
+
+```{r tidy_E2-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 7 - Uniting
+The `too_tidy_survey_data` dataset has separated 'Question' and 'Answer' columns. Create a pipeline on the `too_tidy_survey_data` and use the `unite()` function to combine these into a single column named 'Question_Answer'. Run the code to inspect your result and then click **Submit Answer**.\
+
+```{r tidy_E3-setup}
+too_tidy_survey_data <- tibble(
+  Employee = c("Alice", "Bob", "Charles", "Diana", "Eve", "Frank"),
+  Question = c("Question1", "Question1", "Question2", "Question2", "Question1", "Question2"),
+  Answer = c("Yes", "No", "No", "Yes", "Yes", "No")
+)
+```
+
+```{r tidy_E3, exercise = TRUE}
+
+```
+
+```{r tidy_E3-hint-1}
+___ |> 
+    unite(
+        ___, 
+        ___,
+        ___
+    )
+```
+
+```{r tidy_E3-hint-2}
+too_tidy_survey_data |> 
+    unite(
+        col = "___", 
+        c(___, ___),
+        sep = "_"
+    )
+```
+
+```{r tidy_E3-solution, exercise.reveal_solution = FALSE}
+too_tidy_survey_data |> 
+    unite(
+        col = "Question_Answer", 
+        c(Question, Answer),
+        sep = "_"
+    )
+```
+
+```{r tidy_E3-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Transforming Data
+Lets put your newfound knowledge of transforming data into practice.\
+
+Let's imagine you are a data scientist working for a large company called "FutureTech". This company has multiple departments, such as HR, Finance, Marketing, and IT. You have been given access to two datasets:  
+
+- `transform_practice_emp`: Contains general information about each employee, including their ID, age, department, hire date, and performance score.  
+- `transform_practice_emp_salary`: Contains salary information for some of the employees.  
+
+
+### Exercise 8 - Importing Employee Data
+
+To begin, use the global variable `emp_path` as the `path` attribute to import the dataset. Save the dataset in a variable called `emp_data` and inspect the first few rows.  
+
+```{r, emp-data-setup}
+emp_path <- system.file("extdata", "transform_practice_emp.csv", package = "learnrIO", mustWork = TRUE)
+```
+
+```{r emp-data, exercise = TRUE, exercise.completion = FALSE}
+
+```
+
+```{r emp-data-hint-1}
+emp_data <- ___(___)
+
+___(___)
+```
+
+```{r emp-data-hint-2}
+emp_data <- read_csv(emp_path)
+
+head(___)
+```
+
+```{r emp-data-solution, exercise.reveal_solution = FALSE}
+emp_data <- read_csv(emp_path)
+
+head(emp_data)
+```
+
+```{r emp-data-check}
+# grade_this({
+#   if (identical(.result, .solution)) {
+#     pass()
+#   }
+#   fail()
+# })
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 9 - Importing Salary Data
+Now use the global variable `emp_salary_path` as the `path` attribute to import the dataset. Save the dataset in a variable called `emp_salary_data` and inspect the first few rows.  
+
+```{r, emp-salary-setup}
+emp_salary_path <- system.file("extdata", "transform_practice_emp_salary.csv", package = "learnrIO", mustWork = TRUE)
+```
+
+```{r emp-salary, exercise = TRUE, exercise.completion = FALSE}
+
+```
+
+```{r emp-salary-hint-1}
+emp_salary_data <- ___(___)
+
+___(___)
+```
+
+```{r emp-salary-hint-2}
+emp_salary_data <- read_csv(emp_salary_path)
+
+head(___)
+```
+
+```{r emp-salary-solution, exercise.reveal_solution = FALSE}
+emp_salary_data <- read_csv(emp_salary_path)
+
+head(emp_salary_data)
+```
+
+```{r emp-salary-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 10 - Summarize Data
+Call the `summary()` function on `emp_data` to view a summary overview about the dataset. Use the result to answer the follow-up question. *Hint: if you get stuck on the question, try using `is.na()`*  
+
+```{r emp-summary, exercise=TRUE, exercise.completion = FALSE}
+
+```
+
+```{r emp-summary-hint}
+summary(___)
+```
+
+```{r emp-summary-solution, exercise.reveal_solution = FALSE}
+summary(emp_data)
+```
+
+```{r emp-summary-question, echo=FALSE}
+question("Which variable is missing values?",
+  answer("age"),
+  answer("department"),
+  answer("hire_date"),
+  answer("performance_score", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+
+
+### Exercise 11 - Averaging Scores
+For the performance appraisal process, every employee should have a performance score. However, you've noticed that some employees don't have this score in the `emp_data` dataset.\
+
+Perform the following steps:\
+
+- Group by department and create a summarized column called `avg_performance` that calculates the average performance score and removes NAs. Use the `round()` function to round the scores Save the result in a variable called `avg_scores`.  *Hint: use group_by() and summarise()*\
+- Left join `avg_scores` with the `emp_data` dataset. Save the result as `updated_emp_data`.
+- Overwrite the `performance_score` to replace missing performance scores with average performance score of their department.\
+- Overwrite `updated_emp_data` by saving the result as `updated_emp_data`. *Hint: use mutate(), and call is.na() in an ifelse()*\
+- View the `updated_emp_data` tibble.\
+
+```{r ex-2, exercise = TRUE, exercise.completion = FALSE}
+
+```
+
+```{r ex-2-hint-1}
+avg_scores <- emp_data |> 
+    ___(___) |> 
+    ___(avg_performance = round(___(___, ___ = ___)))
+
+___ <- ___ |> 
+    ___(___, by = ___)
+
+___ <- ___ |> 
+    ___(
+        ___ = ___(is.na(___), ___, ___))
+
+___
+```
+
+```{r ex-2-hint-2}
+avg_scores <- emp_data |> 
+    group_by() |> 
+    summarise(avg_performance = round(mean(___, na.rm = ___)))
+
+updated_emp_data <- emp_data |> 
+    ___(avg_scores, by = "department")
+
+updated_emp_data <- updated_emp_data |> 
+    ___(
+        performance_score = ifelse(is.na(performance_score), ___, performance_score))
+
+updated_emp_data
+```
+
+```{r ex-2-solution, exercise.reveal_solution = TRUE}
+avg_scores <- emp_data |> 
+    group_by(department) |> 
+    summarise(avg_performance = round(mean(performance_score, na.rm = TRUE)))
+
+updated_emp_data <- emp_data |> 
+    left_join(avg_scores, by = "department")
+
+updated_emp_data <- updated_emp_data |> 
+    mutate(
+        performance_score = ifelse(is.na(performance_score), avg_performance, performance_score))
+
+updated_emp_data
+```
+
+```{r ex-2-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+
+### Exercise 12 - Joining Data (Part 1)
+**Part 1**  
+You want to join the `updated_emp_data` and `emp_salary_data` datasets so that you have the salary of all employees in one dataset. Join the two datasets on the common variable so that the new dataset only contains matches between the two datasets. Name the new joined dataset `joined_emp_data` and then print the variable.  
+
+```{r ex-3a-setup}
+avg_scores <- emp_data |> 
+    group_by(department) |> 
+    summarise(avg_performance = round(mean(performance_score, na.rm = TRUE)))
+
+updated_emp_data <- emp_data |> 
+    left_join(avg_scores, by = "department")
+
+updated_emp_data <- updated_emp_data |> 
+    mutate(
+        performance_score = ifelse(is.na(performance_score), avg_performance, performance_score))
+
+updated_emp_data
+```
+
+```{r ex-3a, exercise = TRUE, exercise.completion = FALSE}
+
+```
+
+```{r ex-3a-hint-1}
+joined_emp_data <- ___ |> 
+    ___(___, by = ___)
+
+___
+```
+
+```{r ex-3a-hint-2}
+joined_emp_data <- ___ |> 
+    inner_join(___, by = "employee_id")
+
+joined_emp_data
+```
+
+```{r ex-3a-solution, exercise.reveal_solution = FALSE}
+joined_emp_data <- updated_emp_data |> 
+    inner_join(emp_salary_data, by = "employee_id")
+
+joined_emp_data
+```
+
+```{r ex-3a-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 13 - Joining Data (Part 2)
+**Part 2**  
+While comparing the `updated_emp_data` and `emp_salary_data` datasets, you realize some employees present in the `updated_emp_data` dataset are missing in the `emp_salary_data` dataset. Identify these employees. Save the result in a variable named `missing_employees` and then print the variable.  
+
+*Hint: Use the anti_join() function.*  
+
+```{r ex-3b, exercise = TRUE, exercise.setup = "ex-3a-setup", exercise.completion = FALSE}
+
+```
+
+```{r ex-3b-hint-1}
+missing_employees <- ___ |> 
+    ___(___, by = ___)
+
+missing_employees
+```
+
+```{r ex-3b-hint-2}
+missing_employees <- emp_salary_data |> 
+    ___(updated_emp_data, by = ___)
+
+missing_employees
+```
+
+```{r ex-3b-solution, exercise.reveal_solution = FALSE}
+missing_employees <- emp_salary_data |> 
+    anti_join(updated_emp_data, by = "employee_id")
+
+missing_employees
+```
+
+```{r ex-3b-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+
+### Exercise 14 - Conditional Mutating
+The HR department wants to categorize employees based on their age to better understand the age distribution within the company. Using the `updated_emp_data` dataset, create a new column named `seniority`. This column should categorize employees as "Junior" if their age is less than 35, "Mid-level" if their age is between 35 and 45 (inclusive), and "Senior" if their age is more than 45. Relocate the `seniority` variable to after the `age` variable. Save the result in a variable called `final_emp_data`. View the `final_emp_data` tibble.  
+
+*Hint: You can use the `mutate()`, `case_when()`, and `relocate()` functions to accomplish this. If you need help with the functions, you can type ?function_name (e.g., `?case_when`) in your console to access the help documentation.*  
+
+```{r ex-4, exercise = TRUE, exercise.setup = "ex-3a-setup", exercise.completion = FALSE}
+
+```
+
+```{r ex-4-hint-1}
+___ <- ___ |> 
+    ___(___ = ___(
+        ___ < ___ ~ "Junior",
+        ___ >= ___ & ___ <= 45 ~ ___,
+        ___ ~ ___ 
+    ))
+
+___
+```
+
+```{r ex-4-hint-2}
+final_emp_data <- ___ |> 
+    mutate(___ = case_when(
+        age < 35 ~ "Junior",
+        ___ >= 35 & ___ <= 45 ~ ___,
+        TRUE ~ "Senior" 
+    ))
+
+final_emp_data
+```
+
+```{r ex-4-solution, exercise.reveal_solution = FALSE}
+final_emp_data <- updated_emp_data |> 
+    mutate(seniority = case_when(
+        age < 35 ~ "Junior",
+        age >= 35 & age <= 45 ~ "Mid-level",
+        TRUE ~ "Senior" 
+    ))
+
+final_emp_data
+```
+
+```{r ex-4-check}
+grade_this({
+    pass_if_equal()
+    fail()
+})
+```
+
+### Working with Strings and Text Data: Exercises
+Lets put your newfound knowledge of working with strings and text data into practice.\
+
+###
+Imagine you are a People Analytics Specialist at "FutureTech Corp.", a fast-growing technology company. You have been given a list of employee data and several tasks to complete using R's string manipulation capabilities and regular expressions.  
+
+You will be using the `future_tech_data` dataset for the following exercises. The data is a vector of strings, each representing an employee. Each string contains the employee ID, the employee's name, and their department, separated by hyphens.  
+
+```{r prepare-future-tech-data}
+future_tech_data <- c("EMP001-John Smith-HR",
+                   "EMP002-Robert Brown-Sales",
+                   "EMP003-Emily Johnson-Finance",
+                   "EMP004-Alice Davis-IT",
+                   "EMP005-Bob Anderson-Marketing")
+```
+
+
+### Exercise 15: Extract Employee IDs
+Your first task is to compile a list of all employee IDs. Use `str_extract()` to extract the Employee IDs from `future_tech_data`.  
+
+```{r text-ex-1, exercise = TRUE, exercise.setup = "prepare-future-tech-data"}
+
+```
+
+```{r text-ex-1-hint-1}
+# Remember to use the `^` anchor to start the match at the beginning of the string.
+```
+
+```{r text-ex-1-hint-2}
+str_extract(future_tech_data, ___)
+```
+
+
+```{r text-ex-1-solution, exercise.reveal_solution = FALSE}
+str_extract(future_tech_data, "^EMP\\d+")
+```
+
+```{r text-ex-1-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+
+### Exercise 16: Find Employees in HR Department
+For an upcoming meeting, the HR manager needs the details of all employees in the HR department. Find all employees who are part of the HR department.  
+
+```{r text-ex-2, exercise = TRUE, exercise.setup = "prepare-future-tech-data"}
+
+```
+
+```{r text-ex-2-hint-1}
+str_subset(future_tech_data, ___)
+```
+
+```{r text-ex-2-solution, exercise.reveal_solution = FALSE}
+str_subset(future_tech_data, "HR$")
+```
+
+```{r text-ex-2-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+
+### Exercise 17: Find Employees with IDs Ending in '2' or '5'
+FutureTech Corp. wants to organize a training session for employees whose IDs end in '2' or '5'. They believe these employees belong to the older hiring batches and might need a refresher course. Use `str_subset()` to identify these employees.  
+
+```{r text-ex-3, exercise = TRUE, exercise.setup = "prepare-future-tech-data"}
+
+```
+
+```{r text-ex-3-hint-1}
+# The $ anchor and character classes can help you match at the end of the string.
+```
+
+```{r text-ex-3-hint-2}
+# The $ anchor and character classes can help you match at the end of the string.
+# The | alternation symbol to pick between one or more alternative patterns.
+```
+
+```{r text-ex-3-hint-3}
+str_subset(future_tech_data, "___|___")
+```
+
+```{r text-ex-3-solution, exercise.reveal_solution = FALSE}
+str_subset(future_tech_data, "2$|5$")
+```
+
+```{r text-ex-3-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### BONUS: Advanced Exercises
+
+The following two exercises are a bit more challenging and use the techniques you learned in the "Advanced Regular Expressions" section. But you got this! Utilize various resources to help you solve this exercise (e.g., Google, Stackoverflow, `?help`, etc.). And remember, there are multiple ways to solve these problems.  
+
+### Exercise 18: Extract Department Names
+Next, the HR department needs a list of all the departments mentioned in the dataset. Extract the department names from `future_tech_data`.  
+
+```{r text-ex-4, exercise = TRUE, exercise.setup = "prepare-future-tech-data"}
+
+```
+
+```{r text-ex-4-hint-1}
+str_extract(future_tech_data, ___)
+```
+
+```{r text-ex-4-solution, exercise.reveal_solution = FALSE}
+str_extract(future_tech_data, "(?<=-)[A-Za-z]+$")
+```
+
+```{r text-ex-4-check}
+grade_this({
+    pass_if_equal()
+})
+```
+
+
+### Exercise 19: Rearrange the Data
+FutureTech Corp. has decided they want the data in the following format: "Name (Employee ID) - Department". This would make the data more readable for the upcoming presentation. An example output would be `Bob Anderson (EMP005) - Marketing`. Use `str_replace_all()` with capturing groups to rearrange the employee data.  
+
+```{r text-ex-5, exercise = TRUE, exercise.setup = "prepare-future-tech-data"}
+
+```
+
+```{r text-ex-5-hint-1}
+# Use \\1 and \\2 to refer back to captured groups in the replacement string.
+```
+
+```{r text-ex-5-hint-2}
+str_replace_all(future_tech_data, pattern = ___, replacement = "\\2 (\\1) - \\3")
+```
+
+
+```{r text-ex-5-solution, exercise.reveal_solution = FALSE}
+str_replace_all(future_tech_data, pattern = "(^EMP\\d+)-(\\w+ \\w+)-(\\w+$)", replacement = "\\2 (\\1) - \\3")
+```
+
+```{r text-ex-5-check}
+grade_this({
+    pass_if_equal()
+})
+```

@@ -64,13 +64,6 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Basic R Concepts: Exercises {data-progressive=TRUE}
-```{r, child="lessons/2.1e_exercises.Rmd"}
-
-```
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
 ## Introduction to the Tidyverse {data-progressive=TRUE}
 ```{r, child="lessons/2.2_intro-tidyverse.Rmd"}
 
@@ -95,24 +88,9 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Tidy Data: Exercises {data-progressive=TRUE}
-```{r, child="lessons/2.4e_tidy.Rmd"}
-
-```
-
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
 <!-- ## Transforming Data {data-progressive=TRUE} -->
 ## Transforming Data {data-progressive=FALSE}
 ```{r, child="lessons/2.5_transform.Rmd"}
-
-```
-
-<!-- ==============================NEXT TOPIC=============================== -->
-
-## Transforming Data: Exercises {data-progressive=TRUE}
-```{r, child="lessons/2.5e_exercises.Rmd"}
 
 ```
 
@@ -127,17 +105,16 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Working with Strings and Text Data: Exercises {data-progressive=TRUE}
-```{r, child="lessons/2.6e_exercises.Rmd"}
+## Data Visualization {data-progressive=TRUE}
+```{r, child="lessons/2.7_viz.Rmd"}
 
 ```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Visualization {data-progressive=TRUE}
-```{r, child="lessons/2.7_viz.Rmd"}
+## Module Exercises {data-progressive=TRUE}
+```{r, child="lessons/Exercises.Rmd"}
 
 ```
-
 
