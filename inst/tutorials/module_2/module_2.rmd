@@ -32,20 +32,12 @@ gradethis::gradethis_setup()
 # source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
 source(here::here("inst/tutorials/module_2/www/helpers.R"))
 
-# employee_survey <- readr::read_csv(here::here("inst/extdata/employee_survey.csv"))
-# employee_turnover <- readr::read_csv(here::here("inst/extdata/employee_turnover.csv"))
-# employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_data.csv"))
-# emp_data <- readr::read_csv(here::here("inst/extdata/transform_practice_emp.csv"))
-# emp_salary_data <- readr::read_csv(here::here("inst/extdata/transform_practice_emp_salary.csv"))
-
 table_types <- tibble(
   Type = c("Numeric", "Integer", "Character", "Logical", "Factor"),
   Description = c("Decimal numbers or fractions", "Whole numbers", "Any text that is enclosed in quotations", "TRUE or FALSE values", "Categorical data with a fixed set of possible values"),
   Example = c(0.05, 42, "Hello World!", "TRUE", "factor(c('apple', 'orange', 'banana'))")
 )
 ```
-
-
 
 
 ## Introduction
@@ -88,8 +80,7 @@ table_types <- tibble(
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-<!-- ## Transforming Data {data-progressive=TRUE} -->
-## Transforming Data {data-progressive=FALSE}
+## Transforming Data {data-progressive=TRUE}
 ```{r, child="lessons/2.5_transform.Rmd"}
 
 ```
