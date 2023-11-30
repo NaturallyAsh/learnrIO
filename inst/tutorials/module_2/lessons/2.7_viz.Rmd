@@ -1012,7 +1012,7 @@ Additionally, consider exploring other packages in R, such as `ggplotly`, `patch
 Remember, practice is key to mastering data visualizations. Keep exploring different datasets, experiment with various plot types, and iterate on your visualizations to improve your proficiency. **Happy visualizing!**\
 
 
-### Up Next
-For the next lesson, Introduction to Exploratory Data Analysis, we'll be leveraging the power of data to ask meaningful questions, uncover hidden patterns, and tell compelling stories.\
+### Congratulations!
+You've successfully grasped the fundamentals of all the lessons we've covered. By mastering these essential skills, you've equipped yourself with a powerful toolkit for data analysis.\
 
-**See you there!** 
+Keep up the great work, and remember that learning is an ongoing adventure!

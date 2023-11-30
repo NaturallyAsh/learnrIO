@@ -4,7 +4,7 @@ title: "Working with Strings and Text Data"
 
 ### Introduction
 
-Text data, which is ubiquitous in business contexts, presents unique opportunities and challenges for analysts. With advances in text analysis techniques and tools, we are now able to derive insights from open-ended survey questions, customer reviews, employee feedback, and more. For instance, in the context of Industrial-Organizational Psychology, text data from employee surveys can provide richer and more nuanced information about employee attitudes and experiences compared to closed-ended questions.  
+Text data, which is very common in business settings, presents unique opportunities and challenges for analysts. With advances in text analysis techniques and tools, we are now able to derive insights from open-ended survey questions, customer reviews, employee feedback, and more. For instance, in the context of Industrial-Organizational Psychology, text data from employee surveys can provide richer and more nuanced information about employee attitudes and experiences compared to closed-ended questions.  
 
 Further, text data forms the backbone of many advanced analytics techniques, such as machine learning classification algorithms, sentiment analysis, and natural language processing. Hence, understanding how to manipulate and work with text data is a crucial skill for analysts.  
 
@@ -935,7 +935,18 @@ You may be feeling slightly confused about the pattern we used. That is complete
 4. `(?=, Salary)`: This is a positive lookahead. It asserts that what immediately follows the current position in the string must match the pattern inside the lookahead (in this case, ", Salary"), but it doesn't include that pattern in the actual match.  
 
 
+### Conclusion
+Phew! That wasn't to bad, right?\ 
+
+Remember, regular expressions can get very complex and sometimes it takes a bit of trial and error to get them right. But once you master them, they can be extremely powerful tools in your data manipulation toolbox.\
+
+Don't forget to try out your newfound knowledge in the "Working with Strings and Text Data Exercises" sub-lesson!\
+
 ###
-Phew! That wasn't to bad, right? Remember, regular expressions can get very complex and sometimes it takes a bit of trial and error to get them right. But once you master them, they can be extremely powerful tools in your data manipulation toolbox.  
+In our upcoming lesson, "Data Visualization," we'll embark on a journey to discover the power of visualizing data. This skill is essential. Visualizing data is like creating a roadmap that helps you understand complex information, spot trends, and communicate findings effectively. With `ggplot`, you'll learn how to do just that.\
+
+We'll explore how to craft a variety of visualizations to help you understand data trends, patterns, and relationships more effectively. Whether you're analyzing employee satisfaction, survey results, or any other data, `ggplot` can make your findings more accessible and impactful.\
+
+So, **get ready!**
 
 

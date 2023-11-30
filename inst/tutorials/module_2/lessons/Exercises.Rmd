@@ -494,7 +494,6 @@ grade_this({
 
 
 ### Exercise 12 - Joining Data (Part 1)
-**Part 1**  
 You want to join the `updated_emp_data` and `emp_salary_data` datasets so that you have the salary of all employees in one dataset. Join the two datasets on the common variable so that the new dataset only contains matches between the two datasets. Name the new joined dataset `joined_emp_data` and then print the variable.  
 
 ```{r ex-3a-setup}
@@ -546,7 +545,6 @@ grade_this({
 
 
 ### Exercise 13 - Joining Data (Part 2)
-**Part 2**  
 While comparing the `updated_emp_data` and `emp_salary_data` datasets, you realize some employees present in the `updated_emp_data` dataset are missing in the `emp_salary_data` dataset. Identify these employees. Save the result in a variable named `missing_employees` and then print the variable.  
 
 *Hint: Use the anti_join() function.*  
@@ -585,7 +583,9 @@ grade_this({
 
 
 ### Exercise 14 - Conditional Mutating
-The HR department wants to categorize employees based on their age to better understand the age distribution within the company. Using the `updated_emp_data` dataset, create a new column named `seniority`. This column should categorize employees as "Junior" if their age is less than 35, "Mid-level" if their age is between 35 and 45 (inclusive), and "Senior" if their age is more than 45. Relocate the `seniority` variable to after the `age` variable. Save the result in a variable called `final_emp_data`. View the `final_emp_data` tibble.  
+The HR department wants to categorize employees based on their age to better understand the age distribution within the company.\
+
+Using the `updated_emp_data` dataset, create a new column named `seniority`. This column should categorize employees as "Junior" if their age is less than 35, "Mid-level" if their age is between 35 and 45 (inclusive), and "Senior" if their age is more than 45. Relocate the `seniority` variable to after the `age` variable. Save the result in a variable called `final_emp_data`. View the `final_emp_data` tibble.  
 
 *Hint: You can use the `mutate()`, `case_when()`, and `relocate()` functions to accomplish this. If you need help with the functions, you can type ?function_name (e.g., `?case_when`) in your console to access the help documentation.*  
 
