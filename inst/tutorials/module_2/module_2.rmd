@@ -2,7 +2,8 @@
 title: "Module 2: R Foundations with the Tidyverse"
 output: 
     learnr::tutorial:
-        progressive: true
+        progressive: false
+        allow_skip: true # TODO: consider keeping or removing
         css: css/learnrIO_styles.css
         theme: "flatly"
 runtime: shiny_prerendered
@@ -17,20 +18,29 @@ knitr::opts_chunk$set(
 )
 
 library(learnr)
-library(dplyr)
-library(readr)
+library(gradethis)
+library(tidyverse)
+library(janitor)
+library(scales)
 
-source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
-employee_survey <- readr::read_csv(here::here("inst/extdata/employee_survey.csv"))
-employee_turnover <- readr::read_csv(here::here("inst/extdata/employee_turnover.csv"))
-employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_data.csv"))
-# gradethis_setup()
+tutorial_options(
+  exercise.blanks = "___",
+  exercise.completion = FALSE
+)
+gradethis::gradethis_setup()
+
+# source(here::here("inst/tutorials/module_2/www/module_datasets.R"))
+source(here::here("inst/tutorials/module_2/www/helpers.R"))
+
+table_types <- tibble(
+  Type = c("Numeric", "Integer", "Character", "Logical", "Factor"),
+  Description = c("Decimal numbers or fractions", "Whole numbers", "Any text that is enclosed in quotations", "TRUE or FALSE values", "Categorical data with a fixed set of possible values"),
+  Example = c(0.05, 42, "Hello World!", "TRUE", "factor(c('apple', 'orange', 'banana'))")
+)
 ```
 
 
-
-
-## Introduction
+## Overview
 ```{r, child="lessons/2.0_lesson-overview.Rmd"}
 
 ```
@@ -38,7 +48,7 @@ employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_dat
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Basic R concepts and data structures {data-progressive=TRUE}
+## Basic R Concepts{data-progressive=TRUE}
 ```{r, child="lessons/2.1_basic-R-concepts.Rmd"}
 
 ```
@@ -46,7 +56,7 @@ employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_dat
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Intro to the Tidyverse {data-progressive=TRUE}
+## Introduction to the Tidyverse {data-progressive=TRUE}
 ```{r, child="lessons/2.2_intro-tidyverse.Rmd"}
 
 ```
@@ -62,16 +72,16 @@ employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_dat
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Data Wrangling {data-progressive=TRUE}
-```{r, child="lessons/2.4_wrangling.Rmd"}
+## Tidy Data {data-progressive=TRUE}
+```{r, child="lessons/2.4_tidy.Rmd"}
 
 ```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Tidy Data {data-progressive=TRUE}
-```{r, child="lessons/2.5_tidy.Rmd"}
+## Transforming Data {data-progressive=TRUE}
+```{r, child="lessons/2.5_transform.Rmd"}
 
 ```
 
@@ -91,4 +101,11 @@ employee_full_data <- readr::read_csv(here::here("inst/extdata/employee_full_dat
 
 ```
 
+
+<!-- ==============================NEXT TOPIC=============================== -->
+
+## Module Exercises {data-progressive=TRUE}
+```{r, child="lessons/Exercises.Rmd"}
+
+```
 

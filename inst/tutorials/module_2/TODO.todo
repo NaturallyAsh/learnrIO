@@ -1,0 +1,57 @@
+
+Projects:
+  Version 2.1: 
+    Todos:
+      consider enabling exercise.completion globally and adjust as needed per exercise
+
+      Need to figure out consistent way to use packages (e.g., dplyr::filter() vs. filter()). See 2.3_importing for example of inconsistency.
+
+      ☐ I'll need to run a spell check on the whole thing. @created(23-12-01)
+
+      ✔ Add ### after in-lesson exercise codeblocks. Put follow-up info about the codeblock there. @created(23-12-01) @done(23-12-01 19:15)
+
+      Note - Figure out a home to add detailed info on creating user-defined functions.
+
+      Consider spinkling ggplot viz throughout all modules. Make it more interesting for the learners. Keep the 2.7 module for in-depth viz.
+      
+      Recommend learners use ChatGPT as a resource.
+
+      Figure out whether to create separate sub-lesson exercises or just include them in the main lesson. 
+
+      Consider using gradethis in main lesson and not just in sub-lesson exercises.
+
+      Add "Tips" general-callout throughout e.g. 
+        <div class="general-callout">
+        **Tip**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
+        </div>
+
+      ✔ add cheatsheet links in callbox at top of every lesson @created(23-12-01) @done(23-12-01 22:28)
+
+      2.1 - basic concepts:
+        NOTE - info from https://rstudio-education.github.io/hopr/ will be extremely useful for further developing this section.
+
+        ☐ Add somewhere info about executing a function without assigning it to a variable as a way to quickly print to console. Play with and view code results without the inconvenience of needing to `rm()` a variable. Maybe add to the "Functions" section. @created(23-05-27)
+        ☐ Add info on using the `summary()` function on vectors and tibbles. Overall inspection and viewing NAs. @created(23-06-16)
+        ☐ Add resources/recommendations for more detailed learning of concept @created(23-05-27)
+      2.4 - tidy:
+        ☐ revisit. Add more stuff or consider combining lesson with another @created(23-06-02)
+        ☐ @created(23-06-08)
+      2.5 - transforming:
+        ☐ add more usage of `glimpse()`. Very useful (especially for a lot of columns) for viewing types of literally all columns instead of trunnecated version @created(23-06-10)
+        ☐ in "Handle Missing Data" section, include using `filter()` to filter missing data. e.g., `filter(!is.na(variable))` @created(23-06-16)
+        ✘ add gifs for joining data section from here: https://github.com/gadenbuie/tidyexplain @created(23-06-17) @cancelled(23-11-30 17:04)
+      2.6 - text:
+        ✔ see todo in Regex section (add resource for practicing regex online) @created(23-06-22) @done(23-12-01 19:10)
+      References module:
+        Citations - create .bib file. Add bibliography to yaml
+        ☐ Hadley Wickham https://r4ds.had.co.nz/index.html @created(23-06-09)
+    
+  Archive:
+  ✔ Probably should move the Tibbles section at the end of 2.3 to 2.4-Wrangling @created(23-05-31) @done(23-06-17 18:06) @project(Projects.Version 2.1.Todos.2.3 - importing)
+  ✔ ~~Need to handle **datasets situation**. `usethis_data()` or in tutorial folder, etc.~~ will put data in "extdata" folder for now. Call in setup chunk. Or in module exercises, call using `system.file("extdata", "dataset.csv", package = "learnrIO", mustWork = TRUE)` @created(23-06-11) @done(23-06-15 15:38) @project(Projects.Version 2.1.Todos)
+  ✔ handle draft exercises (see UNUSED) @created(23-06-01) @done(23-06-16 19:27) @project(Projects.Version 2.1.Todos.2.5 - transforming)
+  ✔ expand "joining datasets" section @created(23-06-14) @done(23-06-14 15:26) @project(Projects.Version 2.1.Todos.2.5 - transforming)
+  ✔ expand "changing data types" section @created(23-06-11) @done(23-06-14 15:27) @project(Projects.Version 2.1.Todos.2.5 - transforming)
+  ✔ Move Packages section (at the bottom) to module 2.1 @created(23-05-27) @done(23-05-29 18:31) @project(Projects.Version 2.1.Todos.2.1 - basic concepts)
+  ✔ Include info about tidyverse package loading options (individually `library(dplyr`) or all `library(tidyverse)`). Explain it's just a matter of preference or convenience. @created(23-05-27 16:09) @done(23-05-31 19:53) @project(Projects.Version 2.1.Todos.2.2 - tidyverse)
+    You can archive finished todos here

@@ -1,11 +1,35 @@
-.callout {
-    padding: 20px;
-    background-color: #ededed;
-    border-left: 6px solid #9e9d9d;
-    margin-bottom: 15px;
+.general-callout {
+  padding: 20px;
+  background-color: #ededed;
+  border-left: 6px solid #9e9d9d;
+  margin-bottom: 15px;
 }
 
 .figcap {
-  color: gray;
-  font-style: italic;
+color: gray;
+font-style: italic;
+}
+
+.float-fig-right {
+display: table;
+float: right;
+padding-left: 30px;
+padding-bottom: 10px;
+}
+
+.float-fig-left {
+display: table;
+float: left;
+padding-right: 30px;
+padding-bottom: 10px;
+}
+
+.tutorial-exercise-output > pre > code {
+white-space: pre-line !important; 
+/* fixed issue where code output had a lot of whitespace. Solved from here: https://github.com/rstudio/pagedown/issues/233#issuecomment-879045818 */
+}
+
+.tutorial-exercise-output > p > img {
+  /* fixes issue where ggplot was scrolling off the page. Now fits to screen */
+  width: 100% !important;
 }

@@ -2,119 +2,956 @@
 title: "Working with Strings and Text Data"
 ---
 
-### Overview
+### Introduction
 
-Text data, which is ubiquitous in business contexts, presents unique opportunities and challenges for analysts. With advances in text analysis techniques and tools, we are now able to derive insights from open-ended survey questions, customer reviews, employee feedback, and more. For instance, in the context of Industrial-Organizational Psychology, text data from employee surveys can provide richer and more nuanced information about employee attitudes and experiences compared to closed-ended questions.  
+Text data, which is very common in business settings, presents unique opportunities and challenges for analysts. With advances in text analysis techniques and tools, we are now able to derive insights from open-ended survey questions, customer reviews, employee feedback, and more. For instance, in the context of Industrial-Organizational Psychology, text data from employee surveys can provide richer and more nuanced information about employee attitudes and experiences compared to closed-ended questions.  
 
 Further, text data forms the backbone of many advanced analytics techniques, such as machine learning classification algorithms, sentiment analysis, and natural language processing. Hence, understanding how to manipulate and work with text data is a crucial skill for analysts.  
 
-**[Placeholder for an image illustrating text data analytics]**  
 
-In this lesson, we will focus on `stringr`, a package in the `tidyverse`, which provides simple, consistent functions for common string manipulation tasks. Importantly, `stringr` functions can be seamlessly integrated within `dplyr` functions or used with pipe (`|>`) operations for efficient data transformations.  
+<figure>
+  <img src="images/text-analytics.png" width="100%" alt="Image with magnifying glass and words saying Text Analytics, classification, sentiment analysis, text mining, and natural language processing.">
+  <figcaption class="figcap"></figcaption>
+</figure>
+
+###
+In this lesson, we'll delve into these basic operations and gradually progress to more advanced concepts, introducing the use of regular expressions for complex pattern matching and text manipulation tasks. Regular expressions, often abbreviated as "regex", are sequences of characters that form a search pattern. This search pattern can be used in functions to match, locate, and manage text.  
+
+By the end of this lesson, you'll have a firm grasp of handling and manipulating strings in R, opening up new possibilities for your data analysis tasks.\
+
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">here</a>.
+</div>
+
+### What is a String?
+To kick things off, let's begin by understanding what a string is and some other string basics.\
+
+A string is a sequence of characters. In R, you can create a string by enclosing the characters in quotes. For example, the string `"Hello, World!"` includes 13 characters: the 12 visible characters, including the comma and the space, and an invisible newline character.\
 
 
-### Basic stringr operations
+###
+Print the `greeting` variable to see the output:  
+```{r string, exercise = TRUE}
+greeting <- "Hello, World!"
 
-`stringr` provides a variety of functions for string manipulation. Let's dive into some of the most commonly used ones.  
-
-**str_length()**  
-This function computes the length of a string. It counts the number of characters in the string, including spaces and punctuation:  
-
-```{r, eval=FALSE}
-str_length("Hello, world!")  # Output: 13
 ```
 
-
-**str_c()**  
-This function concatenates, or combines, strings together. You can specify a separator with the `sep` argument, which will be inserted between the concatenated strings:  
-
-```{r, eval=FALSE}
-str_c("Hello", "world!", sep = ", ")  # Output: "Hello, world!"
+```{r string-solution}
+greeting <- "Hello, World!"
+print(greeting)
 ```
 
-
-**str_sub()**  
-This function extracts or replaces substrings in a string. You specify the start and end positions to extract a substring. If the start is less than 1 or end is greater than the length of the string, the function will return as much as possible:  
-
-```{r, eval=FALSE}
-# Extract the first 5 characters
-str_sub("Hello, world!", start = 1, end = 5)  # Output: "Hello"
-```
+###
+You can see the print output is `"Hello, World!"`.  
 
 
-**str_detect()**  
-This function detects the presence or absence of a pattern in a string. It returns `TRUE` if the pattern is found and `FALSE` otherwise. This function is useful in filtering operations:  
+### Character Escape Sequences
+
+There are times when you need to include a literal single or double quote within a string. This can be accomplished through the use of backslashes `(\)` which help in "escaping" these characters:  
 
 ```{r, eval=FALSE}
-# Check if a string contains 'world'
-str_detect("Hello, world!", "world")  # Output: TRUE
+double_quote <- "\"" # another way is '"'
+single_quote <- '\'' # another way is "'"
 ```
 
-
-**str_replace()**  
-This function replaces matched patterns in a string. If no match is found, the original string is returned unchanged:  
+###
+Similarly, if your aim is to include a literal backslash in your string, you would have to escape it using a double backslash `(\\)`:  
 
 ```{r, eval=FALSE}
-# Replace 'world' with 'everyone'
-str_replace("Hello, world!", "world", "everyone")  # Output: "Hello, everyone!"
+backslash <- "\\"
 ```
 
+###
+One thing to keep in mind is that the printed representation of a string may not match the string itself exactly. This is due to the fact that the printed representation displays the escape sequences. This means that when a string is printed, you could simply copy and paste the output to recreate that string.\
 
-### Extended Using stringr with dplyr and Pipe Operations
+```{r print-escape-setup}
+double_quote <- "\""
+single_quote <- '\''
+backslash <- "\\"
+```
 
-The real power of `stringr` becomes apparent when used with `dplyr` functions or pipe operations. Let's consider a more complex example using the same `employee_feedback` dataset from earlier.  
+Print the variable `x` to see the output:  
 
-We can use `str_detect()` within a dplyr `filter()` to find all comments containing the word 'work':  
+```{r print-escape, exercise = TRUE}
+x <- c(single_quote, double_quote, backslash)
+
+```
+
+```{r print-escape-solution}
+x <- c(single_quote, double_quote, backslash)
+x
+```
+
+###
+The output prints the escape sequences. If you want to view the raw contents of the string, you can use of a `stringr` function called `str_view()`. Use `str_view()` to view the `x` variable:  
+
+```{r view-escape-setup}
+double_quote <- "\""
+single_quote <- '\''
+backslash <- "\\"
+x <- c(single_quote, double_quote, backslash)
+```
+```{r view-escape, exercise = TRUE}
+
+```
+
+```{r view-escape-solution}
+str_view(x)
+```
+
+###
+You see that `str_view()` outputs the raw string minus the escape characters.  
+
+
+
+### Basic String Manipulation using `stringr`
+
+`stringr`, a core package of the `tidyverse`, provides powerful functions for common string manipulation tasks. The `stringr` package simplifies the process of working with strings. It provides user-friendly functions to perform common string manipulations, such as finding and replacing patterns, extracting elements, or converting cases.\
+
+In addition, `stringr` functions can be seamlessly integrated within `dplyr` functions or used with pipe (`|>`) operations for efficient data transformations. The neat thing about `stringr` is that you instantly know when you are using one of its many functions, because they all start with `str_`.\
+
+We will cover some of the most commonly used functions.\
+
+###
+**Counting Characters: str_length()**  
+
+The `str_length()` function calculates the number of characters in a string. For example, we can check the lengths of the strings in our `job_titles` vector. Do this in the codeblock and save the result in a variable called `job_title_lengths` and print the variable.  
+
+```{r job-titles-setup}
+job_titles <- c("Data Analyst", "Project Manager", "HR Specialist")
+```
+
+```{r lengths, exercise = TRUE, exercise.setup = "job-titles-setup"}
+
+```
+
+```{r lengths-solution}
+job_title_lengths <- str_length(job_titles)
+
+job_title_lengths
+```
+
+###
+Notice that the output is a vector containing the length of each job title string. This function can be used to find unusually long or short entries in text data.  
+
+###
+**Creating Strings from Data: str_c()**  
+
+The `str_c()` function is used to combine strings together. This is particularly useful when creating new variables or aggregating information.  
+
+###
+Say we have a vector of employee names:  
 
 ```{r, eval=FALSE}
-work_related_comments <- employee_feedback |> 
-  filter(str_detect(Comment, "work"))
+employee_names <- c("John Doe", "Jane Smith", "Bob Johnson")
 ```
 
+###
+We can use `str_c()` to combine the each name with a job title from `job_titles`. If you type `?str_c` in your console and pull up the documentation, you will notice that the first argument is an ellipsis `...`. This means that you can add as many character strings or character vectors as you'd like, with each separated by a comma. `str_c()` has another neat argument, `sep` (separator), that allows you to specify a string to insert between each combination.  
 
-Now let's say we want to know the average length of these work-related comments:  
+###
+In the codeblock, combine `job_titles` and `employee_names` using `str_c()`. Use the `sep` argument and specify " - " as the separator. Save the result in a variable called `job_employee` and print the variable. Type `?str_c` in your console to read the function's documentation if you need help.  
 
-```{r, eval=FALSE}
-average_comment_length <- work_related_comments |> 
-  mutate(Comment_Length = str_length(Comment)) |> 
-  summarise(Average_Length = mean(Comment_Length))
+```{r str-c-setup, exercise.setup = "job-titles-setup"}
+employee_names <- c("John Doe", "Jane Smith", "Bob Johnson")
 ```
 
+```{r str-c, exercise = TRUE}
 
-We could also create a new variable indicating whether the comment was positive, assuming simplicity that comments containing 'love', 'great', or 'excellent' are positive:  
-
-```{r, eval=FALSE}
-positive_comments <- employee_feedback |> 
-  mutate(Is_Positive = ifelse(str_detect(Comment, c("love", "great", "excellent")), "Yes", "No"))
 ```
 
+```{r str-c-solution}
+job_employee <- str_c(job_titles, employee_names, sep = " - ")
 
-In these examples, `str_detect()` and `str_length()` are used within `filter()`, `mutate()`, and `summarise()` functions to create new variables and compute summaries based on text data. This illustrates the flexibility and power of combining `stringr` functions with `dplyr` and pipe operations.
+job_employee
+```
 
+###
+You can see that we combined the job title and employee name for each individual.  
 
-### Your Turn
-
-Now, it's your turn to practice what you've learned about manipulating and analyzing text data with `stringr` and `dplyr` functions. Use the `employee_feedback` and `employee_emails` tibbles for these exercises.  
-
-**Exercise 1:** Identify all comments in the employee_feedback dataset that contain the word 'balance'. How many such comments are there?  
+###
+`str_c()` is well suited for use inside a `mutate()`:  
 
 ```{r}
+job_employee_tibble <- tibble(
+  employee_names = c("John Doe", "Jane Smith", "Bob Johnson"),
+  job_titles = c("Data Analyst", "Project Manager", "HR Specialist")
+)
 
+job_employee_tibble |> 
+  mutate(
+    name_title_text = str_c(employee_names, "\'s job title is ", job_titles)
+  )
 ```
 
-**Exercise 2:** Create a new column in the employee_feedback dataset called 'Comment_Length' that contains the length of each comment. Then, compute the average comment length.  
+###
+Using `str_c()` in a `tidyverse` function means that you can easily combine multiple variables in your tibble.  
+
+
+###
+**String Extraction: str_sub()**  
+
+The `str_sub()` function enables us to extract or replace substrings in a string. This can be helpful when we need to extract a specific part of a string.  
+
+###
+Using a simple vector as an example, we can extract the first three characters from `job_titles`:  
 
 ```{r}
+job_titles <- c("Data Analyst", "Developer", "Engineer")
+
+first_three <- str_sub(job_titles, start = 1, end = 3)
+```
+
+###
+Specifying start = 1 and end = 3 returns the first three characters for each job title.  
+
+We will show you how to better extract strings using regex (regular expression) later in this lesson.  
+
+
+
+###
+**Lowercasing and Uppercasing: str_to_lower() and str_to_upper()**  
+
+The `str_to_lower()` and `str_to_upper()` functions are used to convert string data to either all lowercase or all uppercase letters, respectively. This is particularly useful when you want to standardize your text data for further analysis.  
+
+###
+To demonstate, first print the `job_titles` vector to view its values:  
+
+```{r prepare-titles}
+job_titles <- c("Data Analyst", "PROJECT MANAGER", "Hr Specialist")
+```
+
+```{r view-titles, exercise = TRUE, exercise.setup = "prepare-titles"}
 
 ```
 
-**Exercise 3:** In the `employee_emails` dataset, create a new column named 'Domain' that contains the domain of each email (the part after '@').  
+```{r view-titles-solution}
+job_titles
+```
 
-- Hint: Use the `str_split()` function.  
+###
+Now, call the `str_to_lower()` and `str_to_upper()` functions on `job_titles`. Save the calls to variables called `job_titles_lower` and `job_titles_upper`, and print the two variable:  
+
+```{r lower-upper, exercise = TRUE, exercise.setup = "prepare-titles"}
+
+```
+
+```{r lower-upper-solution}
+job_titles_lower <- str_to_lower(job_titles)
+job_titles_upper <- str_to_upper(job_titles)
+
+job_titles_lower
+job_titles_upper
+```
+
+
+###
+**Trimming White Spaces: str_trim() and str_squish()**  
+
+Text with extra whitespace can lead to unwanted results or errors in your analyses. The `str_trim()` function is used to remove leading and trailing white spaces from a string, while `str_squish()` removes both leading and trailing white spaces, as well as any extra white spaces between words.  
+
+###
+Take a look at the `feedback` variable which is a vector containing some employee feedback. Print the variable:  
+
+```{r prepare-whitespace}
+feedback <- c(" The training was very useful. ", "I loved it!  ", "  Could be better. ")
+```
+
+```{r view-whitespace, exercise = TRUE, exercise.setup = "prepare-whitespace"}
+
+```
+
+```{r view-whitespace-solution}
+feedback
+```
+
+###
+Use `str_trim()` on `feedback`. Save the result to a variable named `feedback_trimmed` and then print:  
+
+```{r trim, exercise = TRUE, exercise.setup = "prepare-whitespace"}
+
+```
+
+```{r trim-solution}
+feedback_trimmed <- str_trim(feedback)
+feedback_trimmed
+```
+
+###
+Now use `str_squish()` on `feedback`. Save the result to a variable named `feedback_squished()` and then print:  
+
+```{r squish, exercise = TRUE, exercise.setup = "prepare-whitespace"}
+
+```
+
+```{r squish-solution}
+feedback_squished <- str_squish(feedback)
+feedback_squished
+```
+
+
+###
+**String Interpolation: str_glue()**  
+
+The function `str_glue()` simplifies string construction by replacing placeholders - `{}` - in a string with their respective values. This is a process called string interpolation (or variable substitution).   
+
+###
+In the example, we use `str_glue()` instead of `str_c()`, place the variable names in the `{}` placeholder, and include additional text as you would for a typically sentence:  
 
 ```{r}
+job_employee_tibble <- tibble(
+  employee_names = c("John Doe", "Jane Smith", "Bob Johnson"),
+  job_titles = c("Data Analyst", "Project Manager", "HR Specialist")
+)
+
+job_employee_tibble |> 
+  mutate(
+    name_title_text = str_glue("{employee_names}'s job title is {job_titles}")
+  )
+```
+
+###
+This method is an easier alternative to `str_c()` if you find yourself repeatedly quoting, unquoting, escaping, or have a lot of arguments separated by commas.  
+
+
+###
+**Separate Row into Multiple Rows**  
+
+The `separate_longer_delim()` function splits a string in one row into multiple rows based on a delimiter, each containing a separate piece of the original string. This is useful when a single cell contains multiple pieces of information that need to be analyzed separately.  
+
+###
+Take a look at the `employee_skills` tibble:  
+
+```{r prepare-separate-row}
+employee_skills <- tibble(
+  name = c("John Doe", "Jane Smith", "Bob Johnson"),
+  skills = c("R,Python,SQL", "Excel,PowerPoint", "Python,SQL,Excel")
+)
+```
+
+```{r view-separate-row, exercise = TRUE, exercise.setup = "prepare-separate-row"}
+
+```
+
+```{r view-separate-row-solution}
+employee_skills
+```
+
+###
+Notice that the `skills` contains more than one skill, separated by a comma. In order to perform any sort of meaningful analysis, you would need to split these skills into multiple rows.  
+
+###
+Using the `employee_skills` dataset, pipe the dataset and call `separate_longer_delim()` on `skills` with a comma as the delimiter. Save the result in a variable called `separated_skills` and then print the variable.  
+
+```{r separate-skills, exercise = TRUE, exercise.setup = "prepare-separate-row"}
+
+```
+
+```{r separate-skills-solution}
+separated_skills <- employee_skills |> 
+  separate_longer_delim(skills, delim = ",")
+
+separated_skills
+```
+
+###
+`separate_longer_delim()` let's you analyze each skill separately. This is useful, for example, if you wanted to count the frequency of each skill across all employees.  
+
+
+###
+We only touched on a few of the `str_` functions. When working on data projects, you will determine which function to use based on the task you are trying to solve. The documentation is always available by running the `?help` or on the [`stringr` documentation](https://stringr.tidyverse.org/index.html) website.  
+
+
+
+### Regular Expressions
+
+As we dive deeper into text data manipulation, we frequently encounter situations where our basic string operators are not enough. Within the realm of Industrial-Organizational Psychology, we are often presented with various types of data, from neatly structured data arrays to more unpredictable sources like conversational interview transcripts, open-ended survey responses, or the unfiltered stream of social media. In these more complex scenarios, our tasks often demand the detection of intricate patterns, the extraction of specific data points, or sophisticated data transformations. This is where regular expressions, or regex for short, truly shine.\
+
+Regular expressions are the Swiss army knives of text manipulation, adept at locating, substituting, and manipulating text. They function as a pattern - a string of characters which we use as a sort of 'template' within functions to manipulate strings. Regular expressions may appear intimidating at first glance, their syntax intricate and cryptic, but with a bit of persistence, you'll discover they can turn your text manipulation tasks from a chore into a walk in the park.\
+
+###
+In the following sections, we're going to unravel the intricacies of regular expressions together. We'll start with the foundation - understanding the basic syntax and creating simple patterns. We'll familiarize ourselves with special characters and the art of defining character classes. As we journey deeper into the maze, we'll uncover the secrets of more advanced constructs - grouping, capturing groups, look-aheads, and look-behinds.\
+
+Mastering these techniques will provide you with a powerful lens through which you can separate essential insights from the vast seas of text data to make truly data-driven decisions.\
+
+###
+Ready for the challenge? **Let's dive in!**.  
+
+
+### Using Regular Expressions and `stringr`
+
+At its simplest, a regular expression can be just a sequence of characters that you want to find in the text. For example, the regular expression "abc" will match any string that contains "abc". However, regex allows for much more complex patterns.  
+
+The stringr package in R provides several functions to work with strings and regular expressions. These include `str_extract()`, `str_detect()`, `str_replace()`, `str_split()`, and others.  
+
+Before diving into the nitty-gritty of regular expressions, let's first explore `str_detect()` and `str_subset()` in greater depth, as we will be using these functions extensively with our regular expressions.  
+
+
+###
+**`str_detect()`**  
+
+The `str_detect()` function is used to determine if a pattern exists within a string or a vector of strings. This function returns a logical vector (i.e., a vector of `TRUE` and `FALSE` values), indicating whether each element of the input string or vector matches the provided pattern.  
+
+###
+Consider a vector of employee feedback comments. View the `feedback_comments` vector in the codeblock:  
+
+```{r prepare-feedback-comments}
+feedback_comments <- c("Great work environment",
+                       "Need better management",
+                       "Happy with my team",
+                       "Management could improve",
+                       "I love the team spirit")
+```
+
+```{r view-detect, exercise = TRUE, exercise.setup = "prepare-feedback-comments"}
+
+```
+
+```{r view-detect-solution}
+feedback_comments
+```
+
+###
+If we want to find out which comments mention "management", we can use `str_detect()`. Call this function on the `feedback_comments` vector and specify "management" as the pattern:  
+
+> *NOTE:* a comment mentions "management" and another mentions "Management". Be sure to match lower and uppercase!  
+
+```{r detect, exercise = TRUE, exercise.setup = "prepare-feedback-comments"}
+
+```
+
+```{r detect-solution}
+str_detect(feedback_comments, pattern = "[m|M]anagement")
+```
+
+###
+Great job!  
+
+Notice this returns `FALSE, TRUE, FALSE, TRUE, FALSE`, indicating that the second comment mentions "management" and fourth comment mentions "Management".  
+
+###
+**`str_subset()`**  
+
+While `str_detect()` informs us about the presence of a pattern, `str_subset()` goes a step further by returning the actual strings (or a subset of strings) that match the pattern. This is particularly useful when you're interested in the content of the matches, not just their existence.  
+
+###
+Continuing with the previous example, we can extract the comments that mention "management" or "Management" using `str_subset()`. In the codeblock below, swap out `str_detect()` with `str_subset()` and run the code:  
+
+```{r subset, exercise = TRUE, exercise.setup = "prepare-feedback-comments"}
+str_detect(feedback_comments, pattern = "[m|M]anagement")
+```
+
+```{r subset-solution}
+str_subset(feedback_comments, pattern = "[m|M]anagement")
+```
+
+###
+With `str_subset()`, matching the pattern returned the entire string that match belonged to!  
+
+
+###
+`str_detect()` and `str_subset()` are frequently used in combination with regular expressions. 
+
+
+###
+**Metacharacters**  
+There are several special characters in regex, known as **metacharacters**, that have special meanings. These include `.`, `^`, `$`, `*`, `+`, `?`, `{`, `}`, `[`, `]`, `\`, `|`, `(`, and `)`. These metacharacters all have meaning and perform a specific function when used in a regex pattern.  
+
+###
+Let's focus on the dot `.` as an example. The `.` is a special character known as a **wildcard**. It matches any character except a newline. Let's assume we want to extract words that contain a period `(.)`. You might initially specify the `.` as the pattern. Run the codeblock to view the output of `str_subset()`:  
+
+```{r metachar_1, exercise = TRUE}
+words <- c("elephant.", "empire", "edge.", "erase.", "east", "empty")
+str_subset(words, pattern = ".")
+```
+
+###
+You'll notice that all the words were returned, not the words containing periods as you hoped. If you want to *literally* search for these metacharacters in a string, you must escape them using two backslashes `(\\)`.\
+
+In the codeblock, add a double backslash before the `.` in the `pattern` argument. Then run the code:\
+
+```{r metachar_2, exercise = TRUE}
+words <- c("elephant.", "empire", "edge.", "erase.", "east", "empty")
+str_subset(words, pattern = ".")
+```
+
+```{r metachar_2-solution}
+words <- c("elephant.", "empire", "edge.", "erase.", "east", "empty")
+str_subset(words, pattern = "\\.")
+```
+
+###
+Much better! The escape double backslash `(\\)` nullifies the special meaning of these metacharacters.  
+
+
+
+### Character Classes
+
+Character classes (or character sets) are defined by square brackets `[]`. They allow us to specify a set of characters of which we want to match exactly one. For instance, `[abc]` will match any single 'a', 'b', or 'c'. You can also define ranges of characters, like `[a-z]` for any lowercase letter, `[A-Z]` for any uppercase letter, and `[0-9]` for any digit.  
+
+###
+Consider a situation where you are trying to identify whether a string contains any numeric digits:  
+
+```{r}
+str1 <- "The number of employees increased by 10% in the past year."
+str2 <- "The company experienced significant growth last year."
+str_detect(str1, pattern = "[0-9]")
+str_detect(str2, pattern = "[0-9]")
+```
+
+###
+`str_detect(str1, pattern = "[0-9]")` returns `TRUE` as there is a number in `str1`. Meanwhile, `str_detect(str2, pattern = "[0-9]")` returns `FALSE` because `str2` does not contain any numeric digits.  
+
+
+###
+In regex, there are also **shorthand** character classes that represent commonly used sets of characters. Here are some of them:  
+
+- `\\d`: Matches any digit. It's equivalent to `[0-9]`.  
+- `\\D`: Matches any non-digit character. It's equivalent to `[^0-9]`.  
+- `\\w`: Matches any word character (letters, digits, and underscores). It's equivalent to `[a-zA-Z0-9_]`.
+- `\\W`: Matches any non-word character. It's equivalent to `[^a-zA-Z0-9_]`.  
+- `\\s`: Matches any whitespace character (spaces, tabs, and line breaks).  
+- `\\S`: Matches any non-whitespace character.  
+
+###
+These shorthand character classes can be used in conjunction with quantifiers to match a certain number of instances. For example, `\\d{2}` would match exactly two digits, while `\\d+` would match one or more digits.  
+
+###
+Many of the above character classes also have built-in easy to read equivalents. These equivalents take the form of `[:character_class_name]:`. The most common ones are:  
+
+- `[:alpha:]`: Any letter  
+- `[:lower:]`: Any lowercase letter  
+- `[:upper:]`: Any uppercase letter  
+- `[:digit:]`: Any digit (equivalent to `\\d`)  
+- `[:alnum:]`: Any letter or number  
+- `[:punct:]`: Any punctuation character  
+- `[:graph:]`: Any letter, number, or punctuation character  
+- `[:space:]`: A space, a tab, a new line, etc. (equivalent to \s)  
+
+```{r}
+str1 <- "The number of employees increased by 10% in the past year."
+str_extract(str1, pattern = "[:digit:]")
+```
+
+###
+The best way to get better at regex is to practice. I encourage you to visit [RegexR](https://regexr.com/), [RegexLearn](https://regexlearn.com/), or [RegexOne](https://regexone.com/) to learn and practice your regex skills.\
+
+
+
+### Quantifiers
+
+Quantifiers specify how many instances of a character, group, or character set must be present in the input for a match to be found. Here are the main quantifiers:  
+
+- `*` matches the preceding character zero or more times.  
+- `+` matches the preceding character one or more times.  
+- `?` matches the preceding character zero or one times (makes it optional).  
+- `{n}` matches the preceding character exactly n times.  
+- `{n,}` matches the preceding character n or more times.  
+- `{n,m}` matches the preceding character at least n times, but not more than m times.  
+
+
+### 
+**The Asterisk `(*)` Quantifier**  
+
+The `*` quantifier matches zero or more instances of the preceding character or group. For example, you may want to find instances of 'ee' (representing a prolonged vowel sound) in a list of words. View the `rating_terms` vector which is a list of common terms used in performance reviews:  
+
+```{r prepare-terms}
+rating_terms <- c("exceeds", "meets", "needs", "below", "unacceptable")
+```
+
+```{r view-terms, exercise = TRUE, exercise.setup = "prepare-terms"}
+
+```
+
+```{r view-terms-solution}
+rating
+```
+
+###
+Now, run the following code to view the output:  
+
+```{r asterick, exercise = TRUE, exercise.setup = "prepare-terms"}
+str_subset(rating_terms, pattern = "e*")
+```
+
+###
+**Great job!**  
+You can see that the result returns all words in the vector because `e*` matches zero or more instances of 'e'.  
+
+
+
+###
+**The Plus `(+)` Quantifier**  
+
+The `+` quantifier matches one or more instances of the preceding character or group. Let's look for instances where the prolonged 'e' sound appears. Call the `str_subset()` function with `rating_terms` as a parameter, and create a pattern that matches "e" one or more times:  
+
+```{r plus, exercise = TRUE, exercise.setup = "prepare-terms"}
+
+```
+
+```{r plus-hint}
+str_subset(___, pattern = ___)
+```
+
+```{r plus-solution}
+str_subset(rating_terms, pattern = "e+")
+```
+
+###
+**Awesome!**  
+This returns "exceeds", "meets", "needs" as these terms contain one or more instances of 'e'.  
+
+
+###
+**The Question Mark `(?)` Quantifier**  
+
+The `?` quantifier matches zero or one instance of the preceding character or group. It's useful when a character may or may not be present.  
+
+To get started with this example, take a look at the `survey_responses` vector:  
+
+```{r prepare-question-mark}
+survey_responses <- c("I prefer the red.", "I prefer the colour blue.", "My favorite color is green.")
+```
+
+```{r view-question-mark, exercise = TRUE, exercise.setup = "prepare-question-mark"}
+
+```
+
+```{r view-question-mark-solution}
+survey_responses
+```
+
+###
+Notice that the vector contains the words "color" and "colour". That's not a typo! Color is the American spelling whereas colour is the American spelling. If we want to identify all instances of this term, regardless of how it's spelled, we can use the `?` quantifier.\
+
+###
+Give it a try in the codeblock. Call `str_subset()` with `survey_responses` and specify the pattern that will match both "color" and "colour":  
+
+```{r question-mark, exercise = TRUE, exercise.setup = "prepare-question-mark"}
+
+```
+
+```{r question-mark-hint-1}
+str_subset(survey_responses, pattern = ___)
+```
+
+```{r question-mark-solution}
+str_subset(survey_responses, pattern = "colou?r")
+```
+
+###
+**Good job!**  
+The pattern returns all elements (strings) in the input vector where the pattern matches at least once. Since the second and third phrases contain either "color" or "colour", those two phrases are returned while the first phrase is not returned.  
+
+
+### 
+**`{n}`, `{n,}`, and `{n,m}` Quantifiers**  
+
+The `{n}` quantifier matches exactly `n` instances of the preceding character or group. For example, if we want to find words with exactly three 'e's in our list of performance review terms, we would write the pattern as `"e{3}"`.  
+
+###
+In the codeblock below, call `str_subset()` on the `rating_terms` vector and see what happens when you specify the `"e{3}"` pattern:  
+
+```{r n-quantifier, exercise = TRUE, exercise.setup = "prepare-terms"}
 
 ```
 
 
-Remember to check your answers by running your code. **Happy coding!**
+```{r n-quantifier-solution}
+str_subset(rating_terms, pattern = "e{3}")
+```
+
+###
+This will return an empty character vector as none of the words contain exactly three 'e's.
+
+
+###
+The `{n,}` quantifier matches `n` or more instances of the preceding character or group. We can write a pattern as `"e{2,}` if we want to find words with two or more 'e's.  
+
+###
+In the codeblock below, change the pattern to `"e{2,}"`:  
+
+```{r n-or-more, exercise = TRUE, exercise.setup = "prepare-terms"}
+str_subset(rating_terms, pattern = "e{3}")
+```
+
+```{r n-or-more-solution}
+str_subset(rating_terms, pattern = "e{2,}")
+```
+
+###
+Great!  
+You can see the code returns "exceeds", "meets", and "needs" as these words contain two or more 'e's.  
+
+###
+The `{n,m}` quantifier matches between `n` and `m` instances of the preceding character or group. Let's say we want to find words with between one and two "ed"s. See if you can specify the correct pattern in the codeblock below:  
+
+```{r n-m-quantifier, exercise = TRUE, exercise.setup = "prepare-terms"}
+str_subset(rating_terms, pattern = ___)
+```
+
+```{r n-m-quantifier-hint}
+str_subset(rating_terms, pattern = "___{1,2}")
+```
+
+```{r n-m-quantifier-solution}
+str_subset(rating_terms, pattern = "ed{1,2}")
+```
+
+###
+Awesome!  
+You should see "exceeds" and "needs" as your result since these words contain between one and two 'ed's.  
+
+
+### Alternation
+
+The pipe symbol `|` represents alternation, which allows you to specify multiple patterns, any one of which can be matched. It's basically a way to say "or" in a regular expression.  
+
+```{r}
+alteration_titles <- c("HR Manager", "People Analyst", "Data Scientist")
+
+# Matches job titles that contain either 'HR' or 'Data'
+hr_or_data_jobs <- alteration_titles |> 
+  str_detect("HR|Data")
+
+hr_or_data_jobs
+```
+
+
+### Anchors
+
+Anchors do not match any characters but indicate a position in the string where a match must start or end. The `^` symbol is used to start the match at the beginning of the string, and the `$` symbol is used to end the match at the end of the string.  
+
+###
+**Start of String `(^)`**  
+
+The `^` symbol matches the position at the start of a string. This is particularly useful when you want to find strings that start with a certain pattern.  
+
+For example, let's say we have a list of employee IDs, and we want to find all the IDs that start with "EMP":  
+
+```{r}
+emp_ids <- c("EMP001", "EMP234", "PRO567", "EMP765", "MGR890", "EMP342")
+str_subset(emp_ids, pattern = "^EMP")
+```
+
+###
+This will return "EMP001", "EMP234", "EMP765", "EMP342", as these IDs start with "EMP".  
+
+
+###
+**End of String `($)`**  
+
+The `$` symbol matches the position at the end of a string. This is useful when you want to find strings that end with a certain pattern.  
+
+Let's say we have a list of files, and we want to find all the CSV files. First view the `data_files` vector:  
+
+```{r prepare-end-anchor}
+data_files <- c("data1.csv", "data2.txt", "data3.csv", "report.doc", "summary.pdf", "data4.csv")
+```
+
+```{r view-end-anchor, exercise = TRUE, exercise.setup = "prepare-end-anchor"}
+
+```
+
+```{r view-end-anchor-solution}
+data_files
+```
+
+###
+Now, call `str_subset()` and write a pattern that matches all CSV files:  
+
+```{r end-anchor, exercise = TRUE, exercise.setup = "prepare-end-anchor"}
+
+```
+
+```{r end-anchor-solution}
+str_subset(files, pattern = ".csv$")
+```
+
+###
+Great job! The pattern `".csv$"` only returns file names with the ".csv" extension.  
+
+###
+We can also combine the two types of anchors to find strings that both start and end with certain patterns. For instance, suppose we want to find all employee IDs that start with "EMP" and end with "42":  
+
+```{r}
+str_subset(emp_ids, pattern = "^EMP.*42$")
+```
+
+###
+This will return "EMP342", as this ID starts with "EMP" and ends with "42".  
+
+
+
+### Advanced Regular Expressions
+
+You have now learned much of the basics of regular expressions. But we also want to briefly mention a few advanced regex operations to demonstrate how powerful regular expressions can be for manipulating text data.  
+
+
+### 
+**Grouping**  
+
+Grouping in regex allows you to treat multiple characters as a single unit. This can be done using parentheses `()`. Grouping is useful when you want to apply a quantifier to a sequence of characters, rather than just a single character.  
+
+###
+Let's say we want to identify any mentions of a repeated weekly meeting in an email thread. A repeated meeting might be indicated by the word "week" followed by "ly" or "s".  
+
+```{r eval=FALSE}
+meeting_emails <- c("The weekly meeting will proceed as scheduled.", 
+            "Let's meet to discuss this in one week.",
+            "Our bi-weekly sync will address these issues.")
+
+str_subset(meeting_emails, pattern = "(week)(ly|s)")
+```
+
+###
+Run the codeblock to view the result:\
+
+```{r grouping-setup}
+meeting_emails <- c("The weekly meeting will proceed as scheduled.", 
+            "Let's meet to discuss this in one week.",
+            "Our bi-weekly sync will address these issues.")
+```
+
+```{r grouping, exercise = TRUE}
+str_subset(meeting_emails, pattern = "(week)(ly|s)")
+```
+
+
+###
+In addition to grouping, parentheses also create what we call **"capturing groups"**. Capturing groups store the part of the string matched by the part of the regular expression inside the parentheses. These captured groups can then be referred back to with `\\1`, `\\2`, etc., where the number corresponds to the order of the capturing group.  
+
+
+###
+Consider a dataset where we have stored first and last names together, and we want to reverse the order (i.e., from "First Last" to "Last, First"). We can use capturing groups to accomplish this:  
+
+```{r eval=FALSE}
+names <- c("James Doe", "Jenna Smith", "Mike Johnson", "Sarah Connor", "Jack Davis")
+
+str_replace_all(names, pattern = "(\\w+) (\\w+)", replacement = "\\2, \\1")
+```
+
+###
+Run the codeblock to view the result:\
+```{r capturing-setup}
+names <- c("James Doe", "Jenna Smith", "Mike Johnson", "Sarah Connor", "Jack Davis")
+```
+
+```{r capturing, exercise = TRUE}
+str_replace_all(names, pattern = "(\\w+) (\\w+)", replacement = "\\2, \\1")
+```
+
+###
+Here, `(\\w+)` matches any word character (the first and last names), and the spaces are treated as literals. The parentheses create two capturing groups: one for the first name and one for the last name. The replacement `\\2,`, `\\1` reverses the order of the names. Note the comma in `\\2,` which inserts a `,` after the last name.  
+
+###
+Capturing groups are invaluable in scenarios where you not only want to match a pattern, but also manipulate, rearrange, or refer back to these matched patterns. This can greatly aid in data cleaning and text analysis.  
+
+
+
+### 
+**Look-ahead and Look-behind**  
+
+Look-aheads and look-behinds are advanced regex concepts that let you specify a pattern that must come before `(?<=)` or after `(?=)` your main pattern, without including that pattern in your match. They're called "look-arounds" because they look around your main pattern to see what's there, without including it in the match.  
+
+###
+**Look-ahead**  
+
+A look-ahead matches a pattern only if it's followed by another pattern. In regex, look-aheads are represented as `(?=pattern)`.  
+
+Let's say we have a database of email addresses of employees and we want to select only the Gmail addresses. However, we don't want to include the "@gmail.com" part in our result. We can use a positive look-ahead to accomplish this:  
+
+```{r eval=FALSE}
+email_addresses <- c("james@gmail.com", "jenna@yahoo.com", "mike@outlook.com", "sarah@gmail.com", "jack@gmail.com")
+
+str_subset(email_addresses, pattern = "\\w+(?=@gmail.com)")
+```
+
+###
+Run the codeblock to view the result:\
+
+```{r prepare-looks}
+email_addresses <- c("james@gmail.com", "jenna@yahoo.com", "mike@outlook.com", "sarah@gmail.com", "jack@gmail.com")
+```
+
+```{r lookahead, exercise = TRUE, exercise.setup = "prepare-looks"}
+str_subset(email_addresses, pattern = "\\w+(?=@gmail.com)")
+```
+
+###
+Here, "\w+" matches any word character, and "(?=@gmail.com)" is a positive look-ahead that ensures we only match email handles that are followed by "@gmail.com". The output would be "james", "sarah", "jack".  
+
+
+###
+**Look-behind**  
+
+Similarly, a look-behind matches a pattern only if it's preceded by another pattern. Look-behinds are represented as `(?<=pattern)` in regex.  
+
+Suppose we want to extract the domain names from the email addresses, but we don't want to include the "@" part in our result. We can use a positive look-behind to do this:  
+
+```{r eval=FALSE}
+str_extract(email_addresses, pattern = "(?<=@)\\w+.com")
+```
+
+###
+Run the codeblock to view the result:\
+```{r lookbehind, exercise = TRUE, exercise.setup = "prepare-looks"}
+str_extract(email_addresses, pattern = "(?<=@)\\w+.com")
+```
+
+###
+Here, "\w+.com" matches any word character followed by ".com", and "(?<=@)" is a positive look-behind that ensures we only match domain names that are preceded by "@". The output would be "gmail.com", "yahoo.com", "outlook.com", "gmail.com", "gmail.com".  
+
+
+###
+Look-ahead and look-behind can be used for more advanced pattern matching. For example, say we have a job posting:  
+
+```{r eval=FALSE}
+job_postings <- c(
+  "Job opening: Senior HR Analyst, Salary: $75000 per year",
+  "Hiring: Junior People Analyst, Salary: $55000 annually",
+  "Job vacancy: HR Manager, Salary: $95000 per year"
+)
+```
+
+
+###
+Using look arounds, we can extract job titles from a job posting. Run the codeblock to view the result:\
+
+```{r postings-setup}
+job_postings <- c(
+  "Job opening: Senior HR Analyst, Salary: $75000 per year",
+  "Hiring: Junior People Analyst, Salary: $55000 annually",
+  "Job vacancy: HR Manager, Salary: $95000 per year"
+)
+```
+
+```{r postings, exercise = TRUE}
+job_postings |> 
+  str_extract("(?<=Job opening: |Hiring: |Job vacancy: ).*?(?=, Salary)")
+```
+
+###
+You may be feeling slightly confused about the pattern we used. That is completely okay! Let's break down the regular expression step by step:  
+
+1. `(?<=...)`: This is called a positive lookbehind. It asserts that what immediately precedes the current position in the string must match the pattern inside the lookbehind (in this case, "Job opening: ", "Hiring: ", or "Job vacancy: "), but it doesn't include that pattern in the actual match.  
+2. `Job opening: |Hiring: |Job vacancy: `: These are three different strings, separated by the pipe (`|`) character, which signifies alternation in regular expressions. This means the regex will match any one of these three strings.  
+3. `.*?`: This is the main part of the pattern that the regex is trying to match. The dot (`.`) matches any character (except a newline), the asterisk (`*`) is a quantifier that means "zero or more repetitions", and the question mark (`?`) makes the quantifier non-greedy, meaning it will match the shortest possible string that satisfies the rest of the pattern.  
+4. `(?=, Salary)`: This is a positive lookahead. It asserts that what immediately follows the current position in the string must match the pattern inside the lookahead (in this case, ", Salary"), but it doesn't include that pattern in the actual match.  
+
+
+### Conclusion
+Phew! That wasn't to bad, right?\ 
+
+Remember, regular expressions can get very complex and sometimes it takes a bit of trial and error to get them right. But once you master them, they can be extremely powerful tools in your data manipulation toolbox.\
+
+Don't forget to try out your newfound knowledge in the "Working with Strings and Text Data Exercises" sub-lesson!\
+
+###
+In our upcoming lesson, "Data Visualization," we'll embark on a journey to discover the power of visualizing data. This skill is essential. Visualizing data is like creating a roadmap that helps you understand complex information, spot trends, and communicate findings effectively. With `ggplot`, you'll learn how to do just that.\
+
+We'll explore how to craft a variety of visualizations to help you understand data trends, patterns, and relationships more effectively. Whether you're analyzing employee satisfaction, survey results, or any other data, `ggplot` can make your findings more accessible and impactful.\
+
+So, **get ready!**
+
+

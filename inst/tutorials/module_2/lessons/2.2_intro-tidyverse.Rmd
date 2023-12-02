@@ -1,13 +1,27 @@
 ---
-title: "Intro to the Tidyverse"
+title: "Introduction to the Tidyverse"
 ---
 
-### Introduction to the Tidyverse
-The Tidyverse is an essential part of data science in R. It is a collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. These packages streamline the process of transforming and modeling data, making it a powerful tool for applied data analytics.  
+### Introduction
+The Tidyverse is an essential part of data science in R. It is a collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures. The Tidyverse and the concept of "tidy data" was initially developed by Hadley Wickham, Chief Data Scientist at Posit (formerly called RStudio). These packages streamline the process of transforming and modeling data, making it a powerful tool for applied data analytics.\
 
-#### Why use the Tidyverse for Data Analysis?
 
-Tidyverse packages are user-friendly and designed to work together seamlessly, which makes data manipulation, visualization, and analysis more intuitive and less error-prone all while simplifying complex data analysis tasks to makes it easier to create clean, consistent, and interpretable code. Together, these packages allow you to write less code while still accomplishing your tasks efficiently and effectively.  
+### Why use the Tidyverse for Data Analysis?
+
+<figure class="float-fig-right"> 
+  <img style="width:150px; height:150px" src="images/tidyverse-packages.png" alt="image of tidyverse core packages' hexagons">
+</figure>
+
+Tidyverse packages are user-friendly and designed to work together seamlessly, which makes data manipulation, visualization, and analysis more intuitive and less error-prone all while simplifying complex data analysis tasks to makes it easier to create clean, consistent, and interpretable code.\
+
+Together, these packages allow you to write less code while still accomplishing your tasks efficiently and effectively.\
+
+
+<div class="general-callout">
+The best resource for all things Tidyverse is Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund's free online book, [R for Data Science](https://r4ds.hadley.nz/). I encourage you to always keep it handy. I certainly do!
+</div>
+
+### Installing the Tidyverse
 
 Installing the tidyverse is as simple as running:  
 ```{r, eval=FALSE}
@@ -27,9 +41,40 @@ Once you've installed the Tidyverse, you can load its core packages with the `li
 - `lubridate`: for dealing with date/time data.  
 
 
-By loading the Tidyverse, you also get a condensed summary of conflicts with other packages you have loaded.  
+<div class="general-callout">
+Explore the Tidyverse packages in more detail by visiting [tidyverse.org](https://www.tidyverse.org/). 
+</div>
 
-```{r}
+
+### Loading Tidyverse Packages
+
+After installing `tidyverse`, you have two main options for loading the packages into your R environment.  
+
+**Load the entire tidyverse package with `library(tidyverse)`**  
+This command will load all the core `tidyverse` packages (like `dplyr`, `ggplot2`, `tidyr`, `readr`, `purrr`, and `tibble`) into your current R session. Here is how you do it:  
+
+```{r, eval=FALSE}
+# load the entire tidyverse
+library(tidyverse)
+```
+
+###
+When you load the entire `tidyverse`, you'll notice a message indicating which packages were loaded. You may also notice a message about conflicts with existing functions in your environment; the `tidyverse` functions will take precedence over these.  
+
+###
+**Load individual tidyverse packages**  
+If you only need the functionality from one or two tidyverse packages, or you want to avoid conflicts with other packages, you might choose to load the packages individually. Here is an example of loading just the `dplyr` package:  
+
+```{r, eval=FALSE}
+# load just dplyr
+library(dplyr)
+```
+
+
+###
+As mentioned earlier, when you load the `tidyverse`, you also get a condensed summary of conflicts with other packages you have loaded.  
+
+```{r, eval=FALSE}
 library(tidyverse)
 #> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 #> ✔ dplyr     1.1.0     ✔ readr     2.1.4
@@ -44,6 +89,7 @@ library(tidyverse)
 ```
 
 
+###
 You can check for conflicts later on with the `tidyverse_conflicts()` function, and ensure all Tidyverse packages are up-to-date with the `tidyverse_update()` function.  
 
 ```{r, eval=FALSE}
@@ -59,7 +105,15 @@ tidyverse_update()
 ```
 
 
-Additional Packages
+###
+The choice between loading the entire `tidyverse` and individual packages is up to you and may depend on your specific needs for a given project. Loading the entire `tidyverse` can be more convenient and ensures a consistent and integrated set of tools. Loading individual packages can offer more control and may prevent unwanted function conflicts.  
+
+
+###
+Remember, both methods are perfectly valid—it's just a matter of preference or convenience!  
+
+
+### Additional Packages
 
 In addition to the core Tidyverse, the Tidyverse package also installs a selection of other packages that you're likely to use frequently. These include packages for:  
 
@@ -67,10 +121,31 @@ In addition to the core Tidyverse, the Tidyverse package also installs a selecti
 - Importing other types of data (e.g., `haven` for SPSS, SAS, and Stata files; `readxl` for .xls and .xlsx files).  
 - Modeling (e.g., `modelr` for modeling within a pipeline, `broom` for turning models into tidy data).  
 
-By using the Tidyverse, you're equipping yourself with a comprehensive toolkit for data science in R. So let's get started with the fun part: exploring and making sense of your data!  
+
+### Embracing the Tidyverse
+
+We have only scratched the surface of what the tidyverse has to offer, and its true power lies in the integrated use of its packages to perform complete data analyses. Over the remaining lessons, we will immerse ourselves in the tidyverse, exploring more functionalities and understanding how these tools work together to make our data analysis tasks more straightforward and efficient.  
+
+###
+Remember, the tidyverse is a unified approach to dealing with data - it provides a consistent and coherent toolkit for data manipulation, exploration, and visualization. This consistency is what makes it a powerful tool and will allow us to streamline our analyses as we become more proficient.  
 
 
-<div class="callout">
+### What's to Come
+
+Now that you have an understanding of the Tidyverse, we're ready to venture deeper into the exciting world of data science with follow-up lessons dedicated to the concept of **data wrangling**. Data wrangling is critical component of a data project.  
+
+
+<figure>
+  <img src="images/data-science-wrangle.png" alt="Image of data wrangling component" width="100%">
+</figure>
+
+<br>
+
+###
+By the end of the remaining lessons, you will be adept at harnessing the power of the tidyverse to transform raw data into actionable insights. So, buckle up and get ready to dive into the vast and exciting world of the tidyverse!  
+
+
+<!-- <div class="general-callout">
 Consider checking out the free online [R for Data Science](https://r4ds.had.co.nz/) resource for useful tips and examples on how to leverage the power of Tidyverse!
-</div>
+</div> -->
 
