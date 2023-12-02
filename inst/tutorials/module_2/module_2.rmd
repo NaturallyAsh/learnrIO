@@ -40,7 +40,7 @@ table_types <- tibble(
 ```
 
 
-## Introduction
+## Overview
 ```{r, child="lessons/2.0_lesson-overview.Rmd"}
 
 ```

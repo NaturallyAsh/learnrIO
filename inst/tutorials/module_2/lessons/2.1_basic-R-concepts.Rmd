@@ -17,7 +17,11 @@ Why is this fundamental understanding crucial for any R programmer? Let's unrave
 4. **Enhanced performance:** Different data types and structures have unique performance characteristics. Choosing the most appropriate data type for your needs can enhance the efficiency of your code, making it faster and more robust.  
 
 
-As we go through this lesson, you'll get a chance to work with these concepts directly, reinforcing your understanding and building your skills in data manipulation and analysis in R.  
+As we go through this lesson, you'll get a chance to work with these concepts directly, reinforcing your understanding and building your skills in data manipulation and analysis in R.\
+
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/base-r.pdf">here</a>.
+</div>
 
 
 ### R Objects and Variables
@@ -91,7 +95,7 @@ my_variable
 
 
 ###
-<div class="callout">
+<div class="general-callout">
 **Tip**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
 </div>
  

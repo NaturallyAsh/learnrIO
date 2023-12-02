@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R Foundations"
+title: "Overview"
 ---
 
 ### Welcome to **R Foundations and the Tidyverse!**  

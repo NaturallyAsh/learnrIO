@@ -2,7 +2,14 @@
 title: "Transforming Data"
 ---
 
-Data transformation is an important part of analyzing data. It involves cleaning, organizing, and improving raw data so that it can be used to make better decisions. We'll be using `dplyr`, a core package of the Tidyverse, to show how data transformation can be done effectively.\
+### Introduction
+Data transformation is an important part of analyzing data. It involves cleaning, organizing, and improving raw data so that it can be used to make better decisions. In this lesson you'll learn about tibbles and how they can be used to store data. Then, you'll learn about the core principles of `dplyr`, a core package of the Tidyverse, and how to use its functions to transform data. Finally, you'll learn how to join datasets using `dplyr` functions.\
+
+
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf">here</a>.
+</div>
+
 
 ### Working with Tibbles
 Tibbles are one of the unifying features of the `tidyverse`. A tibble, from the core tidyverse `tibble` package, operates as a modern re-imagining of the traditional data frame. At its core, a tibble inherits all the features that have made data frames a versatile and powerful tool in R. However, a tibble goes one step further, fine-tuning some of the characteristics of data frames to provide an improved experience of data handling.\
@@ -278,7 +285,7 @@ Here, `employee_df$Age > 30` creates a logical vector that is `TRUE` when the ag
 Remember that you can use all sorts of logical conditions to subset your tibble in exactly the way you need. By mastering these techniques, you will find it much easier to work with and extract specific information from large datasets.  
 
 ###
-<div class="callout">
+<div class="general-callout">
 Note that throughout the lessons, we will use the name tibble and data frame interchangeably.  
 </div>
 

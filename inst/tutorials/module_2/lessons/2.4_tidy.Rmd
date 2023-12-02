@@ -3,9 +3,13 @@ title: "Tidy Data"
 ---
 
 ### Introduction
-In applied settings, we often deal with a lot of data, be it employee performance metrics, survey responses, or recruitment data. One of the key challenges we face is ensuring that this data is well-organized and easy to analyze. Enter the concept of "Tidy Data" - a term coined by Hadley Wickham, the creator of many of the tools in the tidyverse package in R.
+In applied settings, we often deal with a lot of data, be it employee performance metrics, survey responses, or recruitment data. One of the key challenges we face is ensuring that this data is well-organized and easy to analyze. Enter the concept of "Tidy Data" - a term coined by Hadley Wickham, the creator of many of the tools in the tidyverse package in R.\
 
-According to Wickham, "Tidy datasets are all alike, but every messy dataset is messy in its own way." The idea is to organize your data in a consistent way that makes it easier to work with and analyze. In essence, tidy data is about structuring datasets to facilitate analysis.  
+According to Wickham, "Tidy datasets are all alike, but every messy dataset is messy in its own way." The idea is to organize your data in a consistent way that makes it easier to work with and analyze. In essence, tidy data is about structuring datasets to facilitate analysis.\
+
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf">here</a>.
+</div>
 
 ### Tidy Data Principles
 
@@ -87,7 +91,7 @@ wide_survey_data <- tidy_survey_data |> pivot_wider(
 
 
 ###
-<div class="callout">
+<div class="general-callout">
 Read the R for Data Science chapter section ["How does pivoting work?"](https://r4ds.hadley.nz/data-tidy#how-does-pivoting-work) for more on `pivot_longer()` and `pivot_wider()`.
 </div>
 

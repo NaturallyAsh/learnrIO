@@ -5,6 +5,11 @@ title: "Importing and exporting data"
 ### Introduction
 In this lesson, we'll be taking a look at how to bring data into R from a variety of formats (like CSV, Excel, and SPSS), and how to write your data back out to these formats. We'll also learn how to work with tibbles, a modern re-imagining of the data frame.  
 
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf">here</a>.
+</div>
+
+
 
 ### Importing CSV files
 Data can come in various forms and from different sources. Two of the most common are CSV (Comma-Separated Values) and excel file types.  
@@ -203,7 +208,7 @@ This is particularly useful when you're working with multiple datasets and want 
 We've now covered the basics of importing and exporting data in R. However, simply importing and exporting data is just the start. The real power of R lies in its capabilities for data manipulation and analysis.\
 
 
-<div class="callout">
+<div class="general-callout">
 I strongly encourage you to read the [Import](https://r4ds.hadley.nz/import) chapter of <strong>Hadley Wickham's R for Data Science</strong> online book for a deeper dive into importing using the Tidyverse. These chapters cover other importing methods outside the scope of this lesson (i.e., Google Sheets, databases).
 </div>
 

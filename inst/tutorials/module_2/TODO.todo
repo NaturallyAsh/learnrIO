@@ -2,19 +2,30 @@
 Projects:
   Version 2.1: 
     Todos:
-      Add ### after in-lesson exercise codeblocks. Put follow-up info about the codeblock there.
+      consider enabling exercise.completion globally and adjust as needed per exercise
+
+      Need to figure out consistent way to use packages (e.g., dplyr::filter() vs. filter()). See 2.3_importing for example of inconsistency.
+
+      ☐ I'll need to run a spell check on the whole thing. @created(23-12-01)
+
+      ✔ Add ### after in-lesson exercise codeblocks. Put follow-up info about the codeblock there. @created(23-12-01) @done(23-12-01 19:15)
 
       Note - Figure out a home to add detailed info on creating user-defined functions.
 
       Consider spinkling ggplot viz throughout all modules. Make it more interesting for the learners. Keep the 2.7 module for in-depth viz.
       
-      Include cheatsheets (i.e., lubridate, dplyr, etc.) at the end of each section as needed.
-
       Recommend learners use ChatGPT as a resource.
 
       Figure out whether to create separate sub-lesson exercises or just include them in the main lesson. 
 
       Consider using gradethis in main lesson and not just in sub-lesson exercises.
+
+      Add "Tips" general-callout throughout e.g. 
+        <div class="general-callout">
+        **Tip**: You can assign a value to a variable and print the variable all in one line of code by enclosing them in parentheses (e.g., ```(my_variable <- x)```). 
+        </div>
+
+      ✔ add cheatsheet links in callbox at top of every lesson @created(23-12-01) @done(23-12-01 22:28)
 
       2.1 - basic concepts:
         NOTE - info from https://rstudio-education.github.io/hopr/ will be extremely useful for further developing this section.
@@ -28,9 +39,9 @@ Projects:
       2.5 - transforming:
         ☐ add more usage of `glimpse()`. Very useful (especially for a lot of columns) for viewing types of literally all columns instead of trunnecated version @created(23-06-10)
         ☐ in "Handle Missing Data" section, include using `filter()` to filter missing data. e.g., `filter(!is.na(variable))` @created(23-06-16)
-        ☐ add gifs for joining data section from here: https://github.com/gadenbuie/tidyexplain @created(23-06-17)
+        ✘ add gifs for joining data section from here: https://github.com/gadenbuie/tidyexplain @created(23-06-17) @cancelled(23-11-30 17:04)
       2.6 - text:
-        ☐ see todo in Regex section (add resource for practicing regex online) @created(23-06-22)
+        ✔ see todo in Regex section (add resource for practicing regex online) @created(23-06-22) @done(23-12-01 19:10)
       References module:
         Citations - create .bib file. Add bibliography to yaml
         ☐ Hadley Wickham https://r4ds.had.co.nz/index.html @created(23-06-09)

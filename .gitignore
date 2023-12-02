@@ -11,3 +11,4 @@ inst/tutorials/*/*.html
 *.todo
 inst/tutorials/module_2/UNUSED.Rmd
 .vscode/settings.json
+.cspell/custom-dictionary-workspace.txt

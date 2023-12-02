@@ -8,22 +8,23 @@ Text data, which is very common in business settings, presents unique opportunit
 
 Further, text data forms the backbone of many advanced analytics techniques, such as machine learning classification algorithms, sentiment analysis, and natural language processing. Hence, understanding how to manipulate and work with text data is a crucial skill for analysts.  
 
-**[Placeholder for an image illustrating text data analytics]**  
 
-`stringr`, a core package of the `tidyverse`, provides powerful functions for common string manipulation tasks. The `stringr` package simplifies the process of working with strings. It provides user-friendly functions to perform common string manipulations, such as finding and replacing patterns, extracting elements, or converting cases.\
-
-In addition, `stringr` functions can be seamlessly integrated within `dplyr` functions or used with pipe (`|>`) operations for efficient data transformations. The neat thing about `stringr` is that you instantly know when you are using one of its many functions, because they all start with `str_`.  
+<figure>
+  <img src="images/text-analytics.png" width="100%" alt="Image with magnifying glass and words saying Text Analytics, classification, sentiment analysis, text mining, and natural language processing.">
+  <figcaption class="figcap"></figcaption>
+</figure>
 
 ###
 In this lesson, we'll delve into these basic operations and gradually progress to more advanced concepts, introducing the use of regular expressions for complex pattern matching and text manipulation tasks. Regular expressions, often abbreviated as "regex", are sequences of characters that form a search pattern. This search pattern can be used in functions to match, locate, and manage text.  
 
-By the end of this lesson, you'll have a firm grasp of handling and manipulating strings in R, opening up new possibilities for your data analysis tasks.  
+By the end of this lesson, you'll have a firm grasp of handling and manipulating strings in R, opening up new possibilities for your data analysis tasks.\
 
-###
-
-To kick things off, let's begin by understanding what a string is and some other string basics.  
+<div class="general-callout">
+A helpful cheatsheet for the main packages used this lesson can be found <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">here</a>.
+</div>
 
 ### What is a String?
+To kick things off, let's begin by understanding what a string is and some other string basics.\
 
 A string is a sequence of characters. In R, you can create a string by enclosing the characters in quotes. For example, the string `"Hello, World!"` includes 13 characters: the 12 visible characters, including the comma and the space, and an invisible newline character.\
 
@@ -103,9 +104,13 @@ You see that `str_view()` outputs the raw string minus the escape characters.
 
 
 
-### Basic String Manipulation 
+### Basic String Manipulation using `stringr`
 
-The `stringr` package from the `tidyverse` offers a wide range of functions for manipulating text data. We will cover some of the most commonly used functions.  
+`stringr`, a core package of the `tidyverse`, provides powerful functions for common string manipulation tasks. The `stringr` package simplifies the process of working with strings. It provides user-friendly functions to perform common string manipulations, such as finding and replacing patterns, extracting elements, or converting cases.\
+
+In addition, `stringr` functions can be seamlessly integrated within `dplyr` functions or used with pipe (`|>`) operations for efficient data transformations. The neat thing about `stringr` is that you instantly know when you are using one of its many functions, because they all start with `str_`.\
+
+We will cover some of the most commonly used functions.\
 
 ###
 **Counting Characters: str_length()**  
@@ -528,9 +533,9 @@ str1 <- "The number of employees increased by 10% in the past year."
 str_extract(str1, pattern = "[:digit:]")
 ```
 
-//TODO: cheat sheet resource 
+###
+The best way to get better at regex is to practice. I encourage you to visit [RegexR](https://regexr.com/), [RegexLearn](https://regexlearn.com/), or [RegexOne](https://regexone.com/) to learn and practice your regex skills.\
 
-//TODO: resource for practicing regex online 
 
 
 ### Quantifiers
