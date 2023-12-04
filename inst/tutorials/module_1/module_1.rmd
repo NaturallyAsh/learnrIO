@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 library(tidyverse)
 library(learnr)
 
+
+tutorial_options(
+  exercise.blanks = "___",
+  exercise.completion = FALSE
+)
+gradethis::gradethis_setup()
 ```
 
 
