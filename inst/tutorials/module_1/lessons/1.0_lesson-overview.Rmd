@@ -3,7 +3,7 @@ title: "Lesson Overview"
 ---
 ### Welcome to **Module 1: Introduction to RStudio & Quarto!**  
 
-This lesson will serve as an introduction to R, RStudio, and Quarto. We will cover the basics of navigating and using R, RStudio, and Quarto for data analytics in the context of IO Psychology.  
+In this lesson, we'll introduce you to R, RStudio, and Quarto. We'll start with the basics, showing you how to navigate and use R and RStudio. Then, we'll guide you on how to effectively leverage Quarto throughout these tutorials and beyond, enhancing your learning journey.\
 
 This module's lessons are:  
 
@@ -12,23 +12,14 @@ This module's lessons are:
 - **Project Workflow and Reports using Quarto:** The final lesson will introduce you to the workflow of creating projects in RStudio and generating reports using Quarto. It will cover markdown basics, adding images and links, creating code chunks, understanding YAML, and knitting documents in different output formats.  
 
 
-Before getting started, we **strongly** encourage you to create a Quarto file to work in alongside this course. An Quarto file is a great way to keep track of notes and practice what you learn from the course. By working in a Quarto file, you can write and execute R code, include text, images, and other media, and export your work to a variety of formats (such as HTML or PDF). This allows you to create a comprehensive record of your progress throughout the course.  
+### Prerequisites
 
-In this module, we will be using the following packages:  
-
-```{r, eval=FALSE}
-install.packages("tidyverse")
-```
+Before starting these lessons, you should have the latest release of R and RStudio installed on your computer. For this lesson, you should also have Quarto installed, which you can download [here](https://quarto.org/docs/get-started/).
 
 
-If you have not yet installed these packages, you can do so using the `install.packages()` function in R, as shown above. Once installed, you can load the packages into your current R session using the `library()` function:  
-
-```{r, eval=FALSE}
-library(tidyverse)
-```
 
 
-So, be sure to load these in your Quarto file!
+###
+Remember, learning is a journey. Don't worry if you don't grasp everything immediately. Practice and persistence are key.\
 
-
-Remember, learning R and data analytics is a journey. Don't worry if you don't grasp everything immediately. Practice and persistence are key. **Let's get started!**  
+**Let's get started!**\
