@@ -104,7 +104,7 @@ my_variable
 When you create an object in RStudio, you can easily see and view the object in the Environment Pane.
 
 <figure>
-  <img src="https://github.com/NaturallyAsh/learnrIO-assets/blob/main/gifs/R_object.gif?raw=true" width="100%">
+  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705444404/R_object_sm5x5q.gif" width="100%">
   <figcaption class="figcap">R Object in RStudio</figcaption>
 </figure>
 
@@ -206,7 +206,7 @@ When working in RStudio, you can access any built-in function and package functi
 Running `?help` should pop open the help documentation window (in RStudio or VScode with the R Extension). You can type any function in the search bar to view its documentation and example usages.\
 
 <figure>
-  <img src="https://github.com/NaturallyAsh/learnrIO-assets/blob/main/gifs/R_help.gif?raw=true" width="100%">
+  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705444394/R_help_zl0007.gif" width="100%">
   <figcaption class="figcap">RStudio Help Documentation</figcaption>
 </figure>
 
