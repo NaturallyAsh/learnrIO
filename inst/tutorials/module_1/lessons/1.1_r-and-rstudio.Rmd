@@ -18,7 +18,7 @@ It is quite possible you may be thinking, "so, what's the difference between R a
 
 
 <figure>
-  <img src="images/r_rstudio_blender.png" width="100%">
+  <img src="images/r_rstudio_blender.png" width="100%" alt="image depicting R as a food processor and Rstudio as a recipe book">
   <figcaption class="figcap"> </figcaption>
 </figure>
 
@@ -33,7 +33,7 @@ Navigating RStudio is like learning the layout of a new office; you're more effe
 RStudio's interface is divided into four main panes: Source pane, Console Pane, Environment Pane, and Output Pane. Each pane can be resized, moved, or closed, allowing you to customize your workspace to suit your needs.\
 
 <figure>
-  <img src="images/rstudio_panes.png" width="100%">
+  <img src="images/rstudio_panes.png" width="100%" alt="RStudio pane layout">
   <figcaption class="figcap">RStudio pane layout</figcaption>
 </figure>
 
@@ -52,7 +52,7 @@ The lower-left pane is the Console Pane, where the action happens! Here you can 
 - Running a script from the Source pane. When you do this, the code copy-pastes into the Console pane.\
 
 <figure>
-  <img src="images/console_pane.png" width="100%">
+  <img src="images/console_pane.png" width="100%" alt="Executing code in console">
   <figcaption class="figcap">Executing code in console</figcaption>
 </figure>
 
@@ -82,7 +82,7 @@ The lower-right pane is the Output Pane which contains the Files, Plots, Package
 - **Viewer Tab:** Use this to view web content directly in RStudio, such as HTML content created through R Markdown or Shiny apps.\
 
 <figure>
-  <img src="images/help_tab.png" width="100%">
+  <img src="images/help_tab.png" width="100%" alt="Help Documentation tab">
   <figcaption class="figcap">Help Documentation tab</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ The lower-right pane is the Output Pane which contains the Files, Plots, Package
 To make RStudio your own, go to `Tools -> Global Options`. You can select a theme that's easy on your eyes, change font size for readability, and even configure your workspace's default directory, so you always know where your projects are stored.\
 
 <figure>
-  <img src="images/appearance_settings.png" width="100%">
+  <img src="images/appearance_settings.png" width="100%" alt="Global Settings">
   <figcaption class="figcap">Global Settings</figcaption>
 </figure>
 
@@ -129,7 +129,7 @@ The Console is your chemistry lab for experimentation in R. It's where you write
 You can run code line by line by typing it directly into the Console. Let's try it out in your own RStudio console. Type `print("Hello, I/O Psychology!")` and press Enter. You should see the message "Hello, I/O Psychology!" printed in the Console. This is a great way to test out code and get immediate feedback.\
 
 <figure>
-  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705443999/running_code_console_t7exc8.gif" width="100%">
+  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705443999/running_code_console_t7exc8.gif" width="100%" alt="Running code line by line in the Console">
   <figcaption class="figcap">Running code line by line in the Console</figcaption>
 </figure>
 
@@ -148,7 +148,6 @@ The Environment Pane in RStudio can be thought of as your workspace's dashboard.
 ###
 When you open RStudio, the Environment Pane is typically empty, gradually filling up as you define variables and load datasets. It lists objects in alphabetical order, making it easy to find the data you're working with. The Environment Pane also shows the object type and structure, which provides a snapshot of your data's composition.\
 
-[Placeholder for Image: Snapshot of the Environment Pane showing a list of variables and objects]
 
 ###
 Let's create a simple vector and a data frame to see how they appear in the Environment pane. Paste the following code into the Console and press Enter to run it.\
@@ -168,9 +167,21 @@ employees <- data.frame(
 
 After running the above code, you should see the `employee_ages` vector and the `employees` data frame appear in the Environment Pane. The `employee_ages` vector is listed under the "Values" section, while the `employees` data frame is listed under the "Data" section.\
 
+<figure>
+  <img src="images/env_objects.png" width="100%" alt="R data objects">
+  <figcaption class="figcap">R data objects</figcaption>
+</figure>
+
+<br>
+
 Clicking on an object in the Environment Pane will open a new tab in the top-left pane, showing the object's contents. For example, if you click on the `employees` data frame, you'll see a preview of the data in the top-left pane. You can also click on the blue arrow next to the object name to see more details about the object, such as its dimensions of the data frame (4 rows and 3 columns) and the data types of each column.\
 
-[Placeholder for Image: Data frame shown in the Environment Pane and structure in the Console Pane]
+<figure>
+  <img src="images/env_objects_2.png" width="100%" alt="R data objects">
+  <figcaption class="figcap">Detailed R data object</figcaption>
+</figure>
+
+<br>
 
 ###
 Let's assume we want to clean up our workspace by removing an outdated object. We can do this in at least two ways:\
@@ -182,6 +193,14 @@ Let's assume we want to clean up our workspace by removing an outdated object. W
 Use the `rm()` function to remove the `employee_ages` vector from the workspace. Then, click the broom icon to clear all remaining objects from the workspace. You should see the Environment Pane become empty again.\
 
 
+<figure>
+  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705445944/remove_R_objects_extxpy.gif" width="100%" alt="Removing R objects from the Environment Pane">
+  <figcaption class="figcap">Removing R objects from the Environment Pane</figcaption>
+</figure>
+
+<br>
+
+
 ### Getting Help
 
 As you start your journey with R, you will undoubtedly encounter challenges or unfamiliar tasks. That's perfectly normal! One of the most important skills in programming, and especially in data analysis, is knowing how to find help when you need it. Let's explore some of the ways you can get help.  
@@ -191,16 +210,30 @@ As you start your journey with R, you will undoubtedly encounter challenges or u
 
 R has a built-in help system that you can access directly from RStudio. If you want to know more about a function, you can use the `help()` function or the `?` shortcut, followed by the name of the function. Hitting 'Enter' will launch the help documentation for the function you specify in the **Help Pane**, displaying detailed documentation that includes information on usage, arguments, details, and examples.\
 
-Let's say you want to learn more about the `lm()` function, which is used to fit linear models. You can use the `help()` function or `?` shortcut to access the documentation. Try it out in the Console by typing `help(lm)` or `?lm` and pressing Enter. You should see the help documentation for the `lm()` function appear in the Help Pane.\
+Let's say you want to learn more about the `lm()` function, which is used to fit linear models. You can use the `help()` function or `?` shortcut to access the documentation.\
 
-[Placeholder for Image: Help documentation for the `lm()` function]
+Try it out in the Console by typing `help(lm)` or `?lm` and pressing Enter. You should see the help documentation for the `lm()` function appear in the Help Pane.\
+
+
+<figure>
+  <img src="images/lm_help_doc.png" width="100%" alt="Documentation for the lm() function in the Help tab">
+  <figcaption class="figcap">Documentation for the `lm()` function in the Help tab</figcaption>
+</figure>
+
+<br>
 
 ###
 Documentation for entire packages is also available. Say you are using the `ggplot2` package for data visualization and you want to access its user manual. You can do so by typing `help(package = "ggplot2")` and pressing Enter. This will open the package's help page in the Help Pane, providing detailed information about the package, including a description file, user guides (if any were created for the package), and list of all the functions it contains.\
 
 Go ahead and try it out in the Console. Type `help(package = "ggplot2")` and press Enter. You should see the help documentation for the `ggplot2` package appear in the Help Pane. Briefly browse the included User Guides and Functions sections to get a sense of what's available.\
 
-[Placeholder for Image: Help documentation for the ggplot2 package]
+
+<figure>
+  <img src="images/package_help_doc.png" width="100%" alt="Documentation for the ggplot2 package in the Help tab">
+  <figcaption class="figcap">Documentation for the `ggplot2` package in the Help tab</figcaption>
+</figure>
+
+<br>
 
 
 <div class="general-callout">
@@ -212,17 +245,15 @@ At the bottom of most help files are examples that show you how to use the funct
 
 While the built-in help system is great for learning about specific functions, you will often encounter more complex problems or need broader advice. That's where online resources come in handy. Here are a few key ones:  
 
-- **Google:** Don't underestimate the power of a well-phrased Google search! Often, someone else has already encountered the same problem and found a solution. Try to be as specific as possible in your search, and include "R" to get more relevant results.  
+- **Google:** Don't underestimate the power of a well-phrased Google search! Often, someone else has already encountered the same problem and found a solution. Try to be as specific as possible in your search, and include "R" to get more relevant results.\
 
-- **Stack Overflow:** This is a question-and-answer website for a wide range of programming topics, including R. You can search for your problem, and if it hasn't been asked before, you can post a new question. Remember to be specific and include a minimal reproducible example if possible.  
+- **Stack Overflow:** This is a question-and-answer website for a wide range of programming topics, including R. You can search for your problem, and if it hasn't been asked before, you can post a new question. Remember to be specific and include a minimal reproducible example if possible.\
 
-- **GitHub:** Many R packages are developed openly on GitHub, and you can often find help and examples in the repository's issues or wiki. If you think you've found a bug in a package, you can report it in the issues section.  
+- **GitHub:** Many R packages are developed openly on GitHub, and you can often find help and examples in the repository's issues or wiki. If you think you've found a bug in a package, you can report it in the issues section.\
 
-- **Package Documentation and Vignettes:** Most R packages come with detailed documentation and vignettes (long-form guides). You can access the documentation by using the `help()` function or `?`, and vignettes can be accessed with the `vignette()` function.  
+- **Package Documentation and Vignettes:** Most R packages come with detailed documentation and vignettes (long-form guides). You can access the documentation by using the `help()` function or `?`, and vignettes can be accessed with the `vignette()` function.\
 
-- **R-Bloggers:** This is an aggregate of blogs about R, where you can find tutorials, examples, and advice on a wide range of topics. [R-bloggers website](https://www.r-bloggers.com/).  
-
-- **Twitter:** Many R users and developers are active on Twitter, using the hashtag #rstats. It's a great place to ask questions, share your work, and keep up with the latest developments in the R community.  
+- **R-Bloggers:** This is an aggregate of blogs about R, where you can find tutorials, examples, and advice on a wide range of topics. [R-bloggers website](https://www.r-bloggers.com/).\
 
 - **Reddit:** The Reddit community can also be a helpful resource, particularly the r/rstats and r/RStudio subreddits. You can post questions, share your work, and engage in discussions with other R users. As with other online communities, try to be specific in your questions and provide a reproducible example if possible. Remember, the goal is to make it as easy as possible for others to understand your problem and provide help.\
 
