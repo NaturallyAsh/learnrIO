@@ -26,6 +26,9 @@ RStudio Projects is like your personal study space where everything you need is 
 
 Imagine you are learning about different statistical tests. With RStudio Projects, you can have a separate project for each type of test with relevant data sets, scripts, and notes—all neatly compartmentalized.\
 
+<div class="general-callout">
+For more on RStudio Projects, check out the <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio Projects Support Page</a>.
+</div>
 
 ### Setting Up Your First RStudio Project
 

@@ -10,20 +10,19 @@ R is a powerful programming language that was designed with statistics and data 
 
 ### Introduction to RStudio
    
-RStudio is an integrated development environment (IDE) for R, providing a convenient and user-friendly interface for writing, running, and debugging R code. It includes several useful features such as syntax highlighting, code completion, and version control integration. RStudio makes working with R easier and more enjoyable. RStudio is often used by I/O psychology practitioners because it simplifies many of the technical aspects of coding, allowing practitioners to focus more on the insights gleaned from the data.  
-
-It is quite possible you may be thinking, "so, what's the difference between R and RStudio? Aren't they the same thing?" Well, imagine R as a versatile and powerful kitchen appliance like a food processor, while RStudio is like a cookbook filled with recipes and step-by-step instructions on how to use the appliance.
+RStudio is an integrated development environment (IDE) for R, providing a convenient and user-friendly interface for writing, running, and debugging R code. It includes several useful features such as syntax highlighting, code completion, and version control integration. RStudio makes working with R easier and more enjoyable. RStudio is often used by practitioners because it simplifies many of the technical aspects of coding, allowing them to focus more on the insights gleaned from the data.  
 
 
-[insert image]
+###
+It is quite possible you may be thinking, "so, what's the difference between R and RStudio? Aren't they the same thing?" Well, imagine R as a versatile and powerful kitchen appliance, like a food processor, that can help you perform various tasks such as slicing, chopping, and blending ingredients. On the other hand, imagine RStudio is like a cookbook filled with recipes and step-by-step instructions on how to effectively use the R food processor.
 
 
-R is the underlying programming language and software environment for statistical computing and graphics. It's like a food processor that can help you perform various tasks such as slicing, chopping, and blending ingredients. R is what allows you to perform data analysis, create visualizations, and develop statistical models.
+<figure>
+  <img src="images/r_rstudio_blender.png" width="100%">
+  <figcaption class="figcap"> </figcaption>
+</figure>
 
-On the other hand, RStudio is an integrated development environment (IDE) designed to work with R. It's like a cookbook that teaches you how to use the food processor (R) effectively, guiding you through the process of preparing a variety of dishes. RStudio provides features such as code editing, debugging, and project management, making it easier to write, run, and organize your R code.
-
-
-[insert image]
+<br>
 
 
 ### Navigating RStudio
@@ -31,46 +30,79 @@ Navigating RStudio is like learning the layout of a new office; you're more effe
 
 ### The Four Main Panes
 
-RStudio's interface is divided into four main panes, each with its own purpose.
+RStudio's interface is divided into four main panes: Source pane, Console Pane, Environment Pane, and Output Pane. Each pane can be resized, moved, or closed, allowing you to customize your workspace to suit your needs.\
+
+<figure>
+  <img src="images/rstudio_panes.png" width="100%">
+  <figcaption class="figcap">RStudio pane layout</figcaption>
+</figure>
+
+<br>
 
 ###
 **Source Pane**\
 The upper-left pane by default is the Source Pane, your scripting playground. Here, you can write, edit, and organize your R scripts. RStudio aids your scripting with intuitive features like syntax highlighting, which helps differentiate commands, comments, and values with color codes, and code completion, a feature that predicts and suggests the function names as you type, reducing the likelihood to make errors.
 
-[Placeholder for Image/GIF: Showing code typing and syntax highlighting in the Source Pane]
 
-###
+
+
 **Console Pane**\
 The lower-left pane is the Console Pane, where the action happens! Here you can execute your R code. This can be done in two ways:\
 - By typing code directly into the console which executes the code line by line.\
 - Running a script from the Source pane. When you do this, the code copy-pastes into the Console pane.\
- 
-It's often better to write code in the Source Pane and then run it, so you have a record of your code. The console is where you'll see the results of your code, such as data frames, plots, and messages, as well as any errors with your code.\
 
-[Placeholder for Image/GIF: Showing code execution in the Console Pane]
+<figure>
+  <img src="images/console_pane.png" width="100%">
+  <figcaption class="figcap">Executing code in console</figcaption>
+</figure>
 
-###
+<br>
+
+Note that it's often better to write code in the Source Pane and then run it, so you have a record of your code. The console is where you'll see the results of your code, such as data frames, plots, and messages, as well as any errors with your code.\
+
+
+
+
 **Environment/History Pane**\
-On the upper-right, we find the Environment/History Pane. The **Environment tab** is like your desk where all the current project's variables, data sets, and functions that you've created or loaded are displayed. Here, you can see at a glance all the objects that exist in your current R session. The **History tab** is your project diary; you can review all the commands that have been entered in the Console over time. It's valuable for revisiting previous work or correcting mistakes.\
+On the upper-right, we find the Environment Pane which contains the Environment, History, Connections, Tutorial, and the optional Git tabs:\
+- **Environment tab:** this is like your desk where all the current project's variables, data sets, and functions that you've created or loaded are displayed. Here, you can see at a glance all the objects that exist in your current R session.\
+- **History tab:** this is your project diary; you can review all the commands that have been entered in the Console over time. It's valuable for revisiting previous work or correcting mistakes.\
+- **Connections:** this is where you can manage connections to databases and other data sources.\
+- **Tutorial:** this is where you can access RStudio and other package tutorials.\
+- **Git:** this is where you can manage your Git version control system. This tab is not visible by default.\
 
-[Placeholder for Image: Environment Tab showing list of variables and data sets]
 
 
-###
-**Files/Plots/Packages/Help Pane**\
-The lower-right pane is the Files/Plots/Packages/Help Pane. This pane allows you to navigate your file system, see plots generated by your code, manage packages, and access R's built-in help system. This pane has multiple tabs:\
+**Output Pane**\
+The lower-right pane is the Output Pane which contains the Files, Plots, Packages, Help, Viewer, and Presentation tabs. This pane allows you to navigate your file system, see plots generated by your code, manage packages, and access R's built-in help system:\
 - **Files Tab:** This is your project folder navigator. Similar to a file explorer, it allows you to open, delete, move, and manage your files and folders.\
 - **Plots Tab:** Here, you'll see the output of your graphical data representations, such as histograms or scatter plots.\
 - **Packages Tab:** Your R toolbox. Install, view, and manage packages (collections of R functions, compiled code, and sample data).\
 - **Help Tab:** Hover over this for R documentation and assistance with functions and packages.\
 - **Viewer Tab:** Use this to view web content directly in RStudio, such as HTML content created through R Markdown or Shiny apps.\
 
-[Placeholder for Image/GIF: Navigating through Files/Plots/Packages/Help/Viewer Pane]
+<figure>
+  <img src="images/help_tab.png" width="100%">
+  <figcaption class="figcap">Help Documentation tab</figcaption>
+</figure>
+
+<br>
 
 ### Setting Preferences
-To make RStudio your own, go to `Tools -> Global Options`. You can select a theme that's easy on your eyes, change font size for readability, and even configure your workspace's default directory, so you always know where your projects are stored. Feel free to explore additional settings like code display options, including whether to show invisible characters or highlight matching parentheses.\
+To make RStudio your own, go to `Tools -> Global Options`. You can select a theme that's easy on your eyes, change font size for readability, and even configure your workspace's default directory, so you always know where your projects are stored.\
 
-[Placeholder for Image: Global Options]
+<figure>
+  <img src="images/appearance_settings.png" width="100%">
+  <figcaption class="figcap">Global Settings</figcaption>
+</figure>
+
+<br>
+
+Feel free to explore additional settings like code display options, including whether to show invisible characters or highlight matching parentheses.\
+
+<div class="general-callout">
+For detailed information on all global settings, visit this online <a href="https://support.posit.co/hc/en-us/articles/200549016-Customizing-the-RStudio-IDE">support page</a>.
+</div>
 
 ### Managing Files and RStudio Projects
 RStudio makes it easy to manage your files and projects. You can create new files, open existing ones, and even create new RStudio Projects. A Project (note the uppercase "P") is a folder that contains all the files and data related to a specific analysis. It's a great way to keep your work organized and reproducible. You can create a new project by going to `File -> New Project`. You can also open an existing project by going to `File -> Open Project`.\
@@ -83,9 +115,7 @@ Remember Your Settings: When you open a project, it remembers all your previous 
 - **Manage Files Easily:** You can start a project in a new folder, in a folder where you already have some R files, or even from an online code repository like GitHub.\
 - **You can have several RStudio Projects open at once:** Code executed in Project A does not have any effect on the R session and workspace of Project B.\
 
-<div class="general-callout">
-For more on RStudio Projects, check out the <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio Projects Support Page</a>.
-</div>
+
 
 We'll revisit projects in more detail in the next lesson. For now, let's focus on the basics of R and RStudio.\
 
@@ -93,11 +123,18 @@ We'll revisit projects in more detail in the next lesson. For now, let's focus o
 ### Running Code in the Console
 The Console is your chemistry lab for experimentation in R. It's where you write a command to get immediate results. Whether you're exploring data interactively or testing a quick fix, the Console Pane is where you want to be.\
 
+
 ###
 **Running Code Line by Line**\
 You can run code line by line by typing it directly into the Console. Let's try it out in your own RStudio console. Type `print("Hello, I/O Psychology!")` and press Enter. You should see the message "Hello, I/O Psychology!" printed in the Console. This is a great way to test out code and get immediate feedback.\
 
-[Placeholder for Image/GIF: Running code line by line in the Console]
+<figure>
+  <img src="https://res.cloudinary.com/naturallyash/image/upload/v1705443999/running_code_console_t7exc8.gif" width="100%">
+  <figcaption class="figcap">Running code line by line in the Console</figcaption>
+</figure>
+
+<br>
+
 
 ###
 While the console is powerful for improvised work, remember that for larger or more structured analysis, scripting is better for maintaining reproducibility and clarity.\
