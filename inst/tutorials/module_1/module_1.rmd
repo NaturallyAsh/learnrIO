@@ -35,21 +35,21 @@ gradethis::gradethis_setup()
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Introduction to R and RStudio {data-progressive=TRUE}
+## Introduction to R and RStudio 
 ```{r, child="lessons/1.1_r-and-rstudio.Rmd"}
 ``` 
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Project Workflow and Reports using Quarto {data-progressive=TRUE}
+## Project Workflow and Reports using Quarto 
 ```{r, child="lessons/1.2_quarto.Rmd"}
 ```
 
 
 <!-- ==============================NEXT TOPIC=============================== -->
 
-## Workflow and Data Management using RStudio Projects {data-progressive=TRUE}
+## Workflow and Data Management using RStudio Projects 
 
 
 
